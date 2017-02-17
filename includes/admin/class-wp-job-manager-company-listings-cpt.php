@@ -78,7 +78,7 @@ class WP_Resume_Manager_CPT {
 							$approved_resumes[] = $post_id;
 					}
 
-				wp_redirect( remove_query_arg( 'approve_resumes', add_query_arg( 'approved_resumes', $approved_resumes, admin_url( 'edit.php?post_type=resume' ) ) ) );
+				wp_redirect( remove_query_arg( 'approve_resumes', add_query_arg( 'approved_resumes', $approved_resumes, admin_url( 'edit.php?post_type=job_company' ) ) ) );
 				exit;
 			break;
 		}
@@ -97,7 +97,7 @@ class WP_Resume_Manager_CPT {
 				'post_status' => 'publish'
 			);
 			wp_update_post( $resume_data );
-			wp_redirect( remove_query_arg( 'approve_resume', add_query_arg( 'approved_resumes', $post_id, admin_url( 'edit.php?post_type=resume' ) ) ) );
+			wp_redirect( remove_query_arg( 'approve_resume', add_query_arg( 'approved_resumes', $post_id, admin_url( 'edit.php?post_type=job_company' ) ) ) );
 			exit;
 		}
 	}

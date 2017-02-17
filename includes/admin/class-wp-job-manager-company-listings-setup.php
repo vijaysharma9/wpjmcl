@@ -210,8 +210,8 @@ class WP_Resume_Manager_Setup {
 				<p><?php _e( 'Looks like you\'re all set to start using the plugin. In case you\'re wondering where to go next:', 'wp-job-manager-resumes' ); ?></p>
 
 				<ul class="wp-job-manager-company-listings-next-steps">
-					<li><a href="<?php echo admin_url( 'edit.php?post_type=resume&page=company-listing-settings' ); ?>"><?php _e( 'Tweak the plugin settings', 'wp-job-manager-resumes' ); ?></a></li>
-					<li><a href="<?php echo admin_url( 'post-new.php?post_type=resume' ); ?>"><?php _e( 'Add a resume via the back-end', 'wp-job-manager-resumes' ); ?></a></li>
+					<li><a href="<?php echo admin_url( 'edit.php?post_type=job_company&page=company-listing-settings' ); ?>"><?php _e( 'Tweak the plugin settings', 'wp-job-manager-resumes' ); ?></a></li>
+					<li><a href="<?php echo admin_url( 'post-new.php?post_type=job_company' ); ?>"><?php _e( 'Add a resume via the back-end', 'wp-job-manager-resumes' ); ?></a></li>
 
 					<?php if ( $permalink = resume_manager_get_permalink( 'submit_resume_form' ) ) : ?>
 						<li><a href="<?php echo esc_url( $permalink ); ?>"><?php _e( 'Add a resume via the front-end', 'wp-job-manager-resumes' ); ?></a></li>
