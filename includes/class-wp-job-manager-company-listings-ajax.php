@@ -58,7 +58,7 @@ class WP_Resume_Manager_Ajax {
 
 			<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
 
-				<?php get_job_manager_template_part( 'content', 'job_company', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_job_manager_template_part( 'content', 'job_company', 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 			<?php endwhile; ?>
 

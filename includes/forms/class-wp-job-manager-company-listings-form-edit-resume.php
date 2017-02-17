@@ -89,7 +89,7 @@ class WP_Resume_Manager_Form_Edit_Resume extends WP_Resume_Manager_Form_Submit_R
 			'resume_fields'      => $this->get_fields( 'resume_fields' ),
 			'step'               => $this->get_step(),
 			'submit_button_text' => __( 'Save changes', 'wp-job-manager-resumes' )
-		), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**

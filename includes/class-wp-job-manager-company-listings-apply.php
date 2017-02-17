@@ -97,14 +97,14 @@ class WP_Resume_Manager_Apply {
 	 * Allow users to apply to a job with a resume
 	 */
 	public function apply_with_resume() {
-		get_job_manager_template( 'apply-with-resume.php', array( 'resumes' => $this->get_user_resumes() ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'apply-with-resume.php', array( 'resumes' => $this->get_user_resumes() ), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**
 	 * Allow users to apply to a job with a resume
 	 */
 	public function force_apply_with_resume() {
-		get_job_manager_template( 'force-apply-with-resume.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'force-apply-with-resume.php', array(), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**

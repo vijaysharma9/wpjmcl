@@ -83,7 +83,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 			$singular  = __( 'Resume Category', 'wp-job-manager-resumes' );
 			$plural    = __( 'Resume Categories', 'wp-job-manager-resumes' );
 
-			if ( current_theme_supports( 'resume-manager-templates' ) ) {
+			if ( current_theme_supports( 'company-listing-templates' ) ) {
 				$rewrite     = array(
 					'slug'         => _x( 'resume-category', 'Resume category slug - resave permalinks after changing this', 'wp-job-manager-resumes' ),
 					'with_front'   => false,
@@ -128,7 +128,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 			$singular  = __( 'Candidate Skill', 'wp-job-manager-resumes' );
 			$plural    = __( 'Candidate Skills', 'wp-job-manager-resumes' );
 
-			if ( current_theme_supports( 'resume-manager-templates' ) ) {
+			if ( current_theme_supports( 'company-listing-templates' ) ) {
 				$rewrite     = array(
 					'slug'         => _x( 'resume-skill', 'Resume skill slug - resave permalinks after changing this', 'wp-job-manager-resumes' ),
 					'with_front'   => false,
@@ -175,7 +175,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		$singular  = __( 'Company', 'wp-job-manager-resumes' );
 		$plural    = __( 'Companies', 'wp-job-manager-resumes' );
 
-		if ( current_theme_supports( 'resume-manager-templates' ) ) {
+		if ( current_theme_supports( 'company-listing-templates' ) ) {
 			$has_archive = _x( 'resumes', 'Post type archive slug - resave permalinks after changing this', 'wp-job-manager-resumes' );
 		} else {
 			$has_archive = false;
@@ -471,7 +471,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		$email   = get_post_meta( $post->ID, '_candidate_email', true );
 		$subject = sprintf( __( 'Contact via the resume for "%s" on %s', 'wp-job-manager-resumes' ), single_post_title( '', false ), home_url() );
 
-		get_job_manager_template( 'contact-details-email.php', array( 'email' => $email, 'subject' => $subject ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'contact-details-email.php', array( 'email' => $email, 'subject' => $subject ), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**

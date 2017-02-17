@@ -40,7 +40,7 @@ class WP_Resume_Manager_Email_Notification {
 			'job_company'        => $resume,
 			'resume_id'     => $resume_id,
 			'custom_fields' => $custom_fields
-		), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 		$message = ob_get_clean();
 
 		add_filter( 'wp_mail_from', array( __CLASS__, 'get_from_address' ) );

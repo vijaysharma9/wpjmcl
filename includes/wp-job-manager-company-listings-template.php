@@ -278,7 +278,7 @@ function the_resume_permalink( $post = null ) {
  */
 function the_resume_links( $post = null ) {
 	$post = get_post( $post );
-	get_job_manager_template( 'resume-links.php', array( 'post' => $post ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+	get_job_manager_template( 'resume-links.php', array( 'post' => $post ), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 }
 
 /**

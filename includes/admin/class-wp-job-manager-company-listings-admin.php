@@ -61,7 +61,7 @@ class WP_Resume_Manager_Admin {
 	 * @return void
 	 */
 	public function admin_menu() {
-		add_submenu_page( 'edit.php?post_type=resume', __( 'Settings', 'wp-job-manager-resumes' ), __( 'Settings', 'wp-job-manager-resumes' ), 'manage_options', 'resume-manager-settings', array( $this->settings_page, 'output' ) );
+		add_submenu_page( 'edit.php?post_type=job_company', __( 'Settings', 'wp-job-manager-resumes' ), __( 'Settings', 'wp-job-manager-resumes' ), 'manage_options', 'company-listing-settings', array( $this->settings_page, 'output' ) );
 	}
 }
 

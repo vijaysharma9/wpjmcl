@@ -104,7 +104,7 @@ class WP_Resume_Manager_Form_Submit_Resume extends WP_Job_Manager_Form {
 			case 'education' :
 			case 'experience' :
 			case 'links' :
-				get_job_manager_template( 'form-fields/repeated-field.php', array( 'key' => $key, 'field' => $field, 'class' => $this ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+				get_job_manager_template( 'form-fields/repeated-field.php', array( 'key' => $key, 'field' => $field, 'class' => $this ), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 			break;
 			default :
 				get_job_manager_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field, 'class' => $this ) );
@@ -528,7 +528,7 @@ class WP_Resume_Manager_Form_Submit_Resume extends WP_Job_Manager_Form {
 			'resume_fields'      => $this->get_fields( 'resume_fields' ),
 			'step'               => $this->get_step(),
 			'submit_button_text' => apply_filters( 'submit_resume_form_submit_button_text', __( 'Preview &rarr;', 'wp-job-manager-resumes' ) )
-		), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**
@@ -807,7 +807,7 @@ class WP_Resume_Manager_Form_Submit_Resume extends WP_Job_Manager_Form {
 				</div>
 				<div class="resume_preview single-resume">
 					<h1><?php the_title(); ?></h1>
-					<?php get_job_manager_template_part( 'content-single', 'job_company', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content-single', 'job_company', 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 				</div>
 			</form>
 			<?php
@@ -859,7 +859,7 @@ class WP_Resume_Manager_Form_Submit_Resume extends WP_Job_Manager_Form {
 	 */
 	public function done() {
 		do_action( 'resume_manager_resume_submitted', $this->resume_id );
-		get_job_manager_template( 'resume-submitted.php', array( 'job_company' => get_post( $this->resume_id ), 'job_id' => $this->job_id ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'resume-submitted.php', array( 'job_company' => get_post( $this->resume_id ), 'job_id' => $this->job_id ), 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 
 		// Allow application
 		if ( $this->job_id ) {

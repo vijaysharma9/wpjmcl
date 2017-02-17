@@ -92,7 +92,7 @@ class WP_Resume_Manager_Widget_Recent_Resumes extends WP_Job_Manager_Widget {
 
 				<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
 
-					<?php get_job_manager_template_part( 'content-widget', 'job_company', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content-widget', 'job_company', 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php endwhile; ?>
 
@@ -102,7 +102,7 @@ class WP_Resume_Manager_Widget_Recent_Resumes extends WP_Job_Manager_Widget {
 
 		<?php else : ?>
 
-			<?php get_job_manager_template_part( 'content-widget', 'no-resumes-found', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+			<?php get_job_manager_template_part( 'content-widget', 'no-resumes-found', 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 		<?php endif;
 
@@ -189,7 +189,7 @@ class WP_Resume_Manager_Widget_Featured_Resumes extends WP_Job_Manager_Widget {
 
 				<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
 
-					<?php get_job_manager_template_part( 'content-widget', 'job_company', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content-widget', 'job_company', 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php endwhile; ?>
 
@@ -199,7 +199,7 @@ class WP_Resume_Manager_Widget_Featured_Resumes extends WP_Job_Manager_Widget {
 
 		<?php else : ?>
 
-			<?php get_job_manager_template_part( 'content-widget', 'no-resumes-found', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+			<?php get_job_manager_template_part( 'content-widget', 'no-resumes-found', 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 		<?php endif;
 
