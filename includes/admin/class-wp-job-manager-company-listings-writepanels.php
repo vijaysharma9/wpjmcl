@@ -81,10 +81,10 @@ class WP_Resume_Manager_Writepanels extends WP_Job_Manager_Writepanels {
 	 * add_meta_boxes function.
 	 */
 	public function add_meta_boxes() {
-		add_meta_box( 'resume_data', __( 'Candidate Data', 'wp-job-manager-resumes' ), array( $this, 'resume_data' ), 'resume', 'normal', 'high' );
-		add_meta_box( 'resume_url_data', __( 'URL(s)', 'wp-job-manager-resumes' ), array( $this, 'url_data' ), 'resume', 'side', 'low' );
-		add_meta_box( 'resume_education_data', __( 'Education', 'wp-job-manager-resumes' ), array( $this, 'education_data' ), 'resume', 'normal', 'high' );
-		add_meta_box( 'resume_experience_data', __( 'Experience', 'wp-job-manager-resumes' ), array( $this, 'experience_data' ), 'resume', 'normal', 'high' );
+		add_meta_box( 'resume_data', __( 'Company Data', 'wp-job-manager-resumes' ), array( $this, 'resume_data' ), 'job_company', 'normal', 'high' );
+		add_meta_box( 'resume_url_data', __( 'URL(s)', 'wp-job-manager-resumes' ), array( $this, 'url_data' ), 'job_company', 'side', 'low' );
+		// add_meta_box( 'resume_education_data', __( 'Education', 'wp-job-manager-resumes' ), array( $this, 'education_data' ), 'job_company', 'normal', 'high' );
+		// add_meta_box( 'resume_experience_data', __( 'Experience', 'wp-job-manager-resumes' ), array( $this, 'experience_data' ), 'job_company', 'normal', 'high' );
 	}
 
 	/**

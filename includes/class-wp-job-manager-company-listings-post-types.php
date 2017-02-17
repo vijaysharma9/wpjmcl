@@ -71,7 +71,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 */
 	public function register_post_types() {
 
-		if ( post_type_exists( "resume" ) )
+		if ( post_type_exists( "job_company" ) )
 			return;
 
 		$admin_capability = 'manage_resumes';
@@ -188,7 +188,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 			'pages'      => false
 		);
 
-		register_post_type( "resume",
+		register_post_type( "job_company",
 			apply_filters( "register_post_type_resume", array(
 				'labels' => array(
 					'name' 					=> $plural,
@@ -407,7 +407,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		global $menu;
 
 		$plural        = __( 'Resumes', 'wp-job-manager-resumes' );
-		$count_resumes = wp_count_posts( 'resume', 'readable' );
+		$count_resumes = wp_count_posts( 'job_company', 'readable' );
 
 		foreach ( $menu as $key => $menu_item ) {
 			if ( strpos( $menu_item[0], $plural ) === 0 ) {
@@ -426,7 +426,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 * @return string
 	 */
 	public function resume_title( $title, $post_or_id = null ) {
-		if ( $post_or_id && 'resume' === get_post_type( $post_or_id ) && ! resume_manager_user_can_view_resume_name( $post_or_id ) ) {
+		if ( $post_or_id && 'job_company' === get_post_type( $post_or_id ) && ! resume_manager_user_can_view_resume_name( $post_or_id ) ) {
 			$title_parts    = explode( ' ', $title );
 			$hidden_title[] = array_shift( $title_parts );
 			foreach ( $title_parts as $title_part ) {
@@ -443,16 +443,16 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	public function resume_content( $content ) {
 		global $post;
 
-		if ( ! is_singular( 'resume' ) || ! in_the_loop() ) {
+		if ( ! is_singular( 'job_company' ) || ! in_the_loop() ) {
 			return $content;
 		}
 
 		remove_filter( 'the_content', array( $this, 'resume_content' ) );
 
-		if ( $post->post_type == 'resume' ) {
+		if ( $post->post_type == 'job_company' ) {
 			ob_start();
 
-			get_job_manager_template_part( 'content-single', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template_part( 'content-single', 'job_company', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 
 			$content = ob_get_clean();
 		}
@@ -595,7 +595,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 			AND postmeta.meta_value > 0
 			AND postmeta.meta_value < %s
 			AND posts.post_status = 'publish'
-			AND posts.post_type = 'resume'
+			AND posts.post_type = 'job_company'
 		", date( 'Y-m-d', current_time( 'timestamp' ) ) ) );
 
 		if ( $resume_ids ) {
@@ -611,7 +611,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		if ( apply_filters( 'resume_manager_delete_expired_resumes', true ) ) {
 			$resume_ids = $wpdb->get_col( $wpdb->prepare( "
 				SELECT posts.ID FROM {$wpdb->posts} as posts
-				WHERE posts.post_type = 'resume'
+				WHERE posts.post_type = 'job_company'
 				AND posts.post_modified < %s
 				AND posts.post_status = 'expired'
 			", date( 'Y-m-d', strtotime( '-' . apply_filters( 'resume_manager_delete_expired_resumes_days', 30 ) . ' days', current_time( 'timestamp' ) ) ) ) );

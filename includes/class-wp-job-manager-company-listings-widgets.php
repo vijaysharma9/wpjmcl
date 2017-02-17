@@ -22,11 +22,11 @@ class WP_Resume_Manager_Widget_Recent_Resumes extends WP_Job_Manager_Widget {
 		$this->widget_cssclass    = 'job_manager widget_recent_resumes';
 		$this->widget_description = __( 'Display a list of recent listings on your site, optionally matching a keyword and location.', 'wp-job-manager-resumes' );
 		$this->widget_id          = 'widget_recent_resumes';
-		$this->widget_name        = sprintf( __( 'Recent %s', 'wp-job-manager-resumes' ), $wp_post_types['resume']->labels->name );
+		$this->widget_name        = sprintf( __( 'Recent %s', 'wp-job-manager-resumes' ), $wp_post_types['job_company']->labels->name );
 		$this->settings           = array(
 			'title' => array(
 				'type'  => 'text',
-				'std'   => sprintf( __( 'Recent %s', 'wp-job-manager-resumes' ), $wp_post_types['resume']->labels->name ),
+				'std'   => sprintf( __( 'Recent %s', 'wp-job-manager-resumes' ), $wp_post_types['job_company']->labels->name ),
 				'label' => __( 'Title', 'wp-job-manager-resumes' )
 			),
 			'keyword' => array(
@@ -130,11 +130,11 @@ class WP_Resume_Manager_Widget_Featured_Resumes extends WP_Job_Manager_Widget {
 		$this->widget_cssclass    = 'job_manager widget_featured_resumes';
 		$this->widget_description = __( 'Display a list of featured listings on your site.', 'wp-job-manager-resumes' );
 		$this->widget_id          = 'widget_featured_resumes';
-		$this->widget_name        = sprintf( __( 'Featured %s', 'wp-job-manager-resumes' ), $wp_post_types['resume']->labels->name );
+		$this->widget_name        = sprintf( __( 'Featured %s', 'wp-job-manager-resumes' ), $wp_post_types['job_company']->labels->name );
 		$this->settings           = array(
 			'title' => array(
 				'type'  => 'text',
-				'std'   => sprintf( __( 'Featured %s', 'wp-job-manager-resumes' ), $wp_post_types['resume']->labels->name ),
+				'std'   => sprintf( __( 'Featured %s', 'wp-job-manager-resumes' ), $wp_post_types['job_company']->labels->name ),
 				'label' => __( 'Title', 'wp-job-manager-resumes' )
 			),
 			'number' => array(
