@@ -7,7 +7,7 @@ if ( ! function_exists( 'get_resumes' ) ) :
  * @return void
  */
 function get_resumes( $args = array() ) {
-	global $wpdb, $resume_manager_keyword;
+	global $wpdb, $company_listings_keyword;
 
 	$args = wp_parse_args( $args, array(
 		'search_location'   => '',
@@ -81,8 +81,8 @@ function get_resumes( $args = array() ) {
 		);
 	}
 
-	if ( $resume_manager_keyword = sanitize_text_field( $args['search_keywords'] ) ) {
-		$query_args['_keyword'] = $resume_manager_keyword; // Does nothing but needed for unique hash
+	if ( $company_listings_keyword = sanitize_text_field( $args['search_keywords'] ) ) {
+		$query_args['_keyword'] = $company_listings_keyword; // Does nothing but needed for unique hash
 		add_filter( 'posts_clauses', 'get_resumes_keyword_search' );
 	}
 
@@ -126,18 +126,18 @@ if ( ! function_exists( 'get_resumes_keyword_search' ) ) :
 	 * @return array
 	 */
 	function get_resumes_keyword_search( $args ) {
-		global $wpdb, $resume_manager_keyword;
+		global $wpdb, $company_listings_keyword;
 
 		// Meta searching - Query matching ids to avoid more joins
-		$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value LIKE '" . esc_sql( $resume_manager_keyword ) . "%'" );
+		$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value LIKE '" . esc_sql( $company_listings_keyword ) . "%'" );
 
 		// Term searching
-		$post_ids = array_merge( $post_ids, $wpdb->get_col( "SELECT object_id FROM {$wpdb->term_relationships} AS tr LEFT JOIN {$wpdb->terms} AS t ON tr.term_taxonomy_id = t.term_id WHERE t.name LIKE '" . esc_sql( $resume_manager_keyword ) . "%'" ) );
+		$post_ids = array_merge( $post_ids, $wpdb->get_col( "SELECT object_id FROM {$wpdb->term_relationships} AS tr LEFT JOIN {$wpdb->terms} AS t ON tr.term_taxonomy_id = t.term_id WHERE t.name LIKE '" . esc_sql( $company_listings_keyword ) . "%'" ) );
 
 		// Title and content searching
 		$conditions = array();
-		$conditions[] = "{$wpdb->posts}.post_title LIKE '%" . esc_sql( $resume_manager_keyword ) . "%'";
-		$conditions[] = "{$wpdb->posts}.post_content RLIKE '[[:<:]]" . esc_sql( $resume_manager_keyword ) . "[[:>:]]'";
+		$conditions[] = "{$wpdb->posts}.post_title LIKE '%" . esc_sql( $company_listings_keyword ) . "%'";
+		$conditions[] = "{$wpdb->posts}.post_content RLIKE '[[:<:]]" . esc_sql( $company_listings_keyword ) . "[[:>:]]'";
 
 		if ( $post_ids ) {
 			$conditions[] = "{$wpdb->posts}.ID IN (" . esc_sql( implode( ',', array_unique( $post_ids ) ) ) . ")";

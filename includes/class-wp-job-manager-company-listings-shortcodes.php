@@ -117,7 +117,7 @@ class WP_Resume_Manager_Shortcodes {
 	 * Shortcode which lists the logged in user's resumes
 	 */
 	public function candidate_dashboard( $atts ) {
-		global $resume_manager;
+		global $company_listings;
 
 		if ( ! is_user_logged_in() ) {
 			ob_start();
@@ -139,7 +139,7 @@ class WP_Resume_Manager_Shortcodes {
 
 			switch ( $action ) {
 				case 'edit' :
-					return $resume_manager->forms->get_form( 'edit-resume' );
+					return $company_listings->forms->get_form( 'edit-resume' );
 			}
 		}
 
@@ -186,7 +186,7 @@ class WP_Resume_Manager_Shortcodes {
 	 * @return void
 	 */
 	public function output_resumes( $atts ) {
-		global $resume_manager;
+		global $company_listings;
 
 		ob_start();
 

@@ -489,10 +489,10 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		add_post_meta( $post->ID, '_featured', 0, true );
 		wp_clear_scheduled_hook( 'auto-hide-resume', array( $post->ID ) );
 
-		$resume_manager_autohide = get_option( 'resume_manager_autohide' );
+		$company_listings_autohide = get_option( 'resume_manager_autohide' );
 
-		if ( $resume_manager_autohide ) {
-			wp_schedule_single_event( strtotime( "+{$resume_manager_autohide} day" ), 'auto-hide-resume', array( $post->ID ) );
+		if ( $company_listings_autohide ) {
+			wp_schedule_single_event( strtotime( "+{$company_listings_autohide} day" ), 'auto-hide-resume', array( $post->ID ) );
 		}
 	}
 
