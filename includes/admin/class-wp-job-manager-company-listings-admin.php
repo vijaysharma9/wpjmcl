@@ -33,7 +33,7 @@ class WP_Resume_Manager_Admin {
 	 */
 	public function add_screen_ids( $screen_ids ) {
 		$screen_ids[] = 'edit-resume';
-		$screen_ids[] = 'resume';
+		$screen_ids[] = 'job_company';
 		return $screen_ids;
 	}
 

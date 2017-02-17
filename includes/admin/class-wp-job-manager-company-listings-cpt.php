@@ -42,7 +42,7 @@ class WP_Resume_Manager_CPT {
 	public function add_bulk_actions() {
 		global $post_type;
 
-		if ( $post_type == 'resume' ) {
+		if ( $post_type == 'job_company' ) {
 			?>
 			<script type="text/javascript">
 		      jQuery(document).ready(function() {
@@ -108,7 +108,7 @@ class WP_Resume_Manager_CPT {
 	public function approved_notice() {
 		 global $post_type, $pagenow;
 
-		if ( $pagenow == 'edit.php' && $post_type == 'resume' && ! empty( $_REQUEST['approved_resumes'] ) ) {
+		if ( $pagenow == 'edit.php' && $post_type == 'job_company' && ! empty( $_REQUEST['approved_resumes'] ) ) {
 			$approved_resumes = $_REQUEST['approved_resumes'];
 			if ( is_array( $approved_resumes ) ) {
 				$approved_resumes = array_map( 'absint', $approved_resumes );
@@ -135,7 +135,7 @@ class WP_Resume_Manager_CPT {
 	public function resumes_by_category( $show_counts = 1, $hierarchical = 1, $show_uncategorized = 1, $orderby = '' ) {
 		global $typenow, $wp_query;
 
-	    if ( $typenow != 'resume' || ! taxonomy_exists( 'resume_category' ) ) {
+	    if ( $typenow != 'job_company' || ! taxonomy_exists( 'resume_category' ) ) {
 	    	return;
 	    }
 
@@ -196,7 +196,7 @@ class WP_Resume_Manager_CPT {
 	 * @return string
 	 */
 	public function enter_title_here( $text, $post ) {
-		if ( $post->post_type == 'resume' ) {
+		if ( $post->post_type == 'job_company' ) {
 			return __( 'Candidate name', 'wp-job-manager-resumes' );
 		}
 		return $text;
@@ -210,7 +210,7 @@ class WP_Resume_Manager_CPT {
 	public function post_updated_messages( $messages ) {
 		global $post, $post_ID;
 
-		$messages['resume'] = array(
+		$messages['job_company'] = array(
 			0 => '',
 			1 => sprintf( __( 'Resume updated. <a href="%s">View Resume</a>', 'wp-job-manager-resumes' ), esc_url( get_permalink( $post_ID ) ) ),
 			2 => __( 'Custom field updated.', 'wp-job-manager-resumes' ),
@@ -283,7 +283,7 @@ class WP_Resume_Manager_CPT {
 	public function search_meta( $wp ) {
 		global $pagenow, $wpdb;
 
-		if ( 'edit.php' != $pagenow || empty( $wp->query_vars['s'] ) || $wp->query_vars['post_type'] != 'resume' ) {
+		if ( 'edit.php' != $pagenow || empty( $wp->query_vars['s'] ) || $wp->query_vars['post_type'] != 'job_company' ) {
 			return;
 		}
 
@@ -296,7 +296,7 @@ class WP_Resume_Manager_CPT {
 					WHERE p1.meta_value LIKE '%%%s%%'
 					OR posts.post_title LIKE '%%%s%%'
 					OR posts.post_content LIKE '%%%s%%'
-					AND posts.post_type = 'resume'
+					AND posts.post_type = 'job_company'
 					",
 					esc_attr( $wp->query_vars['s'] ),
 					esc_attr( $wp->query_vars['s'] ),
@@ -320,7 +320,7 @@ class WP_Resume_Manager_CPT {
 	public function search_meta_label( $query ) {
 		global $pagenow, $typenow;
 
-		if ( 'edit.php' != $pagenow || $typenow != 'resume' || ! get_query_var( 'resume_search' ) ) {
+		if ( 'edit.php' != $pagenow || $typenow != 'job_company' || ! get_query_var( 'resume_search' ) ) {
 			return $query;
 		}
 
@@ -448,7 +448,7 @@ class WP_Resume_Manager_CPT {
 		global $wp_post_statuses, $post, $post_type;
 
 		// Abort if we're on the wrong post type, but only if we got a restriction
-		if ( 'resume' !== $post_type ) {
+		if ( 'job_company' !== $post_type ) {
 			return;
 		}
 

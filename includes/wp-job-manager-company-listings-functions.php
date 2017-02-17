@@ -22,7 +22,7 @@ function get_resumes( $args = array() ) {
 	) );
 
 	$query_args = array(
-		'post_type'              => 'resume',
+		'post_type'              => 'job_company',
 		'post_status'            => 'publish',
 		'ignore_sticky_posts'    => 1,
 		'offset'                 => absint( $args['offset'] ),
@@ -418,7 +418,7 @@ function resume_manager_count_user_resumes( $user_id = 0 ) {
 		$user_id = get_current_user_id();
 	}
 
-	return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'resume' AND post_status IN ( 'publish', 'pending', 'expired', 'hidden' );", $user_id ) );
+	return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'job_company' AND post_status IN ( 'publish', 'pending', 'expired', 'hidden' );", $user_id ) );
 }
 
 /**

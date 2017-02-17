@@ -51,7 +51,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 * Flush the cache
 	 */
 	public function flush_get_resume_listings_cache( $post_id ) {
-		if ( 'resume' === get_post_type( $post_id ) ) {
+		if ( 'job_company' === get_post_type( $post_id ) ) {
 			WP_Job_Manager_Cache_Helper::get_transient_version( 'get_resume_listings', true );
 		}
 	}
@@ -172,8 +172,8 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	    /**
 		 * Post types
 		 */
-		$singular  = __( 'Resume', 'wp-job-manager-resumes' );
-		$plural    = __( 'Resumes', 'wp-job-manager-resumes' );
+		$singular  = __( 'Company', 'wp-job-manager-resumes' );
+		$plural    = __( 'Companies', 'wp-job-manager-resumes' );
 
 		if ( current_theme_supports( 'resume-manager-templates' ) ) {
 			$has_archive = _x( 'resumes', 'Post type archive slug - resave permalinks after changing this', 'wp-job-manager-resumes' );
@@ -182,7 +182,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		}
 
 		$rewrite     = array(
-			'slug'       => _x( 'resume', 'Resume permalink - resave permalinks after changing this', 'wp-job-manager-resumes' ),
+			'slug'       => _x( 'companies', 'Resume permalink - resave permalinks after changing this', 'wp-job-manager-resumes' ),
 			'with_front' => false,
 			'feeds'      => false,
 			'pages'      => false
@@ -452,7 +452,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		if ( $post->post_type == 'job_company' ) {
 			ob_start();
 
-			get_job_manager_template_part( 'content-single', 'job_company', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template_part( 'content-single', 'job_company', 'wp-job-manager-resumes', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 
 			$content = ob_get_clean();
 		}
@@ -482,7 +482,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		if ( ! is_object( $post ) ) {
 			$post = get_post( $post );
 		}
-		if ( $post->post_type !== 'resume' ) {
+		if ( $post->post_type !== 'job_company' ) {
 			return;
 		}
 
@@ -513,7 +513,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 * Maybe set menu_order if the featured status of a resume is changed
 	 */
 	public function maybe_update_menu_order( $meta_id, $object_id, $meta_key, $_meta_value ) {
-		if ( '_featured' !== $meta_key || 'resume' !== get_post_type( $object_id ) ) {
+		if ( '_featured' !== $meta_key || 'job_company' !== get_post_type( $object_id ) ) {
 			return;
 		}
 		global $wpdb;
@@ -533,7 +533,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 * @return array
 	 */
 	public function fix_post_name( $data, $postarr ) {
-		 if ( 'resume' === $data['post_type'] && 'pending' === $data['post_status'] && ! current_user_can( 'publish_posts' ) ) {
+		 if ( 'job_company' === $data['post_type'] && 'pending' === $data['post_status'] && ! current_user_can( 'publish_posts' ) ) {
 			$data['post_name'] = $postarr['post_name'];
 		 }
 		 return $data;
@@ -550,7 +550,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 * Set expirey date when resume status changes
 	 */
 	public function set_expiry( $post ) {
-		if ( $post->post_type !== 'resume' ) {
+		if ( $post->post_type !== 'job_company' ) {
 			return;
 		}
 

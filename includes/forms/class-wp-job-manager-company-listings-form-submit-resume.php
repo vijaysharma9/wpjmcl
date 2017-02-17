@@ -633,7 +633,7 @@ class WP_Resume_Manager_Form_Submit_Resume extends WP_Job_Manager_Form {
 		$data = array(
 			'post_title'     => $post_title,
 			'post_content'   => $post_content,
-			'post_type'      => 'resume',
+			'post_type'      => 'job_company',
 			'comment_status' => 'closed',
 			'post_password'  => '',
 			'post_name'      => sanitize_title( implode( '-', $resume_slug ) )
@@ -807,7 +807,7 @@ class WP_Resume_Manager_Form_Submit_Resume extends WP_Job_Manager_Form {
 				</div>
 				<div class="resume_preview single-resume">
 					<h1><?php the_title(); ?></h1>
-					<?php get_job_manager_template_part( 'content-single', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content-single', 'job_company', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 				</div>
 			</form>
 			<?php
@@ -859,7 +859,7 @@ class WP_Resume_Manager_Form_Submit_Resume extends WP_Job_Manager_Form {
 	 */
 	public function done() {
 		do_action( 'resume_manager_resume_submitted', $this->resume_id );
-		get_job_manager_template( 'resume-submitted.php', array( 'resume' => get_post( $this->resume_id ), 'job_id' => $this->job_id ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'resume-submitted.php', array( 'job_company' => get_post( $this->resume_id ), 'job_id' => $this->job_id ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 
 		// Allow application
 		if ( $this->job_id ) {

@@ -76,7 +76,7 @@ class WP_Resume_Manager_Apply {
 	private function get_user_resumes() {
 		if ( is_user_logged_in() ) {
 			$args = apply_filters( 'resume_manager_get_application_form_resumes_args', array(
-				'post_type'           => 'resume',
+				'post_type'           => 'job_company',
 				'post_status'         => array( 'publish', 'pending', 'hidden' ),
 				'ignore_sticky_posts' => 1,
 				'posts_per_page'      => -1,

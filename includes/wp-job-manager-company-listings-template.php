@@ -34,7 +34,7 @@ function the_candidate_location( $map_link = true, $post = null ) {
  */
 function get_the_candidate_location( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'job_company' )
 		return;
 
 	return apply_filters( 'the_candidate_location', $post->_candidate_location, $post );
@@ -73,7 +73,7 @@ function the_candidate_title( $before = '', $after = '', $echo = true, $post = n
 function get_the_candidate_title( $post = null ) {
 	$post = get_post( $post );
 
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'job_company' )
 		return '';
 
 	return apply_filters( 'the_candidate_title', $post->_candidate_title, $post );
@@ -111,7 +111,7 @@ function the_candidate_photo( $size = 'thumbnail', $default = null, $post = null
  */
 function get_the_candidate_photo( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'job_company' )
 		return;
 
 	return apply_filters( 'the_candidate_photo', $post->_candidate_photo, $post );
@@ -132,7 +132,7 @@ function the_resume_category( $post = null ) {
  */
 function get_the_resume_category( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'job_company' )
 		return '';
 
 	if ( ! get_option( 'resume_manager_enable_categories' ) )
@@ -243,7 +243,7 @@ function resume_class( $class = '', $post_id = null ) {
  */
 function get_resume_class( $class = '', $post_id = null ) {
 	$post = get_post( $post_id );
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'job_company' )
 		return array();
 
 	$classes = array();
@@ -252,7 +252,7 @@ function get_resume_class( $class = '', $post_id = null ) {
 		return $classes;
 	}
 
-	$classes[] = 'resume';
+	$classes[] = 'job_company';
 
 	if ( is_resume_featured( $post ) ) {
 		$classes[] = 'resume_featured';
@@ -395,7 +395,7 @@ function the_candidate_video( $post = null ) {
  */
 function get_the_candidate_video( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'resume' ) {
+	if ( $post->post_type !== 'job_company' ) {
 		return;
 	}
 	return apply_filters( 'the_candidate_video', $post->_candidate_video, $post );

@@ -145,7 +145,7 @@ class WP_Resume_Manager_Shortcodes {
 
 		// ....If not show the candidate dashboard
 		$args = apply_filters( 'resume_manager_get_dashboard_resumes_args', array(
-			'post_type'           => 'resume',
+			'post_type'           => 'job_company',
 			'post_status'         => array( 'publish', 'expired', 'pending', 'hidden' ),
 			'ignore_sticky_posts' => 1,
 			'posts_per_page'      => $posts_per_page,
@@ -262,7 +262,7 @@ class WP_Resume_Manager_Shortcodes {
 				<?php get_job_manager_template( 'resumes-start.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
-					<?php get_job_manager_template_part( 'content', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content', 'job_company', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 				<?php endwhile; ?>
 
 				<?php get_job_manager_template( 'resumes-end.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>

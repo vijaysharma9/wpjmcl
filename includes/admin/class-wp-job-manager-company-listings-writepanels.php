@@ -322,7 +322,7 @@ class WP_Resume_Manager_Writepanels extends WP_Job_Manager_Writepanels {
 		if ( is_int( wp_is_post_autosave( $post ) ) ) return;
 		if ( empty( $_POST['resume_manager_nonce'] ) || ! wp_verify_nonce( $_POST['resume_manager_nonce'], 'save_meta_data' ) ) return;
 		if ( ! current_user_can( 'edit_post', $post_id ) ) return;
-		if ( $post->post_type != 'resume' ) return;
+		if ( $post->post_type != 'job_company' ) return;
 
 		do_action( 'resume_manager_save_resume', $post_id, $post );
 	}

@@ -37,7 +37,7 @@ class WP_Resume_Manager_Email_Notification {
 
 		ob_start();
 		get_job_manager_template( 'resume-submitted-notification.php', array(
-			'resume'        => $resume,
+			'job_company'        => $resume,
 			'resume_id'     => $resume_id,
 			'custom_fields' => $custom_fields
 		), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
