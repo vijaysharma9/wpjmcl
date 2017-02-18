@@ -241,7 +241,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 
 		unset( $columns['title'], $columns['date'] );
 
-		$columns["company"]          = __( "Candidate", 'wp-job-manager-company-listings' );
+		$columns["company"]          = __( "Company", 'wp-job-manager-company-listings' );
 		$columns["company_location"] = __( "Location", 'wp-job-manager-company-listings' );
 		$columns['company_status']   = '<span class="tips" data-tip="' . __( "Status", 'wp-job-manager-company-listings' ) . '">' . __( "Status", 'wp-job-manager-company-listings' ) . '</span>';
 		$columns["company_posted"]   = __( "Posted", 'wp-job-manager-company-listings' );
