@@ -11,14 +11,14 @@ class WP_Job_Manager_Company_Listings_Ajax {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_nopriv_resume_manager_get_resumes', array( $this, 'get_resumes' ) );
-		add_action( 'wp_ajax_resume_manager_get_resumes', array( $this, 'get_resumes' ) );
+		add_action( 'wp_ajax_nopriv_company_manager_get_companies', array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_company_manager_get_companies', array( $this, 'get_companies' ) );
 	}
 
 	/**
-	 * Get resumes via ajax
+	 * Get companies via ajax
 	 */
-	public function get_resumes() {
+	public function get_companies() {
 		global $wpdb;
 
 		ob_start();
@@ -49,39 +49,39 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			$args['featured'] = $_POST['featured'] === 'true' ? true : false;
 		}
 
-		$resumes = get_resumes( apply_filters( 'resume_manager_get_companies_args', $args ) );
+		$companies = get_companies( apply_filters( 'company_manager_get_companies_args', $args ) );
 
 		$result = array();
-		$result['found_resumes'] = false;
+		$result['found_companies'] = false;
 
-		if ( $resumes->have_posts() ) : $result['found_resumes'] = true; ?>
+		if ( $companies->have_posts() ) : $result['found_companies'] = true; ?>
 
-			<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
+			<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
 
-				<?php get_job_manager_template_part( 'content', 'resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_job_manager_template_part( 'content', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 			<?php endwhile; ?>
 
 		<?php else : ?>
 
-			<li class="no_companies_found"><?php _e( 'No resumes found matching your selection.', 'wp-job-manager-company-listings' ); ?></li>
+			<li class="no_companies_found"><?php _e( 'No companies found matching your selection.', 'wp-job-manager-company-listings' ); ?></li>
 
 		<?php endif;
 
 		$result['html']    = ob_get_clean();
 
 		// Generate 'showing' text
-		if ( $search_keywords || $search_location || $search_categories || apply_filters( 'resume_manager_get_companies_custom_filter', false ) ) {
+		if ( $search_keywords || $search_location || $search_categories || apply_filters( 'company_manager_get_companies_custom_filter', false ) ) {
 
 			$showing_categories = array();
 
 			if ( $search_categories ) {
 				foreach ( $search_categories as $category ) {
 					if ( ! is_numeric( $category ) ) {
-						$category_object = get_term_by( 'slug', $category, 'resume_category' );
+						$category_object = get_term_by( 'slug', $category, 'company_category' );
 					}
 					if ( is_numeric( $category ) || is_wp_error( $category_object ) || ! $category_object ) {
-						$category_object = get_term_by( 'id', $category, 'resume_category' );
+						$category_object = get_term_by( 'id', $category, 'company_category' );
 					}
 					if ( ! is_wp_error( $category_object ) ) {
 						$showing_categories[] = $category_object->name;
@@ -90,21 +90,21 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			}
 
 			if ( $search_keywords ) {
-				$showing_resumes  = sprintf( __( 'Showing &ldquo;%s&rdquo; %sresumes', 'wp-job-manager-company-listings' ), $search_keywords, implode( ', ', $showing_categories ) );
+				$showing_companies  = sprintf( __( 'Showing &ldquo;%s&rdquo; %scompanies', 'wp-job-manager-company-listings' ), $search_keywords, implode( ', ', $showing_categories ) );
 			} else {
-				$showing_resumes  = sprintf( __( 'Showing all %sresumes', 'wp-job-manager-company-listings' ), implode( ', ', $showing_categories ) . ' ' );
+				$showing_companies  = sprintf( __( 'Showing all %scompanies', 'wp-job-manager-company-listings' ), implode( ', ', $showing_categories ) . ' ' );
 			}
 
 			$showing_location  = $search_location ? sprintf( ' ' . __( 'located in &ldquo;%s&rdquo;', 'wp-job-manager-company-listings' ), $search_location ) : '';
 
-			$result['showing'] = apply_filters( 'resume_manager_get_companies_custom_filter_text', $showing_resumes . $showing_location );
+			$result['showing'] = apply_filters( 'company_manager_get_companies_custom_filter_text', $showing_companies . $showing_location );
 
 		} else {
 			$result['showing'] = '';
 		}
 
 		// Generate RSS link
-		$result['showing_links'] = resume_manager_get_filtered_links( array(
+		$result['showing_links'] = company_manager_get_filtered_links( array(
 			'search_location'   => $search_location,
 			'search_categories' => $search_categories,
 			'search_keywords'   => $search_keywords
@@ -112,10 +112,10 @@ class WP_Job_Manager_Company_Listings_Ajax {
 
 		// Generate pagination
 		if ( isset( $_POST['show_pagination'] ) && $_POST['show_pagination'] === 'true' ) {
-			$result['pagination'] = get_job_listing_pagination( $resumes->max_num_pages, absint( $_POST['page'] ) );
+			$result['pagination'] = get_job_listing_pagination( $companies->max_num_pages, absint( $_POST['page'] ) );
 		}
 
-		$result['max_num_pages'] = $resumes->max_num_pages;
+		$result['max_num_pages'] = $companies->max_num_pages;
 
 		echo '<!--WPJM-->';
 		echo json_encode( $result );

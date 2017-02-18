@@ -1,13 +1,13 @@
 <?php
-if ( ! function_exists( 'get_resumes' ) ) :
+if ( ! function_exists( 'get_companies' ) ) :
 /**
  * Queries job listings with certain criteria and returns them
  *
  * @access public
  * @return void
  */
-function get_resumes( $args = array() ) {
-	global $wpdb, $resume_manager_keyword;
+function get_companies( $args = array() ) {
+	global $wpdb, $company_manager_keyword;
 
 	$args = wp_parse_args( $args, array(
 		'search_location'   => '',
@@ -22,7 +22,7 @@ function get_resumes( $args = array() ) {
 	) );
 
 	$query_args = array(
-		'post_type'              => 'resume',
+		'post_type'              => 'company',
 		'post_status'            => 'publish',
 		'ignore_sticky_posts'    => 1,
 		'offset'                 => absint( $args['offset'] ),
@@ -42,7 +42,7 @@ function get_resumes( $args = array() ) {
 	}
 
 	if ( ! empty( $args['search_location'] ) ) {
-		$location_meta_keys = array( 'geolocation_formatted_address', '_candidate_location', 'geolocation_state_long' );
+		$location_meta_keys = array( 'geolocation_formatted_address', '_company_location', 'geolocation_state_long' );
 		$location_search    = array( 'relation' => 'OR' );
 		foreach ( $location_meta_keys as $meta_key ) {
 			$location_search[] = array(
@@ -64,9 +64,9 @@ function get_resumes( $args = array() ) {
 
 	if ( ! empty( $args['search_categories'] ) ) {
 		$field    = is_numeric( $args['search_categories'][0] ) ? 'term_id' : 'slug';
-		$operator = 'all' === get_option( 'resume_manager_category_filter_type', 'all' ) && sizeof( $args['search_categories'] ) > 1 ? 'AND' : 'IN';
+		$operator = 'all' === get_option( 'company_manager_category_filter_type', 'all' ) && sizeof( $args['search_categories'] ) > 1 ? 'AND' : 'IN';
 		$query_args['tax_query'][] = array(
-			'taxonomy'         => 'resume_category',
+			'taxonomy'         => 'company_category',
 			'field'            => $field,
 			'terms'            => array_values( $args['search_categories'] ),
 			'include_children' => $operator !== 'AND' ,
@@ -81,12 +81,12 @@ function get_resumes( $args = array() ) {
 		);
 	}
 
-	if ( $resume_manager_keyword = sanitize_text_field( $args['search_keywords'] ) ) {
-		$query_args['_keyword'] = $resume_manager_keyword; // Does nothing but needed for unique hash
+	if ( $company_manager_keyword = sanitize_text_field( $args['search_keywords'] ) ) {
+		$query_args['_keyword'] = $company_manager_keyword; // Does nothing but needed for unique hash
 		add_filter( 'posts_clauses', 'get_companies_keyword_search' );
 	}
 
-	$query_args = apply_filters( 'resume_manager_get_resumes', $query_args, $args );
+	$query_args = apply_filters( 'company_manager_get_companies', $query_args, $args );
 
 	if ( empty( $query_args['meta_query'] ) ) {
 		unset( $query_args['meta_query'] );
@@ -101,7 +101,7 @@ function get_resumes( $args = array() ) {
 
 	// Generate hash
 	$to_hash         = defined( 'ICL_LANGUAGE_CODE' ) ? json_encode( $query_args ) . ICL_LANGUAGE_CODE : json_encode( $query_args );
-	$query_args_hash = 'jm_' . md5( $to_hash ) . WP_Job_Manager_Cache_Helper::get_transient_version( 'get_resume_listings' );
+	$query_args_hash = 'jm_' . md5( $to_hash ) . WP_Job_Manager_Cache_Helper::get_transient_version( 'get_company_listings' );
 
 	do_action( 'before_get_job_listings', $query_args, $args );
 
@@ -110,7 +110,7 @@ function get_resumes( $args = array() ) {
 		set_transient( $query_args_hash, $result, DAY_IN_SECONDS * 30 );
 	}
 
-	do_action( 'after_get_resumes', $query_args, $args );
+	do_action( 'after_get_companies', $query_args, $args );
 
 	remove_filter( 'posts_clauses', 'get_companies_keyword_search' );
 
@@ -126,18 +126,18 @@ if ( ! function_exists( 'get_companies_keyword_search' ) ) :
 	 * @return array
 	 */
 	function get_companies_keyword_search( $args ) {
-		global $wpdb, $resume_manager_keyword;
+		global $wpdb, $company_manager_keyword;
 
 		// Meta searching - Query matching ids to avoid more joins
-		$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value LIKE '" . esc_sql( $resume_manager_keyword ) . "%'" );
+		$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value LIKE '" . esc_sql( $company_manager_keyword ) . "%'" );
 
 		// Term searching
-		$post_ids = array_merge( $post_ids, $wpdb->get_col( "SELECT object_id FROM {$wpdb->term_relationships} AS tr LEFT JOIN {$wpdb->terms} AS t ON tr.term_taxonomy_id = t.term_id WHERE t.name LIKE '" . esc_sql( $resume_manager_keyword ) . "%'" ) );
+		$post_ids = array_merge( $post_ids, $wpdb->get_col( "SELECT object_id FROM {$wpdb->term_relationships} AS tr LEFT JOIN {$wpdb->terms} AS t ON tr.term_taxonomy_id = t.term_id WHERE t.name LIKE '" . esc_sql( $company_manager_keyword ) . "%'" ) );
 
 		// Title and content searching
 		$conditions = array();
-		$conditions[] = "{$wpdb->posts}.post_title LIKE '%" . esc_sql( $resume_manager_keyword ) . "%'";
-		$conditions[] = "{$wpdb->posts}.post_content RLIKE '[[:<:]]" . esc_sql( $resume_manager_keyword ) . "[[:>:]]'";
+		$conditions[] = "{$wpdb->posts}.post_title LIKE '%" . esc_sql( $company_manager_keyword ) . "%'";
+		$conditions[] = "{$wpdb->posts}.post_content RLIKE '[[:<:]]" . esc_sql( $company_manager_keyword ) . "[[:>:]]'";
 
 		if ( $post_ids ) {
 			$conditions[] = "{$wpdb->posts}.ID IN (" . esc_sql( implode( ',', array_unique( $post_ids ) ) ) . ")";
@@ -149,7 +149,7 @@ if ( ! function_exists( 'get_companies_keyword_search' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'order_featured_resume' ) ) :
+if ( ! function_exists( 'order_featured_company' ) ) :
 	/**
 	 * WP Core doens't let us change the sort direction for invidual orderby params - http://core.trac.wordpress.org/ticket/17065
 	 *
@@ -157,7 +157,7 @@ if ( ! function_exists( 'order_featured_resume' ) ) :
 	 * @param array $args
 	 * @return array
 	 */
-	function order_featured_resume( $args ) {
+	function order_featured_company( $args ) {
 		global $wpdb;
 
 		$args['orderby'] = "$wpdb->postmeta.meta_value+0 DESC, $wpdb->posts.post_title ASC";
@@ -166,36 +166,36 @@ if ( ! function_exists( 'order_featured_resume' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'get_resume_share_link' ) ) :
+if ( ! function_exists( 'get_company_share_link' ) ) :
 /**
- * Generates a sharing link which allows someone to view the resume directly (even if permissions do not usually allow it)
+ * Generates a sharing link which allows someone to view the company directly (even if permissions do not usually allow it)
  *
  * @access public
  * @return array
  */
-function get_resume_share_link( $resume_id ) {
-	if ( ! $key = get_post_meta( $resume_id, 'share_link_key', true ) ) {
+function get_company_share_link( $company_id ) {
+	if ( ! $key = get_post_meta( $company_id, 'share_link_key', true ) ) {
 		$key = wp_generate_password( 32, false );
-		update_post_meta( $resume_id, 'share_link_key', $key );
+		update_post_meta( $company_id, 'share_link_key', $key );
 	}
 
-	return add_query_arg( 'key', $key, get_permalink( $resume_id ) );
+	return add_query_arg( 'key', $key, get_permalink( $company_id ) );
 }
 endif;
 
-if ( ! function_exists( 'get_resume_categories' ) ) :
+if ( ! function_exists( 'get_company_categories' ) ) :
 /**
  * Outputs a form to submit a new job to the site from the frontend.
  *
  * @access public
  * @return array
  */
-function get_resume_categories() {
-	if ( ! get_option( 'resume_manager_enable_categories' ) ) {
+function get_company_categories() {
+	if ( ! get_option( 'company_manager_enable_categories' ) ) {
 		return array();
 	}
 
-	return get_terms( "resume_category", array(
+	return get_terms( "company_category", array(
 		'orderby'       => 'name',
 	    'order'         => 'ASC',
 	    'hide_empty'    => false,
@@ -203,13 +203,13 @@ function get_resume_categories() {
 }
 endif;
 
-if ( ! function_exists( 'resume_manager_get_filtered_links' ) ) :
+if ( ! function_exists( 'company_manager_get_filtered_links' ) ) :
 /**
- * Shows links after filtering resumes
+ * Shows links after filtering companies
  */
-function resume_manager_get_filtered_links( $args = array() ) {
+function company_manager_get_filtered_links( $args = array() ) {
 
-	$links = apply_filters( 'resume_manager_resume_filters_showing_companies_links', array(
+	$links = apply_filters( 'company_manager_company_filters_showing_companies_links', array(
 		'reset' => array(
 			'name' => __( 'Reset', 'wp-job-manager-company-listings' ),
 			'url'  => '#'
@@ -227,31 +227,31 @@ function resume_manager_get_filtered_links( $args = array() ) {
 endif;
 
 /**
- * True if an the user can edit a resume.
+ * True if an the user can edit a company.
  *
  * @return bool
  */
-function resume_manager_user_can_edit_resume( $resume_id ) {
+function company_manager_user_can_edit_company( $company_id ) {
 	$can_edit = true;
-	$resume   = get_post( $resume_id );
+	$company   = get_post( $company_id );
 
 	if ( ! is_user_logged_in() ) {
 		$can_edit = false;
-	} elseif ( $resume->post_author != get_current_user_id() ) {
+	} elseif ( $company->post_author != get_current_user_id() ) {
 		$can_edit = false;
 	}
 
-	return apply_filters( 'resume_manager_user_can_edit_resume', $can_edit, $resume_id );
+	return apply_filters( 'company_manager_user_can_edit_company', $can_edit, $company_id );
 }
 
 /**
- * True if an the user can browse resumes.
+ * True if an the user can browse companies.
  *
  * @return bool
  */
-function resume_manager_user_can_browse_resumes() {
+function company_manager_user_can_browse_companies() {
 	$can_browse = true;
-	$caps       = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'resume_manager_browse_resume_capability' ) ) ) ) );
+	$caps       = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_manager_browse_company_capability' ) ) ) ) );
 
 	if ( $caps ) {
 		$can_browse = false;
@@ -263,21 +263,21 @@ function resume_manager_user_can_browse_resumes() {
 		}
 	}
 
-	return apply_filters( 'resume_manager_user_can_browse_resumes', $can_browse );
+	return apply_filters( 'company_manager_user_can_browse_companies', $can_browse );
 }
 
 /**
- * True if an the user can view the full resume name.
+ * True if an the user can view the full company name.
  *
  * @return bool
  */
-function resume_manager_user_can_view_resume_name( $resume_id ) {
+function company_manager_user_can_view_company_name( $company_id ) {
 	$can_view = true;
-	$resume   = get_post( $resume_id );
-	$caps     = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'resume_manager_view_name_capability' ) ) ) ) );
+	$company   = get_post( $company_id );
+	$caps     = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_manager_view_name_capability' ) ) ) ) );
 
 	// Allow previews
-	if ( $resume->post_status === 'preview' ) {
+	if ( $company->post_status === 'preview' ) {
 		return true;
 	}
 
@@ -291,33 +291,33 @@ function resume_manager_user_can_view_resume_name( $resume_id ) {
 		}
 	}
 
-	if ( $resume->post_author > 0 && $resume->post_author == get_current_user_id() ) {
+	if ( $company->post_author > 0 && $company->post_author == get_current_user_id() ) {
 		$can_view = true;
 	}
 
-	if ( ( $key = get_post_meta( $resume_id, 'share_link_key', true ) ) && ! empty( $_GET['key'] ) && $key == $_GET['key'] ) {
+	if ( ( $key = get_post_meta( $company_id, 'share_link_key', true ) ) && ! empty( $_GET['key'] ) && $key == $_GET['key'] ) {
 		$can_view = true;
 	}
 
-	return apply_filters( 'resume_manager_user_can_view_resume_name', $can_view );
+	return apply_filters( 'company_manager_user_can_view_company_name', $can_view );
 }
 
 
 /**
- * True if an the user can view a resume.
+ * True if an the user can view a company.
  *
  * @return bool
  */
-function resume_manager_user_can_view_resume( $resume_id ) {
+function company_manager_user_can_view_company( $company_id ) {
 	$can_view = true;
-	$resume   = get_post( $resume_id );
+	$company   = get_post( $company_id );
 
 	// Allow previews
-	if ( $resume->post_status === 'preview' ) {
+	if ( $company->post_status === 'preview' ) {
 		return true;
 	}
 
-	$caps = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'resume_manager_view_resume_capability' ) ) ) ) );
+	$caps = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_manager_view_company_capability' ) ) ) ) );
 
 	if ( $caps ) {
 		$can_view = false;
@@ -329,30 +329,30 @@ function resume_manager_user_can_view_resume( $resume_id ) {
 		}
 	}
 
-	if ( $resume->post_status === 'expired' ) {
+	if ( $company->post_status === 'expired' ) {
 		$can_view = false;
 	}
 
-	if ( $resume->post_author > 0 && $resume->post_author == get_current_user_id() ) {
+	if ( $company->post_author > 0 && $company->post_author == get_current_user_id() ) {
 		$can_view = true;
 	}
 
-	if ( ( $key = get_post_meta( $resume_id, 'share_link_key', true ) ) && ! empty( $_GET['key'] ) && $key == $_GET['key'] ) {
+	if ( ( $key = get_post_meta( $company_id, 'share_link_key', true ) ) && ! empty( $_GET['key'] ) && $key == $_GET['key'] ) {
 		$can_view = true;
 	}
 
-	return apply_filters( 'resume_manager_user_can_view_resume', $can_view, $resume_id );
+	return apply_filters( 'company_manager_user_can_view_company', $can_view, $company_id );
 }
 
 /**
- * True if an the user can view a resume.
+ * True if an the user can view a company.
  *
  * @return bool
  */
-function resume_manager_user_can_view_contact_details( $resume_id ) {
+function company_manager_user_can_view_contact_details( $company_id ) {
 	$can_view = true;
-	$resume   = get_post( $resume_id );
-	$caps     = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'resume_manager_contact_resume_capability' ) ) ) ) );
+	$company   = get_post( $company_id );
+	$caps     = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_manager_contact_company_capability' ) ) ) ) );
 
 	if ( $caps ) {
 		$can_view = false;
@@ -364,26 +364,26 @@ function resume_manager_user_can_view_contact_details( $resume_id ) {
 		}
 	}
 
-	if ( $resume->post_author > 0 && $resume->post_author == get_current_user_id() ) {
+	if ( $company->post_author > 0 && $company->post_author == get_current_user_id() ) {
 		$can_view = true;
 	}
 
-	if ( ( $key = get_post_meta( $resume_id, 'share_link_key', true ) ) && ! empty( $_GET['key'] ) && $key == $_GET['key'] ) {
+	if ( ( $key = get_post_meta( $company_id, 'share_link_key', true ) ) && ! empty( $_GET['key'] ) && $key == $_GET['key'] ) {
 		$can_view = true;
 	}
 
-	return apply_filters( 'resume_manager_user_can_view_contact_details', $can_view, $resume_id );
+	return apply_filters( 'company_manager_user_can_view_contact_details', $can_view, $company_id );
 }
 
-if ( ! function_exists( 'get_resume_post_statuses' ) ) :
+if ( ! function_exists( 'get_company_post_statuses' ) ) :
 /**
- * Get post statuses used for resumes
+ * Get post statuses used for companies
  *
  * @access public
  * @return array
  */
-function get_resume_post_statuses() {
-	return apply_filters( 'resume_post_statuses', array(
+function get_company_post_statuses() {
+	return apply_filters( 'company_post_statuses', array(
 		'draft'           => _x( 'Draft', 'post status', 'wp-job-manager-company-listings' ),
 		'expired'         => _x( 'Expired', 'post status', 'wp-job-manager-company-listings' ),
 		'hidden'          => _x( 'Hidden', 'post status', 'wp-job-manager-company-listings' ),
@@ -398,36 +398,36 @@ endif;
 /**
  * Upload dir
  */
-function resume_manager_upload_dir( $dir, $field ) {
-	if ( 'resume_file' === $field ) {
-		$dir = 'resumes/resume_files';
+function company_manager_upload_dir( $dir, $field ) {
+	if ( 'company_file' === $field ) {
+		$dir = 'companies/company_files';
 	}
 	return $dir;
 }
-add_filter( 'job_manager_upload_dir', 'resume_manager_upload_dir', 10, 2 );
+add_filter( 'job_manager_upload_dir', 'company_manager_upload_dir', 10, 2 );
 
 /**
- * Count user resumes
+ * Count user companies
  * @param  integer $user_id
  * @return int
  */
-function resume_manager_count_user_resumes( $user_id = 0 ) {
+function company_manager_count_user_companies( $user_id = 0 ) {
 	global $wpdb;
 
 	if ( ! $user_id ) {
 		$user_id = get_current_user_id();
 	}
 
-	return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'resume' AND post_status IN ( 'publish', 'pending', 'expired', 'hidden' );", $user_id ) );
+	return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'company' AND post_status IN ( 'publish', 'pending', 'expired', 'hidden' );", $user_id ) );
 }
 
 /**
  * Get the permalink of a page if set
- * @param  string $page e.g. candidate_dashboard, submit_resume_form, resumes
+ * @param  string $page e.g. company_dashboard, submit_company_form, companies
  * @return string|bool
  */
-function resume_manager_get_permalink( $page ) {
-	$page_id = get_option( 'resume_manager_' . $page . '_page_id', false );
+function company_manager_get_permalink( $page ) {
+	$page_id = get_option( 'company_manager_' . $page . '_page_id', false );
 	if ( $page_id ) {
 		return get_permalink( $page_id );
 	} else {
@@ -436,17 +436,17 @@ function resume_manager_get_permalink( $page ) {
 }
 
 /**
- * Calculate and return the resume expiry date
- * @param  int $resume_id
+ * Calculate and return the company expiry date
+ * @param  int $company_id
  * @return string
  */
-function calculate_resume_expiry( $resume_id ) {
+function calculate_company_expiry( $company_id ) {
 	// Get duration from the product if set...
-	$duration = get_post_meta( $resume_id, '_resume_duration', true );
+	$duration = get_post_meta( $company_id, '_company_duration', true );
 
 	// ...otherwise use the global option
 	if ( ! $duration ) {
-		$duration = absint( get_option( 'resume_manager_submission_duration' ) );
+		$duration = absint( get_option( 'company_manager_submission_duration' ) );
 	}
 
 	if ( $duration ) {

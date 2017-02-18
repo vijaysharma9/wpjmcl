@@ -21,7 +21,7 @@ msgstr "Configuración"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:49
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:50
-msgid "Approve Resumes"
+msgid "Approve Companies"
 msgstr "Aprovar CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:118
@@ -94,13 +94,13 @@ msgstr "Candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:245
 #: includes/class-wp-job-manager-company-listings-widgets.php:40
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:153
-#: templates/candidate-dashboard.php:13 templates/resume-filters.php:13
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:153
+#: templates/company-dashboard.php:13 templates/company-filters.php:13
 msgid "Location"
 msgstr "Localización"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:246
-#: templates/candidate-dashboard.php:17
+#: templates/company-dashboard.php:17
 msgid "Status"
 msgstr "Estatus"
 
@@ -115,8 +115,8 @@ msgstr "Vence"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:251
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:85
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:195
-#: templates/content-single-resume.php:20
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:195
+#: templates/content-single-company.php:20
 msgid "Skills"
 msgstr "Habilidades"
 
@@ -164,12 +164,12 @@ msgstr "Email candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:420
 #: includes/class-wp-job-manager-company-listings-post-types.php:198
-#: templates/candidate-dashboard.php:36 templates/candidate-dashboard.php:40
+#: templates/company-dashboard.php:36 templates/company-dashboard.php:40
 msgid "Edit"
 msgstr "Editar"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:425
-#: templates/candidate-dashboard.php:50
+#: templates/company-dashboard.php:50
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -178,20 +178,20 @@ msgid "Resume Listings"
 msgstr "Listados de CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:49
-msgid "Resumes Per Page"
+msgid "Companies Per Page"
 msgstr "CV por pagina"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:50
-msgid "How many resumes should be shown per page by default?"
+msgid "How many companies should be shown per page by default?"
 msgstr "Cuantos CV se deben mostrar por pagina, por defecto?"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:57
-msgid "Enable resume categories"
+msgid "Enable company categories"
 msgstr "Habilitar categorías de CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:58
 msgid ""
-"Choose whether to enable resume categories. Categories must be setup by an "
+"Choose whether to enable company categories. Categories must be setup by an "
 "admin for users to choose during job submission."
 msgstr ""
 "Elija si desea habilitar categorías curriculum vitae. Categorías deben ser "
@@ -210,7 +210,7 @@ msgstr "Habilitar multi selección de categorías"
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:75
 msgid ""
 "If enabled, the category select box will default to a multiselect on the "
-"[resumes] shortcode."
+"[companies] shortcode."
 msgstr ""
 "Si se activa, el cuadro de selección de categoría será predeterminado a una "
 "selección múltiple en el código corto."
@@ -220,21 +220,21 @@ msgid "Category Filter Type"
 msgstr "Filtro de tipo de categoría"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:78
-msgid "Resumes will be shown if within ANY selected category"
+msgid "Companies will be shown if within ANY selected category"
 msgstr "CV se le aparecen dentro de cualquier categoría seleccionada"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:79
-msgid "Resumes will be shown if within ALL selected categories"
+msgid "Companies will be shown if within ALL selected categories"
 msgstr "CV se le aparecen dentro de TODAS las categorías seleccionadas"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:86
-msgid "Enable resume skills"
+msgid "Enable company skills"
 msgstr "Habilitar habilidades en el CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:87
 msgid ""
-"Choose whether to enable the resume skills field. Skills work like tags and "
-"can be added by users during resume submission."
+"Choose whether to enable the company skills field. Skills work like tags and "
+"can be added by users during company submission."
 msgstr ""
 "Elija si desea habilitar el campo de las habilidades del curriculum vitae. "
 "Habilidades funcionan como etiquetas y se pueden agregar los usuarios "
@@ -250,7 +250,7 @@ msgstr "Ilimitado"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:96
 msgid ""
-"Enter the number of skills per resume submission you wish to allow, or leave "
+"Enter the number of skills per company submission you wish to allow, or leave "
 "blank for unlimited skills."
 msgstr ""
 "Digite el número de habilidades para el envio del curriculum vitae  o dejar "
@@ -261,11 +261,11 @@ msgid "Resume Upload"
 msgstr "Subir CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:103
-msgid "Enable resume upload"
+msgid "Enable company upload"
 msgstr "Habilitar subida CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:104
-msgid "Choose whether to allow candidates to upload a resume file."
+msgid "Choose whether to allow companys to upload a company file."
 msgstr ""
 "Elija si desea permitir que los candidatos puedan subir un archivo de hoja "
 "de vida."
@@ -303,7 +303,7 @@ msgstr "Permitir creación de cuenta"
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:127
 msgid ""
 "If enabled, non-logged in users will be able to create an account by "
-"entering their email address on the resume submission form."
+"entering their email address on the company submission form."
 msgstr ""
 "Si se activa, no los usuarios registrados podrán crear una cuenta "
 "introduciendo su dirección de correo electrónico en el formulario de "
@@ -357,14 +357,14 @@ msgid "Email New Submissions"
 msgstr "Email nuevos envios"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:161
-msgid "Email resume details to the admin user after submission."
+msgid "Email company details to the admin user after submission."
 msgstr ""
 "Emaillos detalels del  curriculum vitae al usuario administrador después de "
 "la inclusión."
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:162
 msgid ""
-"If enabled, all resume details for new submissions will be emailed to %s."
+"If enabled, all company details for new submissions will be emailed to %s."
 msgstr ""
 "Si se activa, todos los detalles del curriculum vitae para nuevas "
 "presentaciones serán enviadas por correo electrónico a %s."
@@ -388,14 +388,14 @@ msgid "Never expire"
 msgstr "Nunca vence"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:177
-msgid "Auto-hide Resumes"
+msgid "Auto-hide Companies"
 msgstr "Auto ocultar CVs"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:178
 msgid ""
-"How many <strong>days</strong> un-modified resumes should be published "
-"before being hidden. Can be left blank to never hide resumes automaticaly. "
-"Candidates can re-publish hidden resumes form their dashboard."
+"How many <strong>days</strong> un-modified companies should be published "
+"before being hidden. Can be left blank to never hide companies automaticaly. "
+"Candidates can re-publish hidden companies form their dashboard."
 msgstr ""
 "¿Cuántos <strong> días </ strong>los CV NO modificados deben publicarse "
 "antes de ser ocultados. Se puede dejar en blanco para no ocultar hojas de "
@@ -427,12 +427,12 @@ msgid "Linkedin Import"
 msgstr "Importar de linkedin"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:194
-msgid "Allow import of resume data from LinkedIn"
+msgid "Allow import of company data from LinkedIn"
 msgstr "Permitir la importación de datos de CV desde Linkedin"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:195
 msgid ""
-"If enabled, users will be able to login to LinkedIn and have the resume "
+"If enabled, users will be able to login to LinkedIn and have the company "
 "submission form automatically populated."
 msgstr ""
 "Si está habilitado, los usuarios podrán acceder a LinkedIn y tener el "
@@ -460,15 +460,15 @@ msgstr "Método de aplicación por Email"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:215
 msgid ""
-"Allow candidates to apply to jobs which use the email application method"
+"Allow companys to apply to jobs which use the email application method"
 msgstr ""
 "Permitir a los candidatos aplicar a los trabajos que utilizan el método de "
 "aplicación de correo electrónico"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:216
 msgid ""
-"If a candidate applies to a job with their online resume, the employer will "
-"be mailed their message and a private link to the resume."
+"If a company applies to a job with their online company, the employer will "
+"be mailed their message and a private link to the company."
 msgstr ""
 "Si un candidato se aplica a un trabajo con su curriculum vitae en línea, el "
 "empleador recibira su mensaje y un enlace privado a la hoja de vida."
@@ -479,7 +479,7 @@ msgstr "Método de aplicación por URL de website"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:223
 msgid ""
-"Allow candidates to apply to jobs which use the the website URL application "
+"Allow companys to apply to jobs which use the the website URL application "
 "method"
 msgstr ""
 "Permitir a los candidatos aplicar  a los trabajos que utilizan el método de "
@@ -487,7 +487,7 @@ msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:224
 msgid ""
-"If a candidate applies to a job with their online resume, the application "
+"If a company applies to a job with their online company, the application "
 "will be stored in the database."
 msgstr ""
 "Si un candidato se aplica a un trabajo con su curriculum vitae en línea, la "
@@ -498,14 +498,14 @@ msgid "Force Apply With Resume"
 msgstr "Forzar el aplicar con CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:231
-msgid "Force candidates to create a resume and apply through resume manager"
+msgid "Force companys to create a company and apply through company manager"
 msgstr ""
 "Forzar a los Candidatos a crear un curriculum vitae y a aplicar a través de "
 "la gestión del CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:232
 msgid ""
-"Candidates without a resume on file will be taken through the resume "
+"Candidates without a company on file will be taken through the company "
 "submission process to apply for a job. Other details, such as the "
 "application email address, will be hidden."
 msgstr ""
@@ -524,11 +524,11 @@ msgstr "Pagina de Envió CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:245
 msgid ""
-"Select the page where you have placed the [submit_resume_form] shortcode. "
+"Select the page where you have placed the [submit_company_form] shortcode. "
 "This lets the plugin know where the form is located."
 msgstr ""
 "Seleccione la página donde ha colocado el código corto "
-"[submit_resume_form] . Esto permite que el plugin reconozca donde se "
+"[submit_company_form] . Esto permite que el plugin reconozca donde se "
 "encuentra el formulario."
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:251
@@ -537,11 +537,11 @@ msgstr "Página de panel de control del candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:252
 msgid ""
-"Select the page where you have placed the [candidate_dashboard] shortcode. "
+"Select the page where you have placed the [company_dashboard] shortcode. "
 "This lets the plugin know where the dashboard is located."
 msgstr ""
 "Seleccione la página en la que ha colocado el código corto. "
-"[candidate_dashboard]  Esto permite que el plugin identifique donde se "
+"[company_dashboard]  Esto permite que el plugin identifique donde se "
 "encuentra el tablero de control."
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:258
@@ -550,8 +550,8 @@ msgstr "Página de listado de CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:259
 msgid ""
-"Select the page where you have placed the [resumes] shortcode. This lets the "
-"plugin know where the resume listings page is located."
+"Select the page where you have placed the [companies] shortcode. This lets the "
+"plugin know where the company listings page is located."
 msgstr ""
 "Seleccione la página donde ha colocado el código corto [currículos]  Esto "
 "permite que el plugin identifique donde se encuentra la página de CVs."
@@ -566,7 +566,7 @@ msgstr "Capacidad de navegar por los CVs"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:272
 msgid ""
-"Enter the <a href=\"%s\">capability</a> required in order to browse resumes. "
+"Enter the <a href=\"%s\">capability</a> required in order to browse companies. "
 "Supports a comma separated list of roles/capabilities."
 msgstr ""
 "Introduzca la  <a href=\"%s\">capacidad</a> para navegar por  los CVs. "
@@ -579,7 +579,7 @@ msgstr "Ver capacidad de CVs"
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:279
 msgid ""
 "Enter the <a href=\"%s\">capability</a> required in order to view a single "
-"resume. Supports a comma separated list of roles/capabilities."
+"company. Supports a comma separated list of roles/capabilities."
 msgstr ""
 "Entre la  <a href=\"%s\">capacidad</a> requerida para ver un CV. Soporta una "
 "lista de roles separada por comas."
@@ -591,7 +591,7 @@ msgstr "Capacidad de detalles de contacto"
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:286
 msgid ""
 "Enter the <a href=\"%s\">capability</a> required in order to view contact "
-"details on a resume. Supports a comma separated list of roles/capabilities."
+"details on a company. Supports a comma separated list of roles/capabilities."
 msgstr ""
 "Entre la  <a href=\"%s\">capacidad</a> requerida para ver los detalles de un "
 "CV. Soporta una lista de roles separada por comas."
@@ -626,8 +626,8 @@ msgstr "Gracias por instalar <em>Resume Manager</em>!"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:141
 msgid ""
-"This setup wizard will help you get started by creating the pages for resume "
-"submission, resume management, and resume listing."
+"This setup wizard will help you get started by creating the pages for company "
+"submission, company management, and company listing."
 msgstr ""
 "Este asistente de configuración le ayudará a empezar por la creación de las "
 "páginas de presentación del curriculum vitae, la gestión de envío y la lista "
@@ -659,7 +659,7 @@ msgstr "Configuración pagina"
 msgid ""
 "<em>Resume Manager</em> includes %1$sshortcodes%2$s which can be used within "
 "your %3$spages%2$s to output content. These can be created for you below. "
-"For more information on the resume shortcodes view the %4$sshortcode "
+"For more information on the company shortcodes view the %4$sshortcode "
 "documentation%2$s."
 msgstr ""
 "<em>Resume Manager</em>incluye %1$sshortcodes%2$s  que pueden ser usados "
@@ -686,7 +686,7 @@ msgstr "Enviar CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:171
 msgid ""
-"This page allows candidates to post their resume to your website from the "
+"This page allows companys to post their company to your website from the "
 "front-end."
 msgstr ""
 "Esta página permite a los candidatos enviar su hoja de vida a su sitio web "
@@ -695,7 +695,7 @@ msgstr ""
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:173
 msgid ""
 "If you do not want to accept submissions from users in this way (for example "
-"you just want to post resumes from the admin dashboard) you can skip "
+"you just want to post companies from the admin dashboard) you can skip "
 "creating this page."
 msgstr ""
 "Si usted no desea aceptar comunicaciones de los usuarios de esta manera (por "
@@ -709,7 +709,7 @@ msgstr "Panel de Control de Candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:181
 msgid ""
-"This page allows candidates to manage and edit their own resumes from the "
+"This page allows companys to manage and edit their own companies from the "
 "front-end."
 msgstr ""
 "Esta página permite a los candidatos gestionar y editar sus propias hojas de "
@@ -725,12 +725,12 @@ msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:189
 msgctxt "Default page title (wizard)"
-msgid "Resumes"
+msgid "Companies"
 msgstr "Todos los Curriculum Viates"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:190
 msgid ""
-"This page allows users to browse, search, and filter resume listings on the "
+"This page allows users to browse, search, and filter company listings on the "
 "front-end of your site."
 msgstr ""
 "Esta página permite a los usuarios navegar, buscar y filtrar los anuncios de "
@@ -757,11 +757,11 @@ msgid "Tweak the plugin settings"
 msgstr "Ajustar la configuración del plugin"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:214
-msgid "Add a resume via the back-end"
+msgid "Add a company via the back-end"
 msgstr "Adicionar un CV en el back"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:217
-msgid "Add a resume via the front-end"
+msgid "Add a company via the front-end"
 msgstr "Adicionar un CV en el frente de la web"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:221
@@ -769,7 +769,7 @@ msgid "View submitted job listings"
 msgstr "Ver los CV enviados"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:225
-msgid "View the candidate dashboard"
+msgid "View the company dashboard"
 msgstr "Ver el panel de control del candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:229
@@ -823,7 +823,7 @@ msgid "Contact Email"
 msgstr "Email de contacto"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:35
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:142
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:142
 msgid "you@yourdomain.com"
 msgstr "su@sudominio.com"
 
@@ -832,26 +832,26 @@ msgid "Candidate Location"
 msgstr "Ubicación del Candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:40
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:156
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:156
 msgid "e.g. \"London, UK\", \"New York\", \"Houston, TX\""
 msgstr "ejemplo San José, Peréz Zeledón, Cartago"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:44
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:160
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:160
 msgid "Photo"
 msgstr "Foto"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:45
-msgid "URL to the candidate photo"
+msgid "URL to the company photo"
 msgstr "URL de la foto del candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:49
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:173
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:173
 msgid "Video"
 msgstr "Video"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:50
-msgid "URL to the candidate video"
+msgid "URL to the company video"
 msgstr "URL del video del candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:54
@@ -859,7 +859,7 @@ msgid "Resume File"
 msgstr "Archivo del CV"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:55
-msgid "URL to the candidate's resume file"
+msgid "URL to the company's company file"
 msgstr "URL del CV del candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:59
@@ -872,7 +872,7 @@ msgstr "¿CV destacado?"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:65
 msgid ""
-"Featured resumes will be sticky during searches, and can be styled "
+"Featured companies will be sticky during searches, and can be styled "
 "differently."
 msgstr ""
 "Los CV destacados serán presentados ariba durante las búsquedas, y pueden "
@@ -887,21 +887,21 @@ msgid "Candidate Data"
 msgstr "Datos del candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:85
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:202
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:202
 msgid "URL(s)"
 msgstr "URL(s)"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:86
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:298
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:226
-#: templates/content-single-resume.php:27
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:226
+#: templates/content-single-company.php:27
 msgid "Education"
 msgstr "Educación"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:87
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:308
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:259
-#: templates/content-single-resume.php:46
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:259
+#: templates/content-single-company.php:46
 msgid "Experience"
 msgstr "Experiencia"
 
@@ -911,8 +911,8 @@ msgid "Add %s"
 msgstr "Adicionar %s"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:195
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:210
-#: templates/candidate-dashboard.php:11
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:210
+#: templates/company-dashboard.php:11
 msgid "Name"
 msgstr "Nombre"
 
@@ -922,46 +922,46 @@ msgstr "Su sitio"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:202
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:288
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:217
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:217
 msgid "URL"
 msgstr "URL"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:218
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:233
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:233
 msgid "School name"
 msgstr "Nombre de la Universidad"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:225
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:239
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:239
 msgid "Qualification(s)"
 msgstr "Calificaciones / capacidades"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:231
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:266
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:245
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:278
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:245
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:278
 msgid "Start/end date"
 msgstr "Fecha de inicio y finalización"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:237
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:272
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:251
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:284
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:251
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:284
 msgid "Notes"
 msgstr "Notas"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:253
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:266
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:266
 msgid "Employer"
 msgstr "Empleador"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:260
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:272
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:272
 msgid "Job Title"
 msgstr "Nombre del Trabaho"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:286
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:206
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:206
 msgid ""
 "Optionally provide links to any of your websites or social network profiles."
 msgstr ""
@@ -969,32 +969,32 @@ msgstr ""
 "de redes sociales."
 
 #: includes/class-wp-job-manager-company-listings-ajax.php:67
-msgid "No resumes found matching your selection."
+msgid "No companies found matching your selection."
 msgstr "No hay CV correspondientes a su selección"
 
 #: includes/class-wp-job-manager-company-listings-ajax.php:93
-msgid "Showing &ldquo;%s&rdquo; %sresumes"
-msgstr "Mostrando &ldquo;%s&rdquo; %sresumes"
+msgid "Showing &ldquo;%s&rdquo; %scompanies"
+msgstr "Mostrando &ldquo;%s&rdquo; %scompanies"
 
 #: includes/class-wp-job-manager-company-listings-ajax.php:95
-msgid "Showing all %sresumes"
-msgstr "Mostrando todos los  %sresumes"
+msgid "Showing all %scompanies"
+msgstr "Mostrando todos los  %scompanies"
 
 #: includes/class-wp-job-manager-company-listings-ajax.php:98
 msgid "located in &ldquo;%s&rdquo;"
 msgstr "Localizado en  &ldquo;%s&rdquo;"
 
 #: includes/class-wp-job-manager-company-listings-apply.php:51
-msgid "Submit your resume below to apply for the job \"%s\"."
+msgid "Submit your company below to apply for the job \"%s\"."
 msgstr "Envíe su hoja de vida abajo para solicitar el trabajo  \"%s\"."
 
 #: includes/class-wp-job-manager-company-listings-apply.php:90
-msgid "Please choose a resume to apply with"
+msgid "Please choose a company to apply with"
 msgstr "Seleccione un CV para aplicar"
 
 #: includes/class-wp-job-manager-company-listings-apply.php:95
 #: includes/class-wp-job-manager-company-listings-apply.php:107
-msgid "This job cannot be applied for using a resume"
+msgid "This job cannot be applied for using a company"
 msgstr "No se puede aplicar a este trabajo con un CV"
 
 #: includes/class-wp-job-manager-company-listings-apply.php:100
@@ -1002,7 +1002,7 @@ msgid "Please enter a message to include with your application"
 msgstr "Por favor entre un mensaje a incluir con su aplicación"
 
 #: includes/class-wp-job-manager-company-listings-apply.php:112
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:889
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:889
 msgid "Your application has been sent successfully"
 msgstr "Su aplicación a sido enviada con éxito"
 
@@ -1011,16 +1011,16 @@ msgid "Error sending application"
 msgstr "Error al enviar la aplicación"
 
 #: includes/class-wp-job-manager-company-listings-apply.php:141
-#: templates/resume-submitted-notification.php:8
+#: templates/company-submitted-notification.php:8
 msgid "Hello"
 msgstr "Hola"
 
 #: includes/class-wp-job-manager-company-listings-apply.php:142
-msgid "A candidate has applied online for the position \"%s\"."
+msgid "A company has applied online for the position \"%s\"."
 msgstr "Un candidato a aplicado en línea a la posición \"%s\"."
 
 #: includes/class-wp-job-manager-company-listings-apply.php:146
-msgid "You can view their online resume here: %s."
+msgid "You can view their online company here: %s."
 msgstr "Usted puede enviar su CV en línea aquí: %s."
 
 #: includes/class-wp-job-manager-company-listings-apply.php:147
@@ -1041,8 +1041,8 @@ msgstr "Categorías de CV"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:86
 msgctxt "Resume category slug - resave permalinks after changing this"
-msgid "resume-category"
-msgstr "resume-category"
+msgid "company-category"
+msgstr "company-category"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:103
 #: includes/class-wp-job-manager-company-listings-post-types.php:148
@@ -1098,8 +1098,8 @@ msgstr "Habilidades del candidato"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:131
 msgctxt "Resume skill slug - resave permalinks after changing this"
-msgid "resume-skill"
-msgstr "resume-skill"
+msgid "company-skill"
+msgstr "company-skill"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:173
 msgid "Resume"
@@ -1107,18 +1107,18 @@ msgstr "CV"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:174
 #: includes/class-wp-job-manager-company-listings-post-types.php:402
-msgid "Resumes"
+msgid "Companies"
 msgstr "CVs"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:177
 msgctxt "Post type archive slug - resave permalinks after changing this"
-msgid "resumes"
-msgstr "resumes"
+msgid "companies"
+msgstr "companies"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:183
 msgctxt "Resume permalink - resave permalinks after changing this"
-msgid "resume"
-msgstr "resume"
+msgid "company"
+msgstr "company"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:196
 msgid "Add New"
@@ -1142,7 +1142,7 @@ msgid "No %s found in trash"
 msgstr "No %s encontrados en la papelera"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:208
-msgid "This is where you can create and manage user resumes."
+msgid "This is where you can create and manage user companies."
 msgstr ""
 "Aquí es donde usted puede crear y administrar hojas de vida de los usuarios."
 
@@ -1167,7 +1167,7 @@ msgid "Go to homepage"
 msgstr "Ir a página de inicio"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:447
-msgid "Contact via the resume for \"%s\" on %s"
+msgid "Contact via the company for \"%s\" on %s"
 msgstr "Contactar por medio del CV \"%s\" en %s"
 
 #: includes/class-wp-job-manager-company-listings-shortcodes.php:76
@@ -1188,7 +1188,7 @@ msgstr "%s ha sido publicado"
 
 #: includes/class-wp-job-manager-company-listings-shortcodes.php:235
 #: includes/class-wp-job-manager-company-listings-shortcodes.php:265
-msgid "Load more resumes"
+msgid "Load more companies"
 msgstr "Cargar mas CV"
 
 #: includes/class-wp-job-manager-company-listings-widgets.php:23
@@ -1206,7 +1206,7 @@ msgstr "Reciente %s"
 
 #: includes/class-wp-job-manager-company-listings-widgets.php:30
 #: includes/class-wp-job-manager-company-listings-widgets.php:138
-#: templates/candidate-dashboard.php:12
+#: templates/company-dashboard.php:12
 msgid "Title"
 msgstr "Título"
 
@@ -1228,150 +1228,150 @@ msgstr "Mostrar una lista de anuncios destacados en su sitio."
 msgid "Featured %s"
 msgstr "Destacados %s"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-edit-resume.php:53
-msgid "Invalid resume"
+#: includes/forms/class-wp-job-manager-company-listings-form-edit-company.php:53
+msgid "Invalid company"
 msgstr "CV no valido"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-edit-resume.php:91
+#: includes/forms/class-wp-job-manager-company-listings-form-edit-company.php:91
 msgid "Save changes"
 msgstr "Guardar cambios"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-edit-resume.php:119
+#: includes/forms/class-wp-job-manager-company-listings-form-edit-company.php:119
 msgid "Your changes have been saved."
 msgstr "Sus cambios han sido guardados"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-edit-resume.php:119
+#: includes/forms/class-wp-job-manager-company-listings-form-edit-company.php:119
 msgid "View Resume &rarr;"
 msgstr "Ver CV &rarr;"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:36
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:36
 msgid "Submit Details"
 msgstr "Enviar detalles"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:42
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:774
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:42
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:774
 msgid "Preview"
 msgstr "Vista previa"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:48
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:48
 msgid "Done"
 msgstr "Hecho"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:54
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:54
 msgid "Application"
 msgstr "Aplicación"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:126
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:126
 msgid "Maximum of %d."
 msgstr "Máximo de %d."
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:132
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:132
 msgid "Your name"
 msgstr "Su nombre"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:135
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:135
 msgid "Your full name"
 msgstr "Su nombre completo"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:139
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:139
 msgid "Your email"
 msgstr "Su Email"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:146
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:146
 msgid "Professional title"
 msgstr "Título profesional"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:149
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:149
 msgid "e.g. \"Web Developer\""
 msgstr "ejemplo: \"Vendedor seguros\""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:177
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:177
 msgid "A link to a video about yourself"
 msgstr "Enlace a un video acerca de usted"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:180
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:180
 msgid "Resume category"
 msgstr "Categoría de CV"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:188
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:188
 msgid "Resume Content"
 msgstr "Contenido del CV"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:198
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:198
 msgid "Comma separate a list of relevant skills"
 msgstr "Lista de habilidades relevantes, separada con comas"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:292
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:292
 msgid "Resume file"
 msgstr "Archivo del CV"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:296
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:296
 msgid ""
-"Optionally upload your resume for employers to view. Max. file size: %s."
+"Optionally upload your company for employers to view. Max. file size: %s."
 msgstr ""
 "Opcionalmente subir su curriculum vitae para que los empleadores lo vean. "
 "Max. tamaño de archivo: %s."
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:403
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:403
 msgid "%s is a required field"
 msgstr "%s es un campo requerido"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:409
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:414
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:409
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:414
 msgid "%s is invalid"
 msgstr "%s no es valido"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:427
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:427
 msgid "Please enter no more than %d skills."
 msgstr "Por favor no entre mas de  %d habilidades."
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:499
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:499
 msgid "Preview &rarr;"
 msgstr "Vista previa &rarr;"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:529
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:529
 msgid "Please enter a username."
 msgstr "Por favor entrar nombre de usuario"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:532
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:532
 msgid "Please enter your email address."
 msgstr "Por favor entre su email"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:554
-msgid "You must be signed in to post your resume."
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:554
+msgid "You must be signed in to post your company."
 msgstr "Debe ingresar para poder subir su CV"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:767
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:767
 msgid "Submit Resume &rarr;"
 msgstr "Enviar CV &rarr;"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:768
-msgid "&larr; Edit resume"
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:768
+msgid "&larr; Edit company"
 msgstr "&larr; Editar CV"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:840
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:840
 msgid ""
 "Enter a message below to apply to \"%s\". This will accompany your online "
-"resume and be sent to the employer."
+"company and be sent to the employer."
 msgstr ""
 "Introduzca un mensaje para aplicar a \"% s\". Este acompañará su currículum "
 "en línea y será enviado al empleador."
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:842
-#: templates/apply-with-resume.php:22
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:842
+#: templates/apply-with-company.php:22
 msgid "Message"
 msgstr "Mensaje"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:846
-#: templates/apply-with-resume.php:36
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:846
+#: templates/apply-with-company.php:36
 msgid "Send application"
 msgstr "Enviar aplicación"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:872
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:872
 msgid "Please enter a message"
 msgstr "Por favor digite su mensaje"
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-resume.php:879
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:879
 msgid "Error sending application."
 msgstr "Error enviando la aplicación"
 
@@ -1452,16 +1452,16 @@ msgstr "Oculto"
 msgid "Inactive"
 msgstr "Inactivo"
 
-#: templates/access-denied-browse-resumes.php:1
-msgid "Sorry, you do not have permission to browse resumes."
+#: templates/access-denied-browse-companies.php:1
+msgid "Sorry, you do not have permission to browse companies."
 msgstr "Lo sentimos no tiene permisos para navegar en los CVs"
 
-#: templates/access-denied-single-resume.php:2
+#: templates/access-denied-single-company.php:2
 msgid "This listing has expired"
 msgstr "El listado ha vencido"
 
-#: templates/access-denied-single-resume.php:4
-msgid "Sorry, you do not have permission to view this resume."
+#: templates/access-denied-single-company.php:4
+msgid "Sorry, you do not have permission to view this company."
 msgstr "Lo sentimos, no tiene permiso para ver este CV"
 
 #: templates/account-signin.php:4
@@ -1480,7 +1480,7 @@ msgstr "Salir del sistema"
 msgid "Have an account?"
 msgstr "¿Tiene una cuenta?"
 
-#: templates/account-signin.php:24 templates/candidate-dashboard-login.php:3
+#: templates/account-signin.php:24 templates/company-dashboard-login.php:3
 msgid "Sign in"
 msgstr "Ingresar"
 
@@ -1494,7 +1494,7 @@ msgstr ""
 "a usted."
 
 #: templates/account-signin.php:32
-msgid "You must sign in to submit a resume."
+msgid "You must sign in to submit a company."
 msgstr "Debe ingresar para enviar un CV"
 
 #: templates/account-signin.php:40
@@ -1508,102 +1508,102 @@ msgstr "Nombre de usuario"
 #: templates/form-fields/links-field.php:7
 #: templates/form-fields/links-field.php:30
 #: templates/form-fields/repeated-field.php:7
-#: templates/form-fields/repeated-field.php:27 templates/resume-submit.php:32
+#: templates/form-fields/repeated-field.php:27 templates/company-submit.php:32
 msgid "(optional)"
 msgstr "(opcional)"
 
-#: templates/apply-with-resume.php:9
+#: templates/apply-with-company.php:9
 msgid ""
-"Apply using your online resume; just enter a short message and choose one of "
-"your resumes to email your application."
+"Apply using your online company; just enter a short message and choose one of "
+"your companies to email your application."
 msgstr ""
 "Aplicar con su currículum en línea; Introduce un mensaje corto y elegir una "
 "de sus hojas de vida al correo electrónico su solicitud."
 
-#: templates/apply-with-resume.php:11
-msgid "Online resume"
+#: templates/apply-with-company.php:11
+msgid "Online company"
 msgstr "CV en linea"
 
-#: templates/apply-with-resume.php:13
-msgid "Choose a resume..."
+#: templates/apply-with-company.php:13
+msgid "Choose a company..."
 msgstr "Seleccione un CV"
 
-#: templates/apply-with-resume.php:27
+#: templates/apply-with-company.php:27
 msgctxt "default cover letter"
 msgid "To whom it may concern,"
 msgstr "A quien pueda interesar,"
 
-#: templates/apply-with-resume.php:29
+#: templates/apply-with-company.php:29
 msgctxt "default cover letter"
 msgid ""
 "I am very interested in the %s position at %s. I believe my skills and work "
-"experience make me an ideal candidate for this role. I look forward to "
+"experience make me an ideal company for this role. I look forward to "
 "speaking with you soon about this position."
 msgstr ""
 "Estoy muy interesado en la  %s posición en %s.  Creo que mis habilidades y "
 "experiencia laboral me hacen un candidato ideal para este papel. Espero "
 "poder hablar con usted pronto acerca de esta posición."
 
-#: templates/apply-with-resume.php:31
+#: templates/apply-with-company.php:31
 msgctxt "default cover letter"
 msgid "Thank you for your consideration."
 msgstr "Gracias por su consideración"
 
-#: templates/apply-with-resume.php:42
+#: templates/apply-with-company.php:42
 msgid ""
-"You can apply to this job and others using your online resume. Click the "
-"link below to submit your online resume and email your application to this "
+"You can apply to this job and others using your online company. Click the "
+"link below to submit your online company and email your application to this "
 "employer."
 msgstr ""
 "Se puede aplicar a este trabajo y otros utilizando su currículum en línea. "
 "Haga clic en el enlace de abajo para enviar su currículum en línea y por "
 "correo electrónico su solicitud a este empleador."
 
-#: templates/apply-with-resume.php:45
-msgid "Submit resume and apply"
+#: templates/apply-with-company.php:45
+msgid "Submit company and apply"
 msgstr "Enviar CV y aplicar"
 
-#: templates/candidate-dashboard-login.php:3
-msgid "You need to be signed in to manage your resumes."
+#: templates/company-dashboard-login.php:3
+msgid "You need to be signed in to manage your companies."
 msgstr "Tienes que iniciar sesión para administrar sus hojas de vida."
 
-#: templates/candidate-dashboard.php:7
-msgid "Your resume can be viewed, edited or removed below."
-msgid_plural "Your resume(s) can be viewed, edited or removed below."
+#: templates/company-dashboard.php:7
+msgid "Your company can be viewed, edited or removed below."
+msgid_plural "Your company(s) can be viewed, edited or removed below."
 msgstr[0] "Su CV puede ser visto, editado o removido abajo"
 msgstr[1] "Su CVs pueden ser vistos, editados o removidos abajo"
 
-#: templates/candidate-dashboard.php:15 templates/resume-filters.php:23
+#: templates/company-dashboard.php:15 templates/company-filters.php:23
 msgid "Category"
 msgstr "Categoría"
 
-#: templates/candidate-dashboard.php:23
-msgid "You do not have any active resume listings."
+#: templates/company-dashboard.php:23
+msgid "You do not have any active company listings."
 msgstr "Usted no tiene CV activos listados"
 
-#: templates/candidate-dashboard.php:37
+#: templates/company-dashboard.php:37
 msgid "Hide"
 msgstr "Oculatar"
 
-#: templates/candidate-dashboard.php:41
+#: templates/company-dashboard.php:41
 msgid "Publish"
 msgstr "Publicar"
 
-#: templates/candidate-dashboard.php:45
+#: templates/company-dashboard.php:45
 msgid "Relist"
 msgstr "Re listar"
 
-#: templates/candidate-dashboard.php:72
+#: templates/company-dashboard.php:72
 msgid "Expires %s"
 msgstr "Vence %s"
 
-#: templates/candidate-dashboard.php:86
+#: templates/company-dashboard.php:86
 msgid "Add Resume"
 msgstr "Adicionar CV"
 
 #: templates/contact-details-email.php:1
 msgid ""
-"To contact this candidate email <a class=\"job_application_email\" href="
+"To contact this company email <a class=\"job_application_email\" href="
 "\"mailto:%1$s%2$s\">%1$s</a>"
 msgstr ""
 "Para contactar a este candidato enviar email a  <a class="
@@ -1617,24 +1617,24 @@ msgstr "Contacto usando webmail:"
 msgid "Contact"
 msgstr "Contacto"
 
-#: templates/content-no-resumes-found.php:2
+#: templates/content-no-companies-found.php:2
 msgid "There are no listings matching your search."
 msgstr "No hay listados que coincidan con su búsqueda"
 
-#: templates/content-no-resumes-found.php:4
-msgid "There are currently no resumes."
+#: templates/content-no-companies-found.php:4
+msgid "There are currently no companies."
 msgstr "No hay CVs"
 
-#: templates/content-resume.php:15
+#: templates/content-company.php:15
 msgid "%s ago"
 msgstr "hace %s"
 
-#: templates/content-single-resume.php:34
-#: templates/content-single-resume.php:53
+#: templates/content-single-company.php:34
+#: templates/content-single-company.php:53
 msgid "%s at %s"
 msgstr "%s en %s"
 
-#: templates/content-single-resume.php:71
+#: templates/content-single-company.php:71
 msgid "Updated %s ago"
 msgstr "Actualizado hace %s"
 
@@ -1673,88 +1673,88 @@ msgstr "Linkedin"
 msgid "Import from LinkedIn"
 msgstr "Importat desde Linkedin"
 
-#: templates/resume-filters.php:8
+#: templates/company-filters.php:8
 msgid "Keywords"
 msgstr "Palabras clave"
 
-#: templates/resume-filters.php:9
-msgid "All Resumes"
+#: templates/company-filters.php:9
+msgid "All Companies"
 msgstr "Todos los CVs"
 
-#: templates/resume-filters.php:14
+#: templates/company-filters.php:14
 msgid "Any Location"
 msgstr "Cualquier ubicación"
 
-#: templates/resume-filters.php:27
+#: templates/company-filters.php:27
 msgid "Any category"
 msgstr "Cualquier categoría"
 
-#: templates/resume-submitted-notification.php:9
+#: templates/company-submitted-notification.php:9
 msgid ""
-"A new resume has just been submitted by *%s*. The details of their resume "
+"A new company has just been submitted by *%s*. The details of their company "
 "are as follows:"
 msgstr ""
 "Una nueva hoja de vida acaba de ser presentada por  *%s*. Los detalles de su "
 "hoja de vida son los siguientes:"
 
-#: templates/resume-submitted-notification.php:22
-msgid "The content of their resume is as follows:"
+#: templates/company-submitted-notification.php:22
+msgid "The content of their company is as follows:"
 msgstr "El contenido del CV es el siguiente:"
 
-#: templates/resume-submitted-notification.php:27
+#: templates/company-submitted-notification.php:27
 msgid "Links:"
 msgstr "Enlaces:"
 
-#: templates/resume-submitted-notification.php:36
+#: templates/company-submitted-notification.php:36
 msgid "Education:"
 msgstr "Educación:"
 
-#: templates/resume-submitted-notification.php:38
+#: templates/company-submitted-notification.php:38
 msgid "Location: %s"
 msgstr "Localización: %s"
 
-#: templates/resume-submitted-notification.php:39
-#: templates/resume-submitted-notification.php:51
+#: templates/company-submitted-notification.php:39
+#: templates/company-submitted-notification.php:51
 msgid "Date: %s"
 msgstr "Fecha: %s"
 
-#: templates/resume-submitted-notification.php:40
+#: templates/company-submitted-notification.php:40
 msgid "Qualification: %s"
 msgstr "Calificaciones: %s"
 
-#: templates/resume-submitted-notification.php:48
+#: templates/company-submitted-notification.php:48
 msgid "Experience:"
 msgstr "Experiencia:"
 
-#: templates/resume-submitted-notification.php:50
+#: templates/company-submitted-notification.php:50
 msgid "Employer: %s"
 msgstr "Empleador: %s"
 
-#: templates/resume-submitted-notification.php:52
+#: templates/company-submitted-notification.php:52
 msgid "Job Title: %s"
 msgstr "Nombre de la vacante: %s"
 
-#: templates/resume-submitted-notification.php:58
-msgid "You can view this resume here: %s"
+#: templates/company-submitted-notification.php:58
+msgid "You can view this company here: %s"
 msgstr "Puede ver este CV aquí: %s"
 
-#: templates/resume-submitted-notification.php:59
-msgid "You can view/edit this resume in the backend by clicking here: %s"
+#: templates/company-submitted-notification.php:59
+msgid "You can view/edit this company in the backend by clicking here: %s"
 msgstr "Puede ver / editar este CV en el back dando clic aquí: %s"
 
-#: templates/resume-submitted.php:5
+#: templates/company-submitted.php:5
 msgid ""
-"Resume submitted successfully. To view your resume <a href=\"%s\">click "
+"Resume submitted successfully. To view your company <a href=\"%s\">click "
 "here</a>."
 msgstr "CV enviado con éxito. Para ver su CV <a href=\"%s\">dé clic aquí</a>."
 
-#: templates/resume-submitted.php:7
+#: templates/company-submitted.php:7
 msgid "Resume submitted successfully."
 msgstr "CV enviado con éxito"
 
-#: templates/resume-submitted.php:11
+#: templates/company-submitted.php:11
 msgid ""
-"Resume submitted successfully. Your resume will be visible once approved."
+"Resume submitted successfully. Your company will be visible once approved."
 msgstr "CV enviado con éxito. Su currículum será visible una vez aprobado."
 
 #: wp-job-manager-company-listings.php:85
@@ -1767,7 +1767,7 @@ msgstr "Resume Manager requiere WP Job Manager  %s (está usando %s)"
 
 #: wp-job-manager-company-listings.php:154
 msgid ""
-"If you wish to edit the posted details use the \"edit resume\" button "
+"If you wish to edit the posted details use the \"edit company\" button "
 "instead, otherwise changes may be lost."
 msgstr ""
 "Si desea editar los detalles enviados utilice el botón \"Editar CV\" , de lo "
@@ -1782,7 +1782,7 @@ msgid "remove"
 msgstr "remover"
 
 #: wp-job-manager-company-listings.php:162
-msgid "Are you sure you want to delete this resume?"
+msgid "Are you sure you want to delete this company?"
 msgstr "¿Esta seguro que desea remover este CV?"
 
 #. Plugin Name of the plugin/theme
@@ -1790,13 +1790,13 @@ msgid "WP Job Manager - Resume Manager"
 msgstr "WP Job Manager - Resume Manager"
 
 #. Plugin URI of the plugin/theme
-msgid "https://wpjobmanager.com/add-ons/resume-manager/"
-msgstr "https://wpjobmanager.com/add-ons/resume-manager/"
+msgid "https://wpjobmanager.com/add-ons/company-manager/"
+msgstr "https://wpjobmanager.com/add-ons/company-manager/"
 
 #. Description of the plugin/theme
 msgid ""
-"Manage canidate resumes from the WordPress admin panel, and allow candidates "
-"to post their resumes directly to your site."
+"Manage canidate companies from the WordPress admin panel, and allow companys "
+"to post their companies directly to your site."
 msgstr ""
 "Administrar los CV de los candidatos desde el panel de administración de "
 "WordPress, y permitir a los  candidatos publicar sus hojas de vida "

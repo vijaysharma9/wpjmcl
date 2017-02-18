@@ -37,81 +37,81 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 			$account_roles[ $key ] = $role['name'];
 		}
 
-		$this->settings = apply_filters( 'resume_manager_settings',
+		$this->settings = apply_filters( 'company_manager_settings',
 			array(
-				'resume_listings' => array(
+				'company_listings' => array(
 					__( 'Resume Listings', 'wp-job-manager-company-listings' ),
 					array(
 						array(
-							'name'        => 'resume_manager_per_page',
+							'name'        => 'company_manager_per_page',
 							'std'         => '10',
 							'placeholder' => '',
-							'label'       => __( 'Resumes Per Page', 'wp-job-manager-company-listings' ),
-							'desc'        => __( 'How many resumes should be shown per page by default?', 'wp-job-manager-company-listings' ),
+							'label'       => __( 'Companies Per Page', 'wp-job-manager-company-listings' ),
+							'desc'        => __( 'How many companies should be shown per page by default?', 'wp-job-manager-company-listings' ),
 							'attributes'  => array()
 						),
 						array(
-							'name'       => 'resume_manager_enable_categories',
+							'name'       => 'company_manager_enable_categories',
 							'std'        => '0',
 							'label'      => __( 'Categories', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Enable resume categories', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'Choose whether to enable resume categories. Categories must be setup by an admin for users to choose during job submission.', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Enable company categories', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'Choose whether to enable company categories. Categories must be setup by an admin for users to choose during job submission.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						),
 						array(
-							'name'       => 'resume_manager_enable_default_category_multiselect',
+							'name'       => 'company_manager_enable_default_category_multiselect',
 							'std'        => '0',
 							'label'      => __( 'Multi-select Categories', 'wp-job-manager-company-listings' ),
 							'cb_label'   => __( 'Enable category multiselect by default', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'If enabled, the category select box will default to a multiselect on the [resumes] shortcode.', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'If enabled, the category select box will default to a multiselect on the [companies] shortcode.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						),
 						array(
-							'name'       => 'resume_manager_category_filter_type',
+							'name'       => 'company_manager_category_filter_type',
 							'std'        => 'any',
 							'label'      => __( 'Category Filter Type', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'If enabled, the category select box will default to a multiselect on the [resumes] shortcode.', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'If enabled, the category select box will default to a multiselect on the [companies] shortcode.', 'wp-job-manager-company-listings' ),
 							'type'       => 'select',
 							'options' => array(
-								'any'  => __( 'Resumes will be shown if within ANY selected category', 'wp-job-manager-company-listings' ),
-								'all' => __( 'Resumes will be shown if within ALL selected categories', 'wp-job-manager-company-listings' ),
+								'any'  => __( 'Companies will be shown if within ANY selected category', 'wp-job-manager-company-listings' ),
+								'all' => __( 'Companies will be shown if within ALL selected categories', 'wp-job-manager-company-listings' ),
 							)
 						),
 						array(
-							'name'       => 'resume_manager_enable_skills',
+							'name'       => 'company_manager_enable_skills',
 							'std'        => '0',
 							'label'      => __( 'Skills', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Enable resume skills', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'Choose whether to enable the resume skills field. Skills work like tags and can be added by users during resume submission.', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Enable company skills', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'Choose whether to enable the company skills field. Skills work like tags and can be added by users during company submission.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						),
 						array(
-							'name'        => 'resume_manager_max_skills',
+							'name'        => 'company_manager_max_skills',
 							'std'         => '',
 							'label'       => __( 'Maximum Skills', 'wp-job-manager-company-listings' ),
 							'placeholder' => __( 'Unlimited', 'wp-job-manager-company-listings' ),
-							'desc'        => __( 'Enter the number of skills per resume submission you wish to allow, or leave blank for unlimited skills.', 'wp-job-manager-company-listings' ),
+							'desc'        => __( 'Enter the number of skills per company submission you wish to allow, or leave blank for unlimited skills.', 'wp-job-manager-company-listings' ),
 							'type'        => 'input'
 						),
 						array(
-							'name'       => 'resume_manager_enable_resume_upload',
+							'name'       => 'company_manager_enable_company_upload',
 							'std'        => '0',
 							'label'      => __( 'Resume Upload', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Enable resume upload', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'Choose whether to allow candidates to upload a resume file.', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Enable company upload', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'Choose whether to allow companys to upload a company file.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						)
 					),
 				),
-				'resume_submission' => array(
+				'company_submission' => array(
 					__( 'Resume Submission', 'wp-job-manager-company-listings' ),
 					array(
 						array(
-							'name'       => 'resume_manager_user_requires_account',
+							'name'       => 'company_manager_user_requires_account',
 							'std'        => '1',
 							'label'      => __( 'Account Required', 'wp-job-manager' ),
 							'cb_label'   => __( 'Submitting listings requires an account', 'wp-job-manager' ),
@@ -120,16 +120,16 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'attributes' => array()
 						),
 						array(
-							'name'       => 'resume_manager_enable_registration',
+							'name'       => 'company_manager_enable_registration',
 							'std'        => '1',
 							'label'      => __( 'Account Creation', 'wp-job-manager-company-listings' ),
 							'cb_label'   => __( 'Allow account creation', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'If enabled, non-logged in users will be able to create an account by entering their email address on the resume submission form.', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'If enabled, non-logged in users will be able to create an account by entering their email address on the company submission form.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						),
 						array(
-							'name'       => 'resume_manager_generate_username_from_email',
+							'name'       => 'company_manager_generate_username_from_email',
 							'std'        => '1',
 							'label'      => __( 'Account Username', 'wp-job-manager-company-listings' ),
 							'cb_label'   => __( 'Automatically Generate Username from Email Address', 'wp-job-manager-company-listings' ),
@@ -138,15 +138,15 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'attributes' => array()
 						),
 						array(
-							'name'       => 'resume_manager_registration_role',
-							'std'        => 'candidate',
+							'name'       => 'company_manager_registration_role',
+							'std'        => 'company',
 							'label'      => __( 'Account Role', 'wp-job-manager-company-listings' ),
 							'desc'       => __( 'If you enable registration on your submission form, choose a role for the new user.', 'wp-job-manager-company-listings' ),
 							'type'       => 'select',
 							'options'    => $account_roles
 						),
 						array(
-							'name'       => 'resume_manager_submission_requires_approval',
+							'name'       => 'company_manager_submission_requires_approval',
 							'std'        => '1',
 							'label'      => __( 'Approval Required', 'wp-job-manager-company-listings' ),
 							'cb_label'   => __( 'New submissions require admin approval', 'wp-job-manager-company-listings' ),
@@ -155,16 +155,16 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'attributes' => array()
 						),
 						array(
-							'name'       => 'resume_manager_submission_notification',
+							'name'       => 'company_manager_submission_notification',
 							'std'        => '1',
 							'label'      => __( 'Email New Submissions', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Email resume details to the admin/notification recipient after submission.', 'wp-job-manager-company-listings' ),
-							'desc'       => sprintf( __( 'If enabled, all resume details for new submissions will be emailed to %s.', 'wp-job-manager-company-listings' ), get_option( 'resume_manager_email_notifications' ) ? get_option( 'resume_manager_email_notifications' ) : get_option( 'admin_email' ) ),
+							'cb_label'   => __( 'Email company details to the admin/notification recipient after submission.', 'wp-job-manager-company-listings' ),
+							'desc'       => sprintf( __( 'If enabled, all company details for new submissions will be emailed to %s.', 'wp-job-manager-company-listings' ), get_option( 'company_manager_email_notifications' ) ? get_option( 'company_manager_email_notifications' ) : get_option( 'admin_email' ) ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						),
 						array(
-							'name' 		  => 'resume_manager_email_notifications',
+							'name' 		  => 'company_manager_email_notifications',
 						    'std' 		  => '',
 							'placeholder' => get_option( 'admin_email' ),
 						    'label' 	  => __( 'Notify Email Address(es)', 'wp-job-manager-company-listings' ),
@@ -172,7 +172,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						    'type'        => 'input'
 						),
 						array(
-							'name'        => 'resume_manager_submission_duration',
+							'name'        => 'company_manager_submission_duration',
 							'std'         => '',
 							'label'       => __( 'Listing Duration', 'wp-job-manager-company-listings' ),
 							'desc'        => __( 'How many <strong>days</strong> listings are live before expiring. Can be left blank to never expire. Expired listings must be relisted to become visible.', 'wp-job-manager-company-listings' ),
@@ -180,15 +180,15 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'placeholder' => __( 'Never expire', 'wp-job-manager-company-listings' )
 						),
 						array(
-							'name'       => 'resume_manager_autohide',
+							'name'       => 'company_manager_autohide',
 							'std'        => '',
-							'label'      => __( 'Auto-hide Resumes', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'How many <strong>days</strong> un-modified resumes should be published before being hidden. Can be left blank to never hide resumes automaticaly. Candidates can re-publish hidden resumes form their dashboard.', 'wp-job-manager-company-listings' ),
+							'label'      => __( 'Auto-hide Companies', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'How many <strong>days</strong> un-modified companies should be published before being hidden. Can be left blank to never hide companies automaticaly. Candidates can re-publish hidden companies form their dashboard.', 'wp-job-manager-company-listings' ),
 							'attributes' => array(),
 							'placeholder' => __( 'Never auto-hide', 'wp-job-manager-company-listings' )
 						),
 						array(
-							'name'        => 'resume_manager_submission_limit',
+							'name'        => 'company_manager_submission_limit',
 							'std'         => '',
 							'label'       => __( 'Listing Limit', 'wp-job-manager-company-listings' ),
 							'desc'        => __( 'How many listings are users allowed to post. Can be left blank to allow unlimited listings per account.', 'wp-job-manager-company-listings' ),
@@ -196,11 +196,11 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'placeholder' => __( 'No limit', 'wp-job-manager-company-listings' )
 						),
 						array(
-							'name' 		=> 'resume_manager_linkedin_import',
+							'name' 		=> 'company_manager_linkedin_import',
 							'std'        => '0',
 							'label'      => __( 'Linkedin Import', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Allow import of resume data from LinkedIn', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'If enabled, users will be able to login to LinkedIn and have the resume submission form automatically populated.', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Allow import of company data from LinkedIn', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'If enabled, users will be able to login to LinkedIn and have the company submission form automatically populated.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						),
@@ -213,101 +213,101 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						),
 					)
 				),
-				'resume_application' => array(
+				'company_application' => array(
 					__( 'Apply with Resume', 'wp-job-manager-company-listings' ),
 					array(
 						array(
-							'name'     => 'resume_manager_enable_application',
+							'name'     => 'company_manager_enable_application',
 							'std'      => '1',
 							'label'    => __( 'Email Based Applications', 'wp-job-manager-company-listings' ),
-							'cb_label' => __( 'Allow candidates to apply to jobs which use the email application method using their online resume', 'wp-job-manager-company-listings' ),
-							'desc'     => __( 'The employer will be mailed their message and a private link to the resume.', 'wp-job-manager-company-listings' ),
+							'cb_label' => __( 'Allow companys to apply to jobs which use the email application method using their online company', 'wp-job-manager-company-listings' ),
+							'desc'     => __( 'The employer will be mailed their message and a private link to the company.', 'wp-job-manager-company-listings' ),
 							'type'     => 'checkbox'
 						),
 						array(
-							'name' 		=> 'resume_manager_enable_application_for_url_method',
+							'name' 		=> 'company_manager_enable_application_for_url_method',
 							'std' 		=> '1',
 							'label' 	=> __( 'Website Based Applications', 'wp-job-manager-company-listings' ),
-							'cb_label' => __( 'Allow candidates to apply to jobs which use the the website URL application method using their online resume', 'wp-job-manager-company-listings' ),
+							'cb_label' => __( 'Allow companys to apply to jobs which use the the website URL application method using their online company', 'wp-job-manager-company-listings' ),
 							'desc'     => __( 'The application will be stored in the database.', 'wp-job-manager-company-listings' ),
 							'type'      => 'checkbox'
 						),
 						array(
-							'name'       => 'resume_manager_force_resume',
+							'name'       => 'company_manager_force_company',
 							'std'        => '0',
 							'label'      => __( 'Force Resume Creation', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Force candidates to create an online resume before applying to a job', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'Candidates without a resume on file will be taken through the resume submission process. Other details, such as the application email address or application forms, will be hidden.', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Force companys to create an online company before applying to a job', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'Candidates without a company on file will be taken through the company submission process. Other details, such as the application email address or application forms, will be hidden.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						),
 						array(
-							'name'       => 'resume_manager_force_application',
+							'name'       => 'company_manager_force_application',
 							'std'        => '0',
 							'label'      => __( 'Force Apply with Resume', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Force candidates to apply through Resume Manager', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Force companys to apply through Resume Manager', 'wp-job-manager-company-listings' ),
 							'desc'       => __( 'If the apply forms are enabled above, they must be used to apply. All other application methods will be hidden.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						)
 					)
 				),
-				'resume_pages' => array(
+				'company_pages' => array(
 					__( 'Pages', 'wp-job-manager' ),
 					array(
 						array(
-							'name' 		=> 'resume_manager_submit_resume_form_page_id',
+							'name' 		=> 'company_manager_submit_company_form_page_id',
 							'std' 		=> '',
 							'label' 	=> __( 'Submit Resume Page', 'wp-job-manager-company-listings' ),
-							'desc'		=> __( 'Select the page where you have placed the [submit_resume_form] shortcode. This lets the plugin know where the form is located.', 'wp-job-manager-company-listings' ),
+							'desc'		=> __( 'Select the page where you have placed the [submit_company_form] shortcode. This lets the plugin know where the form is located.', 'wp-job-manager-company-listings' ),
 							'type'      => 'page'
 						),
 						array(
-							'name' 		=> 'resume_manager_candidate_dashboard_page_id',
+							'name' 		=> 'company_manager_company_dashboard_page_id',
 							'std' 		=> '',
 							'label' 	=> __( 'Candidate Dashboard Page', 'wp-job-manager-company-listings' ),
-							'desc'		=> __( 'Select the page where you have placed the [candidate_dashboard] shortcode. This lets the plugin know where the dashboard is located.', 'wp-job-manager-company-listings' ),
+							'desc'		=> __( 'Select the page where you have placed the [company_dashboard] shortcode. This lets the plugin know where the dashboard is located.', 'wp-job-manager-company-listings' ),
 							'type'      => 'page'
 						),
 						array(
-							'name' 		=> 'resume_manager_companies_page_id',
+							'name' 		=> 'company_manager_companies_page_id',
 							'std' 		=> '',
 							'label' 	=> __( 'Resume Listings Page', 'wp-job-manager-company-listings' ),
-							'desc'		=> __( 'Select the page where you have placed the [resumes] shortcode. This lets the plugin know where the resume listings page is located.', 'wp-job-manager-company-listings' ),
+							'desc'		=> __( 'Select the page where you have placed the [companies] shortcode. This lets the plugin know where the company listings page is located.', 'wp-job-manager-company-listings' ),
 							'type'      => 'page'
 						),
 					)
 				),
-				'resume_visibility' => array(
+				'company_visibility' => array(
 					__( 'Resume Visibility', 'wp-job-manager-company-listings' ),
 					array(
 						array(
-							'name'       => 'resume_manager_view_name_capability',
+							'name'       => 'company_manager_view_name_capability',
 							'std'        => '',
 							'label'      => __( 'View Resume name Capability', 'wp-job-manager-company-listings' ),
 							'type'      => 'input',
-							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to view resumes names. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
+							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to view companies names. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
 						),
 						array(
-							'name'       => 'resume_manager_browse_resume_capability',
+							'name'       => 'company_manager_browse_company_capability',
 							'std'        => '',
 							'label'      => __( 'Browse Resume Capability', 'wp-job-manager-company-listings' ),
 							'type'      => 'input',
-							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to browse resumes. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
+							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to browse companies. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
 						),
 						array(
-							'name'       => 'resume_manager_view_resume_capability',
+							'name'       => 'company_manager_view_company_capability',
 							'std'        => '',
 							'label'      => __( 'View Resume Capability', 'wp-job-manager-company-listings' ),
 							'type'      => 'input',
-							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to view a single resume. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
+							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to view a single company. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
 						),
 						array(
-							'name'       => 'resume_manager_contact_resume_capability',
+							'name'       => 'company_manager_contact_company_capability',
 							'std'        => '',
 							'label'      => __( 'Contact Details Capability', 'wp-job-manager-company-listings' ),
 							'type'      => 'input',
-							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to view contact details on a resume. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
+							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to view contact details on a company. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
 						),
 					),
 				),
@@ -315,7 +315,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 		);
 
 		if ( ! class_exists( 'WP_Job_Manager_Applications' ) ) {
-			unset( $this->settings['resume_application'][1][1] );
+			unset( $this->settings['company_application'][1][1] );
 		}
 	}
 }

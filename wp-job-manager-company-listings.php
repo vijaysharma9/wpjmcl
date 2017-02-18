@@ -29,9 +29,9 @@ class WP_Job_Manager_Company_Listings {
 	 */
 	public function __construct() {
 		// Define constants
-		define( 'RESUME_MANAGER_VERSION', '1.15.2' );
-		define( 'RESUME_MANAGER_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-		define( 'RESUME_MANAGER_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
+		define( 'COMPANY_LISTINGS_VERSION', '1.15.2' );
+		define( 'COMPANY_LISTINGS_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+		define( 'COMPANY_LISTINGS_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 
 		// Includes
 		include( 'includes/wp-job-manager-company-listings-functions.php' );
@@ -81,7 +81,7 @@ class WP_Job_Manager_Company_Listings {
 	 * Handle Updates
 	 */
 	public function updater() {
-		if ( version_compare( RESUME_MANAGER_VERSION, get_option( 'wp_resume_manager_version' ), '>' ) ) {
+		if ( version_compare( COMPANY_LISTINGS_VERSION, get_option( 'wp_company_manager_version' ), '>' ) ) {
 			include_once( 'includes/class-wp-job-manager-company-listings-install.php' );
 		}
 	}
@@ -134,25 +134,25 @@ class WP_Job_Manager_Company_Listings {
 			$ajax_filter_deps[] = 'chosen';
 		}
 
-		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', RESUME_MANAGER_PLUGIN_URL . '/assets/js/ajax-filters.min.js', $ajax_filter_deps, RESUME_MANAGER_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-candidate-dashboard', RESUME_MANAGER_PLUGIN_URL . '/assets/js/candidate-dashboard.min.js', array( 'jquery' ), RESUME_MANAGER_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-submission', RESUME_MANAGER_PLUGIN_URL . '/assets/js/resume-submission.min.js', array( 'jquery', 'jquery-ui-sortable' ), RESUME_MANAGER_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-contact-details', RESUME_MANAGER_PLUGIN_URL . '/assets/js/contact-details.min.js', array( 'jquery' ), RESUME_MANAGER_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/ajax-filters.min.js', $ajax_filter_deps, COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-dashboard', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-dashboard.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-submission', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-submission.min.js', array( 'jquery', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-contact-details', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/contact-details.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 
-		wp_localize_script( 'wp-job-manager-company-listings-company-submission', 'resume_manager_resume_submission', array(
-			'i18n_navigate'       => __( 'If you wish to edit the posted details use the "edit resume" button instead, otherwise changes may be lost.', 'wp-job-manager-company-listings' ),
+		wp_localize_script( 'wp-job-manager-company-listings-company-submission', 'company_manager_company_submission', array(
+			'i18n_navigate'       => __( 'If you wish to edit the posted details use the "edit company" button instead, otherwise changes may be lost.', 'wp-job-manager-company-listings' ),
 			'i18n_confirm_remove' => __( 'Are you sure you want to remove this item?', 'wp-job-manager-company-listings' ),
 			'i18n_remove'         => __( 'remove', 'wp-job-manager-company-listings' )
 		) );
-		wp_localize_script( 'wp-job-manager-company-listings-ajax-filters', 'resume_manager_ajax_filters', array(
+		wp_localize_script( 'wp-job-manager-company-listings-ajax-filters', 'company_manager_ajax_filters', array(
 			'ajax_url' => $ajax_url
 		) );
-		wp_localize_script( 'wp-job-manager-company-listings-candidate-dashboard', 'resume_manager_candidate_dashboard', array(
-			'i18n_confirm_delete' => __( 'Are you sure you want to delete this resume?', 'wp-job-manager-company-listings' )
+		wp_localize_script( 'wp-job-manager-company-listings-company-dashboard', 'company_manager_company_dashboard', array(
+			'i18n_confirm_delete' => __( 'Are you sure you want to delete this company?', 'wp-job-manager-company-listings' )
 		) );
 
-		wp_enqueue_style( 'wp-job-manager-company-frontend', RESUME_MANAGER_PLUGIN_URL . '/assets/css/frontend.css' );
+		wp_enqueue_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend.css' );
 	}
 }
 
-$GLOBALS['resume_manager'] = new WP_Job_Manager_Company_Listings();
+$GLOBALS['company_manager'] = new WP_Job_Manager_Company_Listings();

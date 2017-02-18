@@ -1,4 +1,4 @@
-<p><?php printf( __( 'To contact this candidate email <a class="job_application_email" href="mailto:%1$s%2$s">%1$s</a>', 'wp-job-manager-company-listings' ), $email, '?subject=' . rawurlencode( $subject ) ); ?></p>
+<p><?php printf( __( 'To contact this company email <a class="job_application_email" href="mailto:%1$s%2$s">%1$s</a>', 'wp-job-manager-company-listings' ), $email, '?subject=' . rawurlencode( $subject ) ); ?></p>
 
 <p>
 	<?php _e( 'Contact using webmail: ', 'wp-job-manager-company-listings' ); ?>

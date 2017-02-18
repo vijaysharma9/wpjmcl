@@ -5,7 +5,7 @@ Tested up to: 4.5
 Stable tag: 1.15.3
 License: GNU General Public License v3.0
 
-Manage candidate resumes from the WordPress admin panel, and allow candidates to post their resumes directly to your site.
+Manage company companies from the WordPress admin panel, and allow companys to post their companies directly to your site.
 
 = Documentation =
 
@@ -28,7 +28,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 == Changelog ==
 
 = 1.15.3 =
-* Fix - Add jpeg for candidate photos. Allows iOS Camera Roll uploads.
+* Fix - Add jpeg for company photos. Allows iOS Camera Roll uploads.
 
 = 1.15.2 =
 * Fix - Only load widget files once.
@@ -37,40 +37,40 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 
 = 1.15.1 =
 * Fix - Resume download link when previewing.
-* Dev - Moved resume_manager_resume_submitted to match WPJM core.
+* Dev - Moved company_manager_company_submitted to match WPJM core.
 
 = 1.15.0 =
-* Feature - Force apply with resume setting will now force before applications plugin can be used as well.
+* Feature - Force apply with company setting will now force before applications plugin can be used as well.
 * Tweak - Deeper integration with applications.
-* Tweak - Improved 'apply' step after resume submission. Now uses job_apply shortcode to keep things DRY.
-* Tweak - Split apply with resume settings. "Force Resume Creation" to make users submit resumes before they can see apply forms, and "Force Apply with Resume" to force the resume manager apply form to be used regardless of other installed plugins.
+* Tweak - Improved 'apply' step after company submission. Now uses job_apply shortcode to keep things DRY.
+* Tweak - Split apply with company settings. "Force Resume Creation" to make users submit companies before they can see apply forms, and "Force Apply with Resume" to force the company manager apply form to be used regardless of other installed plugins.
 * Tweak - Attachments.
 
 = 1.14.0 =
 * Feature - UI to allow notifications to different addresses.
-* Fix - Improved resume expiry setting and calculation.
-* Tweak - resume_manager_default_candidate_photo filter.
+* Fix - Improved company expiry setting and calculation.
+* Tweak - company_manager_default_company_photo filter.
 
 = 1.13.2 =
 * Fix - Relist compatibility with paid listings.
-* Tweak - resume_manager_resume_filters_before and after hooks.
+* Tweak - company_manager_company_filters_before and after hooks.
 
 = 1.13.1 =
 * Fix - Add text links.
 * Fix - Correctly validate email addresses.
-* Fix - Load user fields if posting a resume from job page links.
+* Fix - Load user fields if posting a company from job page links.
 * Fix - anonymize default post_name/permalink. e.g. mike-randomstring-web-developer-london-uk
 
 = 1.13.0 =
-* Feature - From address for application set to candidate email.
-* Feature - Option to hide the full resume name based on a new permission.
+* Feature - From address for application set to company email.
+* Feature - Option to hide the full company name based on a new permission.
 * Fix - File handling in repeated fields.
-* Fix - Only show linkedin when resume_manager_user_can_post_resume.
-* Fix - Only link to resume when published.
+* Fix - Only show linkedin when company_manager_user_can_post_company.
+* Fix - Only link to company when published.
 * Tweak - Use repeated-field.php template for links, education and experience.
-* Tweak - Made candidate dashboard columns customisable.
+* Tweak - Made company dashboard columns customisable.
 * Tweak - Preserve case in new tags.
-* Tweak - Don't attach images to resumes. Enabled via filter. resume_manager_attach_uploaded_files. False by default.
+* Tweak - Don't attach images to companies. Enabled via filter. company_manager_attach_uploaded_files. False by default.
 
 = 1.12.0 =
 * Feature - Make keyword search also search term names.
@@ -98,9 +98,9 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 
 = 1.11.0 =
 * Feature - Backend sorting of repeated rows.
-* Feature - Backend search meta data when searching resumes.
-* Feature - Added separate option to enable apply with resume for URL based jobs (when also using applications).
-* Tweak - Added candidate-dashboard-login.php file for logged out users.
+* Feature - Backend search meta data when searching companies.
+* Feature - Added separate option to enable apply with company for URL based jobs (when also using applications).
+* Tweak - Added company-dashboard-login.php file for logged out users.
 * Tweak - Refactored form classes to be instance based rather than static. Reduction in code base. Requires Job Manager 1.22.0.
 * Tweak - Improved handling and filters for repeated fields (links, edu, exp).
 * Tweak - Improved admin columns display.
@@ -119,8 +119,8 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 
 = 1.10.0 =
 * Feature - Added setup screen for new installs.
-* Feature - Option to limit the number of resumes a user can post.
-* Feature - Added recent and featured resume widgets.
+* Feature - Option to limit the number of companies a user can post.
+* Feature - Added recent and featured company widgets.
 * Feature - Option to limit the number if skills a user can input.
 * Feature - Limit the number of skills which can be input.
 * Tweak - Added no results template.
@@ -133,21 +133,21 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 = 1.9.2 =
 * Prevent navigation warnings in some cases.
 * Import linkedin photo.
-* Attach resume file when applying.
+* Attach company file when applying.
 
 = 1.9.1 =
 * Feature - Automatically Generate Username from Email Address option (disable to show a username field). Requires Job Manager 1.20+
 
 = 1.9.0 =
 * Feature - Allow role/cap checks to support CSV list of caps.
-* Feature - Option to email resume details for new submissions to the admin.
+* Feature - Option to email company details for new submissions to the admin.
 * Tweak - Moved application related options to own setting tab.
-* Tweak - Improved default resume list styling.
-* Dev - Abiltiy to pass shortcode args to submit_resume_form shortcode.
+* Tweak - Improved default company list styling.
+* Dev - Abiltiy to pass shortcode args to submit_company_form shortcode.
 
 = 1.8.2 =
 * Check summary exists during import.
-* Allow apply with hidden resumes.
+* Allow apply with hidden companies.
 * Fixed get_posted_multiselect_field
 
 = 1.8.1 =
@@ -155,32 +155,32 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 
 = 1.8.0 =
 * Added show_more and show_pagination arguments to the main shortcode.
-* Added multi-select funtionality for categories for resume submission + resume filtering.
+* Added multi-select funtionality for categories for company submission + company filtering.
 * Added filter for required/optional labels.
-* Added ability for guests to submit resumes (but they cannot edit them!).
-* Added tighter integration with the Job Applications plugin (so applications through resume manager can be saved in the database). Requires Applications 1.5.0.
+* Added ability for guests to submit companies (but they cannot edit them!).
+* Added tighter integration with the Job Applications plugin (so applications through company manager can be saved in the database). Requires Applications 1.5.0.
 * Added confirmation when removing education and experience.
 * Fix - tinymce type checking.
 * Tweak - Filter to disable chosen: job_manager_chosen_enabled (same as job manager core)
-* Tweak - submit_resume_form_submit_button_text filter.
+* Tweak - submit_company_form_submit_button_text filter.
 * Tweak - Pick up search_category from querystring to set default/selected category.
 * Tweak - Added step input to submission form.
 
 = 1.7.8 =
-* the_candidate_video HTTPS fix.
+* the_company_metavideo HTTPS fix.
 * Add remove link to existing education/links.
 * Improved uninstall script.
 
 = 1.7.7 =
-* Added dropdown to select resume submission page instead of slug option.
-* Added 'add resume' link to candidate dashboard.
+* Added dropdown to select company submission page instead of slug option.
+* Added 'add company' link to company dashboard.
 
 = 1.7.6 =
 * Support skills for other field types.
-* When creating a resume, copy candidate name to WP Profile (if not yet set).
+* When creating a company, copy company name to WP Profile (if not yet set).
 
 = 1.7.5 =
-* Fix access checks for guest posted resumes.
+* Fix access checks for guest posted companies.
 * Use ICL_LANGUAGE_CODE.
 
 = 1.7.4 =
@@ -189,21 +189,21 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Fix - When specifying categories on the jobs shortcode, don't clear those categories on reset.
 
 = 1.7.3 =
-* Fix resume file loop.
+* Fix company file loop.
 
 = 1.7.2 =
-* Fix - Revised resume skills to work when slugs match. e.g. C++ C#, C
-* resume_manager_user_can_download_resume_file filter
+* Fix - Revised company skills to work when slugs match. e.g. C++ C#, C
+* company_manager_user_can_download_company_file filter
 
 = 1.7.1 =
 * Fix LinkedIn jquery.
 
 = 1.7.0 =
-* Mirroring WP Job Manager, added listing duration to resumes to allow them to expire/be relisted. Works in tandem with WC Paid Listings for charging submission and relisting.
+* Mirroring WP Job Manager, added listing duration to companies to allow them to expire/be relisted. Works in tandem with WC Paid Listings for charging submission and relisting.
 * Added expirey field to backend.
-* Improved post status display for resumes.
+* Improved post status display for companies.
 * Support html5 multiple files like WP Job Manager 1.14.
-* Added video field for resumes.
+* Added video field for companies.
 * Added support for new field type in WP Job Manager 1.14.
 
 = 1.6.4 =
@@ -214,34 +214,34 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Option to choose the role users get during registration.
 
 = 1.6.2 =
-* _candidate_title change to Professional to match frontend.
-* Fix notice in update_resume_data.
-* Fix resume_file notice.
+* _company_title change to Professional to match frontend.
+* Fix notice in update_company_data.
+* Fix company_file notice.
 
 = 1.6.1 =
 * Fix updater.
 * Job manager compat update.
 
 = 1.6.0 =
-* Confirm navigation when leaving the resume submission form.
-* Added a new option to allow users to import their resume data from LinkedIn during submission.
-* Added ability for users to make resumes hidden from their candidate dashboard (or publish them again).
-* Added setting to automatically hide resumes after X days. Candidates can re-publish hidden resumes from their dashboard.
-* Allow admin to 'feature' resumes, making them queryable and sticky.
+* Confirm navigation when leaving the company submission form.
+* Added a new option to allow users to import their company data from LinkedIn during submission.
+* Added ability for users to make companies hidden from their company dashboard (or publish them again).
+* Added setting to automatically hide companies after X days. Candidates can re-publish hidden companies from their dashboard.
+* Allow admin to 'feature' companies, making them queryable and sticky.
 * Fire updated_results hook after loading results.
-* Fix submit_resume_form_fields_get_resume_data hook.
+* Fix submit_company_form_fields_get_company_data hook.
 
 = 1.5.2 =
 * Fix closing tag in view links.
 
 = 1.5.1 =
-* Show link to submit new resume to logged out users
+* Show link to submit new company to logged out users
 
 = 1.5.0 =
 * Additonal hooks in single template
-* Extra args for submit_resume_form_save_resume_data
-* Option to force users to apply via their online resume
-* Built apply process into resume submission form
+* Extra args for submit_company_form_save_company_data
+* Option to force users to apply via their online company
+* Built apply process into company submission form
 
 = 1.4.4 =
 * Text domain fixes
@@ -258,30 +258,30 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * strtolower on capabilities
 
 = 1.4.0 =
-* Added the ability for logged in users to apply to a job with an on-file resume + include a custom message (requires Job Manager 1.9 and compatible template files)
-* Added a way to have private share links for resumes (used in the apply feature). get_resume_share_link appends a key to the permalink and when present, any user can view the resume (even if standard permissions deny access).
-* Drag drop sorting for education and experience fields on the resume submission form
+* Added the ability for logged in users to apply to a job with an on-file company + include a custom message (requires Job Manager 1.9 and compatible template files)
+* Added a way to have private share links for companies (used in the apply feature). get_company_share_link appends a key to the permalink and when present, any user can view the company (even if standard permissions deny access).
+* Drag drop sorting for education and experience fields on the company submission form
 * Template file for contact details.
 
 = 1.3.0 =
 * Improved search by including custom fields and comma separated keywords
-* Get geolocation data for resumes
+* Get geolocation data for companies
 * Support for languages in the WP_LANG dir (subfolder wp-job-manager-company-listings)
 
 = 1.2.2 =
-* Template files and functions for resume links
+* Template files and functions for company links
 
 = 1.2.1 =
-* New dir for resume files so protection does not affect old images
+* New dir for company files so protection does not affect old images
 
 = 1.2.0 =
-* Use GET vars to search resumes
+* Use GET vars to search companies
 * Added grunt
 * Updated all text domains to wp-job-manager-company-listings
 * Fix wp-editor field
 * Include POT file
 * Added 'x' to remove education/exp/links
-* Secure downloading of resumes and protected resumes directory with htaccess
+* Secure downloading of companies and protected companies directory with htaccess
 
 = 1.1.2 =
 * Fix remove link for uploaded files
@@ -292,9 +292,9 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Fix class exists check for WP_Job_Manager_Writepanels
 
 = 1.1.0 =
-* Added resume file input. Enabled in settings. Requires Job Manager 1.7.3.
-* Added download link for resume file to single resume page
-* the_candidate_location_map_link filter
+* Added company file input. Enabled in settings. Requires Job Manager 1.7.3.
+* Added download link for company file to single company page
+* the_company_metalocation_map_link filter
 
 = 1.0.1 =
 * PHP 5.2 compat

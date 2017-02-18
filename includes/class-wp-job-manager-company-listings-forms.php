@@ -15,8 +15,8 @@ class WP_Job_Manager_Company_Listings_Forms {
 	 * If a form was posted, load its class so that it can be processed before display.
 	 */
 	public function load_posted_form() {
-		if ( ! empty( $_POST['resume_manager_form'] ) ) {
-			$this->load_form_class( sanitize_title( $_POST['resume_manager_form'] ) );
+		if ( ! empty( $_POST['company_manager_form'] ) ) {
+			$this->load_form_class( sanitize_title( $_POST['company_manager_form'] ) );
 		}
 	}
 
@@ -33,7 +33,7 @@ class WP_Job_Manager_Company_Listings_Forms {
 
 		// Now try to load the form_name
 		$form_class  = 'WP_Job_Manager_Company_Listings_Form_' . str_replace( '-', '_', $form_name );
-		$form_file   = RESUME_MANAGER_PLUGIN_DIR . '/includes/forms/class-wp-job-manager-company-listings-form-' . $form_name . '.php';
+		$form_file   = COMPANY_LISTINGS_PLUGIN_DIR . '/includes/forms/class-wp-job-manager-company-listings-form-' . $form_name . '.php';
 
 		if ( class_exists( $form_class ) ) {
 			return call_user_func( array( $form_class, 'instance' ) );

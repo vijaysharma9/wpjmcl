@@ -2,27 +2,27 @@ jQuery( document ).ready( function ( $ ) {
 
 	var xhr = [];
 
-	$( '.resumes' ).on( 'update_results', function( event, page, append ) {
+	$( '.companies' ).on( 'update_results', function( event, page, append ) {
 		var data     = '';
 		var target   = $(this);
-		var form     = target.find( '.resume_filters' );
-		var showing  = target.find( '.showing_resumes' );
-		var results  = target.find( '.resumes' );
+		var form     = target.find( '.company_filters' );
+		var showing  = target.find( '.showing_companies' );
+		var results  = target.find( '.companies' );
 		var per_page = target.data( 'per_page' );
 		var orderby  = target.data( 'orderby' );
 		var order    = target.data( 'order' );
 		var featured = target.data( 'featured' );
-		var index    = $( 'div.resumes' ).index(this);
+		var index    = $( 'div.companies' ).index(this);
 
 		if ( xhr[index] ) {
 			xhr[index].abort();
 		}
 
 		if ( append ) {
-			$( '.load_more_resumes', target ).addClass( 'loading' );
+			$( '.load_more_companies', target ).addClass( 'loading' );
 		} else {
 			$( results).addClass( 'loading' );
-			$( 'li.resume, li.no_companies_found', results ).css( 'visibility', 'hidden' );
+			$( 'li.company, li.no_companies_found', results ).css( 'visibility', 'hidden' );
 		}
 
 		if ( true == target.data( 'show_filters' ) ) {
@@ -41,7 +41,7 @@ jQuery( document ).ready( function ( $ ) {
 				location = $location.val();
 
 			var data = {
-				action: 			'resume_manager_get_resumes',
+				action: 			'company_manager_get_companies',
 				search_keywords: 	keywords,
 				search_location: 	location,
 				search_categories:  categories,
@@ -57,7 +57,7 @@ jQuery( document ).ready( function ( $ ) {
 		} else {
 
 			var data = {
-				action: 			'resume_manager_get_resumes',
+				action: 			'company_manager_get_companies',
 				search_categories:  target.data('categories').split(','),
                 		search_keywords: target.data('keywords'),
 		                search_location: target.data('location'),
@@ -73,7 +73,7 @@ jQuery( document ).ready( function ( $ ) {
 
 		xhr[index] = $.ajax( {
 			type: 		'POST',
-			url: 		resume_manager_ajax_filters.ajax_url,
+			url: 		company_manager_ajax_filters.ajax_url,
 			data: 		data,
 			success: 	function( response ) {
 				if ( response ) {
@@ -109,13 +109,13 @@ jQuery( document ).ready( function ( $ ) {
 								target.append( result.pagination );
 							}
 						} else {
-							if ( ! result.found_resumes || result.max_num_pages === page ) {
-								$( '.load_more_resumes', target ).hide();
+							if ( ! result.found_companies || result.max_num_pages === page ) {
+								$( '.load_more_companies', target ).hide();
 							} else {
-								$( '.load_more_resumes', target ).show().data( 'page', page );
+								$( '.load_more_companies', target ).show().data( 'page', page );
 							}
-							$( '.load_more_resumes', target ).removeClass( 'loading' );
-							$( 'li.resume', results ).css( 'visibility', 'visible' );
+							$( '.load_more_companies', target ).removeClass( 'loading' );
+							$( 'li.company', results ).css( 'visibility', 'visible' );
 						}
 
 						$( results ).removeClass( 'loading' );
@@ -131,13 +131,13 @@ jQuery( document ).ready( function ( $ ) {
 	} );
 
 	$( '#search_keywords, #search_location, #search_categories' ).change( function() {
-		var target = $(this).closest( 'div.resumes' );
+		var target = $(this).closest( 'div.companies' );
 
 		target.triggerHandler( 'update_results', [ 1, false ] );
 	} ).change();
 
-	$( '.resume_filters' ).on( 'click', '.reset', function() {
-		var target  = $(this).closest( 'div.resumes' );
+	$( '.company_filters' ).on( 'click', '.reset', function() {
+		var target  = $(this).closest( 'div.companies' );
 		var form    = $(this).closest( 'form' );
 
 		form.find(':input[name="search_keywords"]').not(':input[type="hidden"]').val('');
@@ -150,8 +150,8 @@ jQuery( document ).ready( function ( $ ) {
 		return false;
 	} );
 
-	$( '.load_more_resumes' ).click( function () {
-		var target = $( this ).closest( 'div.resumes' );
+	$( '.load_more_companies' ).click( function () {
+		var target = $( this ).closest( 'div.companies' );
 		var page = $( this ).data( 'page' );
 
 		if ( ! page ) {
@@ -167,8 +167,8 @@ jQuery( document ).ready( function ( $ ) {
 		return false;
 	} );
 
-	$( 'div.resumes' ).on( 'click', '.job-manager-pagination a', function() {
-		var target = $( this ).closest( 'div.resumes' );
+	$( 'div.companies' ).on( 'click', '.job-manager-pagination a', function() {
+		var target = $( this ).closest( 'div.companies' );
 		var page   = $( this ).data( 'page' );
 
 		target.triggerHandler( 'update_results', [ page, false ] );

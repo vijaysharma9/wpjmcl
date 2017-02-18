@@ -16,7 +16,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function __construct() {
 		add_filter( 'enter_title_here', array( $this, 'enter_title_here' ), 1, 2 );
 		add_filter( 'manage_edit-company_columns', array( $this, 'columns' ) );
-		add_action( 'manage_resume_posts_custom_column', array( $this, 'custom_columns' ), 2 );
+		add_action( 'manage_company_posts_custom_column', array( $this, 'custom_columns' ), 2 );
 		add_filter( 'manage_edit-company_sortable_columns', array( $this, 'sortable_columns' ) );
 		add_action( 'parse_query', array( $this, 'search_meta' ) );
 		add_filter( 'get_search_query', array( $this, 'search_meta_label' ) );
@@ -24,10 +24,10 @@ class WP_Job_Manager_Company_Listings_CPT {
 		add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
 		add_action( 'admin_footer-edit.php', array( $this, 'add_bulk_actions' ) );
 		add_action( 'load-edit.php', array( $this, 'do_bulk_actions' ) );
-		add_action( 'admin_init', array( $this, 'approve_resume' ) );
+		add_action( 'admin_init', array( $this, 'approve_company' ) );
 		add_action( 'admin_notices', array( $this, 'approved_notice' ) );
 
-		if ( get_option( 'resume_manager_enable_categories' ) ) {
+		if ( get_option( 'company_manager_enable_categories' ) ) {
 			add_action( "restrict_manage_posts", array( $this, "companies_by_category" ) );
 		}
 
@@ -42,12 +42,12 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function add_bulk_actions() {
 		global $post_type;
 
-		if ( $post_type == 'resume' ) {
+		if ( $post_type == 'company' ) {
 			?>
 			<script type="text/javascript">
 		      jQuery(document).ready(function() {
-		        jQuery('<option>').val('approve_resumes').text('<?php _e( 'Approve Resumes', 'wp-job-manager-company-listings' )?>').appendTo("select[name='action']");
-		        jQuery('<option>').val('approve_resumes').text('<?php _e( 'Approve Resumes', 'wp-job-manager-company-listings' )?>').appendTo("select[name='action2']");
+		        jQuery('<option>').val('approve_companies').text('<?php _e( 'Approve Companies', 'wp-job-manager-company-listings' )?>').appendTo("select[name='action']");
+		        jQuery('<option>').val('approve_companies').text('<?php _e( 'Approve Companies', 'wp-job-manager-company-listings' )?>').appendTo("select[name='action2']");
 		      });
 		    </script>
 		    <?php
@@ -62,23 +62,23 @@ class WP_Job_Manager_Company_Listings_CPT {
 		$action        = $wp_list_table->current_action();
 
 		switch( $action ) {
-			case 'approve_resumes' :
+			case 'approve_companies' :
 				check_admin_referer( 'bulk-posts' );
 
 				$post_ids      = array_map( 'absint', array_filter( (array) $_GET['post'] ) );
-				$approved_resumes = array();
+				$approved_companies = array();
 
 				if ( ! empty( $post_ids ) )
 					foreach( $post_ids as $post_id ) {
-						$resume_data = array(
+						$company_data = array(
 							'ID'          => $post_id,
 							'post_status' => 'publish'
 						);
-						if ( get_post_status( $post_id ) == 'pending' && wp_update_post( $resume_data ) )
-							$approved_resumes[] = $post_id;
+						if ( get_post_status( $post_id ) == 'pending' && wp_update_post( $company_data ) )
+							$approved_companies[] = $post_id;
 					}
 
-				wp_redirect( remove_query_arg( 'approve_resumes', add_query_arg( 'approved_resumes', $approved_resumes, admin_url( 'edit.php?post_type=resume' ) ) ) );
+				wp_redirect( remove_query_arg( 'approve_companies', add_query_arg( 'approved_companies', $approved_companies, admin_url( 'edit.php?post_type=company' ) ) ) );
 				exit;
 			break;
 		}
@@ -87,17 +87,17 @@ class WP_Job_Manager_Company_Listings_CPT {
 	}
 
 	/**
-	 * Approve a single resume
+	 * Approve a single company
 	 */
-	public function approve_resume() {
-		if ( ! empty( $_GET['approve_resume'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'approve_resume' ) && current_user_can( 'edit_post', $_GET['approve_resume'] ) ) {
-			$post_id = absint( $_GET['approve_resume'] );
-			$resume_data = array(
+	public function approve_company() {
+		if ( ! empty( $_GET['approve_company'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'approve_company' ) && current_user_can( 'edit_post', $_GET['approve_company'] ) ) {
+			$post_id = absint( $_GET['approve_company'] );
+			$company_data = array(
 				'ID'          => $post_id,
 				'post_status' => 'publish'
 			);
-			wp_update_post( $resume_data );
-			wp_redirect( remove_query_arg( 'approve_resume', add_query_arg( 'approved_resumes', $post_id, admin_url( 'edit.php?post_type=resume' ) ) ) );
+			wp_update_post( $company_data );
+			wp_redirect( remove_query_arg( 'approve_company', add_query_arg( 'approved_companies', $post_id, admin_url( 'edit.php?post_type=company' ) ) ) );
 			exit;
 		}
 	}
@@ -108,16 +108,16 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function approved_notice() {
 		 global $post_type, $pagenow;
 
-		if ( $pagenow == 'edit.php' && $post_type == 'resume' && ! empty( $_REQUEST['approved_resumes'] ) ) {
-			$approved_resumes = $_REQUEST['approved_resumes'];
-			if ( is_array( $approved_resumes ) ) {
-				$approved_resumes = array_map( 'absint', $approved_resumes );
+		if ( $pagenow == 'edit.php' && $post_type == 'company' && ! empty( $_REQUEST['approved_companies'] ) ) {
+			$approved_companies = $_REQUEST['approved_companies'];
+			if ( is_array( $approved_companies ) ) {
+				$approved_companies = array_map( 'absint', $approved_companies );
 				$titles           = array();
-				foreach ( $approved_resumes as $resume_id )
-					$titles[] = get_the_title( $resume_id );
+				foreach ( $approved_companies as $company_id )
+					$titles[] = get_the_title( $company_id );
 				echo '<div class="updated"><p>' . sprintf( __( '%s approved', 'wp-job-manager-company-listings' ), '&quot;' . implode( '&quot;, &quot;', $titles ) . '&quot;' ) . '</p></div>';
 			} else {
-				echo '<div class="updated"><p>' . sprintf( __( '%s approved', 'wp-job-manager-company-listings' ), '&quot;' . get_the_title( $approved_resumes ) . '&quot;' ) . '</p></div>';
+				echo '<div class="updated"><p>' . sprintf( __( '%s approved', 'wp-job-manager-company-listings' ), '&quot;' . get_the_title( $approved_companies ) . '&quot;' ) . '</p></div>';
 			}
 		}
 	}
@@ -135,7 +135,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function companies_by_category( $show_counts = 1, $hierarchical = 1, $show_uncategorized = 1, $orderby = '' ) {
 		global $typenow, $wp_query;
 
-	    if ( $typenow != 'resume' || ! taxonomy_exists( 'resume_category' ) ) {
+	    if ( $typenow != 'company' || ! taxonomy_exists( 'company_category' ) ) {
 	    	return;
 	    }
 
@@ -150,7 +150,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 		$r['hierarchical'] = $hierarchical;
 		$r['hide_empty']   = 0;
 		$r['show_count']   = $show_counts;
-		$r['selected']     = isset( $wp_query->query['resume_category'] ) ? $wp_query->query['resume_category'] : '';
+		$r['selected']     = isset( $wp_query->query['company_category'] ) ? $wp_query->query['company_category'] : '';
 		$r['menu_order']   = false;
 
 		if ( $orderby == 'order' ) {
@@ -159,13 +159,13 @@ class WP_Job_Manager_Company_Listings_CPT {
 			$r['orderby'] = $orderby;
 		}
 
-		$terms = get_terms( 'resume_category', $r );
+		$terms = get_terms( 'company_category', $r );
 
 		if ( ! $terms )
 			return;
 
-		$output  = "<select name='resume_category' id='dropdown_resume_category'>";
-		$output .= '<option value="" ' .  selected( isset( $_GET['resume_category'] ) ? $_GET['resume_category'] : '', '', false ) . '>'.__( 'Select a category', 'wp-job-manager-company-listings' ).'</option>';
+		$output  = "<select name='company_category' id='dropdown_company_category'>";
+		$output .= '<option value="" ' .  selected( isset( $_GET['company_category'] ) ? $_GET['company_category'] : '', '', false ) . '>'.__( 'Select a category', 'wp-job-manager-company-listings' ).'</option>';
 		$output .= $this->walk_category_dropdown_tree( $terms, 0, $r );
 		$output .="</select>";
 
@@ -196,7 +196,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 * @return string
 	 */
 	public function enter_title_here( $text, $post ) {
-		if ( $post->post_type == 'resume' ) {
+		if ( $post->post_type == 'company' ) {
 			return __( 'Candidate name', 'wp-job-manager-company-listings' );
 		}
 		return $text;
@@ -210,7 +210,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function post_updated_messages( $messages ) {
 		global $post, $post_ID;
 
-		$messages['resume'] = array(
+		$messages['company'] = array(
 			0 => '',
 			1 => sprintf( __( 'Resume updated. <a href="%s">View Resume</a>', 'wp-job-manager-company-listings' ), esc_url( get_permalink( $post_ID ) ) ),
 			2 => __( 'Custom field updated.', 'wp-job-manager-company-listings' ),
@@ -241,22 +241,22 @@ class WP_Job_Manager_Company_Listings_CPT {
 
 		unset( $columns['title'], $columns['date'] );
 
-		$columns["candidate"]          = __( "Candidate", 'wp-job-manager-company-listings' );
-		$columns["candidate_location"] = __( "Location", 'wp-job-manager-company-listings' );
-		$columns['resume_status']   = '<span class="tips" data-tip="' . __( "Status", 'wp-job-manager-company-listings' ) . '">' . __( "Status", 'wp-job-manager-company-listings' ) . '</span>';
-		$columns["resume_posted"]   = __( "Posted", 'wp-job-manager-company-listings' );
-		$columns["resume_expires"]  = __( "Expires", 'wp-job-manager-company-listings' );
+		$columns["company"]          = __( "Candidate", 'wp-job-manager-company-listings' );
+		$columns["company_location"] = __( "Location", 'wp-job-manager-company-listings' );
+		$columns['company_status']   = '<span class="tips" data-tip="' . __( "Status", 'wp-job-manager-company-listings' ) . '">' . __( "Status", 'wp-job-manager-company-listings' ) . '</span>';
+		$columns["company_posted"]   = __( "Posted", 'wp-job-manager-company-listings' );
+		$columns["company_expires"]  = __( "Expires", 'wp-job-manager-company-listings' );
 
-		if ( get_option( 'resume_manager_enable_skills' ) ) {
-			$columns["resume_skills"] = __( "Skills", 'wp-job-manager-company-listings' );
+		if ( get_option( 'company_manager_enable_skills' ) ) {
+			$columns["company_skills"] = __( "Skills", 'wp-job-manager-company-listings' );
 		}
 
-		if ( get_option( 'resume_manager_enable_categories' ) ) {
-			$columns["resume_category"] = __( "Categories", 'wp-job-manager-company-listings' );
+		if ( get_option( 'company_manager_enable_categories' ) ) {
+			$columns["company_category"] = __( "Categories", 'wp-job-manager-company-listings' );
 		}
 
-		$columns['featured_resume'] = '<span class="tips" data-tip="' . __( "Featured?", 'wp-job-manager-company-listings' ) . '">' . __( "Featured?", 'wp-job-manager-company-listings' ) . '</span>';
-		$columns['resume_actions']  = __( "Actions", 'wp-job-manager-company-listings' );
+		$columns['featured_company'] = '<span class="tips" data-tip="' . __( "Featured?", 'wp-job-manager-company-listings' ) . '">' . __( "Featured?", 'wp-job-manager-company-listings' ) . '</span>';
+		$columns['company_actions']  = __( "Actions", 'wp-job-manager-company-listings' );
 
 		return $columns;
 	}
@@ -268,10 +268,10 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 */
 	public function sortable_columns( $columns ) {
 		$custom = array(
-			'resume_posted'      => 'date',
-			'candidate'          => 'title',
-			'candidate_location' => 'candidate_location',
-			'resume_expires'     => 'resume_expires'
+			'company_posted'      => 'date',
+			'company'          => 'title',
+			'company_location' => 'company_location',
+			'company_expires'     => 'company_expires'
 		);
 		return wp_parse_args( $custom, $columns );
 	}
@@ -283,7 +283,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function search_meta( $wp ) {
 		global $pagenow, $wpdb;
 
-		if ( 'edit.php' != $pagenow || empty( $wp->query_vars['s'] ) || $wp->query_vars['post_type'] != 'resume' ) {
+		if ( 'edit.php' != $pagenow || empty( $wp->query_vars['s'] ) || $wp->query_vars['post_type'] != 'company' ) {
 			return;
 		}
 
@@ -296,7 +296,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 					WHERE p1.meta_value LIKE '%%%s%%'
 					OR posts.post_title LIKE '%%%s%%'
 					OR posts.post_content LIKE '%%%s%%'
-					AND posts.post_type = 'resume'
+					AND posts.post_type = 'company'
 					",
 					esc_attr( $wp->query_vars['s'] ),
 					esc_attr( $wp->query_vars['s'] ),
@@ -308,7 +308,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 
 		// Adjust the query vars
 		unset( $wp->query_vars['s'] );
-		$wp->query_vars['resume_search'] = true;
+		$wp->query_vars['company_search'] = true;
 		$wp->query_vars['post__in'] = $post_ids;
 	}
 
@@ -320,7 +320,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function search_meta_label( $query ) {
 		global $pagenow, $typenow;
 
-		if ( 'edit.php' != $pagenow || $typenow != 'resume' || ! get_query_var( 'resume_search' ) ) {
+		if ( 'edit.php' != $pagenow || $typenow != 'company' || ! get_query_var( 'company_search' ) ) {
 			return $query;
 		}
 
@@ -334,14 +334,14 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 */
 	public function sort_columns( $vars ) {
 		if ( isset( $vars['orderby'] ) ) {
-			if ( 'resume_expires' === $vars['orderby'] ) {
+			if ( 'company_expires' === $vars['orderby'] ) {
 				$vars = array_merge( $vars, array(
-					'meta_key' 	=> '_resume_expires',
+					'meta_key' 	=> '_company_expires',
 					'orderby' 	=> 'meta_value'
 				) );
-			} elseif ( 'candidate_location' === $vars['orderby'] ) {
+			} elseif ( 'company_location' === $vars['orderby'] ) {
 				$vars = array_merge( $vars, array(
-					'meta_key' 	=> '_candidate_location',
+					'meta_key' 	=> '_company_location',
 					'orderby' 	=> 'meta_value'
 				) );
 			}
@@ -357,40 +357,40 @@ class WP_Job_Manager_Company_Listings_CPT {
 		global $post;
 
 		switch ( $column ) {
-			case "candidate" :
-				echo '<a href="' . admin_url('post.php?post=' . $post->ID . '&action=edit') . '" class="tips candidate_name" data-tip="' . sprintf( __( 'Resume ID: %d', 'wp-job-manager-company-listings' ), $post->ID ) . '">' . $post->post_title . '</a>';
-				echo '<div class="candidate_title">';
-				the_candidate_title();
+			case "company" :
+				echo '<a href="' . admin_url('post.php?post=' . $post->ID . '&action=edit') . '" class="tips company_name" data-tip="' . sprintf( __( 'Resume ID: %d', 'wp-job-manager-company-listings' ), $post->ID ) . '">' . $post->post_title . '</a>';
+				echo '<div class="company_title">';
+				the_company_metatitle();
 				echo '</div>';
-				the_candidate_photo();
+				the_company_metaphoto();
 			break;
-			case 'candidate_location' :
-				the_candidate_location( true, $post );
+			case 'company_location' :
+				the_company_metalocation( true, $post );
 			break;
-			case "resume_skills" :
-				if ( ! $terms = get_the_term_list( $post->ID, 'resume_skill', '', ', ', '' ) ) echo '<span class="na">&ndash;</span>'; else echo $terms;
+			case "company_skills" :
+				if ( ! $terms = get_the_term_list( $post->ID, 'company_skill', '', ', ', '' ) ) echo '<span class="na">&ndash;</span>'; else echo $terms;
 			break;
-			case "resume_category" :
+			case "company_category" :
 				if ( ! $terms = get_the_term_list( $post->ID, $column, '', ', ', '' ) ) echo '<span class="na">&ndash;</span>'; else echo $terms;
 			break;
-			case "resume_posted" :
+			case "company_posted" :
 				echo '<strong>' . date_i18n( __( 'M j, Y', 'wp-job-manager-company-listings' ), strtotime( $post->post_date ) ) . '</strong><span>';
 				echo ( empty( $post->post_author ) ? __( 'by a guest', 'wp-job-manager-company-listings' ) : sprintf( __( 'by %s', 'wp-job-manager-company-listings' ), '<a href="' . get_edit_user_link( $post->post_author ) . '">' . get_the_author() . '</a>' ) ) . '</span>';
 			break;
-			case "resume_expires" :
-				if ( $post->_resume_expires ) {
-					echo '<strong>' . date_i18n( __( 'M j, Y', 'wp-job-manager-company-listings' ), strtotime( $post->_resume_expires ) ) . '</strong>';
+			case "company_expires" :
+				if ( $post->_company_expires ) {
+					echo '<strong>' . date_i18n( __( 'M j, Y', 'wp-job-manager-company-listings' ), strtotime( $post->_company_expires ) ) . '</strong>';
 				} else {
 					echo '&ndash;';
 				}
 			break;
-			case "featured_resume" :
-				if ( is_resume_featured( $post ) ) echo '&#10004;'; else echo '&ndash;';
+			case "featured_company" :
+				if ( is_company_featured( $post ) ) echo '&#10004;'; else echo '&ndash;';
 			break;
-			case "resume_status" :
-				echo '<span data-tip="' . esc_attr( get_the_resume_status( $post ) ) . '" class="tips status-' . esc_attr( $post->post_status ) . '">' . get_the_resume_status( $post ) . '</span>';
+			case "company_status" :
+				echo '<span data-tip="' . esc_attr( get_the_company_metastatus( $post ) ) . '" class="tips status-' . esc_attr( $post->post_status ) . '">' . get_the_company_metastatus( $post ) . '</span>';
 			break;
-			case "resume_actions" :
+			case "company_actions" :
 				echo '<div class="actions">';
 				$admin_actions           = array();
 
@@ -398,7 +398,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 					$admin_actions['approve']   = array(
 						'action'  => 'approve',
 						'name'    => __( 'Approve', 'wp-job-manager-company-listings' ),
-						'url'     =>  wp_nonce_url( add_query_arg( 'approve_resume', $post->ID ), 'approve_resume' )
+						'url'     =>  wp_nonce_url( add_query_arg( 'approve_company', $post->ID ), 'approve_company' )
 					);
 				}
 
@@ -408,7 +408,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 						'name'    => __( 'View', 'wp-job-manager-company-listings' ),
 						'url'     => get_permalink( $post->ID )
 					);
-					if ( $email = get_post_meta( $post->ID, '_candidate_email', true ) ) {
+					if ( $email = get_post_meta( $post->ID, '_company_email', true ) ) {
 						$admin_actions['email']   = array(
 							'action'  => 'email',
 							'name'    => __( 'Email Candidate', 'wp-job-manager-company-listings' ),
@@ -427,7 +427,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 					);
 				}
 
-				$admin_actions = apply_filters( 'resume_manager_admin_actions', $admin_actions, $post );
+				$admin_actions = apply_filters( 'company_manager_admin_actions', $admin_actions, $post );
 
 				foreach ( $admin_actions as $action ) {
 					printf( '<a class="icon-%s button tips" href="%s" data-tip="%s">%s</a>', esc_attr( $action['action'] ), esc_url( $action['url'] ), esc_attr( $action['name'] ), esc_attr( $action['name'] ) );
@@ -448,13 +448,13 @@ class WP_Job_Manager_Company_Listings_CPT {
 		global $wp_post_statuses, $post, $post_type;
 
 		// Abort if we're on the wrong post type, but only if we got a restriction
-		if ( 'resume' !== $post_type ) {
+		if ( 'company' !== $post_type ) {
 			return;
 		}
 
 		// Get all non-builtin post status and add them as <option>
 		$options = $display = '';
-		foreach ( get_resume_post_statuses() as $status => $name ) {
+		foreach ( get_company_post_statuses() as $status => $name ) {
 			$selected = selected( $post->post_status, $status, false );
 
 			// If we one of our custom post status is selected, remember it

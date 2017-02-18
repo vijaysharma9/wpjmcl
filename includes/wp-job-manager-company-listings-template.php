@@ -2,7 +2,7 @@
 /**
  * Template Functions
  *
- * Template functions specifically created for resumes
+ * Template functions specifically created for companies
  *
  * @author 		Mike Jolley
  * @category 	Core
@@ -11,37 +11,37 @@
  */
 
 /**
- * Echo the location for a resume/candidate
+ * Echo the location for a company/company
  * @param  boolean $map_link whether or not to link to the map on google maps
  * @param WP_Post|int $post (default: null)
  */
-function the_candidate_location( $map_link = true, $post = null ) {
-	$location = get_the_candidate_location( $post );
+function the_company_metalocation( $map_link = true, $post = null ) {
+	$location = get_the_company_metalocation( $post );
 
 	if ( $location ) {
 		if ( $map_link )
-			echo apply_filters( 'the_candidate_location_map_link', '<a class="google_map_link candidate-location" href="http://maps.google.com/maps?q=' . urlencode( $location ) . '&zoom=14&size=512x512&maptype=roadmap&sensor=false">' . $location . '</a>', $location, $post );
+			echo apply_filters( 'the_company_metalocation_map_link', '<a class="google_map_link company-location" href="http://maps.google.com/maps?q=' . urlencode( $location ) . '&zoom=14&size=512x512&maptype=roadmap&sensor=false">' . $location . '</a>', $location, $post );
 		else
-			echo '<span class="candidate-location">' . $location . '</span>';
+			echo '<span class="company-location">' . $location . '</span>';
 	}
 }
 
 /**
- * Get the location for a resume/candidate
+ * Get the location for a company/company
  *
  * @param WP_Post|int $post (default: null)
  * @return string
  */
-function get_the_candidate_location( $post = null ) {
+function get_the_company_metalocation( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'company' )
 		return;
 
-	return apply_filters( 'the_candidate_location', $post->_candidate_location, $post );
+	return apply_filters( 'the_company_metalocation', $post->_company_location, $post );
 }
 
 /**
- * Display a candidates given job title
+ * Display a companys given job title
  *
  * @param  string  $before
  * @param  string  $after
@@ -49,8 +49,8 @@ function get_the_candidate_location( $post = null ) {
  * @param WP_Post|int $post (default: null)
  * @return string
  */
-function the_candidate_title( $before = '', $after = '', $echo = true, $post = null ) {
-	$title = get_the_candidate_title( $post );
+function the_company_metatitle( $before = '', $after = '', $echo = true, $post = null ) {
+	$title = get_the_company_metatitle( $post );
 
 	if ( strlen( $title ) == 0 )
 		return;
@@ -65,29 +65,29 @@ function the_candidate_title( $before = '', $after = '', $echo = true, $post = n
 }
 
 /**
- * Get a candidates given job title
+ * Get a companys given job title
  *
  * @param WP_Post|int $post (default: null)
  * @return string
  */
-function get_the_candidate_title( $post = null ) {
+function get_the_company_metatitle( $post = null ) {
 	$post = get_post( $post );
 
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'company' )
 		return '';
 
-	return apply_filters( 'the_candidate_title', $post->_candidate_title, $post );
+	return apply_filters( 'the_company_metatitle', $post->_company_title, $post );
 }
 
 /**
- * Output the photo for the resume/candidate
+ * Output the photo for the company/company
  *
  * @param string $size (default: 'full')
  * @param mixed $default (default: null)
  * @param WP_Post|int $post (default: null)
  */
-function the_candidate_photo( $size = 'thumbnail', $default = null, $post = null ) {
-	$logo = get_the_candidate_photo( $post );
+function the_company_metaphoto( $size = 'thumbnail', $default = null, $post = null ) {
+	$logo = get_the_company_metaphoto( $post );
 
 	if ( $logo ) {
 
@@ -95,34 +95,34 @@ function the_candidate_photo( $size = 'thumbnail', $default = null, $post = null
 			$logo = job_manager_get_resized_image( $logo, $size );
 		}
 
-		echo '<img class="candidate_photo" src="' . $logo . '" alt="Photo" />';
+		echo '<img class="company_photo" src="' . $logo . '" alt="Photo" />';
 
 	} elseif ( $default )
-		echo '<img class="candidate_photo" src="' . $default . '" alt="Photo" />';
+		echo '<img class="company_photo" src="' . $default . '" alt="Photo" />';
 	else
-		echo '<img class="candidate_photo" src="' . apply_filters( 'resume_manager_default_candidate_photo', RESUME_MANAGER_PLUGIN_URL . '/assets/images/candidate.png' ) . '" alt="Logo" />';
+		echo '<img class="company_photo" src="' . apply_filters( 'company_manager_default_company_photo', COMPANY_LISTINGS_PLUGIN_URL . '/assets/images/company.png' ) . '" alt="Logo" />';
 }
 
 /**
- * Get the photo for the resume/candidate
+ * Get the photo for the company/company
  *
  * @param WP_Post|int $post (default: null)
  * @return string
  */
-function get_the_candidate_photo( $post = null ) {
+function get_the_company_metaphoto( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'company' )
 		return;
 
-	return apply_filters( 'the_candidate_photo', $post->_candidate_photo, $post );
+	return apply_filters( 'the_company_metaphoto', $post->_company_photo, $post );
 }
 
 /**
  * Output the category
  * @param WP_Post|int $post (default: null)
  */
-function the_resume_category( $post = null ) {
-	echo get_the_resume_category( $post );
+function the_company_metacategory( $post = null ) {
+	echo get_the_company_metacategory( $post );
 }
 
 /**
@@ -130,15 +130,15 @@ function the_resume_category( $post = null ) {
  * @param WP_Post|int $post (default: null)
  * @return  string
  */
-function get_the_resume_category( $post = null ) {
+function get_the_company_metacategory( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'company' )
 		return '';
 
-	if ( ! get_option( 'resume_manager_enable_categories' ) )
+	if ( ! get_option( 'company_manager_enable_categories' ) )
 		return '';
 
-	$categories = wp_get_object_terms( $post->ID, 'resume_category', array( 'fields' => 'names' ) );
+	$categories = wp_get_object_terms( $post->ID, 'company_category', array( 'fields' => 'names' ) );
 
 	if ( is_wp_error( $categories ) ) {
 		return '';
@@ -152,8 +152,8 @@ function get_the_resume_category( $post = null ) {
  *
  * @param WP_Post|int $post (default: null)
  */
-function the_resume_status( $post = null ) {
-	echo get_the_resume_status( $post );
+function the_company_metastatus( $post = null ) {
+	echo get_the_company_metastatus( $post );
 }
 
 /**
@@ -161,7 +161,7 @@ function the_resume_status( $post = null ) {
  * @param WP_Post|int $post (default: null)
  * @return string
  */
-function get_the_resume_status( $post = null ) {
+function get_the_company_metastatus( $post = null ) {
 	$post = get_post( $post );
 
 	$status = $post->post_status;
@@ -177,24 +177,24 @@ function get_the_resume_status( $post = null ) {
 	else
 		$status = __( 'Inactive', 'wp-job-manager-company-listings' );
 
-	return apply_filters( 'the_resume_status', $status, $post );
+	return apply_filters( 'the_company_metastatus', $status, $post );
 }
 
 /**
- * True if an the user can post a resume. By default, you must be logged in.
+ * True if an the user can post a company. By default, you must be logged in.
  *
  * @return bool
  */
-function resume_manager_user_can_post_resume() {
+function company_manager_user_can_post_company() {
 	$can_post = true;
 
 	if ( ! is_user_logged_in() ) {
-		if ( resume_manager_user_requires_account() && ! resume_manager_enable_registration() ) {
+		if ( company_manager_user_requires_account() && ! company_manager_enable_registration() ) {
 			$can_post = false;
 		}
 	}
 
-	return apply_filters( 'resume_manager_user_can_post_resume', $can_post );
+	return apply_filters( 'company_manager_user_can_post_company', $can_post );
 }
 
 /**
@@ -202,8 +202,8 @@ function resume_manager_user_can_post_resume() {
  *
  * @return bool
  */
-function resume_manager_enable_registration() {
-	return apply_filters( 'resume_manager_enable_registration', get_option( 'resume_manager_enable_registration' ) == 1 ? true : false );
+function company_manager_enable_registration() {
+	return apply_filters( 'company_manager_enable_registration', get_option( 'company_manager_enable_registration' ) == 1 ? true : false );
 }
 
 /**
@@ -211,8 +211,8 @@ function resume_manager_enable_registration() {
  *
  * @return bool
  */
-function resume_manager_user_requires_account() {
-	return apply_filters( 'resume_manager_user_requires_account', get_option( 'resume_manager_user_requires_account' ) == 1 ? true : false );
+function company_manager_user_requires_account() {
+	return apply_filters( 'company_manager_user_requires_account', get_option( 'company_manager_user_requires_account' ) == 1 ? true : false );
 }
 
 /**
@@ -220,8 +220,8 @@ function resume_manager_user_requires_account() {
  *
  * @return bool
  */
-function resume_manager_generate_username_from_email() {
-	return apply_filters( 'resume_manager_generate_username_from_email', get_option( 'resume_manager_generate_username_from_email' ) == 1 ? true : false );
+function company_manager_generate_username_from_email() {
+	return apply_filters( 'company_manager_generate_username_from_email', get_option( 'company_manager_generate_username_from_email' ) == 1 ? true : false );
 }
 
 /**
@@ -231,8 +231,8 @@ function resume_manager_generate_username_from_email() {
  * @param mixed $post_id (default: null)
  * @return void
  */
-function resume_class( $class = '', $post_id = null ) {
-	echo 'class="' . join( ' ', get_resume_class( $class, $post_id ) ) . '"';
+function company_class( $class = '', $post_id = null ) {
+	echo 'class="' . join( ' ', get_company_class( $class, $post_id ) ) . '"';
 }
 
 /**
@@ -241,9 +241,9 @@ function resume_class( $class = '', $post_id = null ) {
  * @access public
  * @return array
  */
-function get_resume_class( $class = '', $post_id = null ) {
+function get_company_class( $class = '', $post_id = null ) {
 	$post = get_post( $post_id );
-	if ( $post->post_type !== 'resume' )
+	if ( $post->post_type !== 'company' )
 		return array();
 
 	$classes = array();
@@ -252,127 +252,127 @@ function get_resume_class( $class = '', $post_id = null ) {
 		return $classes;
 	}
 
-	$classes[] = 'resume';
+	$classes[] = 'company';
 
-	if ( is_resume_featured( $post ) ) {
-		$classes[] = 'resume_featured';
+	if ( is_company_featured( $post ) ) {
+		$classes[] = 'company_featured';
 	}
 
 	return get_post_class( $classes, $post->ID );
 }
 
 /**
- * Output the resume permalinks
+ * Output the company permalinks
  *
  * @param WP_Post|int $post (default: null)
  */
-function the_resume_permalink( $post = null ) {
+function the_company_metapermalink( $post = null ) {
 	$post = get_post( $post );
-	echo get_the_resume_permalink( $post );
+	echo get_the_company_metapermalink( $post );
 }
 
 /**
- * Output the resume links
+ * Output the company links
  *
  * @param WP_Post|int $post (default: null)
  */
-function the_resume_links( $post = null ) {
+function the_company_metalinks( $post = null ) {
 	$post = get_post( $post );
-	get_job_manager_template( 'resume-links.php', array( 'post' => $post ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+	get_job_manager_template( 'company-links.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 }
 
 /**
- * Get the resume permalinks
+ * Get the company permalinks
  *
  * @param WP_Post|int $post (default: null)
  * @return string
  */
-function get_the_resume_permalink( $post = null ) {
+function get_the_company_metapermalink( $post = null ) {
 	$post = get_post( $post );
 	$link = get_permalink( $post );
 
-	return apply_filters( 'the_resume_permalink', $link, $post );
+	return apply_filters( 'the_company_metapermalink', $link, $post );
 }
 
 /**
- * Returns true or false based on whether the resume has any website links to display.
+ * Returns true or false based on whether the company has any website links to display.
  * @param  object $post
  * @return bool
  */
-function resume_has_links( $post = null ) {
-	return sizeof( get_resume_links( $post ) ) ? true : false;
+function company_has_links( $post = null ) {
+	return sizeof( get_company_links( $post ) ) ? true : false;
 }
 
 /**
- * Returns true or false based on whether the resume has a file uploaded.
+ * Returns true or false based on whether the company has a file uploaded.
  * @param  object $post
  * @return bool
  */
-function resume_has_file( $post = null ) {
-	return get_resume_file() ? true : false;
+function company_has_file( $post = null ) {
+	return get_company_file() ? true : false;
 }
 
 /**
- * Returns an array of links defined for a resume
+ * Returns an array of links defined for a company
  * @param  object $post
  * @return array
  */
-function get_resume_links( $post = null ) {
+function get_company_links( $post = null ) {
 	$post = get_post( $post );
 
 	return array_filter( (array) get_post_meta( $post->ID, '_links', true ) );
 }
 
 /**
- * If multiple files have been attached to the resume_file field, return the in array format.
+ * If multiple files have been attached to the company_file field, return the in array format.
  * @return array
  */
-function get_resume_files( $post = null ) {
+function get_company_files( $post = null ) {
 	$post  = get_post( $post );
-	$files = get_post_meta( $post->ID, '_resume_file', true );
+	$files = get_post_meta( $post->ID, '_company_file', true );
 	$files = is_array( $files ) ? $files : array( $files );
 	return $files;
 }
 
 /**
- * Returns the resume file attached to a resume.
+ * Returns the company file attached to a company.
  * @param  object $post
  * @return string
  */
-function get_resume_file( $post = null ) {
+function get_company_file( $post = null ) {
 	$post = get_post( $post );
-	$file = get_post_meta( $post->ID, '_resume_file', true );
+	$file = get_post_meta( $post->ID, '_company_file', true );
 	return is_array( $file ) ? current( $file ) : $file;
 }
 
 /**
- * Returns a download link for a resume file.
+ * Returns a download link for a company file.
  * @param  object $post
  * @param  file key
  * @return string
  */
-function get_resume_file_download_url( $post = null, $key = 0 ) {
+function get_company_file_download_url( $post = null, $key = 0 ) {
 	$post = get_post( $post );
-	return add_query_arg( array( 'download-resume' => $post->ID, 'file-id' => $key ) );
+	return add_query_arg( array( 'download-company' => $post->ID, 'file-id' => $key ) );
 }
 
 /**
- * Return whether or not the resume has been featured
+ * Return whether or not the company has been featured
  *
  * @param  object $post
  * @return boolean
  */
-function is_resume_featured( $post = null ) {
+function is_company_featured( $post = null ) {
 	$post = get_post( $post );
 
 	return $post->_featured ? true : false;
 }
 
 /**
- * Output the candidate video
+ * Output the company video
  */
-function the_candidate_video( $post = null ) {
-	$video    = get_the_candidate_video( $post );
+function the_company_metavideo( $post = null ) {
+	$video    = get_the_company_metavideo( $post );
 	$video    = is_ssl() ? str_replace( 'http:', 'https:', $video ) : $video;
 	$filetype = wp_check_filetype( $video );
 
@@ -383,20 +383,20 @@ function the_candidate_video( $post = null ) {
 	}
 
 	if ( $video_embed ) {
-		echo '<div class="candidate-video">' . $video_embed . '</div>';
+		echo '<div class="company-video">' . $video_embed . '</div>';
 	}
 }
 
 /**
- * Get the candidate video URL
+ * Get the company video URL
  *
  * @param mixed $post (default: null)
  * @return string
  */
-function get_the_candidate_video( $post = null ) {
+function get_the_company_metavideo( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'resume' ) {
+	if ( $post->post_type !== 'company' ) {
 		return;
 	}
-	return apply_filters( 'the_candidate_video', $post->_candidate_video, $post );
+	return apply_filters( 'the_company_metavideo', $post->_company_video, $post );
 }

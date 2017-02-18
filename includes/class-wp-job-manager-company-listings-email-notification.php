@@ -12,46 +12,46 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 	 * Constructor
 	 */
 	public function __construct() {
-		if ( get_option( 'resume_manager_submission_notification' ) ) {
-			add_action( 'resume_manager_resume_submitted', array( $this, 'new_resume_submitted' ) );
+		if ( get_option( 'company_manager_submission_notification' ) ) {
+			add_action( 'company_manager_company_submitted', array( $this, 'new_company_submitted' ) );
 		}
 	}
 
 	/**
-	 * New resume notification
+	 * New company notification
 	 */
-	public function new_resume_submitted( $resume_id ) {
+	public function new_company_submitted( $company_id ) {
 		include_once( 'admin/class-wp-job-manager-company-listings-writepanels.php' );
 
-		$custom_fields = array_diff_key( WP_Job_Manager_Company_Listings_Writepanels::resume_fields(), array( '_resume_file' => '', '_resume_expires' => '' ) );
-		$resume        = get_post( $resume_id );
-		$recipient     = get_option( 'resume_manager_email_notifications' );
+		$custom_fields = array_diff_key( WP_Job_Manager_Company_Listings_Writepanels::company_fields(), array( '_company_file' => '', '_company_expires' => '' ) );
+		$company        = get_post( $company_id );
+		$recipient     = get_option( 'company_manager_email_notifications' );
 		$recipient     = ! empty( $recipient ) ? $recipient : get_option( 'admin_email' );
-		$subject       = sprintf( __( 'New Resume Submission From %s', 'wp-job-manager-company-listings' ), $resume->post_title );
+		$subject       = sprintf( __( 'New Resume Submission From %s', 'wp-job-manager-company-listings' ), $company->post_title );
 		$attachments   = array();
-		$file_paths    = get_resume_files( $resume );
+		$file_paths    = get_company_files( $company );
 
 		foreach ( $file_paths as $file_path ) {
 			$attachments[] = str_replace( array( WP_CONTENT_URL, site_url() ), array( WP_CONTENT_DIR, ABSPATH ), $file_path );
 		}
 
 		ob_start();
-		get_job_manager_template( 'resume-submitted-notification.php', array(
-			'resume'        => $resume,
-			'resume_id'     => $resume_id,
+		get_job_manager_template( 'company-submitted-notification.php', array(
+			'company'        => $company,
+			'company_id'     => $company_id,
 			'custom_fields' => $custom_fields
-		), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 		$message = ob_get_clean();
 
 		add_filter( 'wp_mail_from', array( __CLASS__, 'get_from_address' ) );
 		add_filter( 'wp_mail_from_name', array( __CLASS__, 'get_from_name' ) );
 
 		wp_mail(
-			apply_filters( 'resume_manager_new_resume_notification_recipient', $recipient, $resume_id ),
-			apply_filters( 'resume_manager_new_resume_notification_subject', $subject, $resume_id ),
+			apply_filters( 'company_manager_new_company_notification_recipient', $recipient, $company_id ),
+			apply_filters( 'company_manager_new_company_notification_subject', $subject, $company_id ),
 			$message,
-			apply_filters( 'resume_manager_new_resume_notification_headers', '', $resume_id ),
-			apply_filters( 'resume_manager_new_resume_notification_attachments', array_filter( $attachments ), $resume_id )
+			apply_filters( 'company_manager_new_company_notification_headers', '', $company_id ),
+			apply_filters( 'company_manager_new_company_notification_attachments', array_filter( $attachments ), $company_id )
 		);
 
 		remove_filter( 'wp_mail_from', array( __CLASS__, 'get_from_address' ) );

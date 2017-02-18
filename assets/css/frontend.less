@@ -37,13 +37,13 @@
 	font-weight: bold;
 }
 
-.resume-manager-data-row {
+.company-manager-data-row {
 	position: relative;
 	cursor: move;
 	label {
 		cursor: move;
 	}
-	.resume-manager-remove-row {
+	.company-manager-remove-row {
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -70,11 +70,11 @@
 		border-bottom: 4px solid #eee;
 	}
 }
-.resume_preview {
+.company_preview {
 	padding: 0 1em 1em;
 	border: 5px solid #eee;
 }
-.resume_preview_title, .entry-content .resume_preview_title {
+.company_preview_title, .entry-content .company_preview_title {
 	padding: .5em 1em;
 	vertical-align: middle;
 	position: relative;
@@ -89,9 +89,9 @@
 	}
 }
 
-.single-resume {
-	.resume-manager-experience,
-	.resume-manager-education {
+.single-company {
+	.company-manager-experience,
+	.company-manager-education {
 		padding: 0 0 0 1em;
 		margin: 0 0 1em;
 		border-top: 3px solid #eee;
@@ -131,7 +131,7 @@
 			overflow: hidden;
 		}
 	}
-	.resume-manager-skills {
+	.company-manager-skills {
 		padding: 0;
 		margin: 0 0 1em;
 		list-style: none;
@@ -168,11 +168,11 @@
 		li:first-child {
 			padding-left: 0;
 		}
-		.resume-category:before {
+		.company-category:before {
 			.display-icon;
 			content: '\e818';
 		}
-		.resume-title:before {
+		.company-title:before {
 			.display-icon;
 			content: '\e807';
 		}
@@ -181,17 +181,17 @@
 			content: '\e80f';
 		}
 	}
-	.resume_contact {
+	.company_contact {
 		overflow: hidden;
 		zoom: 1;
 		padding-left: 20px;
 		margin: 0 0 1em;
-		.resume_contact_button, .resume_contact_details {
+		.company_contact_button, .company_contact_details {
 			-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 			-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 			box-sizing: border-box;         /* Opera/IE 8+ */
 		}
-		.resume_contact_button {
+		.company_contact_button {
 			text-align: center;
 			font-size: 1.2em;
 			line-height: 1em;
@@ -200,7 +200,7 @@
 			margin: 0 0 0 -20px;
 			padding: 1/1.2em;
 		}
-		.resume_contact_details {
+		.company_contact_details {
 			float: right;
 			width: 66.6%;
 			border: 1px solid #eee;
@@ -238,7 +238,7 @@
 			}
 		}
 	}
-	.resume-aside {
+	.company-aside {
 		position: relative;
 		border: 1px solid #eee;
 		padding: 1em;
@@ -279,7 +279,7 @@
 				content: '\e81d';
 			}
 		}
-		.candidate-video {
+		.company-video {
 			border-top: 1px solid #eee;
 			padding: 1em 0 0;
 			margin: 1em 0 0 0;
@@ -288,7 +288,7 @@
 				display: block;
 			}
 		}
-		.resume-links {
+		.company-links {
 			line-height: 1.5em;
 			list-style: none outside;
 			padding: 0;
@@ -302,52 +302,52 @@
 				padding: 0;
 				float: right;
 			}
-			.resume-link a:before {
+			.company-link a:before {
 				.display-icon;
 				content: '\e809';
 			}
-			.resume-file a:before {
+			.company-file a:before {
 				.display-icon;
 				content: '\e81b';
 			}
-			.resume-link-twitter a:before {
+			.company-link-twitter a:before {
 				content: '\e80a';
 			}
-			.resume-link-linkedin a:before {
+			.company-link-linkedin a:before {
 				content: '\e80b';
 			}
-			.resume-link-github a:before {
+			.company-link-github a:before {
 				content: '\e810';
 			}
-			.resume-link-dribbble a:before {
+			.company-link-dribbble a:before {
 				content: '\e811';
 			}
-			.resume-link-facebook a:before {
+			.company-link-facebook a:before {
 				content: '\e80c';
 			}
-			.resume-link-wordpress a:before {
+			.company-link-wordpress a:before {
 				content: '\e812';
 			}
-			.resume-link-google a:before {
+			.company-link-google a:before {
 				content: '\e813';
 			}
-			.resume-link-pinterest a:before {
+			.company-link-pinterest a:before {
 				content: '\e814';
 			}
-			.resume-link-flickr a:before {
+			.company-link-flickr a:before {
 				content: '\e815';
 			}
-			.resume-link-instagram a:before {
+			.company-link-instagram a:before {
 				content: '\e816';
 			}
-			.resume-link-skype a:before {
+			.company-link-skype a:before {
 				content: '\e817';
 			}
 		}
 	}
 }
 
-#resume-manager-candidate-dashboard {
+#company-manager-company-dashboard {
 	table {
 		td {
 			vertical-align: top;
@@ -357,7 +357,7 @@
 				display: block;
 			}
 		}
-		ul.candidate-dashboard-actions {
+		ul.company-dashboard-actions {
 			margin: 0;
 			padding:0;
 			visibility: hidden;
@@ -377,26 +377,26 @@
 				&:last-child:after {
 					content: '';
 				}
-				.candidate-dashboard-action-delete {
+				.company-dashboard-action-delete {
 					color: red;
 				}
 			}
 		}
 		tr:hover, tr:focus {
-			ul.candidate-dashboard-actions {
+			ul.company-dashboard-actions {
 				visibility: visible;
 			}
 		}
 	}
 }
-.resume_filters {
+.company_filters {
 	background: #eee;
 	.clearfix;
 
-	.search_resumes {
+	.search_companies {
 		padding: 1em;
 		.clearfix;
-		div.resume-filter {
+		div.company-filter {
 			width: 50%;
 			-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 			-moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -425,7 +425,7 @@
 			}
 		}
 	}
-	.resume_types {
+	.company_types {
 		list-style: none outside;
 		margin: 0;
 		padding: 0;
@@ -445,7 +445,7 @@
 		}
 	}
 
-	.showing_resumes {
+	.showing_companies {
 		padding: .5em 1em;
 		display: none;
 		font-size: 0.83em;
@@ -458,7 +458,7 @@
 		}
 	}
 }
-div.resumes {
+div.companies {
 	.job-manager-pagination {
 		text-align: center;
 		display: block;
@@ -466,7 +466,7 @@ div.resumes {
 		border-bottom: 1px solid #eee;
 		line-height: 1;
 	}
-	.load_more_resumes {
+	.load_more_companies {
 		text-align: center;
 		display: block;
 		padding: 1em 1em 1em 2em;
@@ -483,13 +483,13 @@ div.resumes {
 		}
 	}
 }
-div.resumes {
+div.companies {
 	margin-bottom: 1em;
-	ul.resumes {
+	ul.companies {
 		margin: 0;
 	}
 }
-ul.resumes {
+ul.companies {
 	padding: 0;
 	margin: 0;
 	border-top: 1px solid #eee;
@@ -500,7 +500,7 @@ ul.resumes {
 		background: url(../images/ajax-loader.gif) no-repeat center 32px;
 	}
 
-	li.resume, li.no_companies_found {
+	li.company, li.no_companies_found {
 		list-style: none outside;
 		padding: 0;
 		margin: 0;
@@ -532,12 +532,12 @@ ul.resumes {
 				vertical-align: middle;
 				box-shadow: none;
 			}
-			div.candidate-column, div.location-column, .resume-posted-column {
+			div.company-column, div.location-column, .company-posted-column {
 				-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 				-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 				box-sizing: border-box;         /* Opera/IE 8+ */
 			}
-			div.candidate-column {
+			div.company-column {
 				float: left;
 				width: 50%;
 				padding: 0 1em 0 42px;
@@ -548,14 +548,14 @@ ul.resumes {
 					font-size: 1em;
 					line-height: 1.5em;
 				}
-				.candidate-title {
+				.company-title {
 					color: #999;
 					.tagline {
 						margin-left: .5em;
 					}
 				}
 			}
-			.candidate-location-column {
+			.company-location-column {
 				float: left;
 				text-align: left;
 				width: 25%;
@@ -567,7 +567,7 @@ ul.resumes {
 				-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 				box-sizing: border-box;         /* Opera/IE 8+ */
 			}
-			.resume-posted-column {
+			.company-posted-column {
 				float: right;
 				text-align: right;
 				width: 25%;
@@ -580,15 +580,15 @@ ul.resumes {
 				-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 				box-sizing: border-box;         /* Opera/IE 8+ */
 			}
-			.resume-meta {
+			.company-meta {
 				line-height: 2.03em;
 			}
-			.resume-category:before {
+			.company-category:before {
 				.display-icon;
 				content: '\e818';
 			}
 		}
-		&.resume_featured {
+		&.company_featured {
 			a {
 				background: #fefee5;
 
@@ -599,7 +599,7 @@ ul.resumes {
 		}
 	}
 }
-.apply_with_resume {
+.apply_with_company {
 	label {
 		display: block;
 	}
@@ -614,12 +614,12 @@ ul.resumes {
 	}
 }
 .widget {
-	ul.resumes {
-		li.resume {
+	ul.companies {
+		li.company {
 			a {
 				padding: 1em 0;
 			}
-			.candidate {
+			.company {
 				float: none;
 				width: auto;
 				padding: 0;
@@ -657,8 +657,8 @@ ul.resumes {
 
 // Default theme fixes
 .twenty-eleven {
-	ul.resumes {
-		li.resumes, li.no_companies_found {
+	ul.companies {
+		li.companies, li.no_companies_found {
 			padding: 0 !important;
 		}
 	}

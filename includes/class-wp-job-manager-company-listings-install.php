@@ -21,28 +21,28 @@ class WP_Job_Manager_Company_Listings_Install {
 		$this->cron();
 
 		// Redirect to setup screen for new insalls
-		if ( ! get_option( 'wp_resume_manager_version' ) ) {
-			set_transient( '_resume_manager_activation_redirect', 1, HOUR_IN_SECONDS );
+		if ( ! get_option( 'wp_company_manager_version' ) ) {
+			set_transient( '_company_manager_activation_redirect', 1, HOUR_IN_SECONDS );
 		}
 
 		// Meta update
-		if ( version_compare( get_option( 'wp_resume_manager_version' ), '1.6.1', '<' ) ) {
-			$wpdb->query( "INSERT INTO {$wpdb->postmeta}( post_id, meta_key, meta_value ) SELECT DISTINCT ID AS post_id, '_featured' AS meta_key, 0 AS meta_value FROM {$wpdb->posts} WHERE post_type = 'resume' AND post_status = 'publish';" );
+		if ( version_compare( get_option( 'wp_company_manager_version' ), '1.6.1', '<' ) ) {
+			$wpdb->query( "INSERT INTO {$wpdb->postmeta}( post_id, meta_key, meta_value ) SELECT DISTINCT ID AS post_id, '_featured' AS meta_key, 0 AS meta_value FROM {$wpdb->posts} WHERE post_type = 'company' AND post_status = 'publish';" );
 		}
 
 		// Update featured posts ordering
-		if ( version_compare( get_option( 'wp_resume_manager_version', RESUME_MANAGER_VERSION ), '1.12.0', '<' ) ) {
-			$wpdb->query( "UPDATE {$wpdb->posts} p SET p.menu_order = 0 WHERE p.post_type='resume';" );
-			$wpdb->query( "UPDATE {$wpdb->posts} p LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id SET p.menu_order = -1 WHERE pm.meta_key = '_featured' AND pm.meta_value='1' AND p.post_type='resume';" );
+		if ( version_compare( get_option( 'wp_company_manager_version', COMPANY_LISTINGS_VERSION ), '1.12.0', '<' ) ) {
+			$wpdb->query( "UPDATE {$wpdb->posts} p SET p.menu_order = 0 WHERE p.post_type='company';" );
+			$wpdb->query( "UPDATE {$wpdb->posts} p LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id SET p.menu_order = -1 WHERE pm.meta_key = '_featured' AND pm.meta_value='1' AND p.post_type='company';" );
 		}
 
 		// Update legacy options
-		if ( false === get_option( 'resume_manager_submit_resume_form_page_id', false ) && get_option( 'resume_manager_submit_page_id' ) ) {
-			$page_id = get_option( 'resume_manager_submit_page_id' );
-			update_option( 'resume_manager_submit_resume_form_page_id', $page_id );
+		if ( false === get_option( 'company_manager_submit_company_form_page_id', false ) && get_option( 'company_manager_submit_page_id' ) ) {
+			$page_id = get_option( 'company_manager_submit_page_id' );
+			update_option( 'company_manager_submit_company_form_page_id', $page_id );
 		}
 
-		update_option( 'wp_resume_manager_version', RESUME_MANAGER_VERSION );
+		update_option( 'wp_company_manager_version', COMPANY_LISTINGS_VERSION );
 	}
 
 	/**
@@ -58,10 +58,10 @@ class WP_Job_Manager_Company_Listings_Install {
 			$wp_roles = new WP_Roles();
 
 		if ( is_object( $wp_roles ) ) {
-			$wp_roles->add_cap( 'administrator', 'manage_resumes' );
+			$wp_roles->add_cap( 'administrator', 'manage_companies' );
 
 			// Customer role
-			add_role( 'candidate', __( 'Candidate', 'wp-job-manager-company-listings' ), array(
+			add_role( 'company', __( 'Candidate', 'wp-job-manager-company-listings' ), array(
 			    'read' 						=> true,
 			    'edit_posts' 				=> false,
 			    'delete_posts' 				=> false
@@ -77,16 +77,16 @@ class WP_Job_Manager_Company_Listings_Install {
 		$upload_dir =  wp_upload_dir();
 
 		// Remove old htaccess
-		@unlink( $upload_dir['basedir'] . '/resumes/.htaccess' );
+		@unlink( $upload_dir['basedir'] . '/companies/.htaccess' );
 
 		$files = array(
 			array(
-				'base' 		=> $upload_dir['basedir'] . '/resumes/resume_files',
+				'base' 		=> $upload_dir['basedir'] . '/companies/company_files',
 				'file' 		=> '.htaccess',
 				'content' 	=> 'deny from all'
 			),
 			array(
-				'base' 		=> $upload_dir['basedir'] . '/resumes/resume_files',
+				'base' 		=> $upload_dir['basedir'] . '/companies/company_files',
 				'file' 		=> 'index.html',
 				'content' 	=> ''
 			)
@@ -106,8 +106,8 @@ class WP_Job_Manager_Company_Listings_Install {
 	 * Setup cron jobs
 	 */
 	public function cron() {
-		wp_clear_scheduled_hook( 'resume_manager_check_for_expired_resumes' );
-		wp_schedule_event( time(), 'hourly', 'resume_manager_check_for_expired_resumes' );
+		wp_clear_scheduled_hook( 'company_manager_check_for_expired_companies' );
+		wp_schedule_event( time(), 'hourly', 'company_manager_check_for_expired_companies' );
 	}
 }
 

@@ -1,31 +1,31 @@
-<?php if ( resume_manager_user_can_view_resume( $post->ID ) ) : ?>
+<?php if ( company_manager_user_can_view_company( $post->ID ) ) : ?>
 	<div class="single-company-content">
 
-		<?php do_action( 'single_resume_start' ); ?>
+		<?php do_action( 'single_company_start' ); ?>
 
-		<div class="resume-aside">
-			<?php the_candidate_photo(); ?>
-			<?php the_resume_links(); ?>
-			<p class="job-title"><?php the_candidate_title(); ?></p>
-			<p class="location"><?php the_candidate_location(); ?></p>
+		<div class="company-aside">
+			<?php the_company_metaphoto(); ?>
+			<?php the_company_metalinks(); ?>
+			<p class="job-title"><?php the_company_metatitle(); ?></p>
+			<p class="location"><?php the_company_metalocation(); ?></p>
 
-			<?php the_candidate_video(); ?>
+			<?php the_company_metavideo(); ?>
 		</div>
 
-		<div class="resume_description">
-			<?php echo apply_filters( 'the_resume_description', get_the_content() ); ?>
+		<div class="company_description">
+			<?php echo apply_filters( 'the_company_metadescription', get_the_content() ); ?>
 		</div>
 
-		<?php if ( ( $skills = wp_get_object_terms( $post->ID, 'resume_skill', array( 'fields' => 'names' ) ) ) && is_array( $skills ) ) : ?>
+		<?php if ( ( $skills = wp_get_object_terms( $post->ID, 'company_skill', array( 'fields' => 'names' ) ) ) && is_array( $skills ) ) : ?>
 			<h2><?php _e( 'Skills', 'wp-job-manager-company-listings' ); ?></h2>
-			<ul class="resume-manager-skills">
+			<ul class="company-manager-skills">
 				<?php echo '<li>' . implode( '</li><li>', $skills ) . '</li>'; ?>
 			</ul>
 		<?php endif; ?>
 
-		<?php if ( $items = get_post_meta( $post->ID, '_candidate_education', true ) ) : ?>
+		<?php if ( $items = get_post_meta( $post->ID, '_company_education', true ) ) : ?>
 			<h2><?php _e( 'Education', 'wp-job-manager-company-listings' ); ?></h2>
-			<dl class="resume-manager-education">
+			<dl class="company-manager-education">
 			<?php
 				foreach( $items as $item ) : ?>
 
@@ -42,9 +42,9 @@
 			</dl>
 		<?php endif; ?>
 
-		<?php if ( $items = get_post_meta( $post->ID, '_candidate_experience', true ) ) : ?>
+		<?php if ( $items = get_post_meta( $post->ID, '_company_experience', true ) ) : ?>
 			<h2><?php _e( 'Experience', 'wp-job-manager-company-listings' ); ?></h2>
-			<dl class="resume-manager-experience">
+			<dl class="company-manager-experience">
 			<?php
 				foreach( $items as $item ) : ?>
 
@@ -62,23 +62,23 @@
 		<?php endif; ?>
 
 		<ul class="meta">
-			<?php do_action( 'single_resume_meta_start' ); ?>
+			<?php do_action( 'single_company_meta_start' ); ?>
 
-			<?php if ( get_the_resume_category() ) : ?>
-				<li class="resume-category"><?php the_resume_category(); ?></li>
+			<?php if ( get_the_company_metacategory() ) : ?>
+				<li class="company-category"><?php the_company_metacategory(); ?></li>
 			<?php endif; ?>
 
 			<li class="date-posted" itemprop="datePosted"><date><?php printf( __( 'Updated %s ago', 'wp-job-manager-company-listings' ), human_time_diff( get_the_modified_time( 'U' ), current_time( 'timestamp' ) ) ); ?></date></li>
 
-			<?php do_action( 'single_resume_meta_end' ); ?>
+			<?php do_action( 'single_company_meta_end' ); ?>
 		</ul>
 
-		<?php get_job_manager_template( 'contact-details.php', array( 'post' => $post ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+		<?php get_job_manager_template( 'contact-details.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
-		<?php do_action( 'single_resume_end' ); ?>
+		<?php do_action( 'single_company_end' ); ?>
 	</div>
 <?php else : ?>
 
-	<?php get_job_manager_template_part( 'access-denied', 'single-resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+	<?php get_job_manager_template_part( 'access-denied', 'single-company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 <?php endif; ?>

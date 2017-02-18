@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 	// Data rows
-	$( "input.resume_manager_add_row" ).click(function(){
+	$( "input.company_manager_add_row" ).click(function(){
 		$(this).closest('table').find('tbody').append( $(this).data('row') );
 		return false;
 	});
@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Datepicker
-	$( "input#_resume_expires" ).datepicker({
+	$( "input#_company_expires" ).datepicker({
 		dateFormat: 'yy-mm-dd',
 		minDate: 0
 	});

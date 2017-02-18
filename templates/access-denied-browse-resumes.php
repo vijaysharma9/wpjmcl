@@ -1,1 +1,0 @@
-<p class="job-manager-error"><?php _e( 'Sorry, you do not have permission to browse resumes.', 'wp-job-manager-company-listings' ); ?></p>

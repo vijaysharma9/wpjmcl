@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-	$( '.resume-manager-add-row' ).click(function() {
+	$( '.company-manager-add-row' ).click(function() {
 		var $wrap     = $(this).closest('.field');
 		var max_index = 0;
 
@@ -13,9 +13,9 @@ jQuery(document).ready(function($) {
 		$(this).before( html );
 		return false;
 	});
-	$( '#submit-company-form' ).on('click', '.resume-manager-remove-row', function() {
-		if ( confirm( resume_manager_resume_submission.i18n_confirm_remove ) ) {
-			$(this).closest( 'div.resume-manager-data-row' ).remove();
+	$( '#submit-company-form' ).on('click', '.company-manager-remove-row', function() {
+		if ( confirm( company_manager_company_submission.i18n_confirm_remove ) ) {
+			$(this).closest( 'div.company-manager-data-row' ).remove();
 		}
 		return false;
 	});
@@ -23,8 +23,8 @@ jQuery(document).ready(function($) {
 		$(this).closest( '.job-manager-uploaded-file' ).remove();
 		return false;
 	});
-	$('.fieldset-candidate_experience .field, .fieldset-candidate_education .field, .fieldset-links .field').sortable({
-		items:'.resume-manager-data-row',
+	$('.fieldset-company_experience .field, .fieldset-company_education .field, .fieldset-links .field').sortable({
+		items:'.company-manager-data-row',
 		cursor:'move',
 		axis:'y',
 		scrollSensitivity:40,
@@ -36,34 +36,34 @@ jQuery(document).ready(function($) {
 	// Confirm navigation
 	var confirm_nav = false;
 
-	if ( $('form#resume_preview').size() ) {
+	if ( $('form#company_preview').size() ) {
 		confirm_nav = true;
 	}
 	$( 'form#submit-company-form' ).on( 'change', 'input', function() {
 		confirm_nav = true;
 	});
-	$( 'form#submit-company-form, form#resume_preview' ).submit(function(){
+	$( 'form#submit-company-form, form#company_preview' ).submit(function(){
 		confirm_nav = false;
 		return true;
 	});
 	$(window).bind('beforeunload', function(event) {
 		if ( confirm_nav ) {
-			return resume_manager_resume_submission.i18n_navigate;
+			return company_manager_company_submission.i18n_navigate;
 		}
 	});
 
 	// Linkedin import
 	$('input.import-from-linkedin').click(function() {
 		if ( IN.User.isAuthorized() ) {
-			import_linkedin_resume_data();
+			import_linkedin_company_data();
 		} else {
-			IN.Event.on( IN, "auth", import_linkedin_resume_data );
+			IN.Event.on( IN, "auth", import_linkedin_company_data );
 			IN.UI.Authorize().place();
 		}
 		return false;
 	});
 
-	function import_linkedin_resume_data() {
+	function import_linkedin_company_data() {
 		$( 'fieldset.import-from-linkedin' ).remove();
 		IN.API.Profile("me")
 			.fields(
@@ -95,30 +95,30 @@ jQuery(document).ready(function($) {
 				var profile = result.values[0];
 				$form       = $( '#submit-company-form' );
 
-				$form.find('input[name="candidate_name"]').val( profile.formattedName );
-				$form.find('input[name="candidate_email"]').val( profile.emailAddress );
-				$form.find('input[name="candidate_title"]').val( profile.headline );
-				$form.find('input[name="candidate_location"]').val( profile.location.name );
+				$form.find('input[name="company_name"]').val( profile.formattedName );
+				$form.find('input[name="company_email"]').val( profile.emailAddress );
+				$form.find('input[name="company_title"]').val( profile.headline );
+				$form.find('input[name="company_location"]').val( profile.location.name );
 
 				if ( profile.summary ) {
-					$form.find('textarea[name="resume_content"]').val( profile.summary );
+					$form.find('textarea[name="company_content"]').val( profile.summary );
 
 					if ( $.type( tinymce ) === 'object' ) {
-						tinymce.get('resume_content').setContent( profile.summary );
+						tinymce.get('company_content').setContent( profile.summary );
 					}
 				}
 
 				$( profile.skills.values ).each( function( i, e ) {
-					if ( $form.find('input[name="resume_skills"]').val() ) {
-						$form.find('input[name="resume_skills"]').val( $form.find('input[name="resume_skills"]').val() + ', ' + e.skill.name );
+					if ( $form.find('input[name="company_skills"]').val() ) {
+						$form.find('input[name="company_skills"]').val( $form.find('input[name="company_skills"]').val() + ', ' + e.skill.name );
 					} else {
-						$form.find('input[name="resume_skills"]').val( e.skill.name );
+						$form.find('input[name="company_skills"]').val( e.skill.name );
 					}
 				});
 
 				$( profile.memberUrlResources.values ).each( function( i, e ) {
 					if ( e.name && e.url ) {
-						$( '.fieldset-links' ).find( '.resume-manager-add-row' ).click();
+						$( '.fieldset-links' ).find( '.company-manager-add-row' ).click();
 						$( '.fieldset-links' ).find( 'input[name^="link_name"]' ).last().val( e.name );
 						$( '.fieldset-links' ).find( 'input[name^="link_url"]' ).last().val( e.url );
 					}
@@ -133,11 +133,11 @@ jQuery(document).ready(function($) {
 					if ( e.startDate ) date.push( e.startDate.year );
 					if ( e.endDate ) date.push( e.endDate.year );
 
-					$( '.fieldset-candidate_education' ).find( '.resume-manager-add-row' ).click();
-					$( '.fieldset-candidate_education' ).find( 'input[name^="candidate_education_location"]' ).last().val( e.schoolName );
-					$( '.fieldset-candidate_education' ).find( 'input[name^="candidate_education_qualification"]' ).last().val( qual.join( ', ' ) );
-					$( '.fieldset-candidate_education' ).find( 'input[name^="candidate_education_date"]' ).last().val( date.join( '-' ) );
-					$( '.fieldset-candidate_education' ).find( 'textarea[name^="candidate_education_notes"]' ).last().val( e.notes );
+					$( '.fieldset-company_education' ).find( '.company-manager-add-row' ).click();
+					$( '.fieldset-company_education' ).find( 'input[name^="company_education_location"]' ).last().val( e.schoolName );
+					$( '.fieldset-company_education' ).find( 'input[name^="company_education_qualification"]' ).last().val( qual.join( ', ' ) );
+					$( '.fieldset-company_education' ).find( 'input[name^="company_education_date"]' ).last().val( date.join( '-' ) );
+					$( '.fieldset-company_education' ).find( 'textarea[name^="company_education_notes"]' ).last().val( e.notes );
 				});
 
 				$( profile.positions.values ).each( function( i, e ) {
@@ -146,20 +146,20 @@ jQuery(document).ready(function($) {
 					if ( e.startDate ) date.push( e.startDate.year );
 					if ( e.endDate ) date.push( e.endDate.year );
 
-					$( '.fieldset-candidate_experience' ).find( '.resume-manager-add-row' ).click();
-					$( '.fieldset-candidate_experience' ).find( 'input[name^="candidate_experience_employer"]' ).last().val( e.company.name );
-					$( '.fieldset-candidate_experience' ).find( 'input[name^="candidate_experience_job_title"]' ).last().val( e.title );
-					$( '.fieldset-candidate_experience' ).find( 'input[name^="candidate_experience_date"]' ).last().val( date.join( '-' ) );
-					$( '.fieldset-candidate_experience' ).find( 'textarea[name^="candidate_experience_notes"]' ).last().val( e.summary );
+					$( '.fieldset-company_experience' ).find( '.company-manager-add-row' ).click();
+					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_employer"]' ).last().val( e.company.name );
+					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_job_title"]' ).last().val( e.title );
+					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_date"]' ).last().val( date.join( '-' ) );
+					$( '.fieldset-company_experience' ).find( 'textarea[name^="company_experience_notes"]' ).last().val( e.summary );
 				});
 
 				if ( profile.pictureUrl ) {
-					var photo_field = $('.fieldset-candidate_photo .field');
+					var photo_field = $('.fieldset-company_photo .field');
 
 					if ( photo_field ) {
 						var photo_field_name = photo_field.find(':input[type="file"]').attr( 'name' );
 					}
-					$('.fieldset-candidate_photo .field').prepend('<div class="job-manager-uploaded-files"><div class="job-manager-uploaded-file"><span class="job-manager-uploaded-file-preview"><img src="' + profile.pictureUrl + '" /> <a class="job-manager-remove-uploaded-file" href="#">[' + resume_manager_resume_submission.i18n_remove + ']</a></span><input type="hidden" class="input-text" name="current_' + photo_field_name + '" value="' + profile.pictureUrl + '" /></div></div>');
+					$('.fieldset-company_photo .field').prepend('<div class="job-manager-uploaded-files"><div class="job-manager-uploaded-file"><span class="job-manager-uploaded-file-preview"><img src="' + profile.pictureUrl + '" /> <a class="job-manager-remove-uploaded-file" href="#">[' + company_manager_company_submission.i18n_remove + ']</a></span><input type="hidden" class="input-text" name="current_' + photo_field_name + '" value="' + profile.pictureUrl + '" /></div></div>');
 				}
 
 				$form.trigger( 'linkedin_import', profile );

@@ -9,20 +9,20 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_post_types' ), 0 );
-		add_action( 'wp', array( $this, 'download_resume_handler' ) );
+		add_action( 'wp', array( $this, 'download_company_handler' ) );
 		add_filter( 'admin_head', array( $this, 'admin_head' ) );
-		add_filter( 'the_title', array( $this, 'resume_title' ), 10, 2 );
-		add_filter( 'single_post_title', array( $this, 'resume_title' ), 10, 2 );
-		add_filter( 'the_content', array( $this, 'resume_content' ) );
+		add_filter( 'the_title', array( $this, 'company_title' ), 10, 2 );
+		add_filter( 'single_post_title', array( $this, 'company_title' ), 10, 2 );
+		add_filter( 'the_content', array( $this, 'company_content' ) );
 
-		add_filter( 'the_resume_description', 'wptexturize'        );
-		add_filter( 'the_resume_description', 'convert_smilies'    );
-		add_filter( 'the_resume_description', 'convert_chars'      );
-		add_filter( 'the_resume_description', 'wpautop'            );
-		add_filter( 'the_resume_description', 'shortcode_unautop'  );
-		add_filter( 'the_resume_description', 'prepend_attachment' );
+		add_filter( 'the_company_metadescription', 'wptexturize'        );
+		add_filter( 'the_company_metadescription', 'convert_smilies'    );
+		add_filter( 'the_company_metadescription', 'convert_chars'      );
+		add_filter( 'the_company_metadescription', 'wpautop'            );
+		add_filter( 'the_company_metadescription', 'shortcode_unautop'  );
+		add_filter( 'the_company_metadescription', 'prepend_attachment' );
 
-		add_action( 'resume_manager_contact_details', array( $this, 'contact_details_email' ) );
+		add_action( 'company_manager_contact_details', array( $this, 'contact_details_email' ) );
 
 		add_action( 'pending_to_publish', array( $this, 'setup_autohide_cron' ) );
 		add_action( 'preview_to_publish', array( $this, 'setup_autohide_cron' ) );
@@ -31,7 +31,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		add_action( 'hidden_to_publish', array( $this, 'setup_autohide_cron' ) );
 		add_action( 'expired_to_publish', array( $this, 'setup_autohide_cron' ) );
 		add_action( 'save_post', array( $this, 'setup_autohide_cron' ) );
-		add_action( 'auto-hide-resume', array( $this, 'hide_resume' ) );
+		add_action( 'auto-hide-company', array( $this, 'hide_company' ) );
 
 		add_action( 'update_post_meta', array( $this, 'maybe_update_menu_order' ), 10, 4 );
 		add_filter( 'wp_insert_post_data', array( $this, 'fix_post_name' ), 10, 2 );
@@ -41,26 +41,26 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		add_action( 'draft_to_publish', array( $this, 'set_expiry' ) );
 		add_action( 'auto-draft_to_publish', array( $this, 'set_expiry' ) );
 		add_action( 'expired_to_publish', array( $this, 'set_expiry' ) );
-		add_action( 'resume_manager_check_for_expired_resumes', array( $this, 'check_for_expired_resumes' ) );
+		add_action( 'company_manager_check_for_expired_companies', array( $this, 'check_for_expired_companies' ) );
 
-		add_action( 'save_post', array( $this, 'flush_get_resume_listings_cache' ) );
-		add_action( 'resume_manager_my_resume_do_action', array( $this, 'resume_manager_my_resume_do_action' ) );
+		add_action( 'save_post', array( $this, 'flush_get_company_listings_cache' ) );
+		add_action( 'company_manager_my_company_do_action', array( $this, 'company_manager_my_company_do_action' ) );
 	}
 
 	/**
 	 * Flush the cache
 	 */
-	public function flush_get_resume_listings_cache( $post_id ) {
-		if ( 'resume' === get_post_type( $post_id ) ) {
-			WP_Job_Manager_Cache_Helper::get_transient_version( 'get_resume_listings', true );
+	public function flush_get_company_listings_cache( $post_id ) {
+		if ( 'company' === get_post_type( $post_id ) ) {
+			WP_Job_Manager_Cache_Helper::get_transient_version( 'get_company_listings', true );
 		}
 	}
 
 	/**
 	 * Flush the cache
 	 */
-	public function resume_manager_my_resume_do_action( $action ) {
-		WP_Job_Manager_Cache_Helper::get_transient_version( 'get_resume_listings', true );
+	public function company_manager_my_company_do_action( $action ) {
+		WP_Job_Manager_Cache_Helper::get_transient_version( 'get_company_listings', true );
 	}
 
 	/**
@@ -71,21 +71,21 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 */
 	public function register_post_types() {
 
-		if ( post_type_exists( "resume" ) )
+		if ( post_type_exists( "company" ) )
 			return;
 
-		$admin_capability = 'manage_resumes';
+		$admin_capability = 'manage_companies';
 
 		/**
 		 * Taxonomies
 		 */
-		if ( get_option( 'resume_manager_enable_categories' ) ) {
+		if ( get_option( 'company_manager_enable_categories' ) ) {
 			$singular  = __( 'Resume Category', 'wp-job-manager-company-listings' );
 			$plural    = __( 'Resume Categories', 'wp-job-manager-company-listings' );
 
-			if ( current_theme_supports( 'resume-manager-templates' ) ) {
+			if ( current_theme_supports( 'company-manager-templates' ) ) {
 				$rewrite     = array(
-					'slug'         => _x( 'resume-category', 'Resume category slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
+					'slug'         => _x( 'company-category', 'Resume category slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 					'with_front'   => false,
 					'hierarchical' => false
 				);
@@ -93,8 +93,8 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 				$rewrite = false;
 			}
 
-			register_taxonomy( "resume_category",
-		        array( "resume" ),
+			register_taxonomy( "company_category",
+		        array( "company" ),
 		        array(
 		            'hierarchical' 			=> true,
 		            'update_count_callback' => '_update_post_term_count',
@@ -124,13 +124,13 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		    );
 		}
 
-		if ( get_option( 'resume_manager_enable_skills' ) ) {
+		if ( get_option( 'company_manager_enable_skills' ) ) {
 			$singular  = __( 'Candidate Skill', 'wp-job-manager-company-listings' );
 			$plural    = __( 'Candidate Skills', 'wp-job-manager-company-listings' );
 
-			if ( current_theme_supports( 'resume-manager-templates' ) ) {
+			if ( current_theme_supports( 'company-manager-templates' ) ) {
 				$rewrite     = array(
-					'slug'         => _x( 'resume-skill', 'Resume skill slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
+					'slug'         => _x( 'company-skill', 'Resume skill slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 					'with_front'   => false,
 					'hierarchical' => false
 				);
@@ -138,8 +138,8 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 				$rewrite = false;
 			}
 
-			register_taxonomy( "resume_skill",
-		        array( "resume" ),
+			register_taxonomy( "company_skill",
+		        array( "company" ),
 		        array(
 		            'hierarchical' 			=> false,
 		            'update_count_callback' => '_update_post_term_count',
@@ -173,23 +173,23 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		 * Post types
 		 */
 		$singular  = __( 'Resume', 'wp-job-manager-company-listings' );
-		$plural    = __( 'Resumes', 'wp-job-manager-company-listings' );
+		$plural    = __( 'Companies', 'wp-job-manager-company-listings' );
 
-		if ( current_theme_supports( 'resume-manager-templates' ) ) {
-			$has_archive = _x( 'resumes', 'Post type archive slug - resave permalinks after changing this', 'wp-job-manager-company-listings' );
+		if ( current_theme_supports( 'company-manager-templates' ) ) {
+			$has_archive = _x( 'companies', 'Post type archive slug - resave permalinks after changing this', 'wp-job-manager-company-listings' );
 		} else {
 			$has_archive = false;
 		}
 
 		$rewrite     = array(
-			'slug'       => _x( 'resume', 'Resume permalink - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
+			'slug'       => _x( 'companies', 'Resume permalink - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 			'with_front' => false,
 			'feeds'      => false,
 			'pages'      => false
 		);
 
-		register_post_type( "resume",
-			apply_filters( "register_post_type_resume", array(
+		register_post_type( "company",
+			apply_filters( "register_post_type_company", array(
 				'labels' => array(
 					'name' 					=> $plural,
 					'singular_name' 		=> $singular,
@@ -207,7 +207,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 					'not_found_in_trash' 	=> sprintf( __( 'No %s found in trash', 'wp-job-manager-company-listings' ), $plural ),
 					'parent' 				=> sprintf( __( 'Parent %s', 'wp-job-manager-company-listings' ), $singular )
 				),
-				'description' => __( 'This is where you can create and manage user resumes.', 'wp-job-manager-company-listings' ),
+				'description' => __( 'This is where you can create and manage user companies.', 'wp-job-manager-company-listings' ),
 				'public' 				=> true,
 				'show_ui' 				=> true,
 				'capability_type' 		=> 'post',
@@ -243,17 +243,17 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		) );
 	}
 
-	public function download_resume_handler() {
+	public function download_company_handler() {
 		global $post, $is_IE;
 
-		if ( empty( $_GET['download-resume'] ) ) {
+		if ( empty( $_GET['download-company'] ) ) {
 			return;
 		}
 
-		$resume_id = absint( $_GET['download-resume'] );
+		$company_id = absint( $_GET['download-company'] );
 
-		if ( $resume_id && resume_manager_user_can_view_resume( $resume_id ) && apply_filters( 'resume_manager_user_can_download_resume_file', true, $resume_id ) ) {
-			$file_paths = get_resume_files( $resume_id );
+		if ( $company_id && company_manager_user_can_view_company( $company_id ) && apply_filters( 'company_manager_user_can_download_company_file', true, $company_id ) ) {
+			$file_paths = get_company_files( $company_id );
 			$file_id    = ! empty( $_GET['file-id'] ) ? absint( $_GET['file-id'] ) : 0;
 			$file_path  = $file_paths[ $file_id ];
 
@@ -406,13 +406,13 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	public function admin_head() {
 		global $menu;
 
-		$plural        = __( 'Resumes', 'wp-job-manager-company-listings' );
-		$count_resumes = wp_count_posts( 'resume', 'readable' );
+		$plural        = __( 'Companies', 'wp-job-manager-company-listings' );
+		$count_companies = wp_count_posts( 'company', 'readable' );
 
 		foreach ( $menu as $key => $menu_item ) {
 			if ( strpos( $menu_item[0], $plural ) === 0 ) {
-				if ( $resume_count = $count_resumes->pending ) {
-					$menu[ $key ][0] .= " <span class='awaiting-mod update-plugins count-$resume_count'><span class='pending-count'>" . number_format_i18n( $count_resumes->pending ) . "</span></span>" ;
+				if ( $company_count = $count_companies->pending ) {
+					$menu[ $key ][0] .= " <span class='awaiting-mod update-plugins count-$company_count'><span class='pending-count'>" . number_format_i18n( $count_companies->pending ) . "</span></span>" ;
 				}
 				break;
 			}
@@ -420,44 +420,44 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	}
 
 	/**
-	 * Hide resume titles from users without access
+	 * Hide company titles from users without access
 	 * @param  string $title
 	 * @param  int $post_or_id
 	 * @return string
 	 */
-	public function resume_title( $title, $post_or_id = null ) {
-		if ( $post_or_id && 'resume' === get_post_type( $post_or_id ) && ! resume_manager_user_can_view_resume_name( $post_or_id ) ) {
+	public function company_title( $title, $post_or_id = null ) {
+		if ( $post_or_id && 'company' === get_post_type( $post_or_id ) && ! company_manager_user_can_view_company_name( $post_or_id ) ) {
 			$title_parts    = explode( ' ', $title );
 			$hidden_title[] = array_shift( $title_parts );
 			foreach ( $title_parts as $title_part ) {
 				$hidden_title[] = str_repeat( '*', strlen( $title_part ) );
 			}
-			return apply_filters( 'resume_manager_hidden_resume_title', implode( ' ', $hidden_title ), $title, $post_or_id );
+			return apply_filters( 'company_manager_hidden_company_title', implode( ' ', $hidden_title ), $title, $post_or_id );
 		}
 		return $title;
 	}
 
 	/**
-	 * Add extra content when showing resumes
+	 * Add extra content when showing companies
 	 */
-	public function resume_content( $content ) {
+	public function company_content( $content ) {
 		global $post;
 
-		if ( ! is_singular( 'resume' ) || ! in_the_loop() ) {
+		if ( ! is_singular( 'company' ) || ! in_the_loop() ) {
 			return $content;
 		}
 
-		remove_filter( 'the_content', array( $this, 'resume_content' ) );
+		remove_filter( 'the_content', array( $this, 'company_content' ) );
 
-		if ( $post->post_type == 'resume' ) {
+		if ( $post->post_type == 'company' ) {
 			ob_start();
 
-			get_job_manager_template_part( 'content-single', 'resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template_part( 'content-single', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 
 			$content = ob_get_clean();
 		}
 
-		add_filter( 'the_content', array( $this, 'resume_content' ) );
+		add_filter( 'the_content', array( $this, 'company_content' ) );
 
 		return $content;
 	}
@@ -468,52 +468,52 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	public function contact_details_email() {
 		global $post;
 
-		$email   = get_post_meta( $post->ID, '_candidate_email', true );
-		$subject = sprintf( __( 'Contact via the resume for "%s" on %s', 'wp-job-manager-company-listings' ), single_post_title( '', false ), home_url() );
+		$email   = get_post_meta( $post->ID, '_company_email', true );
+		$subject = sprintf( __( 'Contact via the company for "%s" on %s', 'wp-job-manager-company-listings' ), single_post_title( '', false ), home_url() );
 
-		get_job_manager_template( 'contact-details-email.php', array( 'email' => $email, 'subject' => $subject ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'contact-details-email.php', array( 'email' => $email, 'subject' => $subject ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**
-	 * Setup event to hide a resume after X days
+	 * Setup event to hide a company after X days
 	 * @param  object $post
 	 */
 	public function setup_autohide_cron( $post ) {
 		if ( ! is_object( $post ) ) {
 			$post = get_post( $post );
 		}
-		if ( $post->post_type !== 'resume' ) {
+		if ( $post->post_type !== 'company' ) {
 			return;
 		}
 
 		add_post_meta( $post->ID, '_featured', 0, true );
-		wp_clear_scheduled_hook( 'auto-hide-resume', array( $post->ID ) );
+		wp_clear_scheduled_hook( 'auto-hide-company', array( $post->ID ) );
 
-		$resume_manager_autohide = get_option( 'resume_manager_autohide' );
+		$company_manager_autohide = get_option( 'company_manager_autohide' );
 
-		if ( $resume_manager_autohide ) {
-			wp_schedule_single_event( strtotime( "+{$resume_manager_autohide} day" ), 'auto-hide-resume', array( $post->ID ) );
+		if ( $company_manager_autohide ) {
+			wp_schedule_single_event( strtotime( "+{$company_manager_autohide} day" ), 'auto-hide-company', array( $post->ID ) );
 		}
 	}
 
 	/**
-	 * Hide a resume
+	 * Hide a company
 	 * @param  int
 	 */
-	public function hide_resume( $resume_id ) {
-		$resume = get_post( $resume_id );
-		if ( $resume->post_status === 'publish' ) {
-			$update_resume = array( 'ID' => $resume_id, 'post_status' => 'hidden' );
-			wp_update_post( $update_resume );
-			wp_clear_scheduled_hook( 'auto-hide-resume', array( $resume_id ) );
+	public function hide_company( $company_id ) {
+		$company = get_post( $company_id );
+		if ( $company->post_status === 'publish' ) {
+			$update_company = array( 'ID' => $company_id, 'post_status' => 'hidden' );
+			wp_update_post( $update_company );
+			wp_clear_scheduled_hook( 'auto-hide-company', array( $company_id ) );
 		}
 	}
 
 	/**
-	 * Maybe set menu_order if the featured status of a resume is changed
+	 * Maybe set menu_order if the featured status of a company is changed
 	 */
 	public function maybe_update_menu_order( $meta_id, $object_id, $meta_key, $_meta_value ) {
-		if ( '_featured' !== $meta_key || 'resume' !== get_post_type( $object_id ) ) {
+		if ( '_featured' !== $meta_key || 'company' !== get_post_type( $object_id ) ) {
 			return;
 		}
 		global $wpdb;
@@ -533,7 +533,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 * @return array
 	 */
 	public function fix_post_name( $data, $postarr ) {
-		 if ( 'resume' === $data['post_type'] && 'pending' === $data['post_status'] && ! current_user_can( 'publish_posts' ) ) {
+		 if ( 'company' === $data['post_type'] && 'pending' === $data['post_status'] && ! current_user_can( 'publish_posts' ) ) {
 			$data['post_name'] = $postarr['post_name'];
 		 }
 		 return $data;
@@ -547,78 +547,78 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	}
 
 	/**
-	 * Set expirey date when resume status changes
+	 * Set expirey date when company status changes
 	 */
 	public function set_expiry( $post ) {
-		if ( $post->post_type !== 'resume' ) {
+		if ( $post->post_type !== 'company' ) {
 			return;
 		}
 
 		// See if it is already set
-		if ( metadata_exists( 'post', $post->ID, '_resume_expires' ) ) {
-			$expires = get_post_meta( $post->ID, '_resume_expires', true );
+		if ( metadata_exists( 'post', $post->ID, '_company_expires' ) ) {
+			$expires = get_post_meta( $post->ID, '_company_expires', true );
 			if ( $expires && strtotime( $expires ) < current_time( 'timestamp' ) ) {
-				update_post_meta( $post->ID, '_resume_expires', '' );
-				$_POST[ '_resume_expires' ] = '';
+				update_post_meta( $post->ID, '_company_expires', '' );
+				$_POST[ '_company_expires' ] = '';
 			}
 			return;
 		}
 
 		// No metadata set so we can generate an expiry date
 		// See if the user has set the expiry manually:
-		if ( ! empty( $_POST[ '_resume_expires' ] ) ) {
-			update_post_meta( $post->ID, '_resume_expires', date( 'Y-m-d', strtotime( sanitize_text_field( $_POST[ '_resume_expires' ] ) ) ) );
+		if ( ! empty( $_POST[ '_company_expires' ] ) ) {
+			update_post_meta( $post->ID, '_company_expires', date( 'Y-m-d', strtotime( sanitize_text_field( $_POST[ '_company_expires' ] ) ) ) );
 
 		// No manual setting? Lets generate a date
 		} else {
-			$expires = calculate_resume_expiry( $post->ID );
-			update_post_meta( $post->ID, '_resume_expires', $expires );
+			$expires = calculate_company_expiry( $post->ID );
+			update_post_meta( $post->ID, '_company_expires', $expires );
 
 			// In case we are saving a post, ensure post data is updated so the field is not overridden
-			if ( isset( $_POST[ '_resume_expires' ] ) ) {
-				$_POST[ '_resume_expires' ] = $expires;
+			if ( isset( $_POST[ '_company_expires' ] ) ) {
+				$_POST[ '_company_expires' ] = $expires;
 			}
 		}
 	}
 
 	/**
-	 * Expire resumes
+	 * Expire companies
 	 */
-	public function check_for_expired_resumes() {
+	public function check_for_expired_companies() {
 		global $wpdb;
 
 		// Change status to expired
-		$resume_ids = $wpdb->get_col( $wpdb->prepare( "
+		$company_ids = $wpdb->get_col( $wpdb->prepare( "
 			SELECT postmeta.post_id FROM {$wpdb->postmeta} as postmeta
 			LEFT JOIN {$wpdb->posts} as posts ON postmeta.post_id = posts.ID
-			WHERE postmeta.meta_key = '_resume_expires'
+			WHERE postmeta.meta_key = '_company_expires'
 			AND postmeta.meta_value > 0
 			AND postmeta.meta_value < %s
 			AND posts.post_status = 'publish'
-			AND posts.post_type = 'resume'
+			AND posts.post_type = 'company'
 		", date( 'Y-m-d', current_time( 'timestamp' ) ) ) );
 
-		if ( $resume_ids ) {
-			foreach ( $resume_ids as $resume_id ) {
+		if ( $company_ids ) {
+			foreach ( $company_ids as $company_id ) {
 				$data                = array();
-				$data['ID']          = $resume_id;
+				$data['ID']          = $company_id;
 				$data['post_status'] = 'expired';
 				wp_update_post( $data );
 			}
 		}
 
-		// Delete old expired resumes
-		if ( apply_filters( 'resume_manager_delete_expired_resumes', true ) ) {
-			$resume_ids = $wpdb->get_col( $wpdb->prepare( "
+		// Delete old expired companies
+		if ( apply_filters( 'company_manager_delete_expired_companies', true ) ) {
+			$company_ids = $wpdb->get_col( $wpdb->prepare( "
 				SELECT posts.ID FROM {$wpdb->posts} as posts
-				WHERE posts.post_type = 'resume'
+				WHERE posts.post_type = 'company'
 				AND posts.post_modified < %s
 				AND posts.post_status = 'expired'
-			", date( 'Y-m-d', strtotime( '-' . apply_filters( 'resume_manager_delete_expired_companies_days', 30 ) . ' days', current_time( 'timestamp' ) ) ) ) );
+			", date( 'Y-m-d', strtotime( '-' . apply_filters( 'company_manager_delete_expired_companies_days', 30 ) . ' days', current_time( 'timestamp' ) ) ) ) );
 
-			if ( $resume_ids ) {
-				foreach ( $resume_ids as $resume_id ) {
-					wp_trash_post( $resume_id );
+			if ( $company_ids ) {
+				foreach ( $company_ids as $company_id ) {
+					wp_trash_post( $company_id );
 				}
 			}
 		}
