@@ -75,7 +75,7 @@ class WP_Job_Manager_Company_Listings_Apply {
 	 */
 	private function get_user_resumes() {
 		if ( is_user_logged_in() ) {
-			$args = apply_filters( 'resume_manager_get_application_form_resumes_args', array(
+			$args = apply_filters( 'resume_manager_get_application_form_companies_args', array(
 				'post_type'           => 'resume',
 				'post_status'         => array( 'publish', 'pending', 'hidden' ),
 				'ignore_sticky_posts' => 1,
@@ -111,7 +111,7 @@ class WP_Job_Manager_Company_Listings_Apply {
 	 * Send the application email if posted
 	 */
 	public function apply_with_resume_handler() {
-		if ( ! empty( $_POST['wp_job_manager_resumes_apply_with_resume'] ) ) {
+		if ( ! empty( $_POST['wp_job_manager_companies_apply_with_resume'] ) ) {
 			$resume_id           = absint( $_POST['resume_id'] );
 			$job_id              = absint( $_POST['job_id'] );
 			$application_message = str_replace( '[nl]', "\n", sanitize_text_field( str_replace( "\n", '[nl]', strip_tags( stripslashes( $_POST['application_message'] ) ) ) ) );

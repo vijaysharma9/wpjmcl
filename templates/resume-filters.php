@@ -5,7 +5,7 @@
 <form class="resume_filters">
 
 	<div class="search_resumes">
-		<?php do_action( 'resume_manager_resume_filters_search_resumes_start', $atts ); ?>
+		<?php do_action( 'resume_manager_resume_filters_search_companies_start', $atts ); ?>
 
 		<div class="search_keywords resume-filter">
 			<label for="search_keywords"><?php _e( 'Keywords', 'wp-job-manager-company-listings' ); ?></label>
@@ -32,7 +32,7 @@
 			</div>
 		<?php endif; ?>
 
-		<?php do_action( 'resume_manager_resume_filters_search_resumes_end', $atts ); ?>
+		<?php do_action( 'resume_manager_resume_filters_search_companies_end', $atts ); ?>
 	</div>
 	<div class="showing_resumes"></div>
 </form>

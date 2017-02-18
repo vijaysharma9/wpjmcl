@@ -22,7 +22,7 @@ jQuery( document ).ready( function ( $ ) {
 			$( '.load_more_resumes', target ).addClass( 'loading' );
 		} else {
 			$( results).addClass( 'loading' );
-			$( 'li.resume, li.no_resumes_found', results ).css( 'visibility', 'hidden' );
+			$( 'li.resume, li.no_companies_found', results ).css( 'visibility', 'hidden' );
 		}
 
 		if ( true == target.data( 'show_filters' ) ) {

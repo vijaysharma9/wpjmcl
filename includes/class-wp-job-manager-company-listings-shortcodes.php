@@ -18,7 +18,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 		add_shortcode( 'submit_resume_form', array( $this, 'submit_resume_form' ) );
 		add_shortcode( 'candidate_dashboard', array( $this, 'candidate_dashboard' ) );
 		add_shortcode( 'resumes', array( $this, 'output_resumes' ) );
-		add_action( 'resume_manager_output_resumes_no_results', array( $this, 'output_no_results' ) );
+		add_action( 'resume_manager_output_companies_no_results', array( $this, 'output_no_results' ) );
 	}
 
 	/**
@@ -144,7 +144,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 		}
 
 		// ....If not show the candidate dashboard
-		$args = apply_filters( 'resume_manager_get_dashboard_resumes_args', array(
+		$args = apply_filters( 'resume_manager_get_dashboard_companies_args', array(
 			'post_type'           => 'resume',
 			'post_status'         => array( 'publish', 'expired', 'pending', 'hidden' ),
 			'ignore_sticky_posts' => 1,
@@ -195,7 +195,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			return ob_get_clean();
 		}
 
-		extract( $atts = shortcode_atts( apply_filters( 'resume_manager_output_resumes_defaults', array(
+		extract( $atts = shortcode_atts( apply_filters( 'resume_manager_output_companies_defaults', array(
 			'per_page'                  => get_option( 'resume_manager_per_page' ),
 			'order'                     => 'DESC',
 			'orderby'                   => 'featured',
@@ -249,7 +249,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		} else {
 
-			$resumes = get_resumes( apply_filters( 'resume_manager_output_resumes_args', array(
+			$resumes = get_resumes( apply_filters( 'resume_manager_output_companies_args', array(
 				'search_categories' => $categories,
 				'orderby'           => $orderby,
 				'order'             => $order,
@@ -280,7 +280,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 				<?php endif; ?>
 
 			<?php else :
-				do_action( 'resume_manager_output_resumes_no_results' );
+				do_action( 'resume_manager_output_companies_no_results' );
 			endif;
 
 			wp_reset_postdata();

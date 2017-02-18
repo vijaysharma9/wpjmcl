@@ -49,7 +49,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			$args['featured'] = $_POST['featured'] === 'true' ? true : false;
 		}
 
-		$resumes = get_resumes( apply_filters( 'resume_manager_get_resumes_args', $args ) );
+		$resumes = get_resumes( apply_filters( 'resume_manager_get_companies_args', $args ) );
 
 		$result = array();
 		$result['found_resumes'] = false;
@@ -64,14 +64,14 @@ class WP_Job_Manager_Company_Listings_Ajax {
 
 		<?php else : ?>
 
-			<li class="no_resumes_found"><?php _e( 'No resumes found matching your selection.', 'wp-job-manager-company-listings' ); ?></li>
+			<li class="no_companies_found"><?php _e( 'No resumes found matching your selection.', 'wp-job-manager-company-listings' ); ?></li>
 
 		<?php endif;
 
 		$result['html']    = ob_get_clean();
 
 		// Generate 'showing' text
-		if ( $search_keywords || $search_location || $search_categories || apply_filters( 'resume_manager_get_resumes_custom_filter', false ) ) {
+		if ( $search_keywords || $search_location || $search_categories || apply_filters( 'resume_manager_get_companies_custom_filter', false ) ) {
 
 			$showing_categories = array();
 
@@ -97,7 +97,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 
 			$showing_location  = $search_location ? sprintf( ' ' . __( 'located in &ldquo;%s&rdquo;', 'wp-job-manager-company-listings' ), $search_location ) : '';
 
-			$result['showing'] = apply_filters( 'resume_manager_get_resumes_custom_filter_text', $showing_resumes . $showing_location );
+			$result['showing'] = apply_filters( 'resume_manager_get_companies_custom_filter_text', $showing_resumes . $showing_location );
 
 		} else {
 			$result['showing'] = '';

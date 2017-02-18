@@ -28,7 +28,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 		add_action( 'admin_notices', array( $this, 'approved_notice' ) );
 
 		if ( get_option( 'resume_manager_enable_categories' ) ) {
-			add_action( "restrict_manage_posts", array( $this, "resumes_by_category" ) );
+			add_action( "restrict_manage_posts", array( $this, "companies_by_category" ) );
 		}
 
 		foreach ( array( 'post', 'post-new' ) as $hook ) {
@@ -123,7 +123,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	}
 
 	/**
-	 * resumes_by_category function.
+	 * companies_by_category function.
 	 *
 	 * @access public
 	 * @param int $show_counts (default: 1)
@@ -132,7 +132,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 * @param string $orderby (default: '')
 	 * @return void
 	 */
-	public function resumes_by_category( $show_counts = 1, $hierarchical = 1, $show_uncategorized = 1, $orderby = '' ) {
+	public function companies_by_category( $show_counts = 1, $hierarchical = 1, $show_uncategorized = 1, $orderby = '' ) {
 		global $typenow, $wp_query;
 
 	    if ( $typenow != 'resume' || ! taxonomy_exists( 'resume_category' ) ) {

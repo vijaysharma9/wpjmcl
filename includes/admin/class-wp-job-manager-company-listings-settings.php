@@ -270,7 +270,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'type'      => 'page'
 						),
 						array(
-							'name' 		=> 'resume_manager_resumes_page_id',
+							'name' 		=> 'resume_manager_companies_page_id',
 							'std' 		=> '',
 							'label' 	=> __( 'Resume Listings Page', 'wp-job-manager-company-listings' ),
 							'desc'		=> __( 'Select the page where you have placed the [resumes] shortcode. This lets the plugin know where the resume listings page is located.', 'wp-job-manager-company-listings' ),

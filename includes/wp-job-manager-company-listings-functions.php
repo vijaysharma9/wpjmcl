@@ -83,7 +83,7 @@ function get_resumes( $args = array() ) {
 
 	if ( $resume_manager_keyword = sanitize_text_field( $args['search_keywords'] ) ) {
 		$query_args['_keyword'] = $resume_manager_keyword; // Does nothing but needed for unique hash
-		add_filter( 'posts_clauses', 'get_resumes_keyword_search' );
+		add_filter( 'posts_clauses', 'get_companies_keyword_search' );
 	}
 
 	$query_args = apply_filters( 'resume_manager_get_resumes', $query_args, $args );
@@ -97,7 +97,7 @@ function get_resumes( $args = array() ) {
 	}
 
 	// Filter args
-	$query_args = apply_filters( 'get_resumes_query_args', $query_args, $args );
+	$query_args = apply_filters( 'get_companies_query_args', $query_args, $args );
 
 	// Generate hash
 	$to_hash         = defined( 'ICL_LANGUAGE_CODE' ) ? json_encode( $query_args ) . ICL_LANGUAGE_CODE : json_encode( $query_args );
@@ -112,20 +112,20 @@ function get_resumes( $args = array() ) {
 
 	do_action( 'after_get_resumes', $query_args, $args );
 
-	remove_filter( 'posts_clauses', 'get_resumes_keyword_search' );
+	remove_filter( 'posts_clauses', 'get_companies_keyword_search' );
 
 	return $result;
 }
 endif;
 
-if ( ! function_exists( 'get_resumes_keyword_search' ) ) :
+if ( ! function_exists( 'get_companies_keyword_search' ) ) :
 	/**
 	 * Join and where query for keywords
 	 *
 	 * @param array $args
 	 * @return array
 	 */
-	function get_resumes_keyword_search( $args ) {
+	function get_companies_keyword_search( $args ) {
 		global $wpdb, $resume_manager_keyword;
 
 		// Meta searching - Query matching ids to avoid more joins
@@ -209,7 +209,7 @@ if ( ! function_exists( 'resume_manager_get_filtered_links' ) ) :
  */
 function resume_manager_get_filtered_links( $args = array() ) {
 
-	$links = apply_filters( 'resume_manager_resume_filters_showing_resumes_links', array(
+	$links = apply_filters( 'resume_manager_resume_filters_showing_companies_links', array(
 		'reset' => array(
 			'name' => __( 'Reset', 'wp-job-manager-company-listings' ),
 			'url'  => '#'

@@ -614,7 +614,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 				WHERE posts.post_type = 'resume'
 				AND posts.post_modified < %s
 				AND posts.post_status = 'expired'
-			", date( 'Y-m-d', strtotime( '-' . apply_filters( 'resume_manager_delete_expired_resumes_days', 30 ) . ' days', current_time( 'timestamp' ) ) ) ) );
+			", date( 'Y-m-d', strtotime( '-' . apply_filters( 'resume_manager_delete_expired_companies_days', 30 ) . ' days', current_time( 'timestamp' ) ) ) ) );
 
 			if ( $resume_ids ) {
 				foreach ( $resume_ids as $resume_id ) {
