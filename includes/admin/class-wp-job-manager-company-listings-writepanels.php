@@ -15,7 +15,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_post' ), 1, 2 );
-		add_action( 'company_manager_save_company', array( $this, 'save_company_data' ), 1, 2 );
+		add_action( 'company_listings_save_company', array( $this, 'save_company_data' ), 1, 2 );
 	}
 
 	/**
@@ -24,7 +24,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * @return array
 	 */
 	public static function company_fields() {
-		$fields = apply_filters( 'company_manager_company_fields', array(
+		$fields = apply_filters( 'company_listings_company_fields', array(
 			'_company_title' => array(
 				'label'       => __( 'Professional Title', 'wp-job-manager-company-listings' ),
 				'placeholder' => '',
@@ -70,7 +70,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 			),
 		) );
 
-		if ( ! get_option( 'company_manager_enable_company_upload' ) ) {
+		if ( ! get_option( 'company_listings_enable_company_upload' ) ) {
 			unset( $fields['_company_file'] );
 		}
 
@@ -97,23 +97,23 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 
 		$thepostid = $post->ID;
 
-		echo '<div class="wp_company_manager_meta_data wp_job_manager_meta_data">';
+		echo '<div class="wp_company_listings_meta_data wp_job_manager_meta_data">';
 
-		wp_nonce_field( 'save_meta_data', 'company_manager_nonce' );
+		wp_nonce_field( 'save_meta_data', 'company_listings_nonce' );
 
-		do_action( 'company_manager_company_data_start', $thepostid );
+		do_action( 'company_listings_company_data_start', $thepostid );
 
 		foreach ( $this->company_fields() as $key => $field ) {
 			$type = ! empty( $field['type'] ) ? $field['type'] : 'text';
 
-			if( has_action( 'company_manager_input_' . $type ) ) {
-				do_action( 'company_manager_input_' . $type, $key, $field );
+			if( has_action( 'company_listings_input_' . $type ) ) {
+				do_action( 'company_listings_input_' . $type, $key, $field );
 			} elseif( method_exists( $this, 'input_' . $type ) ) {
 				call_user_func( array( $this, 'input_' . $type ), $key, $field );
 			}
 		}
 
-		do_action( 'company_manager_company_data_end', $thepostid );
+		do_action( 'company_listings_company_data_end', $thepostid );
 
 		echo '</div>';
 	}
@@ -136,7 +136,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				<tr>
 					<td colspan="<?php echo sizeof( $fields ) + 1; ?>">
 						<div class="submit">
-							<input type="submit" class="button company_manager_add_row" value="<?php printf( __( 'Add %s', 'wp-job-manager-company-listings' ), $group_name ); ?>" data-row="<?php
+							<input type="submit" class="button company_listings_add_row" value="<?php printf( __( 'Add %s', 'wp-job-manager-company-listings' ), $group_name ); ?>" data-row="<?php
 								ob_start();
 								echo '<tr>';
 								echo '<td class="sort-column" width="1%">&nbsp;</td>';
@@ -148,7 +148,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 									if ( method_exists( __CLASS__, 'input_' . $type ) ) {
 										call_user_func( array( __CLASS__, 'input_' . $type ), $key, $field );
 									} else {
-										do_action( 'company_manager_input_' . $type, $key, $field );
+										do_action( 'company_listings_input_' . $type, $key, $field );
 									}
 									echo '</td>';
 								}
@@ -173,7 +173,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 								if ( method_exists( __CLASS__, 'input_' . $type ) ) {
 									call_user_func( array( __CLASS__, 'input_' . $type ), $key, $field );
 								} else {
-									do_action( 'company_manager_input_' . $type, $key, $field );
+									do_action( 'company_listings_input_' . $type, $key, $field );
 								}
 								echo '</td>';
 							}
@@ -191,7 +191,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * @return array
 	 */
 	public static function company_links_fields() {
-		return apply_filters( 'company_manager_company_links_fields', array(
+		return apply_filters( 'company_listings_company_links_fields', array(
 			'name' => array(
 				'label'       => __( 'Name', 'wp-job-manager-company-listings' ),
 				'name'        => 'company_url_name[]',
@@ -214,7 +214,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * @return array
 	 */
 	public static function company_education_fields() {
-		return apply_filters( 'company_manager_company_education_fields', array(
+		return apply_filters( 'company_listings_company_education_fields', array(
 			'location' => array(
 				'label'       => __( 'School name', 'wp-job-manager-company-listings' ),
 				'name'        => 'company_education_location[]',
@@ -249,7 +249,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * @return array
 	 */
 	public static function company_experience_fields() {
-		return apply_filters( 'company_manager_company_experience_fields', array(
+		return apply_filters( 'company_listings_company_experience_fields', array(
 			'employer' => array(
 				'label'       => __( 'Employer', 'wp-job-manager-company-listings' ),
 				'name'        => 'company_experience_employer[]',
@@ -320,11 +320,11 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 		if ( is_int( wp_is_post_revision( $post ) ) ) return;
 		if ( is_int( wp_is_post_autosave( $post ) ) ) return;
-		if ( empty( $_POST['company_manager_nonce'] ) || ! wp_verify_nonce( $_POST['company_manager_nonce'], 'save_meta_data' ) ) return;
+		if ( empty( $_POST['company_listings_nonce'] ) || ! wp_verify_nonce( $_POST['company_listings_nonce'], 'save_meta_data' ) ) return;
 		if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 		if ( $post->post_type != 'company' ) return;
 
-		do_action( 'company_manager_save_company', $post_id, $post );
+		do_action( 'company_listings_save_company', $post_id, $post );
 	}
 
 	/**
@@ -352,8 +352,8 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 
 			elseif ( '_company_location' === $key ) {
 				if ( update_post_meta( $post_id, $key, sanitize_text_field( $_POST[ $key ] ) ) ) {
-					do_action( 'company_manager_company_location_edited', $post_id, sanitize_text_field( $_POST[ $key ] ) );
-				} elseif ( apply_filters( 'company_manager_geolocation_enabled', true ) && ! WP_Job_Manager_Geocode::has_location_data( $post_id ) ) {
+					do_action( 'company_listings_company_location_edited', $post_id, sanitize_text_field( $_POST[ $key ] ) );
+				} elseif ( apply_filters( 'company_listings_geolocation_enabled', true ) && ! WP_Job_Manager_Geocode::has_location_data( $post_id ) ) {
 					WP_Job_Manager_Geocode::generate_location_data( $post_id, sanitize_text_field( $_POST[ $key ] ) );
 				}
 				continue;

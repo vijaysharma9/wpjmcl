@@ -81,7 +81,7 @@ class WP_Job_Manager_Company_Listings {
 	 * Handle Updates
 	 */
 	public function updater() {
-		if ( version_compare( COMPANY_LISTINGS_VERSION, get_option( 'wp_company_manager_version' ), '>' ) ) {
+		if ( version_compare( COMPANY_LISTINGS_VERSION, get_option( 'wp_company_listings_version' ), '>' ) ) {
 			include_once( 'includes/class-wp-job-manager-company-listings-install.php' );
 		}
 	}
@@ -139,15 +139,15 @@ class WP_Job_Manager_Company_Listings {
 		wp_register_script( 'wp-job-manager-company-listings-company-submission', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-submission.min.js', array( 'jquery', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
 		wp_register_script( 'wp-job-manager-company-listings-company-contact-details', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/contact-details.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 
-		wp_localize_script( 'wp-job-manager-company-listings-company-submission', 'company_manager_company_submission', array(
+		wp_localize_script( 'wp-job-manager-company-listings-company-submission', 'company_listings_company_submission', array(
 			'i18n_navigate'       => __( 'If you wish to edit the posted details use the "edit company" button instead, otherwise changes may be lost.', 'wp-job-manager-company-listings' ),
 			'i18n_confirm_remove' => __( 'Are you sure you want to remove this item?', 'wp-job-manager-company-listings' ),
 			'i18n_remove'         => __( 'remove', 'wp-job-manager-company-listings' )
 		) );
-		wp_localize_script( 'wp-job-manager-company-listings-ajax-filters', 'company_manager_ajax_filters', array(
+		wp_localize_script( 'wp-job-manager-company-listings-ajax-filters', 'company_listings_ajax_filters', array(
 			'ajax_url' => $ajax_url
 		) );
-		wp_localize_script( 'wp-job-manager-company-listings-company-dashboard', 'company_manager_company_dashboard', array(
+		wp_localize_script( 'wp-job-manager-company-listings-company-dashboard', 'company_listings_company_dashboard', array(
 			'i18n_confirm_delete' => __( 'Are you sure you want to delete this company?', 'wp-job-manager-company-listings' )
 		) );
 
@@ -155,4 +155,4 @@ class WP_Job_Manager_Company_Listings {
 	}
 }
 
-$GLOBALS['company_manager'] = new WP_Job_Manager_Company_Listings();
+$GLOBALS['company_listings'] = new WP_Job_Manager_Company_Listings();

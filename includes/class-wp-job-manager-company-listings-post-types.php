@@ -22,7 +22,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		add_filter( 'the_company_metadescription', 'shortcode_unautop'  );
 		add_filter( 'the_company_metadescription', 'prepend_attachment' );
 
-		add_action( 'company_manager_contact_details', array( $this, 'contact_details_email' ) );
+		add_action( 'company_listings_contact_details', array( $this, 'contact_details_email' ) );
 
 		add_action( 'pending_to_publish', array( $this, 'setup_autohide_cron' ) );
 		add_action( 'preview_to_publish', array( $this, 'setup_autohide_cron' ) );
@@ -41,10 +41,10 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		add_action( 'draft_to_publish', array( $this, 'set_expiry' ) );
 		add_action( 'auto-draft_to_publish', array( $this, 'set_expiry' ) );
 		add_action( 'expired_to_publish', array( $this, 'set_expiry' ) );
-		add_action( 'company_manager_check_for_expired_companies', array( $this, 'check_for_expired_companies' ) );
+		add_action( 'company_listings_check_for_expired_companies', array( $this, 'check_for_expired_companies' ) );
 
 		add_action( 'save_post', array( $this, 'flush_get_company_listings_cache' ) );
-		add_action( 'company_manager_my_company_do_action', array( $this, 'company_manager_my_company_do_action' ) );
+		add_action( 'company_listings_my_company_do_action', array( $this, 'company_listings_my_company_do_action' ) );
 	}
 
 	/**
@@ -59,7 +59,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	/**
 	 * Flush the cache
 	 */
-	public function company_manager_my_company_do_action( $action ) {
+	public function company_listings_my_company_do_action( $action ) {
 		WP_Job_Manager_Cache_Helper::get_transient_version( 'get_company_listings', true );
 	}
 
@@ -79,11 +79,11 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		/**
 		 * Taxonomies
 		 */
-		if ( get_option( 'company_manager_enable_categories' ) ) {
+		if ( get_option( 'company_listings_enable_categories' ) ) {
 			$singular  = __( 'Company Category', 'wp-job-manager-company-listings' );
 			$plural    = __( 'Company Categories', 'wp-job-manager-company-listings' );
 
-			if ( current_theme_supports( 'company-manager-templates' ) ) {
+			if ( current_theme_supports( 'company-listings-templates' ) ) {
 				$rewrite     = array(
 					'slug'         => _x( 'company-category', 'Company category slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 					'with_front'   => false,
@@ -124,11 +124,11 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		    );
 		}
 
-		if ( get_option( 'company_manager_enable_skills' ) ) {
+		if ( get_option( 'company_listings_enable_skills' ) ) {
 			$singular  = __( 'Company Skill', 'wp-job-manager-company-listings' );
 			$plural    = __( 'Company Skills', 'wp-job-manager-company-listings' );
 
-			if ( current_theme_supports( 'company-manager-templates' ) ) {
+			if ( current_theme_supports( 'company-listings-templates' ) ) {
 				$rewrite     = array(
 					'slug'         => _x( 'company-skill', 'Company skill slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 					'with_front'   => false,
@@ -175,7 +175,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		$singular  = __( 'Company', 'wp-job-manager-company-listings' );
 		$plural    = __( 'Companies', 'wp-job-manager-company-listings' );
 
-		if ( current_theme_supports( 'company-manager-templates' ) ) {
+		if ( current_theme_supports( 'company-listings-templates' ) ) {
 			$has_archive = _x( 'companies', 'Post type archive slug - resave permalinks after changing this', 'wp-job-manager-company-listings' );
 		} else {
 			$has_archive = false;
@@ -252,7 +252,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 
 		$company_id = absint( $_GET['download-company'] );
 
-		if ( $company_id && company_manager_user_can_view_company( $company_id ) && apply_filters( 'company_manager_user_can_download_company_file', true, $company_id ) ) {
+		if ( $company_id && company_listings_user_can_view_company( $company_id ) && apply_filters( 'company_listings_user_can_download_company_file', true, $company_id ) ) {
 			$file_paths = get_company_files( $company_id );
 			$file_id    = ! empty( $_GET['file-id'] ) ? absint( $_GET['file-id'] ) : 0;
 			$file_path  = $file_paths[ $file_id ];
@@ -426,13 +426,13 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 * @return string
 	 */
 	public function company_title( $title, $post_or_id = null ) {
-		if ( $post_or_id && 'company' === get_post_type( $post_or_id ) && ! company_manager_user_can_view_company_name( $post_or_id ) ) {
+		if ( $post_or_id && 'company' === get_post_type( $post_or_id ) && ! company_listings_user_can_view_company_name( $post_or_id ) ) {
 			$title_parts    = explode( ' ', $title );
 			$hidden_title[] = array_shift( $title_parts );
 			foreach ( $title_parts as $title_part ) {
 				$hidden_title[] = str_repeat( '*', strlen( $title_part ) );
 			}
-			return apply_filters( 'company_manager_hidden_company_title', implode( ' ', $hidden_title ), $title, $post_or_id );
+			return apply_filters( 'company_listings_hidden_company_title', implode( ' ', $hidden_title ), $title, $post_or_id );
 		}
 		return $title;
 	}
@@ -489,10 +489,10 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		add_post_meta( $post->ID, '_featured', 0, true );
 		wp_clear_scheduled_hook( 'auto-hide-company', array( $post->ID ) );
 
-		$company_manager_autohide = get_option( 'company_manager_autohide' );
+		$company_listings_autohide = get_option( 'company_listings_autohide' );
 
-		if ( $company_manager_autohide ) {
-			wp_schedule_single_event( strtotime( "+{$company_manager_autohide} day" ), 'auto-hide-company', array( $post->ID ) );
+		if ( $company_listings_autohide ) {
+			wp_schedule_single_event( strtotime( "+{$company_listings_autohide} day" ), 'auto-hide-company', array( $post->ID ) );
 		}
 	}
 
@@ -608,13 +608,13 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		}
 
 		// Delete old expired companies
-		if ( apply_filters( 'company_manager_delete_expired_companies', true ) ) {
+		if ( apply_filters( 'company_listings_delete_expired_companies', true ) ) {
 			$company_ids = $wpdb->get_col( $wpdb->prepare( "
 				SELECT posts.ID FROM {$wpdb->posts} as posts
 				WHERE posts.post_type = 'company'
 				AND posts.post_modified < %s
 				AND posts.post_status = 'expired'
-			", date( 'Y-m-d', strtotime( '-' . apply_filters( 'company_manager_delete_expired_companies_days', 30 ) . ' days', current_time( 'timestamp' ) ) ) ) );
+			", date( 'Y-m-d', strtotime( '-' . apply_filters( 'company_listings_delete_expired_companies_days', 30 ) . ' days', current_time( 'timestamp' ) ) ) ) );
 
 			if ( $company_ids ) {
 				foreach ( $company_ids as $company_id ) {

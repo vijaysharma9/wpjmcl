@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-	$( '.company-manager-add-row' ).click(function() {
+	$( '.company-listings-add-row' ).click(function() {
 		var $wrap     = $(this).closest('.field');
 		var max_index = 0;
 
@@ -13,9 +13,9 @@ jQuery(document).ready(function($) {
 		$(this).before( html );
 		return false;
 	});
-	$( '#submit-company-form' ).on('click', '.company-manager-remove-row', function() {
-		if ( confirm( company_manager_company_submission.i18n_confirm_remove ) ) {
-			$(this).closest( 'div.company-manager-data-row' ).remove();
+	$( '#submit-company-form' ).on('click', '.company-listings-remove-row', function() {
+		if ( confirm( company_listings_company_submission.i18n_confirm_remove ) ) {
+			$(this).closest( 'div.company-listings-data-row' ).remove();
 		}
 		return false;
 	});
@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 	$('.fieldset-company_experience .field, .fieldset-company_education .field, .fieldset-links .field').sortable({
-		items:'.company-manager-data-row',
+		items:'.company-listings-data-row',
 		cursor:'move',
 		axis:'y',
 		scrollSensitivity:40,
@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
 	});
 	$(window).bind('beforeunload', function(event) {
 		if ( confirm_nav ) {
-			return company_manager_company_submission.i18n_navigate;
+			return company_listings_company_submission.i18n_navigate;
 		}
 	});
 
@@ -118,7 +118,7 @@ jQuery(document).ready(function($) {
 
 				$( profile.memberUrlResources.values ).each( function( i, e ) {
 					if ( e.name && e.url ) {
-						$( '.fieldset-links' ).find( '.company-manager-add-row' ).click();
+						$( '.fieldset-links' ).find( '.company-listings-add-row' ).click();
 						$( '.fieldset-links' ).find( 'input[name^="link_name"]' ).last().val( e.name );
 						$( '.fieldset-links' ).find( 'input[name^="link_url"]' ).last().val( e.url );
 					}
@@ -133,7 +133,7 @@ jQuery(document).ready(function($) {
 					if ( e.startDate ) date.push( e.startDate.year );
 					if ( e.endDate ) date.push( e.endDate.year );
 
-					$( '.fieldset-company_education' ).find( '.company-manager-add-row' ).click();
+					$( '.fieldset-company_education' ).find( '.company-listings-add-row' ).click();
 					$( '.fieldset-company_education' ).find( 'input[name^="company_education_location"]' ).last().val( e.schoolName );
 					$( '.fieldset-company_education' ).find( 'input[name^="company_education_qualification"]' ).last().val( qual.join( ', ' ) );
 					$( '.fieldset-company_education' ).find( 'input[name^="company_education_date"]' ).last().val( date.join( '-' ) );
@@ -146,7 +146,7 @@ jQuery(document).ready(function($) {
 					if ( e.startDate ) date.push( e.startDate.year );
 					if ( e.endDate ) date.push( e.endDate.year );
 
-					$( '.fieldset-company_experience' ).find( '.company-manager-add-row' ).click();
+					$( '.fieldset-company_experience' ).find( '.company-listings-add-row' ).click();
 					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_employer"]' ).last().val( e.company.name );
 					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_job_title"]' ).last().val( e.title );
 					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_date"]' ).last().val( date.join( '-' ) );
@@ -159,7 +159,7 @@ jQuery(document).ready(function($) {
 					if ( photo_field ) {
 						var photo_field_name = photo_field.find(':input[type="file"]').attr( 'name' );
 					}
-					$('.fieldset-company_photo .field').prepend('<div class="job-manager-uploaded-files"><div class="job-manager-uploaded-file"><span class="job-manager-uploaded-file-preview"><img src="' + profile.pictureUrl + '" /> <a class="job-manager-remove-uploaded-file" href="#">[' + company_manager_company_submission.i18n_remove + ']</a></span><input type="hidden" class="input-text" name="current_' + photo_field_name + '" value="' + profile.pictureUrl + '" /></div></div>');
+					$('.fieldset-company_photo .field').prepend('<div class="job-manager-uploaded-files"><div class="job-manager-uploaded-file"><span class="job-manager-uploaded-file-preview"><img src="' + profile.pictureUrl + '" /> <a class="job-manager-remove-uploaded-file" href="#">[' + company_listings_company_submission.i18n_remove + ']</a></span><input type="hidden" class="input-text" name="current_' + photo_field_name + '" value="' + profile.pictureUrl + '" /></div></div>');
 				}
 
 				$form.trigger( 'linkedin_import', profile );

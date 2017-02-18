@@ -100,7 +100,7 @@ function the_company_metaphoto( $size = 'thumbnail', $default = null, $post = nu
 	} elseif ( $default )
 		echo '<img class="company_photo" src="' . $default . '" alt="Photo" />';
 	else
-		echo '<img class="company_photo" src="' . apply_filters( 'company_manager_default_company_photo', COMPANY_LISTINGS_PLUGIN_URL . '/assets/images/company.png' ) . '" alt="Logo" />';
+		echo '<img class="company_photo" src="' . apply_filters( 'company_listings_default_company_photo', COMPANY_LISTINGS_PLUGIN_URL . '/assets/images/company.png' ) . '" alt="Logo" />';
 }
 
 /**
@@ -135,7 +135,7 @@ function get_the_company_metacategory( $post = null ) {
 	if ( $post->post_type !== 'company' )
 		return '';
 
-	if ( ! get_option( 'company_manager_enable_categories' ) )
+	if ( ! get_option( 'company_listings_enable_categories' ) )
 		return '';
 
 	$categories = wp_get_object_terms( $post->ID, 'company_category', array( 'fields' => 'names' ) );
@@ -185,16 +185,16 @@ function get_the_company_metastatus( $post = null ) {
  *
  * @return bool
  */
-function company_manager_user_can_post_company() {
+function company_listings_user_can_post_company() {
 	$can_post = true;
 
 	if ( ! is_user_logged_in() ) {
-		if ( company_manager_user_requires_account() && ! company_manager_enable_registration() ) {
+		if ( company_listings_user_requires_account() && ! company_listings_enable_registration() ) {
 			$can_post = false;
 		}
 	}
 
-	return apply_filters( 'company_manager_user_can_post_company', $can_post );
+	return apply_filters( 'company_listings_user_can_post_company', $can_post );
 }
 
 /**
@@ -202,8 +202,8 @@ function company_manager_user_can_post_company() {
  *
  * @return bool
  */
-function company_manager_enable_registration() {
-	return apply_filters( 'company_manager_enable_registration', get_option( 'company_manager_enable_registration' ) == 1 ? true : false );
+function company_listings_enable_registration() {
+	return apply_filters( 'company_listings_enable_registration', get_option( 'company_listings_enable_registration' ) == 1 ? true : false );
 }
 
 /**
@@ -211,8 +211,8 @@ function company_manager_enable_registration() {
  *
  * @return bool
  */
-function company_manager_user_requires_account() {
-	return apply_filters( 'company_manager_user_requires_account', get_option( 'company_manager_user_requires_account' ) == 1 ? true : false );
+function company_listings_user_requires_account() {
+	return apply_filters( 'company_listings_user_requires_account', get_option( 'company_listings_user_requires_account' ) == 1 ? true : false );
 }
 
 /**
@@ -220,8 +220,8 @@ function company_manager_user_requires_account() {
  *
  * @return bool
  */
-function company_manager_generate_username_from_email() {
-	return apply_filters( 'company_manager_generate_username_from_email', get_option( 'company_manager_generate_username_from_email' ) == 1 ? true : false );
+function company_listings_generate_username_from_email() {
+	return apply_filters( 'company_listings_generate_username_from_email', get_option( 'company_listings_generate_username_from_email' ) == 1 ? true : false );
 }
 
 /**

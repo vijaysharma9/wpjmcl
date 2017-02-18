@@ -11,8 +11,8 @@ class WP_Job_Manager_Company_Listings_Ajax {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_nopriv_company_manager_get_companies', array( $this, 'get_companies' ) );
-		add_action( 'wp_ajax_company_manager_get_companies', array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_get_companies', array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_company_listings_get_companies', array( $this, 'get_companies' ) );
 	}
 
 	/**
@@ -49,7 +49,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			$args['featured'] = $_POST['featured'] === 'true' ? true : false;
 		}
 
-		$companies = get_companies( apply_filters( 'company_manager_get_companies_args', $args ) );
+		$companies = get_companies( apply_filters( 'company_listings_get_companies_args', $args ) );
 
 		$result = array();
 		$result['found_companies'] = false;
@@ -71,7 +71,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 		$result['html']    = ob_get_clean();
 
 		// Generate 'showing' text
-		if ( $search_keywords || $search_location || $search_categories || apply_filters( 'company_manager_get_companies_custom_filter', false ) ) {
+		if ( $search_keywords || $search_location || $search_categories || apply_filters( 'company_listings_get_companies_custom_filter', false ) ) {
 
 			$showing_categories = array();
 
@@ -97,14 +97,14 @@ class WP_Job_Manager_Company_Listings_Ajax {
 
 			$showing_location  = $search_location ? sprintf( ' ' . __( 'located in &ldquo;%s&rdquo;', 'wp-job-manager-company-listings' ), $search_location ) : '';
 
-			$result['showing'] = apply_filters( 'company_manager_get_companies_custom_filter_text', $showing_companies . $showing_location );
+			$result['showing'] = apply_filters( 'company_listings_get_companies_custom_filter_text', $showing_companies . $showing_location );
 
 		} else {
 			$result['showing'] = '';
 		}
 
 		// Generate RSS link
-		$result['showing_links'] = company_manager_get_filtered_links( array(
+		$result['showing_links'] = company_listings_get_filtered_links( array(
 			'search_location'   => $search_location,
 			'search_categories' => $search_categories,
 			'search_keywords'   => $search_keywords

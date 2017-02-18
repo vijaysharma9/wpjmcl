@@ -15,8 +15,8 @@ class WP_Job_Manager_Company_Listings_Forms {
 	 * If a form was posted, load its class so that it can be processed before display.
 	 */
 	public function load_posted_form() {
-		if ( ! empty( $_POST['company_manager_form'] ) ) {
-			$this->load_form_class( sanitize_title( $_POST['company_manager_form'] ) );
+		if ( ! empty( $_POST['company_listings_form'] ) ) {
+			$this->load_form_class( sanitize_title( $_POST['company_listings_form'] ) );
 		}
 	}
 

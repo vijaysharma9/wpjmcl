@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 	// Data rows
-	$( "input.company_manager_add_row" ).click(function(){
+	$( "input.company_listings_add_row" ).click(function(){
 		$(this).closest('table').find('tbody').append( $(this).data('row') );
 		return false;
 	});
@@ -25,34 +25,34 @@ jQuery(document).ready(function($) {
 
 	// Settings
 	$('.job-manager-settings-wrap')
-		.on( 'change', '#setting-company_manager_enable_skills', function() {
+		.on( 'change', '#setting-company_listings_enable_skills', function() {
 			if ( $( this ).is(':checked') ) {
-				$('#setting-company_manager_max_skills').closest('tr').show();
+				$('#setting-company_listings_max_skills').closest('tr').show();
 			} else {
-				$('#setting-company_manager_max_skills').closest('tr').hide();
+				$('#setting-company_listings_max_skills').closest('tr').hide();
 			}
 		})
-		.on( 'change', '#setting-company_manager_enable_categories', function() {
+		.on( 'change', '#setting-company_listings_enable_categories', function() {
 			if ( $( this ).is(':checked') ) {
-				$('#setting-company_manager_enable_default_category_multiselect, #setting-company_manager_category_filter_type').closest('tr').show();
+				$('#setting-company_listings_enable_default_category_multiselect, #setting-company_listings_category_filter_type').closest('tr').show();
 			} else {
-				$('#setting-company_manager_enable_default_category_multiselect, #setting-company_manager_category_filter_type').closest('tr').hide();
+				$('#setting-company_listings_enable_default_category_multiselect, #setting-company_listings_category_filter_type').closest('tr').hide();
 			}
 		})
-		.on( 'change', '#setting-company_manager_linkedin_import', function() {
+		.on( 'change', '#setting-company_listings_linkedin_import', function() {
 			if ( $( this ).is(':checked') ) {
 				$('#setting-job_manager_linkedin_api_key').closest('tr').show();
 			} else {
 				$('#setting-job_manager_linkedin_api_key').closest('tr').hide();
 			}
 		})
-		.on( 'change', '#setting-company_manager_enable_registration', function() {
+		.on( 'change', '#setting-company_listings_enable_registration', function() {
 			if ( $( this ).is(':checked') ) {
-				$('#setting-company_manager_generate_username_from_email, #setting-company_manager_registration_role').closest('tr').show();
+				$('#setting-company_listings_generate_username_from_email, #setting-company_listings_registration_role').closest('tr').show();
 			} else {
-				$('#setting-company_manager_generate_username_from_email, #setting-company_manager_registration_role').closest('tr').hide();
+				$('#setting-company_listings_generate_username_from_email, #setting-company_listings_registration_role').closest('tr').hide();
 			}
 		});
 
-	$('#setting-company_manager_enable_skills, #setting-company_manager_enable_categories, #setting-company_manager_linkedin_import, #setting-company_manager_enable_registration').change();
+	$('#setting-company_listings_enable_skills, #setting-company_listings_enable_categories, #setting-company_listings_linkedin_import, #setting-company_listings_enable_registration').change();
 });

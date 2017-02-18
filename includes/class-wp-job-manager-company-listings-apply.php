@@ -31,22 +31,22 @@ class WP_Job_Manager_Company_Listings_Apply {
 		/**
 		 * What content is shown is based on settings and whether or not the user has companies.
 		 */
-		if ( empty( $user_companies ) && get_option( 'company_manager_force_company' ) ) {
+		if ( empty( $user_companies ) && get_option( 'company_listings_force_company' ) ) {
 			remove_all_actions( 'job_manager_application_details_email' );
 			remove_all_actions( 'job_manager_application_details_url' );
 			add_action( 'job_manager_application_details_email', array( $this, 'force_apply_with_company' ), 20 );
 			add_action( 'job_manager_application_details_url', array( $this, 'force_apply_with_company' ), 20 );
 		} else {
-			if ( get_option( 'company_manager_enable_application', 1 ) ) {
+			if ( get_option( 'company_listings_enable_application', 1 ) ) {
 				// If we're forcing application through company manager, we should disable other forms and content.
-				if ( get_option( 'company_manager_force_application' ) ) {
+				if ( get_option( 'company_listings_force_application' ) ) {
 					remove_all_actions( 'job_manager_application_details_email' );
 				}
 				add_action( 'job_manager_application_details_email', array( $this, 'apply_with_company' ), 20 );
 			}
-			if ( class_exists( 'WP_Job_Manager_Applications' ) && get_option( 'company_manager_enable_application_for_url_method', 1 ) ) {
+			if ( class_exists( 'WP_Job_Manager_Applications' ) && get_option( 'company_listings_enable_application_for_url_method', 1 ) ) {
 				// If we're forcing application through company manager, we should disable other forms and content.
-				if ( get_option( 'company_manager_force_application' ) ) {
+				if ( get_option( 'company_listings_force_application' ) ) {
 					remove_all_actions( 'job_manager_application_details_url' );
 				}
 				add_action( 'job_manager_application_details_url', array( $this, 'apply_with_company' ), 20 );
@@ -75,7 +75,7 @@ class WP_Job_Manager_Company_Listings_Apply {
 	 */
 	private function get_user_companies() {
 		if ( is_user_logged_in() ) {
-			$args = apply_filters( 'company_manager_get_application_form_companies_args', array(
+			$args = apply_filters( 'company_listings_get_application_form_companies_args', array(
 				'post_type'           => 'company',
 				'post_status'         => array( 'publish', 'pending', 'hidden' ),
 				'ignore_sticky_posts' => 1,
@@ -134,7 +134,7 @@ class WP_Job_Manager_Company_Listings_Apply {
 
 				$method = get_the_job_application_method( $job_id );
 
-				if ( "email" !== $method->type && ! ( class_exists( 'WP_Job_Manager_Applications' ) && get_option( 'company_manager_enable_application_for_url_method', 1 ) ) ) {
+				if ( "email" !== $method->type && ! ( class_exists( 'WP_Job_Manager_Applications' ) && get_option( 'company_listings_enable_application_for_url_method', 1 ) ) ) {
 					throw new Exception( __( 'This job cannot be applied for using a company', 'wp-job-manager-company-listings' ) );
 				}
 
@@ -198,7 +198,7 @@ class WP_Job_Manager_Company_Listings_Apply {
 
 		do_action( 'applied_with_company', get_current_user_id(), $job_id, $company_id, $application_message, $sent );
 
-		if ( "email" !== $method->type && class_exists( 'WP_Job_Manager_Applications' ) && get_option( 'company_manager_enable_application_for_url_method', 1 ) ) {
+		if ( "email" !== $method->type && class_exists( 'WP_Job_Manager_Applications' ) && get_option( 'company_listings_enable_application_for_url_method', 1 ) ) {
 			$sent = true;
 		}
 

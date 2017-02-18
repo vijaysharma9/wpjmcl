@@ -1,8 +1,8 @@
 <?php if ( ! empty( $field['value'] ) && is_array( $field['value'] ) ) : ?>
 	<?php foreach ( $field['value'] as $index => $value ) : ?>
-		<div class="company-manager-data-row">
+		<div class="company-listings-data-row">
 			<input type="hidden" class="repeated-row-index" name="repeated-row-<?php echo esc_attr( $key ); ?>[]" value="<?php echo absint( $index ); ?>" />
-			<a href="#" class="company-manager-remove-row"><?php _e( 'Remove', 'wp-job-manager-company-listings' ); ?></a>
+			<a href="#" class="company-listings-remove-row"><?php _e( 'Remove', 'wp-job-manager-company-listings' ); ?></a>
 			<?php foreach ( $field['fields'] as $subkey => $subfield ) : ?>
 				<fieldset class="fieldset-<?php esc_attr_e( $subkey ); ?>">
 					<label for="<?php esc_attr_e( $subkey ); ?>"><?php echo $subfield['label'] . ( $subfield['required'] ? '' : ' <small>' . __( '(optional)', 'wp-job-manager-company-listings' ) . '</small>' ); ?></label>
@@ -20,13 +20,13 @@
 	<?php endforeach; ?>
 <?php endif; ?>
 
-<a href="#" class="company-manager-add-row" data-row="<?php
+<a href="#" class="company-listings-add-row" data-row="<?php
 
 	ob_start();
 	?>
-		<div class="company-manager-data-row">
+		<div class="company-listings-data-row">
 			<input type="hidden" class="repeated-row-index" name="repeated-row-<?php echo esc_attr( $key ); ?>[]" value="%%repeated-row-index%%" />
-			<a href="#" class="company-manager-remove-row"><?php _e( 'Remove', 'wp-job-manager-company-listings' ); ?></a>
+			<a href="#" class="company-listings-remove-row"><?php _e( 'Remove', 'wp-job-manager-company-listings' ); ?></a>
 			<?php foreach ( $field['fields'] as $subkey => $subfield ) : ?>
 				<fieldset class="fieldset-<?php esc_attr_e( $subkey ); ?>">
 					<label for="<?php esc_attr_e( $subkey ); ?>"><?php echo $subfield['label'] . ( $subfield['required'] ? '' : ' <small>' . __( '(optional)', 'wp-job-manager-company-listings' ) . '</small>' ); ?></label>

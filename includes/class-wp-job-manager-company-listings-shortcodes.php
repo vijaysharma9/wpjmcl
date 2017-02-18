@@ -18,7 +18,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 		add_shortcode( 'submit_company_form', array( $this, 'submit_company_form' ) );
 		add_shortcode( 'company_dashboard', array( $this, 'company_dashboard' ) );
 		add_shortcode( 'companies', array( $this, 'output_companies' ) );
-		add_action( 'company_manager_output_companies_no_results', array( $this, 'output_no_results' ) );
+		add_action( 'company_listings_output_companies_no_results', array( $this, 'output_no_results' ) );
 	}
 
 	/**
@@ -29,10 +29,10 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			return;
 		}
 
-		$submit_company_form_page_id              = get_option( 'company_manager_submit_company_form_page_id' );
-		$company_dashboard_page_id = get_option( 'company_manager_company_dashboard_page_id' );
-		$submission_limit            = get_option( 'company_manager_submission_limit' );
-		$company_count                = company_manager_count_user_companies();
+		$submit_company_form_page_id              = get_option( 'company_listings_submit_company_form_page_id' );
+		$company_dashboard_page_id = get_option( 'company_listings_company_dashboard_page_id' );
+		$submission_limit            = get_option( 'company_listings_submission_limit' );
+		$company_count                = company_listings_count_user_companies();
 
 		if ( $submit_company_form_page_id && $company_dashboard_page_id && $submission_limit && $company_count >= $submission_limit && is_page( $submit_company_form_page_id ) ) {
 			wp_redirect( get_permalink( $company_dashboard_page_id ) );
@@ -55,14 +55,14 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 	 * Show the company submission form
 	 */
 	public function submit_company_form( $atts = array() ) {
-		return $GLOBALS['company_manager']->forms->get_form( 'submit-company', $atts );
+		return $GLOBALS['company_listings']->forms->get_form( 'submit-company', $atts );
 	}
 
 	/**
 	 * Handles actions on company dashboard
 	 */
 	public function company_dashboard_handler() {
-		if ( ! empty( $_REQUEST['action'] ) && ! empty( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'company_manager_my_company_actions' ) ) {
+		if ( ! empty( $_REQUEST['action'] ) && ! empty( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'company_listings_my_company_actions' ) ) {
 
 			$action    = sanitize_title( $_REQUEST['action'] );
 			$company_id = absint( $_REQUEST['company_id'] );
@@ -100,12 +100,12 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 					break;
 					case 'relist' :
 						// redirect to post page
-						wp_redirect( add_query_arg( array( 'company_id' => absint( $company_id ) ), get_permalink( get_option( 'company_manager_submit_company_form_page_id' ) ) ) );
+						wp_redirect( add_query_arg( array( 'company_id' => absint( $company_id ) ), get_permalink( get_option( 'company_listings_submit_company_form_page_id' ) ) ) );
 
 						break;
 				}
 
-				do_action( 'company_manager_my_company_do_action', $action, $company_id );
+				do_action( 'company_listings_my_company_do_action', $action, $company_id );
 
 			} catch ( Exception $e ) {
 				$this->company_dashboard_message = '<div class="job-manager-error">' . $e->getMessage() . '</div>';
@@ -117,7 +117,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 	 * Shortcode which lists the logged in user's companies
 	 */
 	public function company_dashboard( $atts ) {
-		global $company_manager;
+		global $company_listings;
 
 		if ( ! is_user_logged_in() ) {
 			ob_start();
@@ -139,12 +139,12 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 			switch ( $action ) {
 				case 'edit' :
-					return $company_manager->forms->get_form( 'edit-company' );
+					return $company_listings->forms->get_form( 'edit-company' );
 			}
 		}
 
 		// ....If not show the company dashboard
-		$args = apply_filters( 'company_manager_get_dashboard_companies_args', array(
+		$args = apply_filters( 'company_listings_get_dashboard_companies_args', array(
 			'post_type'           => 'company',
 			'post_status'         => array( 'publish', 'expired', 'pending', 'hidden' ),
 			'ignore_sticky_posts' => 1,
@@ -161,7 +161,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		echo $this->company_dashboard_message;
 
-		$company_dashboard_columns = apply_filters( 'company_manager_company_dashboard_columns', array(
+		$company_dashboard_columns = apply_filters( 'company_listings_company_dashboard_columns', array(
 			'company-title'       => __( 'Name', 'wp-job-manager-company-listings' ),
 			'company-title'    => __( 'Title', 'wp-job-manager-company-listings' ),
 			'company-location' => __( 'Location', 'wp-job-manager-company-listings' ),
@@ -169,7 +169,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			'date'               => __( 'Date Posted', 'wp-job-manager-company-listings' )
 		) );
 
-		if ( ! get_option( 'company_manager_enable_categories' ) ) {
+		if ( ! get_option( 'company_listings_enable_categories' ) ) {
 			unset( $company_dashboard_columns['company-category'] );
 		}
 
@@ -186,24 +186,24 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 	 * @return void
 	 */
 	public function output_companies( $atts ) {
-		global $company_manager;
+		global $company_listings;
 
 		ob_start();
 
-		if ( ! company_manager_user_can_browse_companies() ) {
+		if ( ! company_listings_user_can_browse_companies() ) {
 			get_job_manager_template_part( 'access-denied', 'browse-companies', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 			return ob_get_clean();
 		}
 
-		extract( $atts = shortcode_atts( apply_filters( 'company_manager_output_companies_defaults', array(
-			'per_page'                  => get_option( 'company_manager_per_page' ),
+		extract( $atts = shortcode_atts( apply_filters( 'company_listings_output_companies_defaults', array(
+			'per_page'                  => get_option( 'company_listings_per_page' ),
 			'order'                     => 'DESC',
 			'orderby'                   => 'featured',
 			'show_filters'              => true,
-			'show_categories'           => get_option( 'company_manager_enable_categories' ),
+			'show_categories'           => get_option( 'company_listings_enable_categories' ),
 			'categories'                => '',
 			'featured'                  => null, // True to show only featured, false to hide featured, leave null to show both.
-			'show_category_multiselect' => get_option( 'company_manager_enable_default_category_multiselect', false ),
+			'show_category_multiselect' => get_option( 'company_listings_enable_default_category_multiselect', false ),
 			'selected_category'         => '',
 			'show_pagination'           => false,
 			'show_more'                 => true,
@@ -249,7 +249,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		} else {
 
-			$companies = get_companies( apply_filters( 'company_manager_output_companies_args', array(
+			$companies = get_companies( apply_filters( 'company_listings_output_companies_args', array(
 				'search_categories' => $categories,
 				'orderby'           => $orderby,
 				'order'             => $order,
@@ -280,7 +280,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 				<?php endif; ?>
 
 			<?php else :
-				do_action( 'company_manager_output_companies_no_results' );
+				do_action( 'company_listings_output_companies_no_results' );
 			endif;
 
 			wp_reset_postdata();

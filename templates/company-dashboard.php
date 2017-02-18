@@ -1,10 +1,10 @@
 <?php
-$submission_limit           = get_option( 'company_manager_submission_limit' );
-$submit_company_form_page_id = get_option( 'company_manager_submit_company_form_page_id' );
+$submission_limit           = get_option( 'company_listings_submission_limit' );
+$submit_company_form_page_id = get_option( 'company_listings_submit_company_form_page_id' );
 ?>
-<div id="company-manager-company-dashboard">
-	<p><?php echo _n( 'Your company can be viewed, edited or removed below.', 'Your company(s) can be viewed, edited or removed below.', company_manager_count_user_companies(), 'wp-job-manager-company-listings' ); ?></p>
-	<table class="company-manager-companies">
+<div id="company-listings-company-dashboard">
+	<p><?php echo _n( 'Your company can be viewed, edited or removed below.', 'Your company(s) can be viewed, edited or removed below.', company_listings_count_user_companies(), 'wp-job-manager-company-listings' ); ?></p>
+	<table class="company-listings-companies">
 		<thead>
 			<tr>
 				<?php foreach ( $company_dashboard_columns as $key => $column ) : ?>
@@ -42,7 +42,7 @@ $submit_company_form_page_id = get_option( 'company_manager_submit_company_form_
 													$actions['publish'] = array( 'label' => __( 'Publish', 'wp-job-manager-company-listings' ), 'nonce' => true );
 												break;
 												case 'expired' :
-													if ( get_option( 'company_manager_submit_company_form_page_id' ) ) {
+													if ( get_option( 'company_listings_submit_company_form_page_id' ) ) {
 														$actions['relist'] = array( 'label' => __( 'Relist', 'wp-job-manager-company-listings' ), 'nonce' => true );
 													}
 												break;
@@ -50,12 +50,12 @@ $submit_company_form_page_id = get_option( 'company_manager_submit_company_form_
 
 											$actions['delete'] = array( 'label' => __( 'Delete', 'wp-job-manager-company-listings' ), 'nonce' => true );
 
-											$actions = apply_filters( 'company_manager_my_company_actions', $actions, $company );
+											$actions = apply_filters( 'company_listings_my_company_actions', $actions, $company );
 
 											foreach ( $actions as $action => $value ) {
 												$action_url = add_query_arg( array( 'action' => $action, 'company_id' => $company->ID ) );
 												if ( $value['nonce'] )
-													$action_url = wp_nonce_url( $action_url, 'company_manager_my_company_actions' );
+													$action_url = wp_nonce_url( $action_url, 'company_listings_my_company_actions' );
 												echo '<li><a href="' . $action_url . '" class="company-dashboard-action-' . $action . '">' . $value['label'] . '</a></li>';
 											}
 										?>
@@ -77,7 +77,7 @@ $submit_company_form_page_id = get_option( 'company_manager_submit_company_form_
 									}
 									?>
 								<?php else : ?>
-									<?php do_action( 'company_manager_company_dashboard_column_' . $key, $company ); ?>
+									<?php do_action( 'company_listings_company_dashboard_column_' . $key, $company ); ?>
 								<?php endif; ?>
 							</td>
 						<?php endforeach; ?>
@@ -85,7 +85,7 @@ $submit_company_form_page_id = get_option( 'company_manager_submit_company_form_
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</tbody>
-		<?php if ( $submit_company_form_page_id && ( company_manager_count_user_companies() < $submission_limit || ! $submission_limit ) ) : ?>
+		<?php if ( $submit_company_form_page_id && ( company_listings_count_user_companies() < $submission_limit || ! $submission_limit ) ) : ?>
 			<tfoot>
 				<tr>
 					<td colspan="<?php echo sizeof( $company_dashboard_columns ); ?>">

@@ -1,11 +1,11 @@
 <?php wp_enqueue_script( 'wp-job-manager-company-listings-ajax-filters' ); ?>
 
-<?php do_action( 'company_manager_company_filters_before', $atts ); ?>
+<?php do_action( 'company_listings_company_filters_before', $atts ); ?>
 
 <form class="company_filters">
 
 	<div class="search_companies">
-		<?php do_action( 'company_manager_company_filters_search_companies_start', $atts ); ?>
+		<?php do_action( 'company_listings_company_filters_search_companies_start', $atts ); ?>
 
 		<div class="search_keywords company-filter">
 			<label for="search_keywords"><?php _e( 'Keywords', 'wp-job-manager-company-listings' ); ?></label>
@@ -21,7 +21,7 @@
 			<?php foreach ( $categories as $category ) : ?>
 				<input type="hidden" name="search_categories[]" value="<?php echo sanitize_title( $category ); ?>" />
 			<?php endforeach; ?>
-		<?php elseif ( $show_categories && get_option( 'company_manager_enable_categories' ) && ! is_tax( 'company_category' ) && get_terms( 'company_category' ) ) : ?>
+		<?php elseif ( $show_categories && get_option( 'company_listings_enable_categories' ) && ! is_tax( 'company_category' ) && get_terms( 'company_category' ) ) : ?>
 			<div class="search_categories company-filter">
 				<label for="search_categories"><?php _e( 'Category', 'wp-job-manager-company-listings' ); ?></label>
 				<?php if ( $show_category_multiselect ) : ?>
@@ -32,9 +32,9 @@
 			</div>
 		<?php endif; ?>
 
-		<?php do_action( 'company_manager_company_filters_search_companies_end', $atts ); ?>
+		<?php do_action( 'company_listings_company_filters_search_companies_end', $atts ); ?>
 	</div>
 	<div class="showing_companies"></div>
 </form>
 
-<?php do_action( 'company_manager_company_filters_after', $atts ); ?>
+<?php do_action( 'company_listings_company_filters_after', $atts ); ?>

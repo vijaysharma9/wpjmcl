@@ -15,7 +15,7 @@ foreach ( $custom_fields as $meta_key => $field ) {
 	} else {
 		$message_line = '';
 	}
-	$message[] = apply_filters( 'company_manager_new_company_notification_meta_row', $message_line, $meta_key, $field );
+	$message[] = apply_filters( 'company_listings_new_company_notification_meta_row', $message_line, $meta_key, $field );
 }
 
 // Show Company Content
@@ -58,4 +58,4 @@ if ( $items = get_post_meta( $company_id, '_company_experience', true ) ) {
 $message['view_company_link']       = sprintf( __( 'You can view this company here: %s' ), get_permalink( $company_id ) ) . "\n";
 $message['admin_view_company_link'] = sprintf( __( 'You can view/edit this company in the backend by clicking here: %s' ), admin_url( 'post.php?post=' . $company_id . '&action=edit' ) ) . "\n" . "\n";
 
-echo implode( "", apply_filters( 'company_manager_new_company_notification_meta', $message, $company_id, $company ) );
+echo implode( "", apply_filters( 'company_listings_new_company_notification_meta', $message, $company_id, $company ) );

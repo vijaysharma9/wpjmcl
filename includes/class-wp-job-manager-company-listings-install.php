@@ -21,28 +21,28 @@ class WP_Job_Manager_Company_Listings_Install {
 		$this->cron();
 
 		// Redirect to setup screen for new insalls
-		if ( ! get_option( 'wp_company_manager_version' ) ) {
-			set_transient( '_company_manager_activation_redirect', 1, HOUR_IN_SECONDS );
+		if ( ! get_option( 'wp_company_listings_version' ) ) {
+			set_transient( '_company_listings_activation_redirect', 1, HOUR_IN_SECONDS );
 		}
 
 		// Meta update
-		if ( version_compare( get_option( 'wp_company_manager_version' ), '1.6.1', '<' ) ) {
+		if ( version_compare( get_option( 'wp_company_listings_version' ), '1.6.1', '<' ) ) {
 			$wpdb->query( "INSERT INTO {$wpdb->postmeta}( post_id, meta_key, meta_value ) SELECT DISTINCT ID AS post_id, '_featured' AS meta_key, 0 AS meta_value FROM {$wpdb->posts} WHERE post_type = 'company' AND post_status = 'publish';" );
 		}
 
 		// Update featured posts ordering
-		if ( version_compare( get_option( 'wp_company_manager_version', COMPANY_LISTINGS_VERSION ), '1.12.0', '<' ) ) {
+		if ( version_compare( get_option( 'wp_company_listings_version', COMPANY_LISTINGS_VERSION ), '1.12.0', '<' ) ) {
 			$wpdb->query( "UPDATE {$wpdb->posts} p SET p.menu_order = 0 WHERE p.post_type='company';" );
 			$wpdb->query( "UPDATE {$wpdb->posts} p LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id SET p.menu_order = -1 WHERE pm.meta_key = '_featured' AND pm.meta_value='1' AND p.post_type='company';" );
 		}
 
 		// Update legacy options
-		if ( false === get_option( 'company_manager_submit_company_form_page_id', false ) && get_option( 'company_manager_submit_page_id' ) ) {
-			$page_id = get_option( 'company_manager_submit_page_id' );
-			update_option( 'company_manager_submit_company_form_page_id', $page_id );
+		if ( false === get_option( 'company_listings_submit_company_form_page_id', false ) && get_option( 'company_listings_submit_page_id' ) ) {
+			$page_id = get_option( 'company_listings_submit_page_id' );
+			update_option( 'company_listings_submit_company_form_page_id', $page_id );
 		}
 
-		update_option( 'wp_company_manager_version', COMPANY_LISTINGS_VERSION );
+		update_option( 'wp_company_listings_version', COMPANY_LISTINGS_VERSION );
 	}
 
 	/**
@@ -106,8 +106,8 @@ class WP_Job_Manager_Company_Listings_Install {
 	 * Setup cron jobs
 	 */
 	public function cron() {
-		wp_clear_scheduled_hook( 'company_manager_check_for_expired_companies' );
-		wp_schedule_event( time(), 'hourly', 'company_manager_check_for_expired_companies' );
+		wp_clear_scheduled_hook( 'company_listings_check_for_expired_companies' );
+		wp_schedule_event( time(), 'hourly', 'company_listings_check_for_expired_companies' );
 	}
 }
 

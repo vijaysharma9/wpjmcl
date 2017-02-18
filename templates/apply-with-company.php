@@ -1,6 +1,6 @@
 <?php global $post;
 
-if ( ! get_option( 'company_manager_force_application' ) ) {
+if ( ! get_option( 'company_listings_force_application' ) ) {
 	echo '<hr />';
 }
 
@@ -37,7 +37,7 @@ if ( is_user_logged_in() && sizeof( $companies ) ) : ?>
 		</p>
 	</form>
 <?php else : ?>
-	<form class="apply_with_company" method="post" action="<?php echo get_permalink( get_option( 'company_manager_submit_company_form_page_id' ) ); ?>">
+	<form class="apply_with_company" method="post" action="<?php echo get_permalink( get_option( 'company_listings_submit_company_form_page_id' ) ); ?>">
 		<p><?php _e( 'You can apply to this job and others using your online company. Click the link below to submit your online company and email your application to this employer.', 'wp-job-manager-company-listings' ); ?></p>
 
 		<p>

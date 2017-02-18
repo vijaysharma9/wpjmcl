@@ -16,9 +16,9 @@ wp_enqueue_script( 'wp-job-manager-company-listings-company-submission' );
 
 	<?php endif; ?>
 
-	<?php if ( company_manager_user_can_post_company() ) : ?>
+	<?php if ( company_listings_user_can_post_company() ) : ?>
 
-		<?php if ( get_option( 'company_manager_linkedin_import' ) ) : ?>
+		<?php if ( get_option( 'company_listings_linkedin_import' ) ) : ?>
 
 			<?php get_job_manager_template( 'linkedin-import.php', '', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
@@ -40,7 +40,7 @@ wp_enqueue_script( 'wp-job-manager-company-listings-company-submission' );
 
 		<p>
 			<?php wp_nonce_field( 'submit_form_posted' ); ?>
-			<input type="hidden" name="company_manager_form" value="<?php echo $form; ?>" />
+			<input type="hidden" name="company_listings_form" value="<?php echo $form; ?>" />
 			<input type="hidden" name="company_id" value="<?php echo esc_attr( $company_id ); ?>" />
 			<input type="hidden" name="job_id" value="<?php echo esc_attr( $job_id ); ?>" />
 			<input type="hidden" name="step" value="<?php echo esc_attr( $step ); ?>" />

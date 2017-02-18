@@ -27,7 +27,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 		add_action( 'admin_init', array( $this, 'approve_company' ) );
 		add_action( 'admin_notices', array( $this, 'approved_notice' ) );
 
-		if ( get_option( 'company_manager_enable_categories' ) ) {
+		if ( get_option( 'company_listings_enable_categories' ) ) {
 			add_action( "restrict_manage_posts", array( $this, "companies_by_category" ) );
 		}
 
@@ -247,11 +247,11 @@ class WP_Job_Manager_Company_Listings_CPT {
 		$columns["company_posted"]   = __( "Posted", 'wp-job-manager-company-listings' );
 		$columns["company_expires"]  = __( "Expires", 'wp-job-manager-company-listings' );
 
-		if ( get_option( 'company_manager_enable_skills' ) ) {
+		if ( get_option( 'company_listings_enable_skills' ) ) {
 			$columns["company_skills"] = __( "Skills", 'wp-job-manager-company-listings' );
 		}
 
-		if ( get_option( 'company_manager_enable_categories' ) ) {
+		if ( get_option( 'company_listings_enable_categories' ) ) {
 			$columns["company_category"] = __( "Categories", 'wp-job-manager-company-listings' );
 		}
 
@@ -427,7 +427,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 					);
 				}
 
-				$admin_actions = apply_filters( 'company_manager_admin_actions', $admin_actions, $post );
+				$admin_actions = apply_filters( 'company_listings_admin_actions', $admin_actions, $post );
 
 				foreach ( $admin_actions as $action ) {
 					printf( '<a class="icon-%s button tips" href="%s" data-tip="%s">%s</a>', esc_attr( $action['action'] ), esc_url( $action['url'] ), esc_attr( $action['name'] ), esc_attr( $action['name'] ) );

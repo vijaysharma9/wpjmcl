@@ -12,8 +12,8 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 	 * Constructor
 	 */
 	public function __construct() {
-		if ( get_option( 'company_manager_submission_notification' ) ) {
-			add_action( 'company_manager_company_submitted', array( $this, 'new_company_submitted' ) );
+		if ( get_option( 'company_listings_submission_notification' ) ) {
+			add_action( 'company_listings_company_submitted', array( $this, 'new_company_submitted' ) );
 		}
 	}
 
@@ -25,7 +25,7 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 
 		$custom_fields = array_diff_key( WP_Job_Manager_Company_Listings_Writepanels::company_fields(), array( '_company_file' => '', '_company_expires' => '' ) );
 		$company        = get_post( $company_id );
-		$recipient     = get_option( 'company_manager_email_notifications' );
+		$recipient     = get_option( 'company_listings_email_notifications' );
 		$recipient     = ! empty( $recipient ) ? $recipient : get_option( 'admin_email' );
 		$subject       = sprintf( __( 'New Company Submission From %s', 'wp-job-manager-company-listings' ), $company->post_title );
 		$attachments   = array();
@@ -47,11 +47,11 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 		add_filter( 'wp_mail_from_name', array( __CLASS__, 'get_from_name' ) );
 
 		wp_mail(
-			apply_filters( 'company_manager_new_company_notification_recipient', $recipient, $company_id ),
-			apply_filters( 'company_manager_new_company_notification_subject', $subject, $company_id ),
+			apply_filters( 'company_listings_new_company_notification_recipient', $recipient, $company_id ),
+			apply_filters( 'company_listings_new_company_notification_subject', $subject, $company_id ),
 			$message,
-			apply_filters( 'company_manager_new_company_notification_headers', '', $company_id ),
-			apply_filters( 'company_manager_new_company_notification_attachments', array_filter( $attachments ), $company_id )
+			apply_filters( 'company_listings_new_company_notification_headers', '', $company_id ),
+			apply_filters( 'company_listings_new_company_notification_attachments', array_filter( $attachments ), $company_id )
 		);
 
 		remove_filter( 'wp_mail_from', array( __CLASS__, 'get_from_address' ) );

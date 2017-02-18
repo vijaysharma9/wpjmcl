@@ -5,14 +5,14 @@ if ( $company_preview ) {
 	return;
 }
 
-if ( company_manager_user_can_view_contact_details( $post->ID ) ) :
+if ( company_listings_user_can_view_contact_details( $post->ID ) ) :
 	wp_enqueue_script( 'wp-job-manager-company-listings-company-contact-details' );
 	?>
 	<div class="company_contact">
 		<input class="company_contact_button" type="button" value="<?php _e( 'Contact', 'wp-job-manager-company-listings' ); ?>" />
 
 		<div class="company_contact_details">
-			<?php do_action( 'company_manager_contact_details' ); ?>
+			<?php do_action( 'company_listings_contact_details' ); ?>
 		</div>
 	</div>
 <?php else : ?>

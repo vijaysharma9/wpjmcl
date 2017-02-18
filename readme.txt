@@ -37,7 +37,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 
 = 1.15.1 =
 * Fix - Company download link when previewing.
-* Dev - Moved company_manager_company_submitted to match WPJM core.
+* Dev - Moved company_listings_company_submitted to match WPJM core.
 
 = 1.15.0 =
 * Feature - Force apply with company setting will now force before applications plugin can be used as well.
@@ -49,11 +49,11 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 = 1.14.0 =
 * Feature - UI to allow notifications to different addresses.
 * Fix - Improved company expiry setting and calculation.
-* Tweak - company_manager_default_company_photo filter.
+* Tweak - company_listings_default_company_photo filter.
 
 = 1.13.2 =
 * Fix - Relist compatibility with paid listings.
-* Tweak - company_manager_company_filters_before and after hooks.
+* Tweak - company_listings_company_filters_before and after hooks.
 
 = 1.13.1 =
 * Fix - Add text links.
@@ -65,12 +65,12 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Feature - From address for application set to company email.
 * Feature - Option to hide the full company name based on a new permission.
 * Fix - File handling in repeated fields.
-* Fix - Only show linkedin when company_manager_user_can_post_company.
+* Fix - Only show linkedin when company_listings_user_can_post_company.
 * Fix - Only link to company when published.
 * Tweak - Use repeated-field.php template for links, education and experience.
 * Tweak - Made company dashboard columns customisable.
 * Tweak - Preserve case in new tags.
-* Tweak - Don't attach images to companies. Enabled via filter. company_manager_attach_uploaded_files. False by default.
+* Tweak - Don't attach images to companies. Enabled via filter. company_listings_attach_uploaded_files. False by default.
 
 = 1.12.0 =
 * Feature - Make keyword search also search term names.
@@ -193,7 +193,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 
 = 1.7.2 =
 * Fix - Revised company skills to work when slugs match. e.g. C++ C#, C
-* company_manager_user_can_download_company_file filter
+* company_listings_user_can_download_company_file filter
 
 = 1.7.1 =
 * Fix LinkedIn jquery.

@@ -66,12 +66,12 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		if ( $this->company_id ) {
 			$company_status = get_post_status( $this->company_id );
 			if ( 'expired' === $company_status ) {
-				if ( ! company_manager_user_can_edit_company( $this->company_id ) ) {
+				if ( ! company_listings_user_can_edit_company( $this->company_id ) ) {
 					$this->company_id = 0;
 					$this->job_id    = 0;
 					$this->step      = 0;
 				}
-			} elseif ( 0 === $this->step && ! in_array( $company_status, apply_filters( 'company_manager_valid_submit_company_statuses', array( 'preview' ) ) ) && empty( $_POST['company_application_submit_button'] ) ) {
+			} elseif ( 0 === $this->step && ! in_array( $company_status, apply_filters( 'company_listings_valid_submit_company_statuses', array( 'preview' ) ) ) && empty( $_POST['company_application_submit_button'] ) ) {
 				$this->company_id = 0;
 				$this->job_id    = 0;
 				$this->step      = 0;
@@ -119,7 +119,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		if ( $this->fields ) {
 			return;
 		}
-		if ( $max = get_option( 'company_manager_max_skills' ) ) {
+		if ( $max = get_option( 'company_listings_max_skills' ) ) {
 			$max = ' ' . sprintf( __( 'Maximum of %d.', 'wp-job-manager-company-listings' ), $max );
 		}
 
@@ -301,15 +301,15 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			)
 		) );
 
-		if ( ! get_option( 'company_manager_enable_company_upload' ) ) {
+		if ( ! get_option( 'company_listings_enable_company_upload' ) ) {
 			unset( $this->fields['company_fields']['company_file'] );
 		}
 
-		if ( ! get_option( 'company_manager_enable_categories' ) || wp_count_terms( 'company_category' ) == 0 ) {
+		if ( ! get_option( 'company_listings_enable_categories' ) || wp_count_terms( 'company_category' ) == 0 ) {
 			unset( $this->fields['company_fields']['company_category'] );
 		}
 
-		if ( ! get_option( 'company_manager_enable_skills' ) ) {
+		if ( ! get_option( 'company_listings_enable_skills' ) ) {
 			unset( $this->fields['company_fields']['company_skills'] );
 		}
 	}
@@ -441,7 +441,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					} else {
 						$raw_skills = $values[ $group_key ][ $key ];
 					}
-					$max = get_option( 'company_manager_max_skills' );
+					$max = get_option( 'company_listings_max_skills' );
 
 					if ( $max && sizeof( $raw_skills ) > $max ) {
 						return new WP_Error( 'validation-error', sprintf( __( 'Please enter no more than %d skills.', 'wp-job-manager-company-listings' ), $max ) );
@@ -555,9 +555,9 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			if ( ! is_user_logged_in() ) {
 				$create_account = false;
 
-				if ( company_manager_enable_registration() ) {
-					if ( company_manager_user_requires_account() ) {
-						if ( ! company_manager_generate_username_from_email() && empty( $_POST['create_account_username'] ) ) {
+				if ( company_listings_enable_registration() ) {
+					if ( company_listings_user_requires_account() ) {
+						if ( ! company_listings_generate_username_from_email() && empty( $_POST['create_account_username'] ) ) {
 							throw new Exception( __( 'Please enter a username.', 'wp-job-manager-company-listings' ) );
 						}
 						if ( empty( $_POST['company_email'] ) ) {
@@ -566,12 +566,12 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					}
 					if ( ! empty( $_POST['company_email'] ) ) {
 						if ( version_compare( JOB_MANAGER_VERSION, '1.20.0', '<' ) ) {
-							$create_account = wp_job_manager_create_account( $_POST['company_email'], get_option( 'company_manager_registration_role', 'company' ) );
+							$create_account = wp_job_manager_create_account( $_POST['company_email'], get_option( 'company_listings_registration_role', 'company' ) );
 						} else {
 							$create_account = wp_job_manager_create_account( array(
 								'username' => empty( $_POST['create_account_username'] ) ? '' : $_POST['create_account_username'],
 								'email'    => $_POST['company_email'],
-								'role'     => get_option( 'company_manager_registration_role', 'company' )
+								'role'     => get_option( 'company_listings_registration_role', 'company' )
 							) );
 						}
 					}
@@ -582,7 +582,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 				}
 			}
 
-			if ( company_manager_user_requires_account() && ! is_user_logged_in() ) {
+			if ( company_listings_user_requires_account() && ! is_user_logged_in() ) {
 				throw new Exception( __( 'You must be signed in to post your company.', 'wp-job-manager-company-listings' ) );
 			}
 
@@ -710,7 +710,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			}
 		}
 
-		if ( get_option( 'company_manager_enable_skills' ) && isset( $values['company_fields']['company_skills'] ) ) {
+		if ( get_option( 'company_listings_enable_skills' ) && isset( $values['company_fields']['company_skills'] ) ) {
 
 			$tags     = array();
 			$raw_tags = $values['company_fields']['company_skills'];
@@ -740,7 +740,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		}
 
 		// Handle attachments
-		if ( sizeof( $maybe_attach ) && apply_filters( 'company_manager_attach_uploaded_files', false ) ) {
+		if ( sizeof( $maybe_attach ) && apply_filters( 'company_listings_attach_uploaded_files', false ) ) {
 			/** WordPress Administration Image API */
 			include_once( ABSPATH . 'wp-admin/includes/image.php' );
 
@@ -776,7 +776,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			}
 		}
 
-		do_action( 'company_manager_update_company_data', $this->company_id, $values );
+		do_action( 'company_listings_update_company_data', $this->company_id, $values );
 	}
 
 	/**
@@ -800,7 +800,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					<input type="hidden" name="company_id" value="<?php echo esc_attr( $this->company_id ); ?>" />
 					<input type="hidden" name="job_id" value="<?php echo esc_attr( $this->job_id ); ?>" />
 					<input type="hidden" name="step" value="<?php echo esc_attr( $this->step ); ?>" />
-					<input type="hidden" name="company_manager_form" value="<?php echo $this->form_name; ?>" />
+					<input type="hidden" name="company_listings_form" value="<?php echo $this->form_name; ?>" />
 					<h2>
 						<?php _e( 'Preview', 'wp-job-manager-company-listings' ); ?>
 					</h2>
@@ -843,7 +843,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 				$update_company['post_date']     = current_time( 'mysql' );
 				$update_company['post_date_gmt'] = current_time( 'mysql', 1 );
 				$update_company['post_author']   = get_current_user_id();
-				$update_company['post_status']   = apply_filters( 'submit_company_post_status', get_option( 'company_manager_submission_requires_approval' ) ? 'pending' : 'publish', $company );
+				$update_company['post_status']   = apply_filters( 'submit_company_post_status', get_option( 'company_listings_submission_requires_approval' ) ? 'pending' : 'publish', $company );
 
 				wp_update_post( $update_company );
 			}
@@ -858,7 +858,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 * Done Step
 	 */
 	public function done() {
-		do_action( 'company_manager_company_submitted', $this->company_id );
+		do_action( 'company_listings_company_submitted', $this->company_id );
 		get_job_manager_template( 'company-submitted.php', array( 'company' => get_post( $this->company_id ), 'job_id' => $this->job_id ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 
 		// Allow application

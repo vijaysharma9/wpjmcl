@@ -41,7 +41,7 @@ jQuery( document ).ready( function ( $ ) {
 				location = $location.val();
 
 			var data = {
-				action: 			'company_manager_get_companies',
+				action: 			'company_listings_get_companies',
 				search_keywords: 	keywords,
 				search_location: 	location,
 				search_categories:  categories,
@@ -57,7 +57,7 @@ jQuery( document ).ready( function ( $ ) {
 		} else {
 
 			var data = {
-				action: 			'company_manager_get_companies',
+				action: 			'company_listings_get_companies',
 				search_categories:  target.data('categories').split(','),
                 		search_keywords: target.data('keywords'),
 		                search_location: target.data('location'),
@@ -73,7 +73,7 @@ jQuery( document ).ready( function ( $ ) {
 
 		xhr[index] = $.ajax( {
 			type: 		'POST',
-			url: 		company_manager_ajax_filters.ajax_url,
+			url: 		company_listings_ajax_filters.ajax_url,
 			data: 		data,
 			success: 	function( response ) {
 				if ( response ) {

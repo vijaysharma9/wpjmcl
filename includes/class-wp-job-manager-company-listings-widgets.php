@@ -60,7 +60,7 @@ class WP_Job_Manager_Company_Listings_Widget_Recent_Company extends WP_Job_Manag
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		if ( ! company_manager_user_can_browse_companies() ) {
+		if ( ! company_listings_user_can_browse_companies() ) {
 			return;
 		}
 
@@ -158,7 +158,7 @@ class WP_Job_Manager_Company_Listings_Widget_Featured_Company extends WP_Job_Man
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		if ( ! company_manager_user_can_browse_companies() ) {
+		if ( ! company_listings_user_can_browse_companies() ) {
 			return;
 		}
 

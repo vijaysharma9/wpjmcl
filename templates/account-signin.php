@@ -14,9 +14,9 @@
 
 <?php else :
 
-	$account_required             = company_manager_user_requires_account();
-	$registration_enabled         = company_manager_enable_registration();
-	$generate_username_from_email = company_manager_generate_username_from_email();
+	$account_required             = company_listings_user_requires_account();
+	$registration_enabled         = company_listings_enable_registration();
+	$generate_username_from_email = company_listings_generate_username_from_email();
 	?>
 	<fieldset>
 		<label><?php _e( 'Have an account?', 'wp-job-manager-company-listings' ); ?></label>
@@ -43,7 +43,7 @@
 				</div>
 			</fieldset>
 		<?php endif; ?>
-		<?php do_action( 'company_manager_register_form' ); ?>
+		<?php do_action( 'company_listings_register_form' ); ?>
 	<?php endif; ?>
 
 <?php endif; ?>

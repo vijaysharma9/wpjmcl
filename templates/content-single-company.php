@@ -1,4 +1,4 @@
-<?php if ( company_manager_user_can_view_company( $post->ID ) ) : ?>
+<?php if ( company_listings_user_can_view_company( $post->ID ) ) : ?>
 	<div class="single-company-content">
 
 		<?php do_action( 'single_company_start' ); ?>
@@ -18,14 +18,14 @@
 
 		<?php if ( ( $skills = wp_get_object_terms( $post->ID, 'company_skill', array( 'fields' => 'names' ) ) ) && is_array( $skills ) ) : ?>
 			<h2><?php _e( 'Skills', 'wp-job-manager-company-listings' ); ?></h2>
-			<ul class="company-manager-skills">
+			<ul class="company-listings-skills">
 				<?php echo '<li>' . implode( '</li><li>', $skills ) . '</li>'; ?>
 			</ul>
 		<?php endif; ?>
 
 		<?php if ( $items = get_post_meta( $post->ID, '_company_education', true ) ) : ?>
 			<h2><?php _e( 'Education', 'wp-job-manager-company-listings' ); ?></h2>
-			<dl class="company-manager-education">
+			<dl class="company-listings-education">
 			<?php
 				foreach( $items as $item ) : ?>
 
@@ -44,7 +44,7 @@
 
 		<?php if ( $items = get_post_meta( $post->ID, '_company_experience', true ) ) : ?>
 			<h2><?php _e( 'Experience', 'wp-job-manager-company-listings' ); ?></h2>
-			<dl class="company-manager-experience">
+			<dl class="company-listings-experience">
 			<?php
 				foreach( $items as $item ) : ?>
 

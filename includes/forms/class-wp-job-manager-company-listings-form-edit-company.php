@@ -28,7 +28,7 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 	public function __construct() {
 		$this->company_id = ! empty( $_REQUEST['company_id'] ) ? absint( $_REQUEST[ 'company_id' ] ) : 0;
 
-		if  ( ! company_manager_user_can_edit_company( $this->company_id ) ) {
+		if  ( ! company_listings_user_can_edit_company( $this->company_id ) ) {
 			$this->company_id = 0;
 		}
 	}

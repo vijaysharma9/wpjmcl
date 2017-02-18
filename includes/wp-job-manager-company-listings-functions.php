@@ -7,7 +7,7 @@ if ( ! function_exists( 'get_companies' ) ) :
  * @return void
  */
 function get_companies( $args = array() ) {
-	global $wpdb, $company_manager_keyword;
+	global $wpdb, $company_listings_keyword;
 
 	$args = wp_parse_args( $args, array(
 		'search_location'   => '',
@@ -64,7 +64,7 @@ function get_companies( $args = array() ) {
 
 	if ( ! empty( $args['search_categories'] ) ) {
 		$field    = is_numeric( $args['search_categories'][0] ) ? 'term_id' : 'slug';
-		$operator = 'all' === get_option( 'company_manager_category_filter_type', 'all' ) && sizeof( $args['search_categories'] ) > 1 ? 'AND' : 'IN';
+		$operator = 'all' === get_option( 'company_listings_category_filter_type', 'all' ) && sizeof( $args['search_categories'] ) > 1 ? 'AND' : 'IN';
 		$query_args['tax_query'][] = array(
 			'taxonomy'         => 'company_category',
 			'field'            => $field,
@@ -81,12 +81,12 @@ function get_companies( $args = array() ) {
 		);
 	}
 
-	if ( $company_manager_keyword = sanitize_text_field( $args['search_keywords'] ) ) {
-		$query_args['_keyword'] = $company_manager_keyword; // Does nothing but needed for unique hash
+	if ( $company_listings_keyword = sanitize_text_field( $args['search_keywords'] ) ) {
+		$query_args['_keyword'] = $company_listings_keyword; // Does nothing but needed for unique hash
 		add_filter( 'posts_clauses', 'get_companies_keyword_search' );
 	}
 
-	$query_args = apply_filters( 'company_manager_get_companies', $query_args, $args );
+	$query_args = apply_filters( 'company_listings_get_companies', $query_args, $args );
 
 	if ( empty( $query_args['meta_query'] ) ) {
 		unset( $query_args['meta_query'] );
@@ -126,18 +126,18 @@ if ( ! function_exists( 'get_companies_keyword_search' ) ) :
 	 * @return array
 	 */
 	function get_companies_keyword_search( $args ) {
-		global $wpdb, $company_manager_keyword;
+		global $wpdb, $company_listings_keyword;
 
 		// Meta searching - Query matching ids to avoid more joins
-		$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value LIKE '" . esc_sql( $company_manager_keyword ) . "%'" );
+		$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value LIKE '" . esc_sql( $company_listings_keyword ) . "%'" );
 
 		// Term searching
-		$post_ids = array_merge( $post_ids, $wpdb->get_col( "SELECT object_id FROM {$wpdb->term_relationships} AS tr LEFT JOIN {$wpdb->terms} AS t ON tr.term_taxonomy_id = t.term_id WHERE t.name LIKE '" . esc_sql( $company_manager_keyword ) . "%'" ) );
+		$post_ids = array_merge( $post_ids, $wpdb->get_col( "SELECT object_id FROM {$wpdb->term_relationships} AS tr LEFT JOIN {$wpdb->terms} AS t ON tr.term_taxonomy_id = t.term_id WHERE t.name LIKE '" . esc_sql( $company_listings_keyword ) . "%'" ) );
 
 		// Title and content searching
 		$conditions = array();
-		$conditions[] = "{$wpdb->posts}.post_title LIKE '%" . esc_sql( $company_manager_keyword ) . "%'";
-		$conditions[] = "{$wpdb->posts}.post_content RLIKE '[[:<:]]" . esc_sql( $company_manager_keyword ) . "[[:>:]]'";
+		$conditions[] = "{$wpdb->posts}.post_title LIKE '%" . esc_sql( $company_listings_keyword ) . "%'";
+		$conditions[] = "{$wpdb->posts}.post_content RLIKE '[[:<:]]" . esc_sql( $company_listings_keyword ) . "[[:>:]]'";
 
 		if ( $post_ids ) {
 			$conditions[] = "{$wpdb->posts}.ID IN (" . esc_sql( implode( ',', array_unique( $post_ids ) ) ) . ")";
@@ -191,7 +191,7 @@ if ( ! function_exists( 'get_company_categories' ) ) :
  * @return array
  */
 function get_company_categories() {
-	if ( ! get_option( 'company_manager_enable_categories' ) ) {
+	if ( ! get_option( 'company_listings_enable_categories' ) ) {
 		return array();
 	}
 
@@ -203,13 +203,13 @@ function get_company_categories() {
 }
 endif;
 
-if ( ! function_exists( 'company_manager_get_filtered_links' ) ) :
+if ( ! function_exists( 'company_listings_get_filtered_links' ) ) :
 /**
  * Shows links after filtering companies
  */
-function company_manager_get_filtered_links( $args = array() ) {
+function company_listings_get_filtered_links( $args = array() ) {
 
-	$links = apply_filters( 'company_manager_company_filters_showing_companies_links', array(
+	$links = apply_filters( 'company_listings_company_filters_showing_companies_links', array(
 		'reset' => array(
 			'name' => __( 'Reset', 'wp-job-manager-company-listings' ),
 			'url'  => '#'
@@ -231,7 +231,7 @@ endif;
  *
  * @return bool
  */
-function company_manager_user_can_edit_company( $company_id ) {
+function company_listings_user_can_edit_company( $company_id ) {
 	$can_edit = true;
 	$company   = get_post( $company_id );
 
@@ -241,7 +241,7 @@ function company_manager_user_can_edit_company( $company_id ) {
 		$can_edit = false;
 	}
 
-	return apply_filters( 'company_manager_user_can_edit_company', $can_edit, $company_id );
+	return apply_filters( 'company_listings_user_can_edit_company', $can_edit, $company_id );
 }
 
 /**
@@ -249,9 +249,9 @@ function company_manager_user_can_edit_company( $company_id ) {
  *
  * @return bool
  */
-function company_manager_user_can_browse_companies() {
+function company_listings_user_can_browse_companies() {
 	$can_browse = true;
-	$caps       = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_manager_browse_company_capability' ) ) ) ) );
+	$caps       = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_listings_browse_company_capability' ) ) ) ) );
 
 	if ( $caps ) {
 		$can_browse = false;
@@ -263,7 +263,7 @@ function company_manager_user_can_browse_companies() {
 		}
 	}
 
-	return apply_filters( 'company_manager_user_can_browse_companies', $can_browse );
+	return apply_filters( 'company_listings_user_can_browse_companies', $can_browse );
 }
 
 /**
@@ -271,10 +271,10 @@ function company_manager_user_can_browse_companies() {
  *
  * @return bool
  */
-function company_manager_user_can_view_company_name( $company_id ) {
+function company_listings_user_can_view_company_name( $company_id ) {
 	$can_view = true;
 	$company   = get_post( $company_id );
-	$caps     = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_manager_view_name_capability' ) ) ) ) );
+	$caps     = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_listings_view_name_capability' ) ) ) ) );
 
 	// Allow previews
 	if ( $company->post_status === 'preview' ) {
@@ -299,7 +299,7 @@ function company_manager_user_can_view_company_name( $company_id ) {
 		$can_view = true;
 	}
 
-	return apply_filters( 'company_manager_user_can_view_company_name', $can_view );
+	return apply_filters( 'company_listings_user_can_view_company_name', $can_view );
 }
 
 
@@ -308,7 +308,7 @@ function company_manager_user_can_view_company_name( $company_id ) {
  *
  * @return bool
  */
-function company_manager_user_can_view_company( $company_id ) {
+function company_listings_user_can_view_company( $company_id ) {
 	$can_view = true;
 	$company   = get_post( $company_id );
 
@@ -317,7 +317,7 @@ function company_manager_user_can_view_company( $company_id ) {
 		return true;
 	}
 
-	$caps = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_manager_view_company_capability' ) ) ) ) );
+	$caps = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_listings_view_company_capability' ) ) ) ) );
 
 	if ( $caps ) {
 		$can_view = false;
@@ -341,7 +341,7 @@ function company_manager_user_can_view_company( $company_id ) {
 		$can_view = true;
 	}
 
-	return apply_filters( 'company_manager_user_can_view_company', $can_view, $company_id );
+	return apply_filters( 'company_listings_user_can_view_company', $can_view, $company_id );
 }
 
 /**
@@ -349,10 +349,10 @@ function company_manager_user_can_view_company( $company_id ) {
  *
  * @return bool
  */
-function company_manager_user_can_view_contact_details( $company_id ) {
+function company_listings_user_can_view_contact_details( $company_id ) {
 	$can_view = true;
 	$company   = get_post( $company_id );
-	$caps     = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_manager_contact_company_capability' ) ) ) ) );
+	$caps     = array_filter( array_map( 'trim', array_map( 'strtolower', explode( ',', get_option( 'company_listings_contact_company_capability' ) ) ) ) );
 
 	if ( $caps ) {
 		$can_view = false;
@@ -372,7 +372,7 @@ function company_manager_user_can_view_contact_details( $company_id ) {
 		$can_view = true;
 	}
 
-	return apply_filters( 'company_manager_user_can_view_contact_details', $can_view, $company_id );
+	return apply_filters( 'company_listings_user_can_view_contact_details', $can_view, $company_id );
 }
 
 if ( ! function_exists( 'get_company_post_statuses' ) ) :
@@ -398,20 +398,20 @@ endif;
 /**
  * Upload dir
  */
-function company_manager_upload_dir( $dir, $field ) {
+function company_listings_upload_dir( $dir, $field ) {
 	if ( 'company_file' === $field ) {
 		$dir = 'companies/company_files';
 	}
 	return $dir;
 }
-add_filter( 'job_manager_upload_dir', 'company_manager_upload_dir', 10, 2 );
+add_filter( 'job_manager_upload_dir', 'company_listings_upload_dir', 10, 2 );
 
 /**
  * Count user companies
  * @param  integer $user_id
  * @return int
  */
-function company_manager_count_user_companies( $user_id = 0 ) {
+function company_listings_count_user_companies( $user_id = 0 ) {
 	global $wpdb;
 
 	if ( ! $user_id ) {
@@ -426,8 +426,8 @@ function company_manager_count_user_companies( $user_id = 0 ) {
  * @param  string $page e.g. company_dashboard, submit_company_form, companies
  * @return string|bool
  */
-function company_manager_get_permalink( $page ) {
-	$page_id = get_option( 'company_manager_' . $page . '_page_id', false );
+function company_listings_get_permalink( $page ) {
+	$page_id = get_option( 'company_listings_' . $page . '_page_id', false );
 	if ( $page_id ) {
 		return get_permalink( $page_id );
 	} else {
@@ -446,7 +446,7 @@ function calculate_company_expiry( $company_id ) {
 
 	// ...otherwise use the global option
 	if ( ! $duration ) {
-		$duration = absint( get_option( 'company_manager_submission_duration' ) );
+		$duration = absint( get_option( 'company_listings_submission_duration' ) );
 	}
 
 	if ( $duration ) {
