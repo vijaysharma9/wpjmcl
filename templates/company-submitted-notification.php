@@ -18,7 +18,7 @@ foreach ( $custom_fields as $meta_key => $field ) {
 	$message[] = apply_filters( 'company_manager_new_company_notification_meta_row', $message_line, $meta_key, $field );
 }
 
-// Show Resume Content
+// Show Company Content
 $message['content_intro'] = "\n" . __( 'The content of their company is as follows:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 $message['content']       = strip_tags( $company->post_content ) . "\n" . "\n" . '-----------' . "\n" . "\n";
 

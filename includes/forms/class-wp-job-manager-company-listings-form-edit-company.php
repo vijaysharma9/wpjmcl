@@ -116,7 +116,7 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 			$this->update_company_data( $values );
 
 			// Successful
-			echo '<div class="job-manager-message">' . __( 'Your changes have been saved.', 'wp-job-manager-company-listings' ), ' <a href="' . get_permalink( $this->company_id ) . '">' . __( 'View Resume &rarr;', 'wp-job-manager-company-listings' ) . '</a>' . '</div>';
+			echo '<div class="job-manager-message">' . __( 'Your changes have been saved.', 'wp-job-manager-company-listings' ), ' <a href="' . get_permalink( $this->company_id ) . '">' . __( 'View Company &rarr;', 'wp-job-manager-company-listings' ) . '</a>' . '</div>';
 
 		} catch ( Exception $e ) {
 			echo '<div class="job-manager-error">' . $e->getMessage() . '</div>';

@@ -71,9 +71,9 @@ class WP_Job_Manager_Company_Listings {
 	public function version_check() {
 		$required_jm_version      = '1.22.0';
 		if ( ! defined( 'JOB_MANAGER_VERSION' ) ) {
-			?><div class="error"><p><?php _e( 'Resume Manager requires WP Job Manager to be installed!', 'wp-job-manager-applications' ); ?></p></div><?php
+			?><div class="error"><p><?php _e( 'Company Manager requires WP Job Manager to be installed!', 'wp-job-manager-applications' ); ?></p></div><?php
 		} elseif ( version_compare( JOB_MANAGER_VERSION, $required_jm_version, '<' ) ) {
-			?><div class="error"><p><?php printf( __( 'Resume Manager requires WP Job Manager %s (you are using %s)', 'wp-job-manager-applications' ), $required_jm_version, JOB_MANAGER_VERSION ); ?></p></div><?php
+			?><div class="error"><p><?php printf( __( 'Company Manager requires WP Job Manager %s (you are using %s)', 'wp-job-manager-applications' ), $required_jm_version, JOB_MANAGER_VERSION ); ?></p></div><?php
 		}
 	}
 

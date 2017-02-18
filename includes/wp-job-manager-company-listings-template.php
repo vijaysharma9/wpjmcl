@@ -6,7 +6,7 @@
  *
  * @author 		Mike Jolley
  * @category 	Core
- * @package 	Resume Manager/Template
+ * @package 	Company Manager/Template
  * @version     1.0.0
  */
 

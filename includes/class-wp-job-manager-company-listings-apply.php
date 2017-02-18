@@ -55,7 +55,7 @@ class WP_Job_Manager_Company_Listings_Apply {
 	}
 
 	/**
-	 * Resume form intro
+	 * Company form intro
 	 */
 	public function company_form_intro() {
 		if ( ! empty( $_REQUEST['job_id'] ) ) {

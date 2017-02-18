@@ -80,12 +80,12 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		 * Taxonomies
 		 */
 		if ( get_option( 'company_manager_enable_categories' ) ) {
-			$singular  = __( 'Resume Category', 'wp-job-manager-company-listings' );
-			$plural    = __( 'Resume Categories', 'wp-job-manager-company-listings' );
+			$singular  = __( 'Company Category', 'wp-job-manager-company-listings' );
+			$plural    = __( 'Company Categories', 'wp-job-manager-company-listings' );
 
 			if ( current_theme_supports( 'company-manager-templates' ) ) {
 				$rewrite     = array(
-					'slug'         => _x( 'company-category', 'Resume category slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
+					'slug'         => _x( 'company-category', 'Company category slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 					'with_front'   => false,
 					'hierarchical' => false
 				);
@@ -130,7 +130,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 
 			if ( current_theme_supports( 'company-manager-templates' ) ) {
 				$rewrite     = array(
-					'slug'         => _x( 'company-skill', 'Resume skill slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
+					'slug'         => _x( 'company-skill', 'Company skill slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 					'with_front'   => false,
 					'hierarchical' => false
 				);
@@ -172,7 +172,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	    /**
 		 * Post types
 		 */
-		$singular  = __( 'Resume', 'wp-job-manager-company-listings' );
+		$singular  = __( 'Company', 'wp-job-manager-company-listings' );
 		$plural    = __( 'Companies', 'wp-job-manager-company-listings' );
 
 		if ( current_theme_supports( 'company-manager-templates' ) ) {
@@ -182,7 +182,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		}
 
 		$rewrite     = array(
-			'slug'       => _x( 'companies', 'Resume permalink - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
+			'slug'       => _x( 'companies', 'Company permalink - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 			'with_front' => false,
 			'feeds'      => false,
 			'pages'      => false

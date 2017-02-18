@@ -19,7 +19,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Resume fields
+	 * Company fields
 	 *
 	 * @return array
 	 */
@@ -51,7 +51,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				'type'        => 'text'
 			),
 			'_company_file' => array(
-				'label'       => __( 'Resume File', 'wp-job-manager-company-listings' ),
+				'label'       => __( 'Company File', 'wp-job-manager-company-listings' ),
 				'placeholder' => __( 'URL to the company\'s company file', 'wp-job-manager-company-listings' ),
 				'type'        => 'file'
 			),
@@ -60,7 +60,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				'type'  => 'author'
 			),
 			'_featured' => array(
-				'label' => __( 'Feature this Resume?', 'wp-job-manager-company-listings' ),
+				'label' => __( 'Feature this Company?', 'wp-job-manager-company-listings' ),
 				'type'  => 'checkbox',
 				'description' => __( 'Featured companies will be sticky during searches, and can be styled differently.', 'wp-job-manager-company-listings' )
 			),
@@ -88,7 +88,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Resume data
+	 * Company data
 	 *
 	 * @param mixed $post
 	 */
@@ -187,7 +187,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Resume fields
+	 * Company fields
 	 * @return array
 	 */
 	public static function company_links_fields() {
@@ -210,7 +210,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Resume fields
+	 * Company fields
 	 * @return array
 	 */
 	public static function company_education_fields() {
@@ -245,7 +245,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Resume fields
+	 * Company fields
 	 * @return array
 	 */
 	public static function company_experience_fields() {
@@ -280,7 +280,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Resume URL data
+	 * Company URL data
 	 * @param mixed $post
 	 */
 	public function url_data( $post ) {
@@ -290,7 +290,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Resume Education data
+	 * Company Education data
 	 *
 	 * @param mixed $post
 	 */
@@ -300,7 +300,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Resume Education data
+	 * Company Education data
 	 *
 	 * @param mixed $post
 	 */
@@ -328,7 +328,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Save Resume Meta
+	 * Save Company Meta
 	 *
 	 * @param mixed $post_id
 	 * @param mixed $post

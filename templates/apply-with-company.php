@@ -41,7 +41,7 @@ if ( is_user_logged_in() && sizeof( $companies ) ) : ?>
 		<p><?php _e( 'You can apply to this job and others using your online company. Click the link below to submit your online company and email your application to this employer.', 'wp-job-manager-company-listings' ); ?></p>
 
 		<p>
-			<input type="submit" name="wp_job_manager_companies_apply_with_company_create" value="<?php esc_attr_e( 'Submit Resume &amp; Apply', 'wp-job-manager-company-listings' ); ?>" />
+			<input type="submit" name="wp_job_manager_companies_apply_with_company_create" value="<?php esc_attr_e( 'Submit Company &amp; Apply', 'wp-job-manager-company-listings' ); ?>" />
 			<input type="hidden" name="job_id" value="<?php echo absint( $post->ID ); ?>" />
 		</p>
 	</form>

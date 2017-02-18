@@ -89,7 +89,7 @@ $submit_company_form_page_id = get_option( 'company_manager_submit_company_form_
 			<tfoot>
 				<tr>
 					<td colspan="<?php echo sizeof( $company_dashboard_columns ); ?>">
-						<a href="<?php echo esc_url( get_permalink( $submit_company_form_page_id ) ); ?>"><?php _e( 'Add Resume', 'wp-job-manager-company-listings' ); ?></a>
+						<a href="<?php echo esc_url( get_permalink( $submit_company_form_page_id ) ); ?>"><?php _e( 'Add Company', 'wp-job-manager-company-listings' ); ?></a>
 					</td>
 				</tr>
 			</tfoot>

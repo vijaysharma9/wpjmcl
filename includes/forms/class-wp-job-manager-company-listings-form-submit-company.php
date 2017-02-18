@@ -175,7 +175,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'placeholder' => __( 'A link to a video about yourself', 'wp-job-manager-company-listings' ),
 				),
 				'company_category' => array(
-					'label'       => __( 'Resume category', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Company category', 'wp-job-manager-company-listings' ),
 					'type'        => 'term-multiselect',
 					'taxonomy'    => 'company_category',
 					'required'    => true,
@@ -183,7 +183,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'priority'    => 7
 				),
 				'company_content' => array(
-					'label'       => __( 'Resume Content', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Company Content', 'wp-job-manager-company-listings' ),
 					'type'        => 'wp-editor',
 					'required'    => true,
 					'placeholder' => '',
@@ -290,7 +290,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					)
 				),
 				'company_file' => array(
-					'label'       => __( 'Resume file', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Company file', 'wp-job-manager-company-listings' ),
 					'type'        => 'file',
 					'required'    => false,
 					'ajax'        => true,
@@ -795,7 +795,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			?>
 			<form method="post" id="company_preview">
 				<div class="company_preview_title">
-					<input type="submit" name="continue" id="company_preview_submit_button" class="button" value="<?php echo apply_filters( 'submit_company_step_preview_submit_text', __( 'Submit Resume &rarr;', 'wp-job-manager-company-listings' ) ); ?>" />
+					<input type="submit" name="continue" id="company_preview_submit_button" class="button" value="<?php echo apply_filters( 'submit_company_step_preview_submit_text', __( 'Submit Company &rarr;', 'wp-job-manager-company-listings' ) ); ?>" />
 					<input type="submit" name="edit_company" class="button" value="<?php _e( '&larr; Edit company', 'wp-job-manager-company-listings' ); ?>" />
 					<input type="hidden" name="company_id" value="<?php echo esc_attr( $this->company_id ); ?>" />
 					<input type="hidden" name="job_id" value="<?php echo esc_attr( $this->job_id ); ?>" />

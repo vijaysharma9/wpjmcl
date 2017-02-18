@@ -212,17 +212,17 @@ class WP_Job_Manager_Company_Listings_CPT {
 
 		$messages['company'] = array(
 			0 => '',
-			1 => sprintf( __( 'Resume updated. <a href="%s">View Resume</a>', 'wp-job-manager-company-listings' ), esc_url( get_permalink( $post_ID ) ) ),
+			1 => sprintf( __( 'Company updated. <a href="%s">View Company</a>', 'wp-job-manager-company-listings' ), esc_url( get_permalink( $post_ID ) ) ),
 			2 => __( 'Custom field updated.', 'wp-job-manager-company-listings' ),
 			3 => __( 'Custom field deleted.', 'wp-job-manager-company-listings' ),
-			4 => __( 'Resume updated.', 'wp-job-manager-company-listings' ),
-			5 => isset( $_GET['revision'] ) ? sprintf( __( 'Resume restored to revision from %s', 'wp-job-manager-company-listings' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6 => sprintf( __( 'Resume published. <a href="%s">View Resume</a>', 'wp-job-manager-company-listings' ), esc_url( get_permalink( $post_ID ) ) ),
-			7 => __('Resume saved.', 'wp-job-manager-company-listings'),
-			8 => sprintf( __( 'Resume submitted. <a target="_blank" href="%s">Preview Resume</a>', 'wp-job-manager-company-listings' ), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
-			9 => sprintf( __( 'Resume scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Resume</a>', 'wp-job-manager-company-listings' ),
+			4 => __( 'Company updated.', 'wp-job-manager-company-listings' ),
+			5 => isset( $_GET['revision'] ) ? sprintf( __( 'Company restored to revision from %s', 'wp-job-manager-company-listings' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6 => sprintf( __( 'Company published. <a href="%s">View Company</a>', 'wp-job-manager-company-listings' ), esc_url( get_permalink( $post_ID ) ) ),
+			7 => __('Company saved.', 'wp-job-manager-company-listings'),
+			8 => sprintf( __( 'Company submitted. <a target="_blank" href="%s">Preview Company</a>', 'wp-job-manager-company-listings' ), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+			9 => sprintf( __( 'Company scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Company</a>', 'wp-job-manager-company-listings' ),
 			  date_i18n( __( 'M j, Y @ G:i', 'wp-job-manager-company-listings' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
-			10 => sprintf( __( 'Resume draft updated. <a target="_blank" href="%s">Preview Resume</a>', 'wp-job-manager-company-listings' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+			10 => sprintf( __( 'Company draft updated. <a target="_blank" href="%s">Preview Company</a>', 'wp-job-manager-company-listings' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
 		);
 		return $messages;
 	}
@@ -358,7 +358,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 
 		switch ( $column ) {
 			case "company" :
-				echo '<a href="' . admin_url('post.php?post=' . $post->ID . '&action=edit') . '" class="tips company_name" data-tip="' . sprintf( __( 'Resume ID: %d', 'wp-job-manager-company-listings' ), $post->ID ) . '">' . $post->post_title . '</a>';
+				echo '<a href="' . admin_url('post.php?post=' . $post->ID . '&action=edit') . '" class="tips company_name" data-tip="' . sprintf( __( 'Company ID: %d', 'wp-job-manager-company-listings' ), $post->ID ) . '">' . $post->post_title . '</a>';
 				echo '<div class="company_title">';
 				the_company_metatitle();
 				echo '</div>';

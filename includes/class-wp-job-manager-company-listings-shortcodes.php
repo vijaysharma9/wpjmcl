@@ -73,7 +73,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 				// Check ownership
 				if ( ! $company || $company->post_author != get_current_user_id() )
-					throw new Exception( __( 'Invalid Resume ID', 'wp-job-manager-company-listings' ) );
+					throw new Exception( __( 'Invalid Company ID', 'wp-job-manager-company-listings' ) );
 
 				switch ( $action ) {
 					case 'delete' :

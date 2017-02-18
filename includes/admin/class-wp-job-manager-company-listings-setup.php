@@ -125,7 +125,7 @@ class WP_Job_Manager_Company_Listings_Setup {
 		}
 		?>
 		<div class="wrap wp_job_manager wp_job_manager_addons_wrap">
-			<h2><?php _e( 'Resume Manager Setup', 'wp-job-manager-company-listings' ); ?></h2>
+			<h2><?php _e( 'Company Manager Setup', 'wp-job-manager-company-listings' ); ?></h2>
 
 			<ul class="wp-job-manager-company-listings-setup-steps">
 				<li class="<?php if ( $step === 1 ) echo 'wp-job-manager-company-listings-setup-active-step'; ?>"><?php _e( '1. Introduction', 'wp-job-manager-company-listings' ); ?></li>
@@ -137,7 +137,7 @@ class WP_Job_Manager_Company_Listings_Setup {
 
 				<h3><?php _e( 'Setup Wizard Introduction', 'wp-job-manager-company-listings' ); ?></h3>
 
-				<p><?php _e( 'Thanks for installing <em>Resume Manager</em>!', 'wp-job-manager-company-listings' ); ?></p>
+				<p><?php _e( 'Thanks for installing <em>Company Manager</em>!', 'wp-job-manager-company-listings' ); ?></p>
 				<p><?php _e( 'This setup wizard will help you get started by creating the pages for company submission, company management, and company listing.', 'wp-job-manager-company-listings' ); ?></p>
 				<p><?php printf( __( 'If you want to skip the wizard and setup the pages and shortcodes yourself manually, the process is still reletively simple. Refer to the %sdocumentation%s for help.', 'wp-job-manager-company-listings' ), '<a href=https://wpjobmanager.com/documentation/add-ons/company-manager/">', '</a>' ); ?></p>
 
@@ -151,7 +151,7 @@ class WP_Job_Manager_Company_Listings_Setup {
 
 				<h3><?php _e( 'Page Setup', 'wp-job-manager-company-listings' ); ?></h3>
 
-				<p><?php printf( __( '<em>Resume Manager</em> includes %1$sshortcodes%2$s which can be used within your %3$spages%2$s to output content. These can be created for you below. For more information on the company shortcodes view the %4$sshortcode documentation%2$s.', 'wp-job-manager-company-listings' ), '<a href="http://codex.wordpress.org/Shortcode" title="What is a shortcode?" target="_blank" class="help-page-link">', '</a>', '<a href="http://codex.wordpress.org/Pages" target="_blank" class="help-page-link">', '<a href="https://wpjobmanager.com/document/company-manager/#section-4" target="_blank" class="help-page-link">' ); ?></p>
+				<p><?php printf( __( '<em>Company Manager</em> includes %1$sshortcodes%2$s which can be used within your %3$spages%2$s to output content. These can be created for you below. For more information on the company shortcodes view the %4$sshortcode documentation%2$s.', 'wp-job-manager-company-listings' ), '<a href="http://codex.wordpress.org/Shortcode" title="What is a shortcode?" target="_blank" class="help-page-link">', '</a>', '<a href="http://codex.wordpress.org/Pages" target="_blank" class="help-page-link">', '<a href="https://wpjobmanager.com/document/company-manager/#section-4" target="_blank" class="help-page-link">' ); ?></p>
 
 				<form action="<?php echo esc_url( add_query_arg( 'step', 3 ) ); ?>" method="post">
 					<table class="wp-job-manager-company-listings-shortcodes widefat">
@@ -166,7 +166,7 @@ class WP_Job_Manager_Company_Listings_Setup {
 						<tbody>
 							<tr>
 								<td><input type="checkbox" checked="checked" name="wp-job-manager-company-listings-create-page[submit_company_form]" /></td>
-								<td><input type="text" value="<?php echo esc_attr( _x( 'Submit Resume', 'Default page title (wizard)', 'wp-job-manager-company-listings' ) ); ?>" name="wp-job-manager-company-listings-page-title[submit_company_form]" /></td>
+								<td><input type="text" value="<?php echo esc_attr( _x( 'Submit Company', 'Default page title (wizard)', 'wp-job-manager-company-listings' ) ); ?>" name="wp-job-manager-company-listings-page-title[submit_company_form]" /></td>
 								<td>
 									<p><?php _e( 'This page allows companys to post their company to your website from the front-end.', 'wp-job-manager-company-listings' ); ?></p>
 
@@ -226,7 +226,7 @@ class WP_Job_Manager_Company_Listings_Setup {
 					<?php endif; ?>
 				</ul>
 
-				<p><?php printf( __( 'And don\'t forget, if you need any more help using <em>Resume Manager</em> you can consult the %1$sdocumentation%2$s or %3$scontact us via our support area%2$s!', 'wp-job-manager-company-listings' ), '<a href="https://wpjobmanager.com/document/company-manager/">', '</a>', '<a href="https://wpjobmanager.com/support/">' ); ?></p>
+				<p><?php printf( __( 'And don\'t forget, if you need any more help using <em>Company Manager</em> you can consult the %1$sdocumentation%2$s or %3$scontact us via our support area%2$s!', 'wp-job-manager-company-listings' ), '<a href="https://wpjobmanager.com/document/company-manager/">', '</a>', '<a href="https://wpjobmanager.com/support/">' ); ?></p>
 
 				<div class="wp-job-manager-company-listings-support-the-plugin">
 					<h3><?php _e( 'Support the Ongoing Development of WP Job Manager', 'wp-job-manager-company-listings' ); ?></h3>

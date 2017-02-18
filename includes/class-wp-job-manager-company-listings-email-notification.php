@@ -27,7 +27,7 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 		$company        = get_post( $company_id );
 		$recipient     = get_option( 'company_manager_email_notifications' );
 		$recipient     = ! empty( $recipient ) ? $recipient : get_option( 'admin_email' );
-		$subject       = sprintf( __( 'New Resume Submission From %s', 'wp-job-manager-company-listings' ), $company->post_title );
+		$subject       = sprintf( __( 'New Company Submission From %s', 'wp-job-manager-company-listings' ), $company->post_title );
 		$attachments   = array();
 		$file_paths    = get_company_files( $company );
 

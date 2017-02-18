@@ -1,6 +1,6 @@
 <?php
 /**
- * Resume Submission Form
+ * Company Submission Form
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -24,7 +24,7 @@ wp_enqueue_script( 'wp-job-manager-company-listings-company-submission' );
 
 		<?php endif; ?>
 
-		<!-- Resume Fields -->
+		<!-- Company Fields -->
 		<?php do_action( 'submit_company_form_company_fields_start' ); ?>
 
 		<?php foreach ( $company_fields as $key => $field ) : ?>

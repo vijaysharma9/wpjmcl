@@ -40,7 +40,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 		$this->settings = apply_filters( 'company_manager_settings',
 			array(
 				'company_listings' => array(
-					__( 'Resume Listings', 'wp-job-manager-company-listings' ),
+					__( 'Company Listings', 'wp-job-manager-company-listings' ),
 					array(
 						array(
 							'name'        => 'company_manager_per_page',
@@ -99,7 +99,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						array(
 							'name'       => 'company_manager_enable_company_upload',
 							'std'        => '0',
-							'label'      => __( 'Resume Upload', 'wp-job-manager-company-listings' ),
+							'label'      => __( 'Company Upload', 'wp-job-manager-company-listings' ),
 							'cb_label'   => __( 'Enable company upload', 'wp-job-manager-company-listings' ),
 							'desc'       => __( 'Choose whether to allow companys to upload a company file.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
@@ -108,7 +108,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 					),
 				),
 				'company_submission' => array(
-					__( 'Resume Submission', 'wp-job-manager-company-listings' ),
+					__( 'Company Submission', 'wp-job-manager-company-listings' ),
 					array(
 						array(
 							'name'       => 'company_manager_user_requires_account',
@@ -214,7 +214,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 					)
 				),
 				'company_application' => array(
-					__( 'Apply with Resume', 'wp-job-manager-company-listings' ),
+					__( 'Apply with Company', 'wp-job-manager-company-listings' ),
 					array(
 						array(
 							'name'     => 'company_manager_enable_application',
@@ -235,7 +235,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						array(
 							'name'       => 'company_manager_force_company',
 							'std'        => '0',
-							'label'      => __( 'Force Resume Creation', 'wp-job-manager-company-listings' ),
+							'label'      => __( 'Force Company Creation', 'wp-job-manager-company-listings' ),
 							'cb_label'   => __( 'Force companys to create an online company before applying to a job', 'wp-job-manager-company-listings' ),
 							'desc'       => __( 'Candidates without a company on file will be taken through the company submission process. Other details, such as the application email address or application forms, will be hidden.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
@@ -244,8 +244,8 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						array(
 							'name'       => 'company_manager_force_application',
 							'std'        => '0',
-							'label'      => __( 'Force Apply with Resume', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Force companys to apply through Resume Manager', 'wp-job-manager-company-listings' ),
+							'label'      => __( 'Force Apply with Company', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Force companys to apply through Company Manager', 'wp-job-manager-company-listings' ),
 							'desc'       => __( 'If the apply forms are enabled above, they must be used to apply. All other application methods will be hidden.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
@@ -258,7 +258,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						array(
 							'name' 		=> 'company_manager_submit_company_form_page_id',
 							'std' 		=> '',
-							'label' 	=> __( 'Submit Resume Page', 'wp-job-manager-company-listings' ),
+							'label' 	=> __( 'Submit Company Page', 'wp-job-manager-company-listings' ),
 							'desc'		=> __( 'Select the page where you have placed the [submit_company_form] shortcode. This lets the plugin know where the form is located.', 'wp-job-manager-company-listings' ),
 							'type'      => 'page'
 						),
@@ -272,33 +272,33 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						array(
 							'name' 		=> 'company_manager_companies_page_id',
 							'std' 		=> '',
-							'label' 	=> __( 'Resume Listings Page', 'wp-job-manager-company-listings' ),
+							'label' 	=> __( 'Company Listings Page', 'wp-job-manager-company-listings' ),
 							'desc'		=> __( 'Select the page where you have placed the [companies] shortcode. This lets the plugin know where the company listings page is located.', 'wp-job-manager-company-listings' ),
 							'type'      => 'page'
 						),
 					)
 				),
 				'company_visibility' => array(
-					__( 'Resume Visibility', 'wp-job-manager-company-listings' ),
+					__( 'Company Visibility', 'wp-job-manager-company-listings' ),
 					array(
 						array(
 							'name'       => 'company_manager_view_name_capability',
 							'std'        => '',
-							'label'      => __( 'View Resume name Capability', 'wp-job-manager-company-listings' ),
+							'label'      => __( 'View Company name Capability', 'wp-job-manager-company-listings' ),
 							'type'      => 'input',
 							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to view companies names. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
 						),
 						array(
 							'name'       => 'company_manager_browse_company_capability',
 							'std'        => '',
-							'label'      => __( 'Browse Resume Capability', 'wp-job-manager-company-listings' ),
+							'label'      => __( 'Browse Company Capability', 'wp-job-manager-company-listings' ),
 							'type'      => 'input',
 							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to browse companies. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
 						),
 						array(
 							'name'       => 'company_manager_view_company_capability',
 							'std'        => '',
-							'label'      => __( 'View Resume Capability', 'wp-job-manager-company-listings' ),
+							'label'      => __( 'View Company Capability', 'wp-job-manager-company-listings' ),
 							'type'      => 'input',
 							'desc'       => sprintf( __( 'Enter the <a href="%s">capability</a> required in order to view a single company. Supports a comma separated list of roles/capabilities.', 'wp-job-manager-company-listings' ), 'http://codex.wordpress.org/Roles_and_Capabilities' )
 						),

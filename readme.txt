@@ -1,4 +1,4 @@
-=== Resume Manager ===
+=== Company Manager ===
 Contributors: mikejolley, kraftbj
 Requires at least: 4.1
 Tested up to: 4.5
@@ -9,7 +9,7 @@ Manage company companies from the WordPress admin panel, and allow companys to p
 
 = Documentation =
 
-Usage instructions for this plugin can be found on the wiki: [https://github.com/Automattic/WP-Job-Manager/wiki/Resume Manager](https://github.com/Automattic/WP-Job-Manager/wiki/Resume Manager).
+Usage instructions for this plugin can be found on the wiki: [https://github.com/Automattic/WP-Job-Manager/wiki/Company Manager](https://github.com/Automattic/WP-Job-Manager/wiki/Company Manager).
 
 = Support Policy =
 
@@ -32,18 +32,18 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 
 = 1.15.2 =
 * Fix - Only load widget files once.
-* Fix - Pass Job and Resume ID to login page.
+* Fix - Pass Job and Company ID to login page.
 * Fix - Meta retrieval with paid listings.
 
 = 1.15.1 =
-* Fix - Resume download link when previewing.
+* Fix - Company download link when previewing.
 * Dev - Moved company_manager_company_submitted to match WPJM core.
 
 = 1.15.0 =
 * Feature - Force apply with company setting will now force before applications plugin can be used as well.
 * Tweak - Deeper integration with applications.
 * Tweak - Improved 'apply' step after company submission. Now uses job_apply shortcode to keep things DRY.
-* Tweak - Split apply with company settings. "Force Resume Creation" to make users submit companies before they can see apply forms, and "Force Apply with Resume" to force the company manager apply form to be used regardless of other installed plugins.
+* Tweak - Split apply with company settings. "Force Company Creation" to make users submit companies before they can see apply forms, and "Force Apply with Company" to force the company manager apply form to be used regardless of other installed plugins.
 * Tweak - Attachments.
 
 = 1.14.0 =
@@ -76,7 +76,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Feature - Make keyword search also search term names.
 * Tweak - Query improvements from Job Manager.
 * Tweak - Filter apply mail recipient and subject.
-* Tweak - Resume display template/styling.
+* Tweak - Company display template/styling.
 * Tweak - Handle attachments.
 
 = 1.11.4 =
