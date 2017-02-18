@@ -5,7 +5,7 @@ include_once( 'class-wp-job-manager-company-listings-form-submit-company.php' );
 /**
  * WP_Job_Manager_Company_Listings_Form_Edit_Companies class.
  */
-class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_Company_Listings_Form_Submit_Companies {
+class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_Company_Listings_Form_Submit_Company {
 
 	public $form_name = 'edit-company';
 
