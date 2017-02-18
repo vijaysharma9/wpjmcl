@@ -19,10 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WPJM_Updater' ) ) {
-	include( 'includes/updater/class-wpjm-updater.php' );
-}
-
 /**
  * WP_Job_Manager_Company_Listings class.
  */
