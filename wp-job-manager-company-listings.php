@@ -1,17 +1,17 @@
 <?php
 /*
-Plugin Name: WP Job Manager - Resume Manager
-Plugin URI: https://wpjobmanager.com/add-ons/resume-manager/
-Description: Manage canidate resumes from the WordPress admin panel, and allow candidates to post their resumes directly to your site.
-Version: 1.15.3
-Author: Automattic
-Author URI: https://wpjobmanager.com
+Plugin Name: WP Job Manager -  Company Listings
+Plugin URI: https://shop.opentuteplus.com/downloads/wp-job-manager-company-listings/
+Description: Outputs a list of all companies that have submitted jobs with links to their listings and profile.
+Version: 1.0.0
+Author: OpenTute+
+Author URI: http://opentuteplus.com/
 Requires at least: 4.1
-Tested up to: 4.5
+Tested up to: 4.7
 
-	Copyright: 2016 Automattic
-	License: GNU General Public License v3.0
-	License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Copyright: 2016 OpenTute+
+License: GNU General Public License v3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 // Exit if accessed directly
@@ -24,9 +24,9 @@ if ( ! class_exists( 'WPJM_Updater' ) ) {
 }
 
 /**
- * WP_Resume_Manager class.
+ * WP_Job_Manager_Company_Listings class.
  */
-class WP_Resume_Manager extends WPJM_Updater {
+class WP_Job_Manager_Company_Listings {
 
 	/**
 	 * __construct function.
@@ -38,24 +38,24 @@ class WP_Resume_Manager extends WPJM_Updater {
 		define( 'RESUME_MANAGER_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 
 		// Includes
-		include( 'includes/wp-resume-manager-functions.php' );
-		include( 'includes/wp-resume-manager-template.php' );
-		include( 'includes/class-wp-resume-manager-post-types.php' );
-		include( 'includes/class-wp-resume-manager-forms.php' );
-		include( 'includes/class-wp-resume-manager-ajax.php' );
-		include( 'includes/class-wp-resume-manager-shortcodes.php' );
-		include( 'includes/class-wp-resume-manager-geocode.php' );
-		include( 'includes/class-wp-resume-manager-email-notification.php' );
-		include( 'includes/class-wp-resume-manager-apply.php' );
+		include( 'includes/wp-job-manager-company-listings-functions.php' );
+		include( 'includes/wp-job-manager-company-listings-template.php' );
+		include( 'includes/class-wp-job-manager-company-listings-post-types.php' );
+		include( 'includes/class-wp-job-manager-company-listings-forms.php' );
+		include( 'includes/class-wp-job-manager-company-listings-ajax.php' );
+		include( 'includes/class-wp-job-manager-company-listings-shortcodes.php' );
+		include( 'includes/class-wp-job-manager-company-listings-geocode.php' );
+		include( 'includes/class-wp-job-manager-company-listings-email-notification.php' );
+		include( 'includes/class-wp-job-manager-company-listings-apply.php' );
 
 		// Init classes
-		$this->apply      = new WP_Resume_Manager_Apply();
-		$this->forms      = new WP_Resume_Manager_Forms();
-		$this->post_types = new WP_Resume_Manager_Post_Types();
+		$this->apply      = new WP_Job_Manager_Company_Listings_Apply();
+		$this->forms      = new WP_Job_Manager_Company_Listings_Forms();
+		$this->post_types = new WP_Job_Manager_Company_Listings_Post_Types();
 
 		// Activation - works with symlinks
 		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), array( $this->post_types, 'register_post_types' ), 10 );
-		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), create_function( "", "include_once( 'includes/class-wp-resume-manager-install.php' );" ), 10 );
+		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), create_function( "", "include_once( 'includes/class-wp-job-manager-company-listings-install.php' );" ), 10 );
 		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), 'flush_rewrite_rules', 15 );
 
 		// Actions
@@ -67,9 +67,6 @@ class WP_Resume_Manager extends WPJM_Updater {
 		add_action( 'switch_theme', 'flush_rewrite_rules', 15 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
 		add_action( 'admin_init', array( $this, 'updater' ) );
-
-		// Init updates
-		$this->init_updates( __FILE__ );
 	}
 
 	/**
@@ -89,7 +86,7 @@ class WP_Resume_Manager extends WPJM_Updater {
 	 */
 	public function updater() {
 		if ( version_compare( RESUME_MANAGER_VERSION, get_option( 'wp_resume_manager_version' ), '>' ) ) {
-			include_once( 'includes/class-wp-resume-manager-install.php' );
+			include_once( 'includes/class-wp-job-manager-company-listings-install.php' );
 		}
 	}
 
@@ -98,7 +95,7 @@ class WP_Resume_Manager extends WPJM_Updater {
 	 */
 	public function admin() {
 		if ( is_admin() && class_exists( 'WP_Job_Manager' ) ) {
-			include( 'includes/admin/class-wp-resume-manager-admin.php' );
+			include( 'includes/admin/class-wp-job-manager-company-listings-admin.php' );
 		}
 	}
 
@@ -106,7 +103,7 @@ class WP_Resume_Manager extends WPJM_Updater {
 	 * Includes once plugins are loaded
 	 */
 	public function widgets_init() {
-		include_once( 'includes/class-wp-resume-manager-widgets.php' );
+		include_once( 'includes/class-wp-job-manager-company-listings-widgets.php' );
 	}
 
 	/**
@@ -141,20 +138,20 @@ class WP_Resume_Manager extends WPJM_Updater {
 			$ajax_filter_deps[] = 'chosen';
 		}
 
-		wp_register_script( 'wp-resume-manager-ajax-filters', RESUME_MANAGER_PLUGIN_URL . '/assets/js/ajax-filters.min.js', $ajax_filter_deps, RESUME_MANAGER_VERSION, true );
-		wp_register_script( 'wp-resume-manager-candidate-dashboard', RESUME_MANAGER_PLUGIN_URL . '/assets/js/candidate-dashboard.min.js', array( 'jquery' ), RESUME_MANAGER_VERSION, true );
-		wp_register_script( 'wp-resume-manager-resume-submission', RESUME_MANAGER_PLUGIN_URL . '/assets/js/resume-submission.min.js', array( 'jquery', 'jquery-ui-sortable' ), RESUME_MANAGER_VERSION, true );
-		wp_register_script( 'wp-resume-manager-resume-contact-details', RESUME_MANAGER_PLUGIN_URL . '/assets/js/contact-details.min.js', array( 'jquery' ), RESUME_MANAGER_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', RESUME_MANAGER_PLUGIN_URL . '/assets/js/ajax-filters.min.js', $ajax_filter_deps, RESUME_MANAGER_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-candidate-dashboard', RESUME_MANAGER_PLUGIN_URL . '/assets/js/candidate-dashboard.min.js', array( 'jquery' ), RESUME_MANAGER_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-resume-submission', RESUME_MANAGER_PLUGIN_URL . '/assets/js/resume-submission.min.js', array( 'jquery', 'jquery-ui-sortable' ), RESUME_MANAGER_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-resume-contact-details', RESUME_MANAGER_PLUGIN_URL . '/assets/js/contact-details.min.js', array( 'jquery' ), RESUME_MANAGER_VERSION, true );
 
-		wp_localize_script( 'wp-resume-manager-resume-submission', 'resume_manager_resume_submission', array(
+		wp_localize_script( 'wp-job-manager-company-listings-resume-submission', 'resume_manager_resume_submission', array(
 			'i18n_navigate'       => __( 'If you wish to edit the posted details use the "edit resume" button instead, otherwise changes may be lost.', 'wp-job-manager-resumes' ),
 			'i18n_confirm_remove' => __( 'Are you sure you want to remove this item?', 'wp-job-manager-resumes' ),
 			'i18n_remove'         => __( 'remove', 'wp-job-manager-resumes' )
 		) );
-		wp_localize_script( 'wp-resume-manager-ajax-filters', 'resume_manager_ajax_filters', array(
+		wp_localize_script( 'wp-job-manager-company-listings-ajax-filters', 'resume_manager_ajax_filters', array(
 			'ajax_url' => $ajax_url
 		) );
-		wp_localize_script( 'wp-resume-manager-candidate-dashboard', 'resume_manager_candidate_dashboard', array(
+		wp_localize_script( 'wp-job-manager-company-listings-candidate-dashboard', 'resume_manager_candidate_dashboard', array(
 			'i18n_confirm_delete' => __( 'Are you sure you want to delete this resume?', 'wp-job-manager-resumes' )
 		) );
 
@@ -162,4 +159,4 @@ class WP_Resume_Manager extends WPJM_Updater {
 	}
 }
 
-$GLOBALS['resume_manager'] = new WP_Resume_Manager();
+$GLOBALS['resume_manager'] = new WP_Job_Manager_Company_Listings();

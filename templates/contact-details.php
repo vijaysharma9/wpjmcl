@@ -6,7 +6,7 @@ if ( $resume_preview ) {
 }
 
 if ( resume_manager_user_can_view_contact_details( $post->ID ) ) :
-	wp_enqueue_script( 'wp-resume-manager-resume-contact-details' );
+	wp_enqueue_script( 'wp-job-manager-company-listings-resume-contact-details' );
 	?>
 	<div class="resume_contact">
 		<input class="resume_contact_button" type="button" value="<?php _e( 'Contact', 'wp-job-manager-resumes' ); ?>" />

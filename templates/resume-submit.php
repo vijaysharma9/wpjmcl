@@ -4,7 +4,7 @@
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-wp_enqueue_script( 'wp-resume-manager-resume-submission' );
+wp_enqueue_script( 'wp-job-manager-company-listings-resume-submission' );
 ?>
 <form action="<?php echo $action; ?>" method="post" id="submit-resume-form" class="job-manager-form" enctype="multipart/form-data">
 
