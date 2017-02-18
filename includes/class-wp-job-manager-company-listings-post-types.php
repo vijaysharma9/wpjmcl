@@ -125,8 +125,8 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		}
 
 		if ( get_option( 'company_manager_enable_skills' ) ) {
-			$singular  = __( 'Candidate Skill', 'wp-job-manager-company-listings' );
-			$plural    = __( 'Candidate Skills', 'wp-job-manager-company-listings' );
+			$singular  = __( 'Company Skill', 'wp-job-manager-company-listings' );
+			$plural    = __( 'Company Skills', 'wp-job-manager-company-listings' );
 
 			if ( current_theme_supports( 'company-manager-templates' ) ) {
 				$rewrite     = array(

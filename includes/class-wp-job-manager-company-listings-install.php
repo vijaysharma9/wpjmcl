@@ -61,7 +61,7 @@ class WP_Job_Manager_Company_Listings_Install {
 			$wp_roles->add_cap( 'administrator', 'manage_companies' );
 
 			// Customer role
-			add_role( 'company', __( 'Candidate', 'wp-job-manager-company-listings' ), array(
+			add_role( 'company', __( 'Company', 'wp-job-manager-company-listings' ), array(
 			    'read' 						=> true,
 			    'edit_posts' 				=> false,
 			    'delete_posts' 				=> false

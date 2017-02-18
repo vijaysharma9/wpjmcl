@@ -36,7 +36,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				'description' => ''
 			),
 			'_company_location' => array(
-				'label'       => __( 'Candidate Location', 'wp-job-manager-company-listings' ),
+				'label'       => __( 'Company Location', 'wp-job-manager-company-listings' ),
 				'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-company-listings' ),
 				'description' => ''
 			),
@@ -81,7 +81,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * add_meta_boxes function.
 	 */
 	public function add_meta_boxes() {
-		add_meta_box( 'company_data', __( 'Candidate Data', 'wp-job-manager-company-listings' ), array( $this, 'company_data' ), 'company', 'normal', 'high' );
+		add_meta_box( 'company_data', __( 'Company Data', 'wp-job-manager-company-listings' ), array( $this, 'company_data' ), 'company', 'normal', 'high' );
 		add_meta_box( 'company_url_data', __( 'URL(s)', 'wp-job-manager-company-listings' ), array( $this, 'url_data' ), 'company', 'side', 'low' );
 		add_meta_box( 'company_education_data', __( 'Education', 'wp-job-manager-company-listings' ), array( $this, 'education_data' ), 'company', 'normal', 'high' );
 		add_meta_box( 'company_experience_data', __( 'Experience', 'wp-job-manager-company-listings' ), array( $this, 'experience_data' ), 'company', 'normal', 'high' );

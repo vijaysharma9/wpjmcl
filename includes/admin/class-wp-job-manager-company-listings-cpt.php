@@ -197,7 +197,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 */
 	public function enter_title_here( $text, $post ) {
 		if ( $post->post_type == 'company' ) {
-			return __( 'Candidate name', 'wp-job-manager-company-listings' );
+			return __( 'Company name', 'wp-job-manager-company-listings' );
 		}
 		return $text;
 	}
@@ -411,7 +411,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 					if ( $email = get_post_meta( $post->ID, '_company_email', true ) ) {
 						$admin_actions['email']   = array(
 							'action'  => 'email',
-							'name'    => __( 'Email Candidate', 'wp-job-manager-company-listings' ),
+							'name'    => __( 'Email Company', 'wp-job-manager-company-listings' ),
 							'url'     =>  'mailto:' . esc_attr( $email )
 						);
 					}

@@ -42,7 +42,7 @@ msgstr "Kategori Seçin"
 
 # @ wp-job-manager-company-listings
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:193
-msgid "Candidate name"
+msgid "Company name"
 msgstr "Adayın İsmi"
 
 # @ wp-job-manager-company-listings
@@ -112,7 +112,7 @@ msgstr ""
 # @ wp-job-manager-company-listings
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:238
 #: includes/class-wp-job-manager-company-listings-install.php:54
-msgid "Candidate"
+msgid "Company"
 msgstr "Aday"
 
 # @ wp-job-manager-company-listings
@@ -334,7 +334,7 @@ msgstr "Özgeçmişleri otomatik olarak gizle"
 msgid ""
 "How many <strong>days</strong> un-modified companies should be published "
 "before being hidden. Can be left blank to never hide companies automaticaly. "
-"Candidates can re-publish hidden companies form their dashboard."
+"Companys can re-publish hidden companies form their dashboard."
 msgstr ""
 "Üzerinde değişiklik yapılmamış özgeçmişler, gizli hale getirilmeden önce kaç "
 "<strong>gün</strong> yayında kalacaklar. Otomatik olarak hiç gizlenmemeleri "
@@ -565,7 +565,7 @@ msgstr ""
 # @ wp-job-manager-company-listings
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:214
 msgid ""
-"Candidates without a company on file will be taken through the company "
+"Companys without a company on file will be taken through the company "
 "submission process to apply for a job. Other details, such as the "
 "application email address, will be hidden. This works when the job "
 "application method is by email only (unless using the Job Applications addon "
@@ -640,7 +640,7 @@ msgstr "eposta@ornekdomain.com"
 
 # @ wp-job-manager-company-listings
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:39
-msgid "Candidate location"
+msgid "Company location"
 msgstr "Aday lokasyonu"
 
 # @ wp-job-manager-company-listings
@@ -708,7 +708,7 @@ msgstr "dd-mm-yyyy"
 
 # @ wp-job-manager-company-listings
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:84
-msgid "Candidate Data"
+msgid "Company Data"
 msgstr "Aday Bilgisi"
 
 # @ wp-job-manager-company-listings
@@ -954,12 +954,12 @@ msgstr "Yeni %s İsmi"
 
 # @ wp-job-manager-company-listings
 #: includes/class-wp-job-manager-company-listings-post-types.php:105
-msgid "Candidate Skill"
+msgid "Company Skill"
 msgstr "Aday Niteliği"
 
 # @ wp-job-manager-company-listings
 #: includes/class-wp-job-manager-company-listings-post-types.php:106
-msgid "Candidate Skills"
+msgid "Company Skills"
 msgstr "Aday Nitelikleri"
 
 # @ wp-job-manager-company-listings

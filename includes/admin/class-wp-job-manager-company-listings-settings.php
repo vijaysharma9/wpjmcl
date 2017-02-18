@@ -183,7 +183,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'name'       => 'company_manager_autohide',
 							'std'        => '',
 							'label'      => __( 'Auto-hide Companies', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'How many <strong>days</strong> un-modified companies should be published before being hidden. Can be left blank to never hide companies automaticaly. Candidates can re-publish hidden companies form their dashboard.', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'How many <strong>days</strong> un-modified companies should be published before being hidden. Can be left blank to never hide companies automaticaly. Companies can re-publish hidden companies form their dashboard.', 'wp-job-manager-company-listings' ),
 							'attributes' => array(),
 							'placeholder' => __( 'Never auto-hide', 'wp-job-manager-company-listings' )
 						),
@@ -237,7 +237,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'std'        => '0',
 							'label'      => __( 'Force Company Creation', 'wp-job-manager-company-listings' ),
 							'cb_label'   => __( 'Force companys to create an online company before applying to a job', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'Candidates without a company on file will be taken through the company submission process. Other details, such as the application email address or application forms, will be hidden.', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'Companies without a company on file will be taken through the company submission process. Other details, such as the application email address or application forms, will be hidden.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
 						),
@@ -265,7 +265,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						array(
 							'name' 		=> 'company_manager_company_dashboard_page_id',
 							'std' 		=> '',
-							'label' 	=> __( 'Candidate Dashboard Page', 'wp-job-manager-company-listings' ),
+							'label' 	=> __( 'Company Dashboard Page', 'wp-job-manager-company-listings' ),
 							'desc'		=> __( 'Select the page where you have placed the [company_dashboard] shortcode. This lets the plugin know where the dashboard is located.', 'wp-job-manager-company-listings' ),
 							'type'      => 'page'
 						),

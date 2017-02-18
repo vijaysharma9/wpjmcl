@@ -34,7 +34,7 @@ msgid "Select a category"
 msgstr "Seleccione una categoría"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:200
-msgid "Candidate name"
+msgid "Company name"
 msgstr "Nombre candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:215
@@ -89,7 +89,7 @@ msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:244
 #: includes/class-wp-job-manager-company-listings-install.php:64
-msgid "Candidate"
+msgid "Company"
 msgstr "Candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:245
@@ -159,7 +159,7 @@ msgid "View"
 msgstr "Ver"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:414
-msgid "Email Candidate"
+msgid "Email Company"
 msgstr "Email candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:420
@@ -395,7 +395,7 @@ msgstr "Auto ocultar CVs"
 msgid ""
 "How many <strong>days</strong> un-modified companies should be published "
 "before being hidden. Can be left blank to never hide companies automaticaly. "
-"Candidates can re-publish hidden companies form their dashboard."
+"Companys can re-publish hidden companies form their dashboard."
 msgstr ""
 "¿Cuántos <strong> días </ strong>los CV NO modificados deben publicarse "
 "antes de ser ocultados. Se puede dejar en blanco para no ocultar hojas de "
@@ -505,7 +505,7 @@ msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:232
 msgid ""
-"Candidates without a company on file will be taken through the company "
+"Companys without a company on file will be taken through the company "
 "submission process to apply for a job. Other details, such as the "
 "application email address, will be hidden."
 msgstr ""
@@ -532,7 +532,7 @@ msgstr ""
 "encuentra el formulario."
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:251
-msgid "Candidate Dashboard Page"
+msgid "Company Dashboard Page"
 msgstr "Página de panel de control del candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:252
@@ -704,7 +704,7 @@ msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:179
 msgctxt "Default page title (wizard)"
-msgid "Candidate Dashboard"
+msgid "Company Dashboard"
 msgstr "Panel de Control de Candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:181
@@ -828,7 +828,7 @@ msgid "you@yourdomain.com"
 msgstr "su@sudominio.com"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:39
-msgid "Candidate Location"
+msgid "Company Location"
 msgstr "Ubicación del Candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:40
@@ -883,7 +883,7 @@ msgid "yyyy-mm-dd"
 msgstr "año-mes-dia"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:84
-msgid "Candidate Data"
+msgid "Company Data"
 msgstr "Datos del candidato"
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:85
@@ -1089,11 +1089,11 @@ msgid "New %s Name"
 msgstr "Nuevo %s Nombre"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:126
-msgid "Candidate Skill"
+msgid "Company Skill"
 msgstr "Habilidad del candidato"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:127
-msgid "Candidate Skills"
+msgid "Company Skills"
 msgstr "Habilidades del candidato"
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:131

@@ -176,7 +176,7 @@ class WP_Job_Manager_Company_Listings_Setup {
 							</tr>
 							<tr>
 								<td><input type="checkbox" checked="checked" name="wp-job-manager-company-listings-create-page[company_dashboard]" /></td>
-								<td><input type="text" value="<?php echo esc_attr( _x( 'Candidate Dashboard', 'Default page title (wizard)', 'wp-job-manager-company-listings' ) ); ?>" name="wp-job-manager-company-listings-page-title[company_dashboard]" /></td>
+								<td><input type="text" value="<?php echo esc_attr( _x( 'Company Dashboard', 'Default page title (wizard)', 'wp-job-manager-company-listings' ) ); ?>" name="wp-job-manager-company-listings-page-title[company_dashboard]" /></td>
 								<td>
 									<p><?php _e( 'This page allows companys to manage and edit their own companies from the front-end.', 'wp-job-manager-company-listings' ); ?></p>
 

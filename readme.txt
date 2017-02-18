@@ -226,7 +226,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Confirm navigation when leaving the company submission form.
 * Added a new option to allow users to import their company data from LinkedIn during submission.
 * Added ability for users to make companies hidden from their company dashboard (or publish them again).
-* Added setting to automatically hide companies after X days. Candidates can re-publish hidden companies from their dashboard.
+* Added setting to automatically hide companies after X days. Companies can re-publish hidden companies from their dashboard.
 * Allow admin to 'feature' companies, making them queryable and sticky.
 * Fire updated_results hook after loading results.
 * Fix submit_company_form_fields_get_company_data hook.

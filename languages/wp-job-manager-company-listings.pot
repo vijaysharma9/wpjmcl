@@ -31,7 +31,7 @@ msgid "Select a category"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:200
-msgid "Candidate name"
+msgid "Company name"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:215
@@ -83,7 +83,7 @@ msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:244
 #: includes/class-wp-job-manager-company-listings-install.php:64
-msgid "Candidate"
+msgid "Company"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:245
@@ -153,7 +153,7 @@ msgid "View"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:414
-msgid "Email Candidate"
+msgid "Email Company"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:420
@@ -368,7 +368,7 @@ msgstr ""
 msgid ""
 "How many <strong>days</strong> un-modified companies should be published "
 "before being hidden. Can be left blank to never hide companies automaticaly. "
-"Candidates can re-publish hidden companies form their dashboard."
+"Companys can re-publish hidden companies form their dashboard."
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:188
@@ -456,7 +456,7 @@ msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:240
 msgid ""
-"Candidates without a company on file will be taken through the company "
+"Companys without a company on file will be taken through the company "
 "submission process. Other details, such as the application email address or "
 "application forms, will be hidden."
 msgstr ""
@@ -490,7 +490,7 @@ msgid ""
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:268
-msgid "Candidate Dashboard Page"
+msgid "Company Dashboard Page"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:269
@@ -646,7 +646,7 @@ msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:179
 msgctxt "Default page title (wizard)"
-msgid "Candidate Dashboard"
+msgid "Company Dashboard"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-setup.php:181
@@ -755,7 +755,7 @@ msgid "you@yourdomain.com"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:39
-msgid "Candidate Location"
+msgid "Company Location"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:40
@@ -808,7 +808,7 @@ msgid "yyyy-mm-dd"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:84
-msgid "Candidate Data"
+msgid "Company Data"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:85
@@ -1011,11 +1011,11 @@ msgid "New %s Name"
 msgstr ""
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:128
-msgid "Candidate Skill"
+msgid "Company Skill"
 msgstr ""
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:129
-msgid "Candidate Skills"
+msgid "Company Skills"
 msgstr ""
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:133
