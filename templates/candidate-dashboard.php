@@ -3,7 +3,7 @@ $submission_limit           = get_option( 'resume_manager_submission_limit' );
 $submit_resume_form_page_id = get_option( 'resume_manager_submit_resume_form_page_id' );
 ?>
 <div id="resume-manager-candidate-dashboard">
-	<p><?php echo _n( 'Your resume can be viewed, edited or removed below.', 'Your resume(s) can be viewed, edited or removed below.', resume_manager_count_user_resumes(), 'wp-job-manager-resumes' ); ?></p>
+	<p><?php echo _n( 'Your resume can be viewed, edited or removed below.', 'Your resume(s) can be viewed, edited or removed below.', resume_manager_count_user_resumes(), 'wp-job-manager-company-listings' ); ?></p>
 	<table class="resume-manager-resumes">
 		<thead>
 			<tr>
@@ -15,7 +15,7 @@ $submit_resume_form_page_id = get_option( 'resume_manager_submit_resume_form_pag
 		<tbody>
 			<?php if ( ! $resumes ) : ?>
 				<tr>
-					<td colspan="<?php echo sizeof( $candidate_dashboard_columns ); ?>"><?php _e( 'You do not have any active resume listings.', 'wp-job-manager-resumes' ); ?></td>
+					<td colspan="<?php echo sizeof( $candidate_dashboard_columns ); ?>"><?php _e( 'You do not have any active resume listings.', 'wp-job-manager-company-listings' ); ?></td>
 				</tr>
 			<?php else : ?>
 				<?php foreach ( $resumes as $resume ) : ?>
@@ -34,21 +34,21 @@ $submit_resume_form_page_id = get_option( 'resume_manager_submit_resume_form_pag
 
 											switch ( $resume->post_status ) {
 												case 'publish' :
-													$actions['edit'] = array( 'label' => __( 'Edit', 'wp-job-manager-resumes' ), 'nonce' => false );
-													$actions['hide'] = array( 'label' => __( 'Hide', 'wp-job-manager-resumes' ), 'nonce' => true );
+													$actions['edit'] = array( 'label' => __( 'Edit', 'wp-job-manager-company-listings' ), 'nonce' => false );
+													$actions['hide'] = array( 'label' => __( 'Hide', 'wp-job-manager-company-listings' ), 'nonce' => true );
 												break;
 												case 'hidden' :
-													$actions['edit'] = array( 'label' => __( 'Edit', 'wp-job-manager-resumes' ), 'nonce' => false );
-													$actions['publish'] = array( 'label' => __( 'Publish', 'wp-job-manager-resumes' ), 'nonce' => true );
+													$actions['edit'] = array( 'label' => __( 'Edit', 'wp-job-manager-company-listings' ), 'nonce' => false );
+													$actions['publish'] = array( 'label' => __( 'Publish', 'wp-job-manager-company-listings' ), 'nonce' => true );
 												break;
 												case 'expired' :
 													if ( get_option( 'resume_manager_submit_resume_form_page_id' ) ) {
-														$actions['relist'] = array( 'label' => __( 'Relist', 'wp-job-manager-resumes' ), 'nonce' => true );
+														$actions['relist'] = array( 'label' => __( 'Relist', 'wp-job-manager-company-listings' ), 'nonce' => true );
 													}
 												break;
 											}
 
-											$actions['delete'] = array( 'label' => __( 'Delete', 'wp-job-manager-resumes' ), 'nonce' => true );
+											$actions['delete'] = array( 'label' => __( 'Delete', 'wp-job-manager-company-listings' ), 'nonce' => true );
 
 											$actions = apply_filters( 'resume_manager_my_resume_actions', $actions, $resume );
 
@@ -71,7 +71,7 @@ $submit_resume_form_page_id = get_option( 'resume_manager_submit_resume_form_pag
 								<?php elseif ( 'date' === $key ) : ?>
 									<?php
 									if ( ! empty( $resume->_resume_expires ) && strtotime( $resume->_resume_expires ) > current_time( 'timestamp' ) ) {
-										printf( __( 'Expires %s', 'wp-job-manager-resumes' ), date_i18n( get_option( 'date_format' ), strtotime( $resume->_resume_expires ) ) );
+										printf( __( 'Expires %s', 'wp-job-manager-company-listings' ), date_i18n( get_option( 'date_format' ), strtotime( $resume->_resume_expires ) ) );
 									} else {
 										echo date_i18n( get_option( 'date_format' ), strtotime( $resume->post_date ) );
 									}
@@ -89,7 +89,7 @@ $submit_resume_form_page_id = get_option( 'resume_manager_submit_resume_form_pag
 			<tfoot>
 				<tr>
 					<td colspan="<?php echo sizeof( $candidate_dashboard_columns ); ?>">
-						<a href="<?php echo esc_url( get_permalink( $submit_resume_form_page_id ) ); ?>"><?php _e( 'Add Resume', 'wp-job-manager-resumes' ); ?></a>
+						<a href="<?php echo esc_url( get_permalink( $submit_resume_form_page_id ) ); ?>"><?php _e( 'Add Resume', 'wp-job-manager-company-listings' ); ?></a>
 					</td>
 				</tr>
 			</tfoot>

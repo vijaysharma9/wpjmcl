@@ -2,10 +2,10 @@
 	<?php foreach ( $field['value'] as $index => $value ) : ?>
 		<div class="resume-manager-data-row">
 			<input type="hidden" class="repeated-row-index" name="repeated-row-<?php echo esc_attr( $key ); ?>[]" value="<?php echo absint( $index ); ?>" />
-			<a href="#" class="resume-manager-remove-row"><?php _e( 'Remove', 'wp-job-manager-resumes' ); ?></a>
+			<a href="#" class="resume-manager-remove-row"><?php _e( 'Remove', 'wp-job-manager-company-listings' ); ?></a>
 			<?php foreach ( $field['fields'] as $subkey => $subfield ) : ?>
 				<fieldset class="fieldset-<?php esc_attr_e( $subkey ); ?>">
-					<label for="<?php esc_attr_e( $subkey ); ?>"><?php echo $subfield['label'] . ( $subfield['required'] ? '' : ' <small>' . __( '(optional)', 'wp-job-manager-resumes' ) . '</small>' ); ?></label>
+					<label for="<?php esc_attr_e( $subkey ); ?>"><?php echo $subfield['label'] . ( $subfield['required'] ? '' : ' <small>' . __( '(optional)', 'wp-job-manager-company-listings' ) . '</small>' ); ?></label>
 					<div class="field">
 						<?php
 							// Get name and value
@@ -26,10 +26,10 @@
 	?>
 		<div class="resume-manager-data-row">
 			<input type="hidden" class="repeated-row-index" name="repeated-row-<?php echo esc_attr( $key ); ?>[]" value="%%repeated-row-index%%" />
-			<a href="#" class="resume-manager-remove-row"><?php _e( 'Remove', 'wp-job-manager-resumes' ); ?></a>
+			<a href="#" class="resume-manager-remove-row"><?php _e( 'Remove', 'wp-job-manager-company-listings' ); ?></a>
 			<?php foreach ( $field['fields'] as $subkey => $subfield ) : ?>
 				<fieldset class="fieldset-<?php esc_attr_e( $subkey ); ?>">
-					<label for="<?php esc_attr_e( $subkey ); ?>"><?php echo $subfield['label'] . ( $subfield['required'] ? '' : ' <small>' . __( '(optional)', 'wp-job-manager-resumes' ) . '</small>' ); ?></label>
+					<label for="<?php esc_attr_e( $subkey ); ?>"><?php echo $subfield['label'] . ( $subfield['required'] ? '' : ' <small>' . __( '(optional)', 'wp-job-manager-company-listings' ) . '</small>' ); ?></label>
 					<div class="field">
 						<?php
 							$subfield['name']  = $key . '_' . $subkey . '_%%repeated-row-index%%';
@@ -42,5 +42,5 @@
 	<?php
 	echo esc_attr( ob_get_clean() );
 
-?>">+ <?php echo esc_html( ! empty( $field['add_row'] ) ? $field['add_row'] : __( 'Add URL', 'wp-job-manager-resumes' ) ); ?></a>
+?>">+ <?php echo esc_html( ! empty( $field['add_row'] ) ? $field['add_row'] : __( 'Add URL', 'wp-job-manager-company-listings' ) ); ?></a>
 <?php if ( ! empty( $field['description'] ) ) : ?><small class="description"><?php echo $field['description']; ?></small><?php endif; ?>

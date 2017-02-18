@@ -266,7 +266,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 = 1.3.0 =
 * Improved search by including custom fields and comma separated keywords
 * Get geolocation data for resumes
-* Support for languages in the WP_LANG dir (subfolder wp-job-manager-resumes)
+* Support for languages in the WP_LANG dir (subfolder wp-job-manager-company-listings)
 
 = 1.2.2 =
 * Template files and functions for resume links
@@ -277,7 +277,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 = 1.2.0 =
 * Use GET vars to search resumes
 * Added grunt
-* Updated all text domains to wp-job-manager-resumes
+* Updated all text domains to wp-job-manager-company-listings
 * Fix wp-editor field
 * Include POT file
 * Added 'x' to remove education/exp/links

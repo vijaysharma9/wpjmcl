@@ -50,7 +50,7 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Resume extends WP_Job_Manager_Co
 		$resume = get_post( $this->resume_id );
 
 		if ( empty( $this->resume_id  ) || ( $resume->post_status !== 'publish' && $resume->post_status !== 'hidden' ) ) {
-			echo wpautop( __( 'Invalid resume', 'wp-job-manager-resumes' ) );
+			echo wpautop( __( 'Invalid resume', 'wp-job-manager-company-listings' ) );
 			return;
 		}
 
@@ -88,8 +88,8 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Resume extends WP_Job_Manager_Co
 			'action'             => $this->get_action(),
 			'resume_fields'      => $this->get_fields( 'resume_fields' ),
 			'step'               => $this->get_step(),
-			'submit_button_text' => __( 'Save changes', 'wp-job-manager-resumes' )
-		), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			'submit_button_text' => __( 'Save changes', 'wp-job-manager-company-listings' )
+		), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Resume extends WP_Job_Manager_Co
 			$this->update_resume_data( $values );
 
 			// Successful
-			echo '<div class="job-manager-message">' . __( 'Your changes have been saved.', 'wp-job-manager-resumes' ), ' <a href="' . get_permalink( $this->resume_id ) . '">' . __( 'View Resume &rarr;', 'wp-job-manager-resumes' ) . '</a>' . '</div>';
+			echo '<div class="job-manager-message">' . __( 'Your changes have been saved.', 'wp-job-manager-company-listings' ), ' <a href="' . get_permalink( $this->resume_id ) . '">' . __( 'View Resume &rarr;', 'wp-job-manager-company-listings' ) . '</a>' . '</div>';
 
 		} catch ( Exception $e ) {
 			echo '<div class="job-manager-error">' . $e->getMessage() . '</div>';

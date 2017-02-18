@@ -27,7 +27,7 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 		$resume        = get_post( $resume_id );
 		$recipient     = get_option( 'resume_manager_email_notifications' );
 		$recipient     = ! empty( $recipient ) ? $recipient : get_option( 'admin_email' );
-		$subject       = sprintf( __( 'New Resume Submission From %s', 'wp-job-manager-resumes' ), $resume->post_title );
+		$subject       = sprintf( __( 'New Resume Submission From %s', 'wp-job-manager-company-listings' ), $resume->post_title );
 		$attachments   = array();
 		$file_paths    = get_resume_files( $resume );
 
@@ -40,7 +40,7 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 			'resume'        => $resume,
 			'resume_id'     => $resume_id,
 			'custom_fields' => $custom_fields
-		), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 		$message = ob_get_clean();
 
 		add_filter( 'wp_mail_from', array( __CLASS__, 'get_from_address' ) );

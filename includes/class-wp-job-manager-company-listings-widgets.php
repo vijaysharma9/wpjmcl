@@ -20,24 +20,24 @@ class WP_Job_Manager_Company_Listings_Widget_Recent_Resumes extends WP_Job_Manag
 		global $wp_post_types;
 
 		$this->widget_cssclass    = 'job_manager widget_recent_resumes';
-		$this->widget_description = __( 'Display a list of recent listings on your site, optionally matching a keyword and location.', 'wp-job-manager-resumes' );
+		$this->widget_description = __( 'Display a list of recent listings on your site, optionally matching a keyword and location.', 'wp-job-manager-company-listings' );
 		$this->widget_id          = 'widget_recent_resumes';
-		$this->widget_name        = sprintf( __( 'Recent %s', 'wp-job-manager-resumes' ), $wp_post_types['resume']->labels->name );
+		$this->widget_name        = sprintf( __( 'Recent %s', 'wp-job-manager-company-listings' ), $wp_post_types['resume']->labels->name );
 		$this->settings           = array(
 			'title' => array(
 				'type'  => 'text',
-				'std'   => sprintf( __( 'Recent %s', 'wp-job-manager-resumes' ), $wp_post_types['resume']->labels->name ),
-				'label' => __( 'Title', 'wp-job-manager-resumes' )
+				'std'   => sprintf( __( 'Recent %s', 'wp-job-manager-company-listings' ), $wp_post_types['resume']->labels->name ),
+				'label' => __( 'Title', 'wp-job-manager-company-listings' )
 			),
 			'keyword' => array(
 				'type'  => 'text',
 				'std'   => '',
-				'label' => __( 'Keyword', 'wp-job-manager-resumes' )
+				'label' => __( 'Keyword', 'wp-job-manager-company-listings' )
 			),
 			'location' => array(
 				'type'  => 'text',
 				'std'   => '',
-				'label' => __( 'Location', 'wp-job-manager-resumes' )
+				'label' => __( 'Location', 'wp-job-manager-company-listings' )
 			),
 			'number' => array(
 				'type'  => 'number',
@@ -45,7 +45,7 @@ class WP_Job_Manager_Company_Listings_Widget_Recent_Resumes extends WP_Job_Manag
 				'min'   => 1,
 				'max'   => '',
 				'std'   => 10,
-				'label' => __( 'Number of listings to show', 'wp-job-manager-resumes' )
+				'label' => __( 'Number of listings to show', 'wp-job-manager-company-listings' )
 			)
 		);
 		$this->register();
@@ -92,7 +92,7 @@ class WP_Job_Manager_Company_Listings_Widget_Recent_Resumes extends WP_Job_Manag
 
 				<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
 
-					<?php get_job_manager_template_part( 'content-widget', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content-widget', 'resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php endwhile; ?>
 
@@ -102,7 +102,7 @@ class WP_Job_Manager_Company_Listings_Widget_Recent_Resumes extends WP_Job_Manag
 
 		<?php else : ?>
 
-			<?php get_job_manager_template_part( 'content-widget', 'no-resumes-found', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+			<?php get_job_manager_template_part( 'content-widget', 'no-resumes-found', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 		<?php endif;
 
@@ -128,14 +128,14 @@ class WP_Job_Manager_Company_Listings_Widget_Featured_Resumes extends WP_Job_Man
 		global $wp_post_types;
 
 		$this->widget_cssclass    = 'job_manager widget_featured_resumes';
-		$this->widget_description = __( 'Display a list of featured listings on your site.', 'wp-job-manager-resumes' );
+		$this->widget_description = __( 'Display a list of featured listings on your site.', 'wp-job-manager-company-listings' );
 		$this->widget_id          = 'widget_featured_resumes';
-		$this->widget_name        = sprintf( __( 'Featured %s', 'wp-job-manager-resumes' ), $wp_post_types['resume']->labels->name );
+		$this->widget_name        = sprintf( __( 'Featured %s', 'wp-job-manager-company-listings' ), $wp_post_types['resume']->labels->name );
 		$this->settings           = array(
 			'title' => array(
 				'type'  => 'text',
-				'std'   => sprintf( __( 'Featured %s', 'wp-job-manager-resumes' ), $wp_post_types['resume']->labels->name ),
-				'label' => __( 'Title', 'wp-job-manager-resumes' )
+				'std'   => sprintf( __( 'Featured %s', 'wp-job-manager-company-listings' ), $wp_post_types['resume']->labels->name ),
+				'label' => __( 'Title', 'wp-job-manager-company-listings' )
 			),
 			'number' => array(
 				'type'  => 'number',
@@ -143,7 +143,7 @@ class WP_Job_Manager_Company_Listings_Widget_Featured_Resumes extends WP_Job_Man
 				'min'   => 1,
 				'max'   => '',
 				'std'   => 10,
-				'label' => __( 'Number of listings to show', 'wp-job-manager-resumes' )
+				'label' => __( 'Number of listings to show', 'wp-job-manager-company-listings' )
 			)
 		);
 		$this->register();
@@ -189,7 +189,7 @@ class WP_Job_Manager_Company_Listings_Widget_Featured_Resumes extends WP_Job_Man
 
 				<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
 
-					<?php get_job_manager_template_part( 'content-widget', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content-widget', 'resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php endwhile; ?>
 
@@ -199,7 +199,7 @@ class WP_Job_Manager_Company_Listings_Widget_Featured_Resumes extends WP_Job_Man
 
 		<?php else : ?>
 
-			<?php get_job_manager_template_part( 'content-widget', 'no-resumes-found', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+			<?php get_job_manager_template_part( 'content-widget', 'no-resumes-found', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 		<?php endif;
 

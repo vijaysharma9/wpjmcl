@@ -4,15 +4,15 @@
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-wp_enqueue_script( 'wp-job-manager-company-listings-resume-submission' );
+wp_enqueue_script( 'wp-job-manager-company-listings-company-submission' );
 ?>
-<form action="<?php echo $action; ?>" method="post" id="submit-resume-form" class="job-manager-form" enctype="multipart/form-data">
+<form action="<?php echo $action; ?>" method="post" id="submit-company-form" class="job-manager-form" enctype="multipart/form-data">
 
 	<?php do_action( 'submit_resume_form_start' ); ?>
 
 	<?php if ( apply_filters( 'submit_resume_form_show_signin', true ) ) : ?>
 
-		<?php get_job_manager_template( 'account-signin.php', array( 'class' => $class ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+		<?php get_job_manager_template( 'account-signin.php', array( 'class' => $class ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 	<?php endif; ?>
 
@@ -20,7 +20,7 @@ wp_enqueue_script( 'wp-job-manager-company-listings-resume-submission' );
 
 		<?php if ( get_option( 'resume_manager_linkedin_import' ) ) : ?>
 
-			<?php get_job_manager_template( 'linkedin-import.php', '', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+			<?php get_job_manager_template( 'linkedin-import.php', '', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 		<?php endif; ?>
 
@@ -29,7 +29,7 @@ wp_enqueue_script( 'wp-job-manager-company-listings-resume-submission' );
 
 		<?php foreach ( $resume_fields as $key => $field ) : ?>
 			<fieldset class="fieldset-<?php esc_attr_e( $key ); ?>">
-				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label'] . apply_filters( 'submit_resume_form_required_label', $field['required'] ? '' : ' <small>' . __( '(optional)', 'wp-job-manager-resumes' ) . '</small>', $field ); ?></label>
+				<label for="<?php esc_attr_e( $key ); ?>"><?php echo $field['label'] . apply_filters( 'submit_resume_form_required_label', $field['required'] ? '' : ' <small>' . __( '(optional)', 'wp-job-manager-company-listings' ) . '</small>', $field ); ?></label>
 				<div class="field">
 					<?php $class->get_field_template( $key, $field ); ?>
 				</div>

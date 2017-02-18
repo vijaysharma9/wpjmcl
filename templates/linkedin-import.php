@@ -3,8 +3,8 @@
 </script>
 
 <fieldset class="import-from-linkedin">
-	<label><?php _e( 'LinkedIn', 'wp-job-manager-resumes' ); ?></label>
+	<label><?php _e( 'LinkedIn', 'wp-job-manager-company-listings' ); ?></label>
 	<div class="field">
-		<input class="import-from-linkedin" type="button" value="<?php _e( 'Import from LinkedIn', 'wp-job-manager-resumes' ); ?>" />
+		<input class="import-from-linkedin" type="button" value="<?php _e( 'Import from LinkedIn', 'wp-job-manager-company-listings' ); ?>" />
 	</div>
 </fieldset>

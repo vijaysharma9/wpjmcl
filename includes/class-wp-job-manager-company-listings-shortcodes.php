@@ -73,7 +73,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 				// Check ownership
 				if ( ! $resume || $resume->post_author != get_current_user_id() )
-					throw new Exception( __( 'Invalid Resume ID', 'wp-job-manager-resumes' ) );
+					throw new Exception( __( 'Invalid Resume ID', 'wp-job-manager-company-listings' ) );
 
 				switch ( $action ) {
 					case 'delete' :
@@ -81,21 +81,21 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 						wp_trash_post( $resume_id );
 
 						// Message
-						$this->resume_dashboard_message = '<div class="job-manager-message">' . sprintf( __( '%s has been deleted', 'wp-job-manager-resumes' ), $resume->post_title ) . '</div>';
+						$this->resume_dashboard_message = '<div class="job-manager-message">' . sprintf( __( '%s has been deleted', 'wp-job-manager-company-listings' ), $resume->post_title ) . '</div>';
 
 					break;
 					case 'hide' :
 						if ( $resume->post_status === 'publish' ) {
 							$update_resume = array( 'ID' => $resume_id, 'post_status' => 'hidden' );
 							wp_update_post( $update_resume );
-							$this->resume_dashboard_message = '<div class="job-manager-message">' . sprintf( __( '%s has been hidden', 'wp-job-manager-resumes' ), $resume->post_title ) . '</div>';
+							$this->resume_dashboard_message = '<div class="job-manager-message">' . sprintf( __( '%s has been hidden', 'wp-job-manager-company-listings' ), $resume->post_title ) . '</div>';
 						}
 					break;
 					case 'publish' :
 						if ( $resume->post_status === 'hidden' ) {
 							$update_resume = array( 'ID' => $resume_id, 'post_status' => 'publish' );
 							wp_update_post( $update_resume );
-							$this->resume_dashboard_message = '<div class="job-manager-message">' . sprintf( __( '%s has been published', 'wp-job-manager-resumes' ), $resume->post_title ) . '</div>';
+							$this->resume_dashboard_message = '<div class="job-manager-message">' . sprintf( __( '%s has been published', 'wp-job-manager-company-listings' ), $resume->post_title ) . '</div>';
 						}
 					break;
 					case 'relist' :
@@ -121,7 +121,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		if ( ! is_user_logged_in() ) {
 			ob_start();
-			get_job_manager_template( 'candidate-dashboard-login.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template( 'candidate-dashboard-login.php', array(), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 			return ob_get_clean();
 		}
 
@@ -162,18 +162,18 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 		echo $this->resume_dashboard_message;
 
 		$candidate_dashboard_columns = apply_filters( 'resume_manager_candidate_dashboard_columns', array(
-			'resume-title'       => __( 'Name', 'wp-job-manager-resumes' ),
-			'candidate-title'    => __( 'Title', 'wp-job-manager-resumes' ),
-			'candidate-location' => __( 'Location', 'wp-job-manager-resumes' ),
-			'resume-category'    => __( 'Category', 'wp-job-manager-resumes' ),
-			'date'               => __( 'Date Posted', 'wp-job-manager-resumes' )
+			'resume-title'       => __( 'Name', 'wp-job-manager-company-listings' ),
+			'candidate-title'    => __( 'Title', 'wp-job-manager-company-listings' ),
+			'candidate-location' => __( 'Location', 'wp-job-manager-company-listings' ),
+			'resume-category'    => __( 'Category', 'wp-job-manager-company-listings' ),
+			'date'               => __( 'Date Posted', 'wp-job-manager-company-listings' )
 		) );
 
 		if ( ! get_option( 'resume_manager_enable_categories' ) ) {
 			unset( $candidate_dashboard_columns['resume-category'] );
 		}
 
-		get_job_manager_template( 'candidate-dashboard.php', array( 'resumes' => $resumes->query( $args ), 'max_num_pages' => $resumes->max_num_pages, 'candidate_dashboard_columns' => $candidate_dashboard_columns ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'candidate-dashboard.php', array( 'resumes' => $resumes->query( $args ), 'max_num_pages' => $resumes->max_num_pages, 'candidate_dashboard_columns' => $candidate_dashboard_columns ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 
 		return ob_get_clean();
 	}
@@ -191,7 +191,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 		ob_start();
 
 		if ( ! resume_manager_user_can_browse_resumes() ) {
-			get_job_manager_template_part( 'access-denied', 'browse-resumes', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template_part( 'access-denied', 'browse-resumes', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 			return ob_get_clean();
 		}
 
@@ -238,13 +238,13 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		if ( $show_filters ) {
 
-			get_job_manager_template( 'resume-filters.php', array( 'per_page' => $per_page, 'orderby' => $orderby, 'order' => $order, 'show_categories' => $show_categories, 'categories' => $categories, 'selected_category' => $selected_category, 'atts' => $atts, 'location' => $location, 'keywords' => $keywords, 'show_category_multiselect' => $show_category_multiselect ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template( 'resume-filters.php', array( 'per_page' => $per_page, 'orderby' => $orderby, 'order' => $order, 'show_categories' => $show_categories, 'categories' => $categories, 'selected_category' => $selected_category, 'atts' => $atts, 'location' => $location, 'keywords' => $keywords, 'show_category_multiselect' => $show_category_multiselect ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 
-			get_job_manager_template( 'resumes-start.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
-			get_job_manager_template( 'resumes-end.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template( 'resumes-start.php', array(), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template( 'resumes-end.php', array(), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 
 			if ( ! $show_pagination && $show_more ) {
-				echo '<a class="load_more_resumes" href="#" style="display:none;"><strong>' . __( 'Load more resumes', 'wp-job-manager-resumes' ) . '</strong></a>';
+				echo '<a class="load_more_resumes" href="#" style="display:none;"><strong>' . __( 'Load more resumes', 'wp-job-manager-company-listings' ) . '</strong></a>';
 			}
 
 		} else {
@@ -259,13 +259,13 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 			if ( $resumes->have_posts() ) : ?>
 
-				<?php get_job_manager_template( 'resumes-start.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_job_manager_template( 'resumes-start.php', array(), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
-					<?php get_job_manager_template_part( 'content', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content', 'resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 				<?php endwhile; ?>
 
-				<?php get_job_manager_template( 'resumes-end.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_job_manager_template( 'resumes-end.php', array(), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php if ( $resumes->found_posts > $per_page && $show_more ) : ?>
 
@@ -274,7 +274,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 					<?php if ( $show_pagination ) : ?>
 						<?php echo get_job_listing_pagination( $resumes->max_num_pages ); ?>
 					<?php else : ?>
-						<a class="load_more_resumes" href="#"><strong><?php _e( 'Load more resumes', 'wp-job-manager-resumes' ); ?></strong></a>
+						<a class="load_more_resumes" href="#"><strong><?php _e( 'Load more resumes', 'wp-job-manager-company-listings' ); ?></strong></a>
 					<?php endif; ?>
 
 				<?php endif; ?>
@@ -311,7 +311,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 	 * Output some content when no results were found
 	 */
 	public function output_no_results() {
-		get_job_manager_template( 'content-no-resumes-found.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'content-no-resumes-found.php', array(), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**

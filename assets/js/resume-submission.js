@@ -13,13 +13,13 @@ jQuery(document).ready(function($) {
 		$(this).before( html );
 		return false;
 	});
-	$( '#submit-resume-form' ).on('click', '.resume-manager-remove-row', function() {
+	$( '#submit-company-form' ).on('click', '.resume-manager-remove-row', function() {
 		if ( confirm( resume_manager_resume_submission.i18n_confirm_remove ) ) {
 			$(this).closest( 'div.resume-manager-data-row' ).remove();
 		}
 		return false;
 	});
-	$( '#submit-resume-form' ).on('click', '.job-manager-remove-uploaded-file', function() {
+	$( '#submit-company-form' ).on('click', '.job-manager-remove-uploaded-file', function() {
 		$(this).closest( '.job-manager-uploaded-file' ).remove();
 		return false;
 	});
@@ -39,10 +39,10 @@ jQuery(document).ready(function($) {
 	if ( $('form#resume_preview').size() ) {
 		confirm_nav = true;
 	}
-	$( 'form#submit-resume-form' ).on( 'change', 'input', function() {
+	$( 'form#submit-company-form' ).on( 'change', 'input', function() {
 		confirm_nav = true;
 	});
-	$( 'form#submit-resume-form, form#resume_preview' ).submit(function(){
+	$( 'form#submit-company-form, form#resume_preview' ).submit(function(){
 		confirm_nav = false;
 		return true;
 	});
@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
 			)
 			.result( function( result ) {
 				var profile = result.values[0];
-				$form       = $( '#submit-resume-form' );
+				$form       = $( '#submit-company-form' );
 
 				$form.find('input[name="candidate_name"]').val( profile.formattedName );
 				$form.find('input[name="candidate_email"]').val( profile.emailAddress );

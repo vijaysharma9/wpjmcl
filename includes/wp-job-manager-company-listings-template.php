@@ -167,15 +167,15 @@ function get_the_resume_status( $post = null ) {
 	$status = $post->post_status;
 
 	if ( $status == 'publish' )
-		$status = __( 'Published', 'wp-job-manager-resumes' );
+		$status = __( 'Published', 'wp-job-manager-company-listings' );
 	elseif ( $status == 'expired' )
-		$status = __( 'Expired', 'wp-job-manager-resumes' );
+		$status = __( 'Expired', 'wp-job-manager-company-listings' );
 	elseif ( $status == 'pending' )
-		$status = __( 'Pending Review', 'wp-job-manager-resumes' );
+		$status = __( 'Pending Review', 'wp-job-manager-company-listings' );
 	elseif ( $status == 'hidden' )
-		$status = __( 'Hidden', 'wp-job-manager-resumes' );
+		$status = __( 'Hidden', 'wp-job-manager-company-listings' );
 	else
-		$status = __( 'Inactive', 'wp-job-manager-resumes' );
+		$status = __( 'Inactive', 'wp-job-manager-company-listings' );
 
 	return apply_filters( 'the_resume_status', $status, $post );
 }
@@ -278,7 +278,7 @@ function the_resume_permalink( $post = null ) {
  */
 function the_resume_links( $post = null ) {
 	$post = get_post( $post );
-	get_job_manager_template( 'resume-links.php', array( 'post' => $post ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+	get_job_manager_template( 'resume-links.php', array( 'post' => $post ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 }
 
 /**

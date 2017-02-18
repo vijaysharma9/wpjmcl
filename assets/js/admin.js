@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Sorting
-	$('.wc-job-manager-resumes-repeated-rows tbody').sortable({
+	$('.wc-job-manager-company-listings-repeated-rows tbody').sortable({
 		items:'tr',
 		cursor:'move',
 		axis:'y',

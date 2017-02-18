@@ -211,7 +211,7 @@ function resume_manager_get_filtered_links( $args = array() ) {
 
 	$links = apply_filters( 'resume_manager_resume_filters_showing_resumes_links', array(
 		'reset' => array(
-			'name' => __( 'Reset', 'wp-job-manager-resumes' ),
+			'name' => __( 'Reset', 'wp-job-manager-company-listings' ),
 			'url'  => '#'
 		)
 	), $args );
@@ -384,13 +384,13 @@ if ( ! function_exists( 'get_resume_post_statuses' ) ) :
  */
 function get_resume_post_statuses() {
 	return apply_filters( 'resume_post_statuses', array(
-		'draft'           => _x( 'Draft', 'post status', 'wp-job-manager-resumes' ),
-		'expired'         => _x( 'Expired', 'post status', 'wp-job-manager-resumes' ),
-		'hidden'          => _x( 'Hidden', 'post status', 'wp-job-manager-resumes' ),
-		'preview'         => _x( 'Preview', 'post status', 'wp-job-manager-resumes' ),
-		'pending'         => _x( 'Pending approval', 'post status', 'wp-job-manager-resumes' ),
-		'pending_payment' => _x( 'Pending payment', 'post status', 'wp-job-manager-resumes' ),
-		'publish'         => _x( 'Published', 'post status', 'wp-job-manager-resumes' ),
+		'draft'           => _x( 'Draft', 'post status', 'wp-job-manager-company-listings' ),
+		'expired'         => _x( 'Expired', 'post status', 'wp-job-manager-company-listings' ),
+		'hidden'          => _x( 'Hidden', 'post status', 'wp-job-manager-company-listings' ),
+		'preview'         => _x( 'Preview', 'post status', 'wp-job-manager-company-listings' ),
+		'pending'         => _x( 'Pending approval', 'post status', 'wp-job-manager-company-listings' ),
+		'pending_payment' => _x( 'Pending payment', 'post status', 'wp-job-manager-company-listings' ),
+		'publish'         => _x( 'Published', 'post status', 'wp-job-manager-company-listings' ),
 	) );
 }
 endif;

@@ -65,7 +65,7 @@ class WP_Job_Manager_Company_Listings_Apply {
 				return;
 			}
 
-			echo '<p class="applying_for">' . sprintf( __( 'Submit your resume below to apply for the job "%s".', 'wp-job-manager-resumes' ), '<a href="' . get_permalink( $job_id ) . '">' . get_the_title( $job_id ) . '</a>' ) .'</p>';
+			echo '<p class="applying_for">' . sprintf( __( 'Submit your resume below to apply for the job "%s".', 'wp-job-manager-company-listings' ), '<a href="' . get_permalink( $job_id ) . '">' . get_the_title( $job_id ) . '</a>' ) .'</p>';
 		}
 	}
 
@@ -97,14 +97,14 @@ class WP_Job_Manager_Company_Listings_Apply {
 	 * Allow users to apply to a job with a resume
 	 */
 	public function apply_with_resume() {
-		get_job_manager_template( 'apply-with-resume.php', array( 'resumes' => $this->get_user_resumes() ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'apply-with-resume.php', array( 'resumes' => $this->get_user_resumes() ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**
 	 * Allow users to apply to a job with a resume
 	 */
 	public function force_apply_with_resume() {
-		get_job_manager_template( 'force-apply-with-resume.php', array(), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'force-apply-with-resume.php', array(), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**
@@ -121,28 +121,28 @@ class WP_Job_Manager_Company_Listings_Apply {
 
 			try {
 				if ( empty( $resume_id ) ) {
-					throw new Exception( __( 'Please choose a resume to apply with', 'wp-job-manager-resumes' ) );
+					throw new Exception( __( 'Please choose a resume to apply with', 'wp-job-manager-company-listings' ) );
 				}
 
 				if ( empty( $job_id ) ) {
-					throw new Exception( __( 'This job cannot be applied for using a resume', 'wp-job-manager-resumes' ) );
+					throw new Exception( __( 'This job cannot be applied for using a resume', 'wp-job-manager-company-listings' ) );
 				}
 
 				if ( empty( $application_message ) ) {
-					throw new Exception( __( 'Please enter a message to include with your application', 'wp-job-manager-resumes' ) );
+					throw new Exception( __( 'Please enter a message to include with your application', 'wp-job-manager-company-listings' ) );
 				}
 
 				$method = get_the_job_application_method( $job_id );
 
 				if ( "email" !== $method->type && ! ( class_exists( 'WP_Job_Manager_Applications' ) && get_option( 'resume_manager_enable_application_for_url_method', 1 ) ) ) {
-					throw new Exception( __( 'This job cannot be applied for using a resume', 'wp-job-manager-resumes' ) );
+					throw new Exception( __( 'This job cannot be applied for using a resume', 'wp-job-manager-company-listings' ) );
 				}
 
 				if ( $this->send_application( $job_id, $resume_id, $application_message ) ) {
-					$this->message = __( 'Your application has been sent successfully', 'wp-job-manager-resumes' );
+					$this->message = __( 'Your application has been sent successfully', 'wp-job-manager-company-listings' );
 					add_filter( 'job_manager_show_job_apply_' . $job_id, '__return_false' );
 				} else {
-					throw new Exception( __( 'Error sending application', 'wp-job-manager-resumes' ) );
+					throw new Exception( __( 'Error sending application', 'wp-job-manager-company-listings' ) );
 				}
 			} catch ( Exception $e ) {
 				  $this->error = $e->getMessage();
@@ -173,13 +173,13 @@ class WP_Job_Manager_Company_Listings_Apply {
 		}
 
 		$message     = apply_filters( 'apply_with_resume_email_message', array(
-			'greeting'      => __( 'Hello', 'wp-job-manager-resumes' ),
-			'position'      => sprintf( "\n\n" . __( 'A candidate has applied online for the position "%s".', 'wp-job-manager-resumes' ), get_the_title( $job_id ) ),
+			'greeting'      => __( 'Hello', 'wp-job-manager-company-listings' ),
+			'position'      => sprintf( "\n\n" . __( 'A candidate has applied online for the position "%s".', 'wp-job-manager-company-listings' ), get_the_title( $job_id ) ),
 			'start_message' => "\n\n-----------\n\n",
 			'message'       => $application_message,
 			'end_message'   => "\n\n-----------\n\n",
-			'view_resume'   => sprintf( __( 'You can view their online resume here: %s.', 'wp-job-manager-resumes' ), $resume_link ),
-			'contact'       => "\n" . sprintf( __( 'Or you can contact them directly at: %s.', 'wp-job-manager-resumes' ), $candidate_email ),
+			'view_resume'   => sprintf( __( 'You can view their online resume here: %s.', 'wp-job-manager-company-listings' ), $resume_link ),
+			'contact'       => "\n" . sprintf( __( 'Or you can contact them directly at: %s.', 'wp-job-manager-company-listings' ), $candidate_email ),
 		), get_current_user_id(), $job_id, $resume_id, $application_message );
 
 		if ( ! empty( $method->raw_email ) ) {

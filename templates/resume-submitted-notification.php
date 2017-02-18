@@ -5,8 +5,8 @@
  * Note: This is in plain text format
  */
 $message             = array();
-$message['greeting'] = __( 'Hello', 'wp-job-manager-resumes' ) . "\n" . "\n";
-$message['intro']    = sprintf( __( 'A new resume has just been submitted by *%s*. The details of their resume are as follows:', 'wp-job-manager-resumes' ), $resume->post_title ) . "\n" . "\n";
+$message['greeting'] = __( 'Hello', 'wp-job-manager-company-listings' ) . "\n" . "\n";
+$message['intro']    = sprintf( __( 'A new resume has just been submitted by *%s*. The details of their resume are as follows:', 'wp-job-manager-company-listings' ), $resume->post_title ) . "\n" . "\n";
 
 // Get admin custom fields and loop through
 foreach ( $custom_fields as $meta_key => $field ) {
@@ -19,12 +19,12 @@ foreach ( $custom_fields as $meta_key => $field ) {
 }
 
 // Show Resume Content
-$message['content_intro'] = "\n" . __( 'The content of their resume is as follows:', 'wp-job-manager-resumes' ) . "\n" . "\n";
+$message['content_intro'] = "\n" . __( 'The content of their resume is as follows:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 $message['content']       = strip_tags( $resume->post_content ) . "\n" . "\n" . '-----------' . "\n" . "\n";
 
 // Output Links
 if ( $items = get_post_meta( $resume_id, '_links', true ) ) {
-	$message['link_start'] = __( 'Links:', 'wp-job-manager-resumes' ) . "\n" . "\n";
+	$message['link_start'] = __( 'Links:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 	foreach ( $items as $key => $item ) {
 		$message[ 'link_' . $key ] = $item['name'] . ': ' . $item['url'] . "\n";
 	}
@@ -33,11 +33,11 @@ if ( $items = get_post_meta( $resume_id, '_links', true ) ) {
 
 // Education
 if ( $items = get_post_meta( $resume_id, '_candidate_education', true ) ) {
-	$message['education_start'] = __( 'Education:', 'wp-job-manager-resumes' ) . "\n" . "\n";
+	$message['education_start'] = __( 'Education:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 	foreach ( $items as $key => $item ) {
-		$message[ 'education_location_' . $key ]      = sprintf( __( 'Location: %s', 'wp-job-manager-resumes' ), $item['location'] ) . "\n";
-		$message[ 'education_date_' . $key ]          = sprintf( __( 'Date: %s', 'wp-job-manager-resumes' ), $item['date'] ) . "\n";
-		$message[ 'education_qualification_' . $key ] = sprintf( __( 'Qualification: %s', 'wp-job-manager-resumes' ), $item['qualification'] ) . "\n";
+		$message[ 'education_location_' . $key ]      = sprintf( __( 'Location: %s', 'wp-job-manager-company-listings' ), $item['location'] ) . "\n";
+		$message[ 'education_date_' . $key ]          = sprintf( __( 'Date: %s', 'wp-job-manager-company-listings' ), $item['date'] ) . "\n";
+		$message[ 'education_qualification_' . $key ] = sprintf( __( 'Qualification: %s', 'wp-job-manager-company-listings' ), $item['qualification'] ) . "\n";
 		$message[ 'education_notes_' . $key ]         = $item['notes'] . "\n" . "\n";
 	}
 	$message['education_end'] = '-----------' . "\n" . "\n";
@@ -45,11 +45,11 @@ if ( $items = get_post_meta( $resume_id, '_candidate_education', true ) ) {
 
 // Experience
 if ( $items = get_post_meta( $resume_id, '_candidate_experience', true ) ) {
-	$message['experience_start'] = __( 'Experience:', 'wp-job-manager-resumes' ) . "\n" . "\n";
+	$message['experience_start'] = __( 'Experience:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 	foreach ( $items as $key => $item ) {
-		$message[ 'experience_employer_' . $key ] = sprintf( __( 'Employer: %s', 'wp-job-manager-resumes' ), $item['employer'] ) . "\n";
-		$message[ 'experience_location_' . $key ] = sprintf( __( 'Date: %s', 'wp-job-manager-resumes' ), $item['date'] ) . "\n";
-		$message[ 'experience_title_' . $key ]    = sprintf( __( 'Job Title: %s', 'wp-job-manager-resumes' ), $item['job_title'] ) . "\n";
+		$message[ 'experience_employer_' . $key ] = sprintf( __( 'Employer: %s', 'wp-job-manager-company-listings' ), $item['employer'] ) . "\n";
+		$message[ 'experience_location_' . $key ] = sprintf( __( 'Date: %s', 'wp-job-manager-company-listings' ), $item['date'] ) . "\n";
+		$message[ 'experience_title_' . $key ]    = sprintf( __( 'Job Title: %s', 'wp-job-manager-company-listings' ), $item['job_title'] ) . "\n";
 		$message[ 'experience_notes_' . $key ]    = $item['notes'] . "\n" . "\n";
 	}
 	$message['experience_end'] = '-----------' . "\n" . "\n";

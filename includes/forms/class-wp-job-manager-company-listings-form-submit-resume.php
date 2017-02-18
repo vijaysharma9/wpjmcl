@@ -33,19 +33,19 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 
 		$this->steps  = (array) apply_filters( 'submit_resume_steps', array(
 			'submit' => array(
-				'name'     => __( 'Submit Details', 'wp-job-manager-resumes' ),
+				'name'     => __( 'Submit Details', 'wp-job-manager-company-listings' ),
 				'view'     => array( $this, 'submit' ),
 				'handler'  => array( $this, 'submit_handler' ),
 				'priority' => 10
 				),
 			'preview' => array(
-				'name'     => __( 'Preview', 'wp-job-manager-resumes' ),
+				'name'     => __( 'Preview', 'wp-job-manager-company-listings' ),
 				'view'     => array( $this, 'preview' ),
 				'handler'  => array( $this, 'preview_handler' ),
 				'priority' => 20
 			),
 			'done' => array(
-				'name'     => __( 'Done', 'wp-job-manager-resumes' ),
+				'name'     => __( 'Done', 'wp-job-manager-company-listings' ),
 				'view'     => array( $this, 'done' ),
 				'handler'  => '',
 				'priority' => 30
@@ -104,7 +104,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 			case 'education' :
 			case 'experience' :
 			case 'links' :
-				get_job_manager_template( 'form-fields/repeated-field.php', array( 'key' => $key, 'field' => $field, 'class' => $this ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+				get_job_manager_template( 'form-fields/repeated-field.php', array( 'key' => $key, 'field' => $field, 'class' => $this ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 			break;
 			default :
 				get_job_manager_template( 'form-fields/' . $field['type'] . '-field.php', array( 'key' => $key, 'field' => $field, 'class' => $this ) );
@@ -120,41 +120,41 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 			return;
 		}
 		if ( $max = get_option( 'resume_manager_max_skills' ) ) {
-			$max = ' ' . sprintf( __( 'Maximum of %d.', 'wp-job-manager-resumes' ), $max );
+			$max = ' ' . sprintf( __( 'Maximum of %d.', 'wp-job-manager-company-listings' ), $max );
 		}
 
 		$this->fields = apply_filters( 'submit_resume_form_fields', array(
 			'resume_fields' => array(
 				'candidate_name' => array(
-					'label'       => __( 'Your name', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Your name', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
-					'placeholder' => __( 'Your full name', 'wp-job-manager-resumes' ),
+					'placeholder' => __( 'Your full name', 'wp-job-manager-company-listings' ),
 					'priority'    => 1
 				),
 				'candidate_email' => array(
-					'label'       => __( 'Your email', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Your email', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
-					'placeholder' => __( 'you@yourdomain.com', 'wp-job-manager-resumes' ),
+					'placeholder' => __( 'you@yourdomain.com', 'wp-job-manager-company-listings' ),
 					'priority'    => 2
 				),
 				'candidate_title' => array(
-					'label'       => __( 'Professional title', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Professional title', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
-					'placeholder' => __( 'e.g. "Web Developer"', 'wp-job-manager-resumes' ),
+					'placeholder' => __( 'e.g. "Web Developer"', 'wp-job-manager-company-listings' ),
 					'priority'    => 3
 				),
 				'candidate_location' => array(
-					'label'       => __( 'Location', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Location', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
-					'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-resumes' ),
+					'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-company-listings' ),
 					'priority'    => 4
 				),
 				'candidate_photo' => array(
-					'label'       => __( 'Photo', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Photo', 'wp-job-manager-company-listings' ),
 					'type'        => 'file',
 					'required'    => false,
 					'placeholder' => '',
@@ -168,14 +168,14 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 					)
 				),
 				'candidate_video' => array(
-					'label'       => __( 'Video', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Video', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => false,
 					'priority'    => 6,
-					'placeholder' => __( 'A link to a video about yourself', 'wp-job-manager-resumes' ),
+					'placeholder' => __( 'A link to a video about yourself', 'wp-job-manager-company-listings' ),
 				),
 				'resume_category' => array(
-					'label'       => __( 'Resume category', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Resume category', 'wp-job-manager-company-listings' ),
 					'type'        => 'term-multiselect',
 					'taxonomy'    => 'resume_category',
 					'required'    => true,
@@ -183,37 +183,37 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 					'priority'    => 7
 				),
 				'resume_content' => array(
-					'label'       => __( 'Resume Content', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Resume Content', 'wp-job-manager-company-listings' ),
 					'type'        => 'wp-editor',
 					'required'    => true,
 					'placeholder' => '',
 					'priority'    => 8
 				),
 				'resume_skills' => array(
-					'label'       => __( 'Skills', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Skills', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => false,
-					'placeholder' => __( 'Comma separate a list of relevant skills', 'wp-job-manager-resumes' ) . $max,
+					'placeholder' => __( 'Comma separate a list of relevant skills', 'wp-job-manager-company-listings' ) . $max,
 					'priority'    => 9
 				),
 				'links' => array(
-					'label'       => __( 'URL(s)', 'wp-job-manager-resumes' ),
-					'add_row'     => __( 'Add URL', 'wp-job-manager-resumes' ),
+					'label'       => __( 'URL(s)', 'wp-job-manager-company-listings' ),
+					'add_row'     => __( 'Add URL', 'wp-job-manager-company-listings' ),
 					'type'        => 'links', // repeated
 					'required'    => false,
 					'placeholder' => '',
-					'description' => __( 'Optionally provide links to any of your websites or social network profiles.', 'wp-job-manager-resumes' ),
+					'description' => __( 'Optionally provide links to any of your websites or social network profiles.', 'wp-job-manager-company-listings' ),
 					'priority'    => 10,
 					'fields'      => array(
 						'name' => array(
-							'label'       => __( 'Name', 'wp-job-manager-resumes' ),
+							'label'       => __( 'Name', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => '',
 							'priority'    => 1
 						),
 						'url' => array(
-							'label'       => __( 'URL', 'wp-job-manager-resumes' ),
+							'label'       => __( 'URL', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => '',
@@ -222,33 +222,33 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 					)
 				),
 				'candidate_education' => array(
-					'label'       => __( 'Education', 'wp-job-manager-resumes' ),
-					'add_row'     => __( 'Add Education', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Education', 'wp-job-manager-company-listings' ),
+					'add_row'     => __( 'Add Education', 'wp-job-manager-company-listings' ),
 					'type'        => 'education', // repeated
 					'required'    => false,
 					'placeholder' => '',
 					'priority'    => 11,
 					'fields'      => array(
 						'location' => array(
-							'label'       => __( 'School name', 'wp-job-manager-resumes' ),
+							'label'       => __( 'School name', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => ''
 						),
 						'qualification' => array(
-							'label'       => __( 'Qualification(s)', 'wp-job-manager-resumes' ),
+							'label'       => __( 'Qualification(s)', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => ''
 						),
 						'date' => array(
-							'label'       => __( 'Start/end date', 'wp-job-manager-resumes' ),
+							'label'       => __( 'Start/end date', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => ''
 						),
 						'notes' => array(
-							'label'       => __( 'Notes', 'wp-job-manager-resumes' ),
+							'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
 							'type'        => 'textarea',
 							'required'    => false,
 							'placeholder' => ''
@@ -256,33 +256,33 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 					)
 				),
 				'candidate_experience' => array(
-					'label'       => __( 'Experience', 'wp-job-manager-resumes' ),
-					'add_row'     => __( 'Add Experience', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Experience', 'wp-job-manager-company-listings' ),
+					'add_row'     => __( 'Add Experience', 'wp-job-manager-company-listings' ),
 					'type'        => 'experience', // repeated
 					'required'    => false,
 					'placeholder' => '',
 					'priority'    => 12,
 					'fields'      => array(
 						'employer' => array(
-							'label'       => __( 'Employer', 'wp-job-manager-resumes' ),
+							'label'       => __( 'Employer', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => ''
 						),
 						'job_title' => array(
-							'label'       => __( 'Job Title', 'wp-job-manager-resumes' ),
+							'label'       => __( 'Job Title', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => ''
 						),
 						'date' => array(
-							'label'       => __( 'Start/end date', 'wp-job-manager-resumes' ),
+							'label'       => __( 'Start/end date', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => ''
 						),
 						'notes' => array(
-							'label'       => __( 'Notes', 'wp-job-manager-resumes' ),
+							'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
 							'type'        => 'textarea',
 							'required'    => false,
 							'placeholder' => ''
@@ -290,11 +290,11 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 					)
 				),
 				'resume_file' => array(
-					'label'       => __( 'Resume file', 'wp-job-manager-resumes' ),
+					'label'       => __( 'Resume file', 'wp-job-manager-company-listings' ),
 					'type'        => 'file',
 					'required'    => false,
 					'ajax'        => true,
-					'description' => sprintf( __( 'Optionally upload your resume for employers to view. Max. file size: %s.', 'wp-job-manager-resumes' ), size_format( wp_max_upload_size() ) ),
+					'description' => sprintf( __( 'Optionally upload your resume for employers to view. Max. file size: %s.', 'wp-job-manager-company-listings' ), size_format( wp_max_upload_size() ) ),
 					'priority'    => 13,
 					'placeholder' => ''
 				),
@@ -413,25 +413,25 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 		foreach ( $this->fields as $group_key => $fields ) {
 			foreach ( $fields as $key => $field ) {
 				if ( $field['required'] && empty( $values[ $group_key ][ $key ] ) ) {
-					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field', 'wp-job-manager-resumes' ), $field['label'] ) );
+					return new WP_Error( 'validation-error', sprintf( __( '%s is a required field', 'wp-job-manager-company-listings' ), $field['label'] ) );
 				}
 				if ( ! empty( $field['taxonomy'] ) && in_array( $field['type'], array( 'term-checklist', 'term-select', 'term-multiselect' ) ) ) {
 					if ( is_array( $values[ $group_key ][ $key ] ) ) {
 						foreach ( $values[ $group_key ][ $key ] as $term ) {
 							if ( ! term_exists( $term, $field['taxonomy'] ) ) {
-								return new WP_Error( 'validation-error', sprintf( __( '%s is invalid', 'wp-job-manager-resumes' ), $field['label'] ) );
+								return new WP_Error( 'validation-error', sprintf( __( '%s is invalid', 'wp-job-manager-company-listings' ), $field['label'] ) );
 							}
 						}
 					} elseif ( ! empty( $values[ $group_key ][ $key ] ) ) {
 						if ( ! term_exists( $values[ $group_key ][ $key ], $field['taxonomy'] ) ) {
-							return new WP_Error( 'validation-error', sprintf( __( '%s is invalid', 'wp-job-manager-resumes' ), $field['label'] ) );
+							return new WP_Error( 'validation-error', sprintf( __( '%s is invalid', 'wp-job-manager-company-listings' ), $field['label'] ) );
 						}
 					}
 				}
 
 				if ( 'candidate_email' === $key ) {
 					if ( ! empty( $values[ $group_key ][ $key ] ) && ! is_email( $values[ $group_key ][ $key ] ) ) {
-						throw new Exception( __( 'Please enter a valid email address', 'wp-job-manager-resumes' ) );
+						throw new Exception( __( 'Please enter a valid email address', 'wp-job-manager-company-listings' ) );
 					}
 				}
 
@@ -444,7 +444,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 					$max = get_option( 'resume_manager_max_skills' );
 
 					if ( $max && sizeof( $raw_skills ) > $max ) {
-						return new WP_Error( 'validation-error', sprintf( __( 'Please enter no more than %d skills.', 'wp-job-manager-resumes' ), $max ) );
+						return new WP_Error( 'validation-error', sprintf( __( 'Please enter no more than %d skills.', 'wp-job-manager-company-listings' ), $max ) );
 					}
 				}
 			}
@@ -527,8 +527,8 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 			'action'             => $this->get_action(),
 			'resume_fields'      => $this->get_fields( 'resume_fields' ),
 			'step'               => $this->get_step(),
-			'submit_button_text' => apply_filters( 'submit_resume_form_submit_button_text', __( 'Preview &rarr;', 'wp-job-manager-resumes' ) )
-		), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			'submit_button_text' => apply_filters( 'submit_resume_form_submit_button_text', __( 'Preview &rarr;', 'wp-job-manager-company-listings' ) )
+		), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**
@@ -558,10 +558,10 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 				if ( resume_manager_enable_registration() ) {
 					if ( resume_manager_user_requires_account() ) {
 						if ( ! resume_manager_generate_username_from_email() && empty( $_POST['create_account_username'] ) ) {
-							throw new Exception( __( 'Please enter a username.', 'wp-job-manager-resumes' ) );
+							throw new Exception( __( 'Please enter a username.', 'wp-job-manager-company-listings' ) );
 						}
 						if ( empty( $_POST['candidate_email'] ) ) {
-							throw new Exception( __( 'Please enter your email address.', 'wp-job-manager-resumes' ) );
+							throw new Exception( __( 'Please enter your email address.', 'wp-job-manager-company-listings' ) );
 						}
 					}
 					if ( ! empty( $_POST['candidate_email'] ) ) {
@@ -583,7 +583,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 			}
 
 			if ( resume_manager_user_requires_account() && ! is_user_logged_in() ) {
-				throw new Exception( __( 'You must be signed in to post your resume.', 'wp-job-manager-resumes' ) );
+				throw new Exception( __( 'You must be signed in to post your resume.', 'wp-job-manager-company-listings' ) );
 			}
 
 			// Update the job
@@ -785,7 +785,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 	public function preview() {
 		global $post, $resume_preview;
 
-		wp_enqueue_script( 'wp-job-manager-company-listings-resume-submission' );
+		wp_enqueue_script( 'wp-job-manager-company-listings-company-submission' );
 
 		if ( $this->resume_id ) {
 
@@ -795,19 +795,19 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 			?>
 			<form method="post" id="resume_preview">
 				<div class="resume_preview_title">
-					<input type="submit" name="continue" id="resume_preview_submit_button" class="button" value="<?php echo apply_filters( 'submit_resume_step_preview_submit_text', __( 'Submit Resume &rarr;', 'wp-job-manager-resumes' ) ); ?>" />
-					<input type="submit" name="edit_resume" class="button" value="<?php _e( '&larr; Edit resume', 'wp-job-manager-resumes' ); ?>" />
+					<input type="submit" name="continue" id="resume_preview_submit_button" class="button" value="<?php echo apply_filters( 'submit_resume_step_preview_submit_text', __( 'Submit Resume &rarr;', 'wp-job-manager-company-listings' ) ); ?>" />
+					<input type="submit" name="edit_resume" class="button" value="<?php _e( '&larr; Edit resume', 'wp-job-manager-company-listings' ); ?>" />
 					<input type="hidden" name="resume_id" value="<?php echo esc_attr( $this->resume_id ); ?>" />
 					<input type="hidden" name="job_id" value="<?php echo esc_attr( $this->job_id ); ?>" />
 					<input type="hidden" name="step" value="<?php echo esc_attr( $this->step ); ?>" />
 					<input type="hidden" name="resume_manager_form" value="<?php echo $this->form_name; ?>" />
 					<h2>
-						<?php _e( 'Preview', 'wp-job-manager-resumes' ); ?>
+						<?php _e( 'Preview', 'wp-job-manager-company-listings' ); ?>
 					</h2>
 				</div>
 				<div class="resume_preview single-resume">
 					<h1><?php the_title(); ?></h1>
-					<?php get_job_manager_template_part( 'content-single', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_job_manager_template_part( 'content-single', 'resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 				</div>
 			</form>
 			<?php
@@ -859,11 +859,11 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Resume extends WP_Job_Manager_
 	 */
 	public function done() {
 		do_action( 'resume_manager_resume_submitted', $this->resume_id );
-		get_job_manager_template( 'resume-submitted.php', array( 'resume' => get_post( $this->resume_id ), 'job_id' => $this->job_id ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'resume-submitted.php', array( 'resume' => get_post( $this->resume_id ), 'job_id' => $this->job_id ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 
 		// Allow application
 		if ( $this->job_id ) {
-			echo '<h3 class="applying_for">' . sprintf( __( 'Submit your application to the job "%s".', 'wp-job-manager-resumes' ), '<a href="' . get_permalink( $this->job_id ) . '">' . get_the_title( $this->job_id ) . '</a>' ) .'</h3>';
+			echo '<h3 class="applying_for">' . sprintf( __( 'Submit your application to the job "%s".', 'wp-job-manager-company-listings' ), '<a href="' . get_permalink( $this->job_id ) . '">' . get_the_title( $this->job_id ) . '</a>' ) .'</h3>';
 
 			echo do_shortcode( '[job_apply id="' . absint( $this->job_id ) . '"]' );
 		}

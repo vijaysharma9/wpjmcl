@@ -80,12 +80,12 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		 * Taxonomies
 		 */
 		if ( get_option( 'resume_manager_enable_categories' ) ) {
-			$singular  = __( 'Resume Category', 'wp-job-manager-resumes' );
-			$plural    = __( 'Resume Categories', 'wp-job-manager-resumes' );
+			$singular  = __( 'Resume Category', 'wp-job-manager-company-listings' );
+			$plural    = __( 'Resume Categories', 'wp-job-manager-company-listings' );
 
 			if ( current_theme_supports( 'resume-manager-templates' ) ) {
 				$rewrite     = array(
-					'slug'         => _x( 'resume-category', 'Resume category slug - resave permalinks after changing this', 'wp-job-manager-resumes' ),
+					'slug'         => _x( 'resume-category', 'Resume category slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 					'with_front'   => false,
 					'hierarchical' => false
 				);
@@ -102,14 +102,14 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		            'labels' => array(
 	                    'name' 				=> $plural,
 	                    'singular_name' 	=> $singular,
-	                    'search_items' 		=> sprintf( __( 'Search %s', 'wp-job-manager-resumes' ), $plural ),
-	                    'all_items' 		=> sprintf( __( 'All %s', 'wp-job-manager-resumes' ), $plural ),
-	                    'parent_item' 		=> sprintf( __( 'Parent %s', 'wp-job-manager-resumes' ), $singular ),
-	                    'parent_item_colon' => sprintf( __( 'Parent %s:', 'wp-job-manager-resumes' ), $singular ),
-	                    'edit_item' 		=> sprintf( __( 'Edit %s', 'wp-job-manager-resumes' ), $singular ),
-	                    'update_item' 		=> sprintf( __( 'Update %s', 'wp-job-manager-resumes' ), $singular ),
-	                    'add_new_item' 		=> sprintf( __( 'Add New %s', 'wp-job-manager-resumes' ), $singular ),
-	                    'new_item_name' 	=> sprintf( __( 'New %s Name', 'wp-job-manager-resumes' ),  $singular )
+	                    'search_items' 		=> sprintf( __( 'Search %s', 'wp-job-manager-company-listings' ), $plural ),
+	                    'all_items' 		=> sprintf( __( 'All %s', 'wp-job-manager-company-listings' ), $plural ),
+	                    'parent_item' 		=> sprintf( __( 'Parent %s', 'wp-job-manager-company-listings' ), $singular ),
+	                    'parent_item_colon' => sprintf( __( 'Parent %s:', 'wp-job-manager-company-listings' ), $singular ),
+	                    'edit_item' 		=> sprintf( __( 'Edit %s', 'wp-job-manager-company-listings' ), $singular ),
+	                    'update_item' 		=> sprintf( __( 'Update %s', 'wp-job-manager-company-listings' ), $singular ),
+	                    'add_new_item' 		=> sprintf( __( 'Add New %s', 'wp-job-manager-company-listings' ), $singular ),
+	                    'new_item_name' 	=> sprintf( __( 'New %s Name', 'wp-job-manager-company-listings' ),  $singular )
 	            	),
 		            'show_ui' 				=> true,
 		            'query_var' 			=> true,
@@ -125,12 +125,12 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		}
 
 		if ( get_option( 'resume_manager_enable_skills' ) ) {
-			$singular  = __( 'Candidate Skill', 'wp-job-manager-resumes' );
-			$plural    = __( 'Candidate Skills', 'wp-job-manager-resumes' );
+			$singular  = __( 'Candidate Skill', 'wp-job-manager-company-listings' );
+			$plural    = __( 'Candidate Skills', 'wp-job-manager-company-listings' );
 
 			if ( current_theme_supports( 'resume-manager-templates' ) ) {
 				$rewrite     = array(
-					'slug'         => _x( 'resume-skill', 'Resume skill slug - resave permalinks after changing this', 'wp-job-manager-resumes' ),
+					'slug'         => _x( 'resume-skill', 'Resume skill slug - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 					'with_front'   => false,
 					'hierarchical' => false
 				);
@@ -147,14 +147,14 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		            'labels' => array(
 	                    'name' 				=> $plural,
 	                    'singular_name' 	=> $singular,
-	                    'search_items' 		=> sprintf( __( 'Search %s', 'wp-job-manager-resumes' ), $plural ),
-	                    'all_items' 		=> sprintf( __( 'All %s', 'wp-job-manager-resumes' ), $plural ),
-	                    'parent_item' 		=> sprintf( __( 'Parent %s', 'wp-job-manager-resumes' ), $singular ),
-	                    'parent_item_colon' => sprintf( __( 'Parent %s:', 'wp-job-manager-resumes' ), $singular ),
-	                    'edit_item' 		=> sprintf( __( 'Edit %s', 'wp-job-manager-resumes' ), $singular ),
-	                    'update_item' 		=> sprintf( __( 'Update %s', 'wp-job-manager-resumes' ), $singular ),
-	                    'add_new_item' 		=> sprintf( __( 'Add New %s', 'wp-job-manager-resumes' ), $singular ),
-	                    'new_item_name' 	=> sprintf( __( 'New %s Name', 'wp-job-manager-resumes' ),  $singular )
+	                    'search_items' 		=> sprintf( __( 'Search %s', 'wp-job-manager-company-listings' ), $plural ),
+	                    'all_items' 		=> sprintf( __( 'All %s', 'wp-job-manager-company-listings' ), $plural ),
+	                    'parent_item' 		=> sprintf( __( 'Parent %s', 'wp-job-manager-company-listings' ), $singular ),
+	                    'parent_item_colon' => sprintf( __( 'Parent %s:', 'wp-job-manager-company-listings' ), $singular ),
+	                    'edit_item' 		=> sprintf( __( 'Edit %s', 'wp-job-manager-company-listings' ), $singular ),
+	                    'update_item' 		=> sprintf( __( 'Update %s', 'wp-job-manager-company-listings' ), $singular ),
+	                    'add_new_item' 		=> sprintf( __( 'Add New %s', 'wp-job-manager-company-listings' ), $singular ),
+	                    'new_item_name' 	=> sprintf( __( 'New %s Name', 'wp-job-manager-company-listings' ),  $singular )
 	            	),
 		            'show_ui' 				=> true,
 		            'query_var' 			=> true,
@@ -172,17 +172,17 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	    /**
 		 * Post types
 		 */
-		$singular  = __( 'Resume', 'wp-job-manager-resumes' );
-		$plural    = __( 'Resumes', 'wp-job-manager-resumes' );
+		$singular  = __( 'Resume', 'wp-job-manager-company-listings' );
+		$plural    = __( 'Resumes', 'wp-job-manager-company-listings' );
 
 		if ( current_theme_supports( 'resume-manager-templates' ) ) {
-			$has_archive = _x( 'resumes', 'Post type archive slug - resave permalinks after changing this', 'wp-job-manager-resumes' );
+			$has_archive = _x( 'resumes', 'Post type archive slug - resave permalinks after changing this', 'wp-job-manager-company-listings' );
 		} else {
 			$has_archive = false;
 		}
 
 		$rewrite     = array(
-			'slug'       => _x( 'resume', 'Resume permalink - resave permalinks after changing this', 'wp-job-manager-resumes' ),
+			'slug'       => _x( 'resume', 'Resume permalink - resave permalinks after changing this', 'wp-job-manager-company-listings' ),
 			'with_front' => false,
 			'feeds'      => false,
 			'pages'      => false
@@ -194,20 +194,20 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 					'name' 					=> $plural,
 					'singular_name' 		=> $singular,
 					'menu_name'             => $plural,
-					'all_items'             => sprintf( __( 'All %s', 'wp-job-manager-resumes' ), $plural ),
-					'add_new' 				=> __( 'Add New', 'wp-job-manager-resumes' ),
-					'add_new_item' 			=> sprintf( __( 'Add %s', 'wp-job-manager-resumes' ), $singular ),
-					'edit' 					=> __( 'Edit', 'wp-job-manager-resumes' ),
-					'edit_item' 			=> sprintf( __( 'Edit %s', 'wp-job-manager-resumes' ), $singular ),
-					'new_item' 				=> sprintf( __( 'New %s', 'wp-job-manager-resumes' ), $singular ),
-					'view' 					=> sprintf( __( 'View %s', 'wp-job-manager-resumes' ), $singular ),
-					'view_item' 			=> sprintf( __( 'View %s', 'wp-job-manager-resumes' ), $singular ),
-					'search_items' 			=> sprintf( __( 'Search %s', 'wp-job-manager-resumes' ), $plural ),
-					'not_found' 			=> sprintf( __( 'No %s found', 'wp-job-manager-resumes' ), $plural ),
-					'not_found_in_trash' 	=> sprintf( __( 'No %s found in trash', 'wp-job-manager-resumes' ), $plural ),
-					'parent' 				=> sprintf( __( 'Parent %s', 'wp-job-manager-resumes' ), $singular )
+					'all_items'             => sprintf( __( 'All %s', 'wp-job-manager-company-listings' ), $plural ),
+					'add_new' 				=> __( 'Add New', 'wp-job-manager-company-listings' ),
+					'add_new_item' 			=> sprintf( __( 'Add %s', 'wp-job-manager-company-listings' ), $singular ),
+					'edit' 					=> __( 'Edit', 'wp-job-manager-company-listings' ),
+					'edit_item' 			=> sprintf( __( 'Edit %s', 'wp-job-manager-company-listings' ), $singular ),
+					'new_item' 				=> sprintf( __( 'New %s', 'wp-job-manager-company-listings' ), $singular ),
+					'view' 					=> sprintf( __( 'View %s', 'wp-job-manager-company-listings' ), $singular ),
+					'view_item' 			=> sprintf( __( 'View %s', 'wp-job-manager-company-listings' ), $singular ),
+					'search_items' 			=> sprintf( __( 'Search %s', 'wp-job-manager-company-listings' ), $plural ),
+					'not_found' 			=> sprintf( __( 'No %s found', 'wp-job-manager-company-listings' ), $plural ),
+					'not_found_in_trash' 	=> sprintf( __( 'No %s found in trash', 'wp-job-manager-company-listings' ), $plural ),
+					'parent' 				=> sprintf( __( 'Parent %s', 'wp-job-manager-company-listings' ), $singular )
 				),
-				'description' => __( 'This is where you can create and manage user resumes.', 'wp-job-manager-resumes' ),
+				'description' => __( 'This is where you can create and manage user resumes.', 'wp-job-manager-company-listings' ),
 				'public' 				=> true,
 				'show_ui' 				=> true,
 				'capability_type' 		=> 'post',
@@ -234,12 +234,12 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		);
 
 		register_post_status( 'hidden', array(
-			'label'                     => _x( 'Hidden', 'post status', 'wp-job-manager-resumes' ),
+			'label'                     => _x( 'Hidden', 'post status', 'wp-job-manager-company-listings' ),
 			'public'                    => true,
 			'exclude_from_search'       => true,
 			'show_in_admin_all_list'    => true,
 			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Hidden <span class="count">(%s)</span>', 'Hidden <span class="count">(%s)</span>', 'wp-job-manager-resumes' ),
+			'label_count'               => _n_noop( 'Hidden <span class="count">(%s)</span>', 'Hidden <span class="count">(%s)</span>', 'wp-job-manager-company-listings' ),
 		) );
 	}
 
@@ -355,7 +355,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	        	header( "Content-Length: " . $size );
 	        }
 
-			$this->readfile_chunked( $file_path ) or wp_die( __( 'File not found', 'wp-job-manager-resumes' ) . ' <a href="' . esc_url( home_url() ) . '" class="wc-forward">' . __( 'Go to homepage', 'wp-job-manager-resumes' ) . '</a>' );
+			$this->readfile_chunked( $file_path ) or wp_die( __( 'File not found', 'wp-job-manager-company-listings' ) . ' <a href="' . esc_url( home_url() ) . '" class="wc-forward">' . __( 'Go to homepage', 'wp-job-manager-company-listings' ) . '</a>' );
 
         	exit;
 		}
@@ -406,7 +406,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	public function admin_head() {
 		global $menu;
 
-		$plural        = __( 'Resumes', 'wp-job-manager-resumes' );
+		$plural        = __( 'Resumes', 'wp-job-manager-company-listings' );
 		$count_resumes = wp_count_posts( 'resume', 'readable' );
 
 		foreach ( $menu as $key => $menu_item ) {
@@ -452,7 +452,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		if ( $post->post_type == 'resume' ) {
 			ob_start();
 
-			get_job_manager_template_part( 'content-single', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template_part( 'content-single', 'resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 
 			$content = ob_get_clean();
 		}
@@ -469,9 +469,9 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		global $post;
 
 		$email   = get_post_meta( $post->ID, '_candidate_email', true );
-		$subject = sprintf( __( 'Contact via the resume for "%s" on %s', 'wp-job-manager-resumes' ), single_post_title( '', false ), home_url() );
+		$subject = sprintf( __( 'Contact via the resume for "%s" on %s', 'wp-job-manager-company-listings' ), single_post_title( '', false ), home_url() );
 
-		get_job_manager_template( 'contact-details-email.php', array( 'email' => $email, 'subject' => $subject ), 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'contact-details-email.php', array( 'email' => $email, 'subject' => $subject ), 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**

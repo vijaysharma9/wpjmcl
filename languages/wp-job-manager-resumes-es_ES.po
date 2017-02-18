@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Job Manager - Resume Manager 1.12.0\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-job-manager-resumes\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-job-manager-company-listings\n"
 "POT-Creation-Date: 2015-07-25 12:48-0600\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1757,15 +1757,15 @@ msgid ""
 "Resume submitted successfully. Your resume will be visible once approved."
 msgstr "CV enviado con éxito. Su currículum será visible una vez aprobado."
 
-#: wp-job-manager-resumes.php:85
+#: wp-job-manager-company-listings.php:85
 msgid "Resume Manager requires WP Job Manager to be installed!"
 msgstr "Resume Manager requiere que WP Job Manager este instalado"
 
-#: wp-job-manager-resumes.php:87
+#: wp-job-manager-company-listings.php:87
 msgid "Resume Manager requires WP Job Manager %s (you are using %s)"
 msgstr "Resume Manager requiere WP Job Manager  %s (está usando %s)"
 
-#: wp-job-manager-resumes.php:154
+#: wp-job-manager-company-listings.php:154
 msgid ""
 "If you wish to edit the posted details use the \"edit resume\" button "
 "instead, otherwise changes may be lost."
@@ -1773,15 +1773,15 @@ msgstr ""
 "Si desea editar los detalles enviados utilice el botón \"Editar CV\" , de lo "
 "contrario los cambios pueden perderse."
 
-#: wp-job-manager-resumes.php:155
+#: wp-job-manager-company-listings.php:155
 msgid "Are you sure you want to remove this item?"
 msgstr "¿Esta seguro que desea remover este ítem?"
 
-#: wp-job-manager-resumes.php:156
+#: wp-job-manager-company-listings.php:156
 msgid "remove"
 msgstr "remover"
 
-#: wp-job-manager-resumes.php:162
+#: wp-job-manager-company-listings.php:162
 msgid "Are you sure you want to delete this resume?"
 msgstr "¿Esta seguro que desea remover este CV?"
 

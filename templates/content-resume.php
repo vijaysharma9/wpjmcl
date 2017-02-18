@@ -12,7 +12,7 @@
 			<?php the_candidate_location( false ); ?>
 		</div>
 		<div class="resume-posted-column <?php if ( $category ) : ?>resume-meta<?php endif; ?>">
-			<date><?php printf( __( '%s ago', 'wp-job-manager-resumes' ), human_time_diff( get_post_time( 'U' ), current_time( 'timestamp' ) ) ); ?></date>
+			<date><?php printf( __( '%s ago', 'wp-job-manager-company-listings' ), human_time_diff( get_post_time( 'U' ), current_time( 'timestamp' ) ) ); ?></date>
 
 			<?php if ( $category ) : ?>
 				<div class="resume-category">

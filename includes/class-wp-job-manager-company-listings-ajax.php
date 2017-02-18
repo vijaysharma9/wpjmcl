@@ -58,13 +58,13 @@ class WP_Job_Manager_Company_Listings_Ajax {
 
 			<?php while ( $resumes->have_posts() ) : $resumes->the_post(); ?>
 
-				<?php get_job_manager_template_part( 'content', 'resume', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_job_manager_template_part( 'content', 'resume', 'wp-job-manager-company-listings', RESUME_MANAGER_PLUGIN_DIR . '/templates/' ); ?>
 
 			<?php endwhile; ?>
 
 		<?php else : ?>
 
-			<li class="no_resumes_found"><?php _e( 'No resumes found matching your selection.', 'wp-job-manager-resumes' ); ?></li>
+			<li class="no_resumes_found"><?php _e( 'No resumes found matching your selection.', 'wp-job-manager-company-listings' ); ?></li>
 
 		<?php endif;
 
@@ -90,12 +90,12 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			}
 
 			if ( $search_keywords ) {
-				$showing_resumes  = sprintf( __( 'Showing &ldquo;%s&rdquo; %sresumes', 'wp-job-manager-resumes' ), $search_keywords, implode( ', ', $showing_categories ) );
+				$showing_resumes  = sprintf( __( 'Showing &ldquo;%s&rdquo; %sresumes', 'wp-job-manager-company-listings' ), $search_keywords, implode( ', ', $showing_categories ) );
 			} else {
-				$showing_resumes  = sprintf( __( 'Showing all %sresumes', 'wp-job-manager-resumes' ), implode( ', ', $showing_categories ) . ' ' );
+				$showing_resumes  = sprintf( __( 'Showing all %sresumes', 'wp-job-manager-company-listings' ), implode( ', ', $showing_categories ) . ' ' );
 			}
 
-			$showing_location  = $search_location ? sprintf( ' ' . __( 'located in &ldquo;%s&rdquo;', 'wp-job-manager-resumes' ), $search_location ) : '';
+			$showing_location  = $search_location ? sprintf( ' ' . __( 'located in &ldquo;%s&rdquo;', 'wp-job-manager-company-listings' ), $search_location ) : '';
 
 			$result['showing'] = apply_filters( 'resume_manager_get_resumes_custom_filter_text', $showing_resumes . $showing_location );
 

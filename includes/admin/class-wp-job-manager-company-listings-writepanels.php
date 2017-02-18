@@ -26,47 +26,47 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	public static function resume_fields() {
 		$fields = apply_filters( 'resume_manager_resume_fields', array(
 			'_candidate_title' => array(
-				'label'       => __( 'Professional Title', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Professional Title', 'wp-job-manager-company-listings' ),
 				'placeholder' => '',
 				'description' => ''
 			),
 			'_candidate_email' => array(
-				'label'       => __( 'Contact Email', 'wp-job-manager-resumes' ),
-				'placeholder' => __( 'you@yourdomain.com', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Contact Email', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( 'you@yourdomain.com', 'wp-job-manager-company-listings' ),
 				'description' => ''
 			),
 			'_candidate_location' => array(
-				'label'       => __( 'Candidate Location', 'wp-job-manager-resumes' ),
-				'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Candidate Location', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-company-listings' ),
 				'description' => ''
 			),
 			'_candidate_photo' => array(
-				'label'       => __( 'Photo', 'wp-job-manager-resumes' ),
-				'placeholder' => __( 'URL to the candidate photo', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Photo', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( 'URL to the candidate photo', 'wp-job-manager-company-listings' ),
 				'type'        => 'file'
 			),
 			'_candidate_video' => array(
-				'label'       => __( 'Video', 'wp-job-manager-resumes' ),
-				'placeholder' => __( 'URL to the candidate video', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Video', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( 'URL to the candidate video', 'wp-job-manager-company-listings' ),
 				'type'        => 'text'
 			),
 			'_resume_file' => array(
-				'label'       => __( 'Resume File', 'wp-job-manager-resumes' ),
-				'placeholder' => __( 'URL to the candidate\'s resume file', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Resume File', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( 'URL to the candidate\'s resume file', 'wp-job-manager-company-listings' ),
 				'type'        => 'file'
 			),
 			'_resume_author' => array(
-				'label' => __( 'Posted by', 'wp-job-manager-resumes' ),
+				'label' => __( 'Posted by', 'wp-job-manager-company-listings' ),
 				'type'  => 'author'
 			),
 			'_featured' => array(
-				'label' => __( 'Feature this Resume?', 'wp-job-manager-resumes' ),
+				'label' => __( 'Feature this Resume?', 'wp-job-manager-company-listings' ),
 				'type'  => 'checkbox',
-				'description' => __( 'Featured resumes will be sticky during searches, and can be styled differently.', 'wp-job-manager-resumes' )
+				'description' => __( 'Featured resumes will be sticky during searches, and can be styled differently.', 'wp-job-manager-company-listings' )
 			),
 			'_resume_expires' => array(
-				'label'       => __( 'Expires', 'wp-job-manager-resumes' ),
-				'placeholder' => __( 'yyyy-mm-dd', 'wp-job-manager-resumes' )
+				'label'       => __( 'Expires', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( 'yyyy-mm-dd', 'wp-job-manager-company-listings' )
 			),
 		) );
 
@@ -81,10 +81,10 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * add_meta_boxes function.
 	 */
 	public function add_meta_boxes() {
-		add_meta_box( 'resume_data', __( 'Candidate Data', 'wp-job-manager-resumes' ), array( $this, 'resume_data' ), 'resume', 'normal', 'high' );
-		add_meta_box( 'resume_url_data', __( 'URL(s)', 'wp-job-manager-resumes' ), array( $this, 'url_data' ), 'resume', 'side', 'low' );
-		add_meta_box( 'resume_education_data', __( 'Education', 'wp-job-manager-resumes' ), array( $this, 'education_data' ), 'resume', 'normal', 'high' );
-		add_meta_box( 'resume_experience_data', __( 'Experience', 'wp-job-manager-resumes' ), array( $this, 'experience_data' ), 'resume', 'normal', 'high' );
+		add_meta_box( 'resume_data', __( 'Candidate Data', 'wp-job-manager-company-listings' ), array( $this, 'resume_data' ), 'resume', 'normal', 'high' );
+		add_meta_box( 'resume_url_data', __( 'URL(s)', 'wp-job-manager-company-listings' ), array( $this, 'url_data' ), 'resume', 'side', 'low' );
+		add_meta_box( 'resume_education_data', __( 'Education', 'wp-job-manager-company-listings' ), array( $this, 'education_data' ), 'resume', 'normal', 'high' );
+		add_meta_box( 'resume_experience_data', __( 'Experience', 'wp-job-manager-company-listings' ), array( $this, 'experience_data' ), 'resume', 'normal', 'high' );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 */
 	public static function repeated_rows_html( $group_name, $fields, $data ) {
 		?>
-		<table class="wc-job-manager-resumes-repeated-rows">
+		<table class="wc-job-manager-company-listings-repeated-rows">
 			<thead>
 				<tr>
 					<th class="sort-column">&nbsp;</th>
@@ -136,7 +136,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				<tr>
 					<td colspan="<?php echo sizeof( $fields ) + 1; ?>">
 						<div class="submit">
-							<input type="submit" class="button resume_manager_add_row" value="<?php printf( __( 'Add %s', 'wp-job-manager-resumes' ), $group_name ); ?>" data-row="<?php
+							<input type="submit" class="button resume_manager_add_row" value="<?php printf( __( 'Add %s', 'wp-job-manager-company-listings' ), $group_name ); ?>" data-row="<?php
 								ob_start();
 								echo '<tr>';
 								echo '<td class="sort-column" width="1%">&nbsp;</td>';
@@ -193,14 +193,14 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	public static function resume_links_fields() {
 		return apply_filters( 'resume_manager_resume_links_fields', array(
 			'name' => array(
-				'label'       => __( 'Name', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Name', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_url_name[]',
-				'placeholder' => __( 'Your site', 'wp-job-manager-resumes' ),
+				'placeholder' => __( 'Your site', 'wp-job-manager-company-listings' ),
 				'description' => '',
 				'required'    => true
 			),
 			'url' => array(
-				'label'       => __( 'URL', 'wp-job-manager-resumes' ),
+				'label'       => __( 'URL', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_url[]',
 				'placeholder' => 'http://',
 				'description' => '',
@@ -216,26 +216,26 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	public static function resume_education_fields() {
 		return apply_filters( 'resume_manager_resume_education_fields', array(
 			'location' => array(
-				'label'       => __( 'School name', 'wp-job-manager-resumes' ),
+				'label'       => __( 'School name', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_education_location[]',
 				'placeholder' => '',
 				'description' => '',
 				'required'    => true
 			),
 			'qualification' => array(
-				'label'       => __( 'Qualification(s)', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Qualification(s)', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_education_qualification[]',
 				'placeholder' => '',
 				'description' => ''
 			),
 			'date' => array(
-				'label'       => __( 'Start/end date', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Start/end date', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_education_date[]',
 				'placeholder' => '',
 				'description' => ''
 			),
 			'notes' => array(
-				'label'       => __( 'Notes', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_education_notes[]',
 				'placeholder' => '',
 				'description' => '',
@@ -251,26 +251,26 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	public static function resume_experience_fields() {
 		return apply_filters( 'resume_manager_resume_experience_fields', array(
 			'employer' => array(
-				'label'       => __( 'Employer', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Employer', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_experience_employer[]',
 				'placeholder' => '',
 				'description' => '',
 				'required'    => true
 			),
 			'job_title' => array(
-				'label'       => __( 'Job Title', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Job Title', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_experience_job_title[]',
 				'placeholder' => '',
 				'description' => ''
 			),
 			'date' => array(
-				'label'       => __( 'Start/end date', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Start/end date', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_experience_date[]',
 				'placeholder' => '',
 				'description' => ''
 			),
 			'notes' => array(
-				'label'       => __( 'Notes', 'wp-job-manager-resumes' ),
+				'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
 				'name'        => 'resume_experience_notes[]',
 				'placeholder' => '',
 				'description' => '',
@@ -284,9 +284,9 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * @param mixed $post
 	 */
 	public function url_data( $post ) {
-		echo '<p>' . __( 'Optionally provide links to any of your websites or social network profiles.', 'wp-job-manager-resumes' ) . '</p>';
+		echo '<p>' . __( 'Optionally provide links to any of your websites or social network profiles.', 'wp-job-manager-company-listings' ) . '</p>';
 		$fields = $this->resume_links_fields();
-		$this->repeated_rows_html( __( 'URL', 'wp-job-manager-resumes' ), $fields, get_post_meta( $post->ID, '_links', true ) );
+		$this->repeated_rows_html( __( 'URL', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_links', true ) );
 	}
 
 	/**
@@ -296,7 +296,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 */
 	public function education_data( $post ) {
 		$fields = $this->resume_education_fields();
-		$this->repeated_rows_html( __( 'Education', 'wp-job-manager-resumes' ), $fields, get_post_meta( $post->ID, '_candidate_education', true ) );
+		$this->repeated_rows_html( __( 'Education', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_candidate_education', true ) );
 	}
 
 	/**
@@ -306,7 +306,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 */
 	public function experience_data( $post ) {
 		$fields = $this->resume_experience_fields();
-		$this->repeated_rows_html( __( 'Experience', 'wp-job-manager-resumes' ), $fields, get_post_meta( $post->ID, '_candidate_experience', true ) );
+		$this->repeated_rows_html( __( 'Experience', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_candidate_experience', true ) );
 	}
 
 	/**
