@@ -43,6 +43,7 @@ class WP_Job_Manager_Company_Listings {
 		include( 'includes/class-wp-job-manager-company-listings-geocode.php' );
 		include( 'includes/class-wp-job-manager-company-listings-email-notification.php' );
 		include( 'includes/class-wp-job-manager-company-listings-apply.php' );
+		include( 'includes/class-wp-job-manager-company-listings-mapping.php' );
 
 		// Init classes
 		$this->apply      = new WP_Job_Manager_Company_Listings_Apply();

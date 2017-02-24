@@ -229,7 +229,8 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 				'query_var' 			=> true,
 				'supports' 				=> array( 'title', 'editor', 'custom-fields' ),
 				'has_archive' 			=> $has_archive,
-				'show_in_nav_menus' 	=> false
+				'show_in_nav_menus' 	=> false,
+				'menu_icon'           => 'dashicons-building'
 			) )
 		);
 

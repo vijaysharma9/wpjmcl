@@ -100,7 +100,7 @@ function the_company_metaphoto( $size = 'thumbnail', $default = null, $post = nu
 	} elseif ( $default )
 		echo '<img class="company_photo" src="' . $default . '" alt="Photo" />';
 	else
-		echo '<img class="company_photo" src="' . apply_filters( 'company_listings_default_company_photo', COMPANY_LISTINGS_PLUGIN_URL . '/assets/images/company.png' ) . '" alt="Logo" />';
+		echo '<img class="company_photo" src="' . apply_filters( 'job_manager_default_company_logo', JOB_MANAGER_PLUGIN_URL . '/assets/images/company.png' ) . '" alt="Logo" />';
 }
 
 /**
