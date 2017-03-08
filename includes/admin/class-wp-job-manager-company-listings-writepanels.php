@@ -83,6 +83,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	public function add_meta_boxes() {
 		add_meta_box( 'company_data', __( 'Company Data', 'wp-job-manager-company-listings' ), array( $this, 'company_data' ), 'company', 'normal', 'high' );
 		add_meta_box( 'company_url_data', __( 'URL(s)', 'wp-job-manager-company-listings' ), array( $this, 'url_data' ), 'company', 'side', 'low' );
+		add_meta_box( 'company_info_data', __( 'Company Info', 'wp-job-manager-company-listings' ), array( $this, 'info_data' ), 'company', 'side', 'low' );
 		add_meta_box( 'company_education_data', __( 'Education', 'wp-job-manager-company-listings' ), array( $this, 'education_data' ), 'company', 'normal', 'high' );
 		add_meta_box( 'company_experience_data', __( 'Experience', 'wp-job-manager-company-listings' ), array( $this, 'experience_data' ), 'company', 'normal', 'high' );
 	}
@@ -213,6 +214,29 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * Company fields
 	 * @return array
 	 */
+	public static function company_info_fields() {
+		return apply_filters( 'company_listings_company_info_fields', array(
+			'name' => array(
+				'label'       => __( 'Name', 'wp-job-manager-company-listings' ),
+				'name'        => 'company_info_name[]',
+				'placeholder' => __( 'Info', 'wp-job-manager-company-listings' ),
+				'description' => '',
+				'required'    => true
+			),
+			'info' => array(
+				'label'       => __( 'Info', 'wp-job-manager-company-listings' ),
+				'name'        => 'company_info[]',
+				'placeholder' => 'Value',
+				'description' => '',
+				'required'    => true
+			)
+		) );
+	}
+
+	/**
+	 * Company fields
+	 * @return array
+	 */
 	public static function company_education_fields() {
 		return apply_filters( 'company_listings_company_education_fields', array(
 			'location' => array(
@@ -287,6 +311,16 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 		echo '<p>' . __( 'Optionally provide links to any of your websites or social network profiles.', 'wp-job-manager-company-listings' ) . '</p>';
 		$fields = $this->company_links_fields();
 		$this->repeated_rows_html( __( 'URL', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_links', true ) );
+	}
+
+	/**
+	 * Company Info data
+	 * @param mixed $post
+	 */
+	public function info_data( $post ) {
+		echo '<p>' . __( 'Optionally provide information of your company foundation date, type, strength etc.', 'wp-job-manager-company-listings' ) . '</p>';
+		$fields = $this->company_info_fields();
+		$this->repeated_rows_html( __( 'Info', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_info', true ) );
 	}
 
 	/**
@@ -391,6 +425,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 
 		$save_repeated_fields = array(
 			'_links'                => $this->company_links_fields(),
+			'_info'                => $this->company_info_fields(),
 			'_company_education'  => $this->company_education_fields(),
 			'_company_experience' => $this->company_experience_fields()
 		);

@@ -282,6 +282,16 @@ function the_company_metalinks( $post = null ) {
 }
 
 /**
+ * Output the company info
+ *
+ * @param WP_Post|int $post (default: null)
+ */
+function the_company_metainfo( $post = null ) {
+	$post = get_post( $post );
+	get_job_manager_template( 'company-info.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+}
+
+/**
  * Get the company permalinks
  *
  * @param WP_Post|int $post (default: null)
@@ -304,6 +314,15 @@ function company_has_links( $post = null ) {
 }
 
 /**
+ * Returns true or false based on whether the company has any info to display.
+ * @param  object $post
+ * @return bool
+ */
+function company_has_info( $post = null ) {
+	return sizeof( get_company_info( $post ) ) ? true : false;
+}
+
+/**
  * Returns true or false based on whether the company has a file uploaded.
  * @param  object $post
  * @return bool
@@ -321,6 +340,17 @@ function get_company_links( $post = null ) {
 	$post = get_post( $post );
 
 	return array_filter( (array) get_post_meta( $post->ID, '_links', true ) );
+}
+
+/**
+ * Returns an array of info defined for a company
+ * @param  object $post
+ * @return array
+ */
+function get_company_info( $post = null ) {
+	$post = get_post( $post );
+
+	return array_filter( (array) get_post_meta( $post->ID, '_info', true ) );
 }
 
 /**
