@@ -9,6 +9,7 @@
 			<p class="job-title"><?php the_company_metatitle(); ?></p>
 			<p class="location"><?php the_company_metalocation(); ?></p>
 			<?php the_company_metainfo(); ?>
+			<?php the_company_meta_tech_stack(); ?>
 			<?php the_company_metavideo(); ?>
 		</div>
 

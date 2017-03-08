@@ -430,3 +430,33 @@ function get_the_company_metavideo( $post = null ) {
 	}
 	return apply_filters( 'the_company_metavideo', $post->_company_video, $post );
 }
+
+/**
+ * Output the company stack
+ *
+ * @param WP_Post|int $post (default: null)
+ */
+function the_company_meta_tech_stack( $post = null ) {
+	$post = get_post( $post );
+	get_job_manager_template( 'company-tech-stack.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+}
+
+/**
+ * Returns an array of info defined for a company
+ * @param  object $post
+ * @return array
+ */
+function get_company_tech_stack( $post = null ) {
+	$post = get_post( $post );
+
+	return array_filter( (array) get_post_meta( $post->ID, '_company_tech_stack', true ) );
+}
+
+/**
+ * Returns true or false based on whether the company has any stack to display.
+ * @param  object $post
+ * @return bool
+ */
+function company_has_tech_stack( $post = null ) {
+	return sizeof( get_company_tech_stack( $post ) ) ? true : false;
+}
