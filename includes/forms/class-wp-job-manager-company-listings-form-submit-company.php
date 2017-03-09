@@ -221,13 +221,38 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 						)
 					)
 				),
+				'info' => array(
+					'label'       => __( 'Info', 'wp-job-manager-company-listings' ),
+					'add_row'     => __( 'Add Info', 'wp-job-manager-company-listings' ),
+					'type'        => 'links', // repeated
+					'required'    => false,
+					'placeholder' => '',
+					'description' => __( 'Optionally provide information of your company foundation date, type, strength etc.', 'wp-job-manager-company-listings' ),
+					'priority'    => 11,
+					'fields'      => array(
+						'name' => array(
+							'label'       => __( 'Name', 'wp-job-manager-company-listings' ),
+							'type'        => 'text',
+							'required'    => true,
+							'placeholder' => '',
+							'priority'    => 1
+						),
+						'info' => array(
+							'label'       => __( 'Info', 'wp-job-manager-company-listings' ),
+							'type'        => 'text',
+							'required'    => true,
+							'placeholder' => '',
+							'priority'    => 2
+						)
+					)
+				),
 				'company_education' => array(
 					'label'       => __( 'Education', 'wp-job-manager-company-listings' ),
 					'add_row'     => __( 'Add Education', 'wp-job-manager-company-listings' ),
 					'type'        => 'education', // repeated
 					'required'    => false,
 					'placeholder' => '',
-					'priority'    => 11,
+					'priority'    => 12,
 					'fields'      => array(
 						'location' => array(
 							'label'       => __( 'School name', 'wp-job-manager-company-listings' ),
@@ -261,7 +286,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'type'        => 'experience', // repeated
 					'required'    => false,
 					'placeholder' => '',
-					'priority'    => 12,
+					'priority'    => 13,
 					'fields'      => array(
 						'employer' => array(
 							'label'       => __( 'Employer', 'wp-job-manager-company-listings' ),
@@ -295,7 +320,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'required'    => false,
 					'ajax'        => true,
 					'description' => sprintf( __( 'Optionally upload your company for employers to view. Max. file size: %s.', 'wp-job-manager-company-listings' ), size_format( wp_max_upload_size() ) ),
-					'priority'    => 13,
+					'priority'    => 14,
 					'placeholder' => ''
 				),
 			)

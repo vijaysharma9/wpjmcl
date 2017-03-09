@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
 		$(this).closest( '.job-manager-uploaded-file' ).remove();
 		return false;
 	});
-	$('.fieldset-company_experience .field, .fieldset-company_education .field, .fieldset-links .field').sortable({
+	$('.fieldset-company_experience .field, .fieldset-company_education .field, .fieldset-links .field, .fieldset-info .field').sortable({
 		items:'.company-listings-data-row',
 		cursor:'move',
 		axis:'y',
@@ -121,6 +121,14 @@ jQuery(document).ready(function($) {
 						$( '.fieldset-links' ).find( '.company-listings-add-row' ).click();
 						$( '.fieldset-links' ).find( 'input[name^="link_name"]' ).last().val( e.name );
 						$( '.fieldset-links' ).find( 'input[name^="link_url"]' ).last().val( e.url );
+					}
+				});
+
+				$( profile.memberUrlResources.values ).each( function( i, e ) {
+					if ( e.name && e.url ) {
+						$( '.fieldset-info' ).find( '.company-listings-add-row' ).click();
+						$( '.fieldset-info' ).find( 'input[name^="info_name"]' ).last().val( e.name );
+						$( '.fieldset-info' ).find( 'input[name^="info_info"]' ).last().val( e.url );
 					}
 				});
 
