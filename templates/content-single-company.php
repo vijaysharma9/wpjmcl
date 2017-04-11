@@ -16,10 +16,19 @@
 			<?php echo apply_filters( 'the_company_metadescription', get_the_content() ); ?>
 		</div>
 
+		<?php do_action( 'single_company_meta_start' ); ?>
+
 		<?php if ( ( $skills = wp_get_object_terms( $post->ID, 'company_skill', array( 'fields' => 'names' ) ) ) && is_array( $skills ) ) : ?>
 			<h2><?php _e( 'Skills', 'wp-job-manager-company-listings' ); ?></h2>
 			<ul class="company-listings-skills">
 				<?php echo '<li>' . implode( '</li><li>', $skills ) . '</li>'; ?>
+			</ul>
+		<?php endif; ?>
+			
+		<?php if ( get_the_company_metacategory() ) : ?>
+			<h2><?php _e( 'Industry', 'wp-job-manager-company-listings' ); ?></h2>
+			<ul class="meta">
+				<li class="company-category"><?php the_company_metacategory(); ?></li>
 			</ul>
 		<?php endif; ?>
 
@@ -56,17 +65,7 @@
 			</dl>
 		<?php endif; ?>
 
-		<ul class="meta">
-			<?php do_action( 'single_company_meta_start' ); ?>
-
-			<?php if ( get_the_company_metacategory() ) : ?>
-				<li class="company-category"><?php the_company_metacategory(); ?></li>
-			<?php endif; ?>
-
-			<li class="date-posted" itemprop="datePosted"><date><?php printf( __( 'Updated %s ago', 'wp-job-manager-company-listings' ), human_time_diff( get_the_modified_time( 'U' ), current_time( 'timestamp' ) ) ); ?></date></li>
-
-			<?php do_action( 'single_company_meta_end' ); ?>
-		</ul>
+		<?php do_action( 'single_company_meta_end' ); ?>
 
 		<?php do_action( 'single_company_end' ); ?>
 	</div>
