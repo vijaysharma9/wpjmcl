@@ -9,7 +9,6 @@
 			<p class="job-title"><?php the_company_metatitle(); ?></p>
 			<p class="location"><?php the_company_metalocation(); ?></p>
 			<?php the_company_metainfo(); ?>
-			<?php the_company_meta_tech_stack(); ?>
 			<?php the_company_metavideo(); ?>
 		</div>
 
@@ -24,38 +23,33 @@
 			</ul>
 		<?php endif; ?>
 
-		<?php if ( $items = get_post_meta( $post->ID, '_company_education', true ) ) : ?>
-			<h2><?php _e( 'Education', 'wp-job-manager-company-listings' ); ?></h2>
-			<dl class="company-listings-education">
+		<?php if ( $items = get_post_meta( $post->ID, '_company_perk', true ) ) : ?>
+			<h2><?php _e( 'Perks', 'wp-job-manager-company-listings' ); ?></h2>
+			<ul class="company-listings-perk">
 			<?php
 				foreach( $items as $item ) : ?>
-
-					<dt>
-						<small class="date"><?php echo esc_html( $item['date'] ); ?></small>
-						<h3><?php printf( __( '%s at %s', 'wp-job-manager-company-listings' ), '<strong class="qualification">' . esc_html( $item['qualification'] ) . '</strong>', '<strong class="location">' . esc_html( $item['location'] ) . '</strong>' ); ?></h3>
-					</dt>
-					<dd>
+					<li>
 						<?php echo wpautop( wptexturize( $item['notes'] ) ); ?>
-					</dd>
+					</li>
 
 				<?php endforeach;
 			?>
-			</dl>
+			</ul>
 		<?php endif; ?>
 
-		<?php if ( $items = get_post_meta( $post->ID, '_company_experience', true ) ) : ?>
-			<h2><?php _e( 'Experience', 'wp-job-manager-company-listings' ); ?></h2>
+		<?php if ( $items = get_post_meta( $post->ID, '_company_press', true ) ) : ?>
+			<h2><?php _e( 'Press', 'wp-job-manager-company-listings' ); ?></h2>
 			<dl class="company-listings-experience">
 			<?php
 				foreach( $items as $item ) : ?>
 
 					<dt>
-						<small class="date"><?php echo esc_html( $item['date'] ); ?></small>
-						<h3><?php printf( __( '%s at %s', 'wp-job-manager-company-listings' ), '<strong class="job_title">' . esc_html( $item['job_title'] ) . '</strong>', '<strong class="employer">' . esc_html( $item['employer'] ) . '</strong>' ); ?></h3>
+						<h3>
+							<a target="_blank" href="<?php echo esc_html( $item['notes'] ); ?>"> 
+								<?php echo esc_html( $item['job_title'] ); ?>
+							</a>
+						</h3>
 					</dt>
-					<dd>
-						<?php echo wpautop( wptexturize( $item['notes'] ) ); ?>
-					</dd>
 
 				<?php endforeach;
 			?>
@@ -73,8 +67,6 @@
 
 			<?php do_action( 'single_company_meta_end' ); ?>
 		</ul>
-
-		<?php get_job_manager_template( 'contact-details.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 		<?php do_action( 'single_company_end' ); ?>
 	</div>

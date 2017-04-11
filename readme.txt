@@ -67,7 +67,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Fix - File handling in repeated fields.
 * Fix - Only show linkedin when company_listings_user_can_post_company.
 * Fix - Only link to company when published.
-* Tweak - Use repeated-field.php template for links, education and experience.
+* Tweak - Use repeated-field.php template for links, perk and experience.
 * Tweak - Made company dashboard columns customisable.
 * Tweak - Preserve case in new tags.
 * Tweak - Don't attach images to companies. Enabled via filter. company_listings_attach_uploaded_files. False by default.
@@ -159,7 +159,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Added filter for required/optional labels.
 * Added ability for guests to submit companies (but they cannot edit them!).
 * Added tighter integration with the Job Applications plugin (so applications through company manager can be saved in the database). Requires Applications 1.5.0.
-* Added confirmation when removing education and experience.
+* Added confirmation when removing perk and experience.
 * Fix - tinymce type checking.
 * Tweak - Filter to disable chosen: job_manager_chosen_enabled (same as job manager core)
 * Tweak - submit_company_form_submit_button_text filter.
@@ -168,7 +168,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 
 = 1.7.8 =
 * the_company_metavideo HTTPS fix.
-* Add remove link to existing education/links.
+* Add remove link to existing perk/links.
 * Improved uninstall script.
 
 = 1.7.7 =
@@ -260,7 +260,7 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 = 1.4.0 =
 * Added the ability for logged in users to apply to a job with an on-file company + include a custom message (requires Job Manager 1.9 and compatible template files)
 * Added a way to have private share links for companies (used in the apply feature). get_company_share_link appends a key to the permalink and when present, any user can view the company (even if standard permissions deny access).
-* Drag drop sorting for education and experience fields on the company submission form
+* Drag drop sorting for perk and pressfields on the company submission form
 * Template file for contact details.
 
 = 1.3.0 =
@@ -280,13 +280,13 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 * Updated all text domains to wp-job-manager-company-listings
 * Fix wp-editor field
 * Include POT file
-* Added 'x' to remove education/exp/links
+* Added 'x' to remove perk/exp/links
 * Secure downloading of companies and protected companies directory with htaccess
 
 = 1.1.2 =
 * Fix remove link for uploaded files
 * Fix path to fonts
-* add education, experience, and links filters
+* add perk, experience, and links filters
 
 = 1.1.1 =
 * Fix class exists check for WP_Job_Manager_Writepanels

@@ -101,8 +101,8 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	public function get_field_template( $key, $field ) {
 		switch ( $field['type'] ) {
 			case 'repeated' :
-			case 'education' :
-			case 'experience' :
+			case 'perk' :
+			case 'press' :
 			case 'links' :
 				get_job_manager_template( 'form-fields/repeated-field.php', array( 'key' => $key, 'field' => $field, 'class' => $this ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 			break;
@@ -246,71 +246,42 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 						)
 					)
 				),
-				'company_education' => array(
-					'label'       => __( 'Education', 'wp-job-manager-company-listings' ),
-					'add_row'     => __( 'Add Education', 'wp-job-manager-company-listings' ),
-					'type'        => 'education', // repeated
+				'company_perk' => array(
+					'label'       => __( 'Perks', 'wp-job-manager-company-listings' ),
+					'add_row'     => __( 'Add Perks', 'wp-job-manager-company-listings' ),
+					'type'        => 'perk', // repeated
 					'required'    => false,
 					'placeholder' => '',
 					'priority'    => 12,
 					'fields'      => array(
-						'location' => array(
-							'label'       => __( 'School name', 'wp-job-manager-company-listings' ),
-							'type'        => 'text',
-							'required'    => true,
-							'placeholder' => ''
-						),
-						'qualification' => array(
-							'label'       => __( 'Qualification(s)', 'wp-job-manager-company-listings' ),
-							'type'        => 'text',
-							'required'    => true,
-							'placeholder' => ''
-						),
-						'date' => array(
-							'label'       => __( 'Start/end date', 'wp-job-manager-company-listings' ),
-							'type'        => 'text',
-							'required'    => true,
-							'placeholder' => ''
-						),
 						'notes' => array(
 							'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
-							'type'        => 'textarea',
+							'type'        => 'text',
 							'required'    => false,
 							'placeholder' => ''
 						)
 					)
 				),
-				'company_experience' => array(
-					'label'       => __( 'Experience', 'wp-job-manager-company-listings' ),
-					'add_row'     => __( 'Add Experience', 'wp-job-manager-company-listings' ),
-					'type'        => 'experience', // repeated
+				'company_press' => array(
+					'label'       => __( 'Press', 'wp-job-manager-company-listings' ),
+					'add_row'     => __( 'Add Post', 'wp-job-manager-company-listings' ),
+					'type'        => 'press', // repeated
 					'required'    => false,
 					'placeholder' => '',
 					'priority'    => 13,
 					'fields'      => array(
-						'employer' => array(
-							'label'       => __( 'Employer', 'wp-job-manager-company-listings' ),
-							'type'        => 'text',
-							'required'    => true,
-							'placeholder' => ''
-						),
 						'job_title' => array(
-							'label'       => __( 'Job Title', 'wp-job-manager-company-listings' ),
-							'type'        => 'text',
-							'required'    => true,
-							'placeholder' => ''
-						),
-						'date' => array(
-							'label'       => __( 'Start/end date', 'wp-job-manager-company-listings' ),
+							'label'       => __( 'Post Title', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => ''
 						),
 						'notes' => array(
-							'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
-							'type'        => 'textarea',
-							'required'    => false,
-							'placeholder' => ''
+							'label'       => __( 'URL', 'wp-job-manager-company-listings' ),
+							'placeholder' => 'http://',
+							'description' => '',
+							'required'    => true,
+							'type'        => 'text',
 						)
 					)
 				),
@@ -340,7 +311,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	}
 
 	/**
-	 * Get the value of a repeated fields (e.g. education, links)
+	 * Get the value of a repeated fields (e.g. perk, links)
 	 * @param  array $fields
 	 * @return array
 	 */
@@ -415,8 +386,8 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 * @param  array $field
 	 * @return string
 	 */
-	public function get_posted_education_field( $key, $field ) {
-		return apply_filters( 'submit_company_form_fields_get_education_data', $this->get_repeated_field( $key, $field['fields'] ) );
+	public function get_posted_perk_field( $key, $field ) {
+		return apply_filters( 'submit_company_form_fields_get_perk_data', $this->get_repeated_field( $key, $field['fields'] ) );
 	}
 
 	/**

@@ -32,20 +32,20 @@ if ( $items = get_post_meta( $company_id, '_links', true ) ) {
 }
 
 // Education
-if ( $items = get_post_meta( $company_id, '_company_education', true ) ) {
-	$message['education_start'] = __( 'Education:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
+if ( $items = get_post_meta( $company_id, '_company_perk', true ) ) {
+	$message['perk_start'] = __( 'Education:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 	foreach ( $items as $key => $item ) {
-		$message[ 'education_location_' . $key ]      = sprintf( __( 'Location: %s', 'wp-job-manager-company-listings' ), $item['location'] ) . "\n";
-		$message[ 'education_date_' . $key ]          = sprintf( __( 'Date: %s', 'wp-job-manager-company-listings' ), $item['date'] ) . "\n";
-		$message[ 'education_qualification_' . $key ] = sprintf( __( 'Qualification: %s', 'wp-job-manager-company-listings' ), $item['qualification'] ) . "\n";
-		$message[ 'education_notes_' . $key ]         = $item['notes'] . "\n" . "\n";
+		$message[ 'perk_location_' . $key ]      = sprintf( __( 'Location: %s', 'wp-job-manager-company-listings' ), $item['location'] ) . "\n";
+		$message[ 'perk_date_' . $key ]          = sprintf( __( 'Date: %s', 'wp-job-manager-company-listings' ), $item['date'] ) . "\n";
+		$message[ 'perk_qualification_' . $key ] = sprintf( __( 'Qualification: %s', 'wp-job-manager-company-listings' ), $item['qualification'] ) . "\n";
+		$message[ 'perk_notes_' . $key ]         = $item['notes'] . "\n" . "\n";
 	}
-	$message['education_end'] = '-----------' . "\n" . "\n";
+	$message['perk_end'] = '-----------' . "\n" . "\n";
 }
 
-// Experience
-if ( $items = get_post_meta( $company_id, '_company_experience', true ) ) {
-	$message['experience_start'] = __( 'Experience:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
+// Press
+if ( $items = get_post_meta( $company_id, '_company_press', true ) ) {
+	$message['experience_start'] = __( 'Press:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 	foreach ( $items as $key => $item ) {
 		$message[ 'experience_employer_' . $key ] = sprintf( __( 'Employer: %s', 'wp-job-manager-company-listings' ), $item['employer'] ) . "\n";
 		$message[ 'experience_location_' . $key ] = sprintf( __( 'Date: %s', 'wp-job-manager-company-listings' ), $item['date'] ) . "\n";

@@ -84,9 +84,8 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 		add_meta_box( 'company_data', __( 'Company Data', 'wp-job-manager-company-listings' ), array( $this, 'company_data' ), 'company', 'normal', 'high' );
 		add_meta_box( 'company_url_data', __( 'URL(s)', 'wp-job-manager-company-listings' ), array( $this, 'url_data' ), 'company', 'side', 'low' );
 		add_meta_box( 'company_info_data', __( 'Company Info', 'wp-job-manager-company-listings' ), array( $this, 'info_data' ), 'company', 'side', 'low' );
-		add_meta_box( 'company_tech_stack_data', __( 'Tech Stack', 'wp-job-manager-company-listings' ), array( $this, 'tech_stack_data' ), 'company', 'normal', 'high' );
-		add_meta_box( 'company_education_data', __( 'Education', 'wp-job-manager-company-listings' ), array( $this, 'education_data' ), 'company', 'normal', 'high' );
-		add_meta_box( 'company_experience_data', __( 'Experience', 'wp-job-manager-company-listings' ), array( $this, 'experience_data' ), 'company', 'normal', 'high' );
+		add_meta_box( 'company_perk_data', __( 'Perks', 'wp-job-manager-company-listings' ), array( $this, 'perk_data' ), 'company', 'normal', 'high' );
+		add_meta_box( 'company_press_data', __( 'Press', 'wp-job-manager-company-listings' ), array( $this, 'experience_data' ), 'company', 'normal', 'high' );
 	}
 
 	/**
@@ -238,33 +237,14 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * Company fields
 	 * @return array
 	 */
-	public static function company_education_fields() {
-		return apply_filters( 'company_listings_company_education_fields', array(
-			'location' => array(
-				'label'       => __( 'School name', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_education_location[]',
-				'placeholder' => '',
-				'description' => '',
-				'required'    => true
-			),
-			'qualification' => array(
-				'label'       => __( 'Qualification(s)', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_education_qualification[]',
-				'placeholder' => '',
-				'description' => ''
-			),
-			'date' => array(
-				'label'       => __( 'Start/end date', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_education_date[]',
-				'placeholder' => '',
-				'description' => ''
-			),
+	public static function company_perk_fields() {
+		return apply_filters( 'company_listings_company_perk_fields', array(
 			'notes' => array(
 				'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_education_notes[]',
+				'name'        => 'company_perk_notes[]',
 				'placeholder' => '',
 				'description' => '',
-				'type'        => 'textarea',
+				'type'        => 'text',
 			)
 		) );
 	}
@@ -273,56 +253,21 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * Company fields
 	 * @return array
 	 */
-	public static function company_tech_stack_fields() {
-		return apply_filters( 'company_listings_company_tech_stack_fields', array(
-			'stack' => array(
-				'label'       => __( 'Stack name', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_tech_stack_stack[]',
-				'placeholder' => '',
-				'description' => '',
-				'required'    => true
-			),
-			'notes' => array(
-				'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_tech_stack_notes[]',
-				'placeholder' => '',
-				'description' => '',
-				'type'        => 'textarea',
-			)
-		) );
-	}
-
-	/**
-	 * Company fields
-	 * @return array
-	 */
-	public static function company_experience_fields() {
-		return apply_filters( 'company_listings_company_experience_fields', array(
-			'employer' => array(
-				'label'       => __( 'Employer', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_experience_employer[]',
-				'placeholder' => '',
-				'description' => '',
-				'required'    => true
-			),
+	public static function company_press_fields() {
+		return apply_filters( 'company_listings_company_press_fields', array(
 			'job_title' => array(
-				'label'       => __( 'Job Title', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_experience_job_title[]',
-				'placeholder' => '',
-				'description' => ''
-			),
-			'date' => array(
-				'label'       => __( 'Start/end date', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_experience_date[]',
-				'placeholder' => '',
-				'description' => ''
-			),
-			'notes' => array(
-				'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
-				'name'        => 'company_experience_notes[]',
+				'label'       => __( 'Post Title', 'wp-job-manager-company-listings' ),
+				'name'        => 'company_press_job_title[]',
 				'placeholder' => '',
 				'description' => '',
-				'type'        => 'textarea',
+				'required'    => true
+			),
+			'notes' => array(
+				'label'       => __( 'URL', 'wp-job-manager-company-listings' ),
+				'name'        => 'company_press_notes[]',
+				'placeholder' => 'http://',
+				'description' => '',
+				'required'    => true
 			)
 		) );
 	}
@@ -352,19 +297,9 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 *
 	 * @param mixed $post
 	 */
-	public function education_data( $post ) {
-		$fields = $this->company_education_fields();
-		$this->repeated_rows_html( __( 'Education', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_company_education', true ) );
-	}
-
-	/**
-	 * Company Tech Stack data
-	 *
-	 * @param mixed $post
-	 */
-	public function tech_stack_data( $post ) {
-		$fields = $this->company_tech_stack_fields();
-		$this->repeated_rows_html( __( 'Tech Stack', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_company_tech_stack', true ) );
+	public function perk_data( $post ) {
+		$fields = $this->company_perk_fields();
+		$this->repeated_rows_html( __( 'Perks', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_company_perk', true ) );
 	}
 
 	/**
@@ -373,8 +308,8 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * @param mixed $post
 	 */
 	public function experience_data( $post ) {
-		$fields = $this->company_experience_fields();
-		$this->repeated_rows_html( __( 'Experience', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_company_experience', true ) );
+		$fields = $this->company_press_fields();
+		$this->repeated_rows_html( __( 'Press', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_company_press', true ) );
 	}
 
 	/**
@@ -460,9 +395,8 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 		$save_repeated_fields = array(
 			'_links'                => $this->company_links_fields(),
 			'_info'                => $this->company_info_fields(),
-			'_company_education'  => $this->company_education_fields(),
-			'_company_tech_stack'  => $this->company_tech_stack_fields(),
-			'_company_experience' => $this->company_experience_fields()
+			'_company_perk'  => $this->company_perk_fields(),
+			'_company_press' => $this->company_press_fields()
 		);
 
 		foreach ( $save_repeated_fields as $meta_key => $fields ) {

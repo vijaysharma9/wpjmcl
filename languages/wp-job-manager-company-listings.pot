@@ -827,7 +827,7 @@ msgstr ""
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:309
 #: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:258
 #: templates/content-single-company.php:46
-msgid "Experience"
+msgid "Press"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:139
@@ -1235,7 +1235,7 @@ msgid "Add Education"
 msgstr ""
 
 #: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:259
-msgid "Add Experience"
+msgid "Add Press"
 msgstr ""
 
 #: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:292
@@ -1441,7 +1441,7 @@ msgstr ""
 msgctxt "default cover letter"
 msgid ""
 "I am very interested in the %s position at %s. I believe my skills and work "
-"experience make me an ideal company for this role. I look forward to "
+"pressmake me an ideal company for this role. I look forward to "
 "speaking with you soon about this position."
 msgstr ""
 
@@ -1605,7 +1605,7 @@ msgid "Qualification: %s"
 msgstr ""
 
 #: templates/company-submitted-notification.php:48
-msgid "Experience:"
+msgid "Press:"
 msgstr ""
 
 #: templates/company-submitted-notification.php:50

@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
 		$(this).closest( '.job-manager-uploaded-file' ).remove();
 		return false;
 	});
-	$('.fieldset-company_experience .field, .fieldset-company_education .field, .fieldset-links .field, .fieldset-info .field').sortable({
+	$('.fieldset-company_press .field, .fieldset-company_perk .field, .fieldset-links .field, .fieldset-info .field').sortable({
 		items:'.company-listings-data-row',
 		cursor:'move',
 		axis:'y',
@@ -84,7 +84,7 @@ jQuery(document).ready(function($) {
 					"threeCurrentPositions:(title,company,summary,startDate,endDate,isCurrent)",
 					"threePastPositions:(title,company,summary,startDate,endDate,isCurrent)",
 					"positions:(title,company,summary,startDate,endDate,isCurrent)",
-					"educations:(schoolName,degree,fieldOfStudy,startDate,endDate,activities,notes)",
+					"perks:(schoolName,degree,fieldOfStudy,startDate,endDate,activities,notes)",
 					"skills:(skill)",
 					"phoneNumbers",
 					"primaryTwitterAccount",
@@ -132,7 +132,7 @@ jQuery(document).ready(function($) {
 					}
 				});
 
-				$( profile.educations.values ).each( function( i, e ) {
+				$( profile.perks.values ).each( function( i, e ) {
 					var qual = [];
 					var date = [];
 
@@ -141,11 +141,11 @@ jQuery(document).ready(function($) {
 					if ( e.startDate ) date.push( e.startDate.year );
 					if ( e.endDate ) date.push( e.endDate.year );
 
-					$( '.fieldset-company_education' ).find( '.company-listings-add-row' ).click();
-					$( '.fieldset-company_education' ).find( 'input[name^="company_education_location"]' ).last().val( e.schoolName );
-					$( '.fieldset-company_education' ).find( 'input[name^="company_education_qualification"]' ).last().val( qual.join( ', ' ) );
-					$( '.fieldset-company_education' ).find( 'input[name^="company_education_date"]' ).last().val( date.join( '-' ) );
-					$( '.fieldset-company_education' ).find( 'textarea[name^="company_education_notes"]' ).last().val( e.notes );
+					$( '.fieldset-company_perk' ).find( '.company-listings-add-row' ).click();
+					$( '.fieldset-company_perk' ).find( 'input[name^="company_perk_location"]' ).last().val( e.schoolName );
+					$( '.fieldset-company_perk' ).find( 'input[name^="company_perk_qualification"]' ).last().val( qual.join( ', ' ) );
+					$( '.fieldset-company_perk' ).find( 'input[name^="company_perk_date"]' ).last().val( date.join( '-' ) );
+					$( '.fieldset-company_perk' ).find( 'textarea[name^="company_perk_notes"]' ).last().val( e.notes );
 				});
 
 				$( profile.positions.values ).each( function( i, e ) {
@@ -154,11 +154,11 @@ jQuery(document).ready(function($) {
 					if ( e.startDate ) date.push( e.startDate.year );
 					if ( e.endDate ) date.push( e.endDate.year );
 
-					$( '.fieldset-company_experience' ).find( '.company-listings-add-row' ).click();
-					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_employer"]' ).last().val( e.company.name );
-					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_job_title"]' ).last().val( e.title );
-					$( '.fieldset-company_experience' ).find( 'input[name^="company_experience_date"]' ).last().val( date.join( '-' ) );
-					$( '.fieldset-company_experience' ).find( 'textarea[name^="company_experience_notes"]' ).last().val( e.summary );
+					$( '.fieldset-company_press' ).find( '.company-listings-add-row' ).click();
+					$( '.fieldset-company_press' ).find( 'input[name^="company_press_employer"]' ).last().val( e.company.name );
+					$( '.fieldset-company_press' ).find( 'input[name^="company_press_job_title"]' ).last().val( e.title );
+					$( '.fieldset-company_press' ).find( 'input[name^="company_press_date"]' ).last().val( date.join( '-' ) );
+					$( '.fieldset-company_press' ).find( 'textarea[name^="company_press_notes"]' ).last().val( e.summary );
 				});
 
 				if ( profile.pictureUrl ) {

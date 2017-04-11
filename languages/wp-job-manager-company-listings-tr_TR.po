@@ -728,7 +728,7 @@ msgstr "Eğitim"
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:87
 #: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:274
 #: templates/content-single-company.php:46
-msgid "Experience"
+msgid "Press"
 msgstr "Deneyim"
 
 # @ wp-job-manager-company-listings
@@ -789,7 +789,7 @@ msgstr "Notlar"
 
 # @ wp-job-manager-company-listings
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:186
-#: templates/form-fields/education-field.php:44
+#: templates/form-fields/perk-field.php:44
 msgid "Add Education"
 msgstr "Eğitim Ekle"
 
@@ -808,7 +808,7 @@ msgstr "Pozisyon İsmi"
 # @ wp-job-manager-company-listings
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:235
 #: templates/form-fields/experience-field.php:44
-msgid "Add Experience"
+msgid "Add Press"
 msgstr "Deneyim Ekle"
 
 # @ wp-job-manager-company-listings
@@ -1408,8 +1408,8 @@ msgid "Username"
 msgstr "KullanıcıAdı"
 
 # @ wp-job-manager-company-listings
-#: templates/account-signin.php:40 templates/form-fields/education-field.php:7
-#: templates/form-fields/education-field.php:30
+#: templates/account-signin.php:40 templates/form-fields/perk-field.php:7
+#: templates/form-fields/perk-field.php:30
 #: templates/form-fields/experience-field.php:7
 #: templates/form-fields/experience-field.php:30
 #: templates/form-fields/links-field.php:7
@@ -1447,7 +1447,7 @@ msgstr "Sayın İlgili,"
 msgctxt "default cover letter"
 msgid ""
 "I am very interested in the %s position at %s. I believe my skills and work "
-"experience make me an ideal company for this role. I look forward to "
+"pressmake me an ideal company for this role. I look forward to "
 "speaking with you soon about this position."
 msgstr ""
 " %s pozisyonu ile %s firmasındaki iş ile ilgileniyorum. İnanıyorum ki "
@@ -1547,8 +1547,8 @@ msgid "%s at %s"
 msgstr "%s de %s"
 
 # @ wp-job-manager-company-listings
-#: templates/form-fields/education-field.php:4
-#: templates/form-fields/education-field.php:27
+#: templates/form-fields/perk-field.php:4
+#: templates/form-fields/perk-field.php:27
 #: templates/form-fields/experience-field.php:4
 #: templates/form-fields/experience-field.php:27
 #: templates/form-fields/links-field.php:4
@@ -1623,7 +1623,7 @@ msgstr "Nitelik(ler): %s"
 
 # @ wp-job-manager-company-listings
 #: templates/company-submitted-notification.php:48
-msgid "Experience:"
+msgid "Press:"
 msgstr "Deneyim:"
 
 # @ wp-job-manager-company-listings
