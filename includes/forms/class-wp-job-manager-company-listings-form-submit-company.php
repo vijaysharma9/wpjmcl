@@ -175,7 +175,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'placeholder' => __( 'A link to a video about yourself', 'wp-job-manager-company-listings' ),
 				),
 				'company_category' => array(
-					'label'       => __( 'Company category', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Industry Type', 'wp-job-manager-company-listings' ),
 					'type'        => 'term-multiselect',
 					'taxonomy'    => 'company_category',
 					'required'    => true,

@@ -1290,7 +1290,7 @@ msgid "A link to a video about yourself"
 msgstr "Enlace a un video acerca de usted"
 
 #: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:180
-msgid "Company category"
+msgid "Industry Type"
 msgstr "Categoría de CV"
 
 #: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:188
