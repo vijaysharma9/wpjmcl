@@ -450,14 +450,6 @@ msgstr ""
 "Obtenga su clave de API mediante la creación de una nueva aplicación en "
 "https://www.linkedin.com/secure/developer"
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:209
-msgid "Apply with Company"
-msgstr "Aplicar con CV"
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:214
-msgid "Email Application Method"
-msgstr "Método de aplicación por Email"
-
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:215
 msgid ""
 "Allow companys to apply to jobs which use the email application method"

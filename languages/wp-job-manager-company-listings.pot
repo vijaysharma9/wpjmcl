@@ -413,10 +413,6 @@ msgid ""
 "secure/developer"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:217
-msgid "Apply with Company"
-msgstr ""
-
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:222
 msgid "Email Based Applications"
 msgstr ""
@@ -461,13 +457,6 @@ msgid ""
 "application forms, will be hidden."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:247
-msgid "Force Apply with Company"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:248
-msgid "Force companys to apply through Company Manager"
-msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:249
 msgid ""

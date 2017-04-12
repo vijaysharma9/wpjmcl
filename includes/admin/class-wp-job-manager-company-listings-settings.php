@@ -213,45 +213,6 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						),
 					)
 				),
-				'company_application' => array(
-					__( 'Apply with Company', 'wp-job-manager-company-listings' ),
-					array(
-						array(
-							'name'     => 'company_listings_enable_application',
-							'std'      => '1',
-							'label'    => __( 'Email Based Applications', 'wp-job-manager-company-listings' ),
-							'cb_label' => __( 'Allow companys to apply to jobs which use the email application method using their online company', 'wp-job-manager-company-listings' ),
-							'desc'     => __( 'The employer will be mailed their message and a private link to the company.', 'wp-job-manager-company-listings' ),
-							'type'     => 'checkbox'
-						),
-						array(
-							'name' 		=> 'company_listings_enable_application_for_url_method',
-							'std' 		=> '1',
-							'label' 	=> __( 'Website Based Applications', 'wp-job-manager-company-listings' ),
-							'cb_label' => __( 'Allow companys to apply to jobs which use the the website URL application method using their online company', 'wp-job-manager-company-listings' ),
-							'desc'     => __( 'The application will be stored in the database.', 'wp-job-manager-company-listings' ),
-							'type'      => 'checkbox'
-						),
-						array(
-							'name'       => 'company_listings_force_company',
-							'std'        => '0',
-							'label'      => __( 'Force Company Creation', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Force companys to create an online company before applying to a job', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'Companies without a company on file will be taken through the company submission process. Other details, such as the application email address or application forms, will be hidden.', 'wp-job-manager-company-listings' ),
-							'type'       => 'checkbox',
-							'attributes' => array()
-						),
-						array(
-							'name'       => 'company_listings_force_application',
-							'std'        => '0',
-							'label'      => __( 'Force Apply with Company', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Force companys to apply through Company Manager', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'If the apply forms are enabled above, they must be used to apply. All other application methods will be hidden.', 'wp-job-manager-company-listings' ),
-							'type'       => 'checkbox',
-							'attributes' => array()
-						)
-					)
-				),
 				'company_pages' => array(
 					__( 'Pages', 'wp-job-manager' ),
 					array(
