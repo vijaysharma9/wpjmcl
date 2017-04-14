@@ -18,6 +18,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 		add_shortcode( 'submit_company_form', array( $this, 'submit_company_form' ) );
 		add_shortcode( 'company_dashboard', array( $this, 'company_dashboard' ) );
 		add_shortcode( 'companies', array( $this, 'output_companies' ) );
+		add_shortcode( 'company_directory', array( $this, 'output_company_directory' ) );
 		add_action( 'company_listings_output_companies_no_results', array( $this, 'output_no_results' ) );
 	}
 
@@ -285,6 +286,122 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 			wp_reset_postdata();
 		}
+
+		$data_attributes_string = '';
+		$data_attributes        = array(
+			'location'        => $location,
+			'keywords'        => $keywords,
+			'show_filters'    => $show_filters ? 'true' : 'false',
+			'show_pagination' => $show_pagination ? 'true' : 'false',
+			'per_page'        => $per_page,
+			'orderby'         => $orderby,
+			'order'           => $order,
+			'categories'      => implode( ',', $categories )
+		);
+		if ( ! is_null( $featured ) ) {
+			$data_attributes[ 'featured' ] = $featured ? 'true' : 'false';
+		}
+		foreach ( $data_attributes as $key => $value ) {
+			$data_attributes_string .= 'data-' . esc_attr( $key ) . '="' . esc_attr( $value ) . '" ';
+		}
+
+		return '<div class="companies" ' . $data_attributes_string . '>' . ob_get_clean() . '</div>';
+	}
+
+
+	/**
+	 * output_company_directory function.
+	 *
+	 * @access public
+	 * @param mixed $args
+	 * @return void
+	 */
+	public function output_company_directory( $atts ) {
+		global $company_listings;
+
+		ob_start();
+
+		if ( ! company_listings_user_can_browse_companies() ) {
+			get_job_manager_template_part( 'access-denied', 'browse-companies', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+			return ob_get_clean();
+		}
+
+		extract( $atts = shortcode_atts( apply_filters( 'company_listings_output_companies_defaults', array(
+			'per_page'                  => get_option( 'company_listings_per_page' ),
+			'order'                     => 'DESC',
+			'orderby'                   => 'featured',
+			'show_filters'              => true,
+			'show_categories'           => get_option( 'company_listings_enable_categories' ),
+			'categories'                => '',
+			'featured'                  => null, // True to show only featured, false to hide featured, leave null to show both.
+			'show_category_multiselect' => get_option( 'company_listings_enable_default_category_multiselect', false ),
+			'selected_category'         => '',
+			'show_pagination'           => false,
+			'show_more'                 => true,
+		) ), $atts ) );
+
+		$categories = array_filter( array_map( 'trim', explode( ',', $categories ) ) );
+		$keywords   = '';
+		$location   = '';
+
+		// String and bool handling
+		$show_filters              = $this->string_to_bool( $show_filters );
+		$show_categories           = $this->string_to_bool( $show_categories );
+		$show_category_multiselect = $this->string_to_bool( $show_category_multiselect );
+		$show_more                 = $this->string_to_bool( $show_more );
+		$show_pagination           = $this->string_to_bool( $show_pagination );
+
+		if ( ! is_null( $featured ) ) {
+			$featured = ( is_bool( $featured ) && $featured ) || in_array( $featured, array( '1', 'true', 'yes' ) ) ? true : false;
+		}
+
+		if ( ! empty( $_GET['search_keywords'] ) ) {
+			$keywords = sanitize_text_field( $_GET['search_keywords'] );
+		}
+
+		if ( ! empty( $_GET['search_location'] ) ) {
+			$location = sanitize_text_field( $_GET['search_location'] );
+		}
+
+		if ( ! empty( $_GET['search_category'] ) ) {
+			$selected_category = sanitize_text_field( $_GET['search_category'] );
+		}
+
+		$companies = get_companies( apply_filters( 'company_listings_output_companies_args', array(
+				'search_categories' => $categories,
+				'orderby'           => $orderby,
+				'order'             => $order,
+				'posts_per_page'    => $per_page,
+				'featured'          => $featured
+		) ) );
+
+		if ( $companies->have_posts() ) : ?>
+
+			<?php get_job_manager_template( 'company-directory-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+
+			<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
+				<?php get_job_manager_template_part( 'content', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+			<?php endwhile; ?>
+
+			<?php get_job_manager_template( 'company-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+
+			<?php if ( $companies->found_posts > $per_page && $show_more ) : ?>
+
+				<?php wp_enqueue_script( 'wp-job-manager-company-listings-ajax-filters' ); ?>
+
+				<?php if ( $show_pagination ) : ?>
+					<?php echo get_job_listing_pagination( $companies->max_num_pages ); ?>
+				<?php else : ?>
+					<a class="load_more_companies" href="#"><strong><?php _e( 'Load more companies', 'wp-job-manager-company-listings' ); ?></strong></a>
+				<?php endif; ?>
+
+			<?php endif; ?>
+
+		<?php else :
+			do_action( 'company_listings_output_companies_no_results' );
+		endif;
+
+		wp_reset_postdata();
 
 		$data_attributes_string = '';
 		$data_attributes        = array(

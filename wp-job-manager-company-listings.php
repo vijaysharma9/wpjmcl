@@ -64,6 +64,10 @@ class WP_Job_Manager_Company_Listings {
 		add_action( 'switch_theme', 'flush_rewrite_rules', 15 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
 		add_action( 'admin_init', array( $this, 'updater' ) );
+
+		// Filters
+		add_filter('rewrite_rules_array', array( $this, 'insert_rewrite_rules' ));
+    	add_filter('query_vars', array( $this, 'insert_query_variable' ));
 	}
 
 	/**
@@ -95,6 +99,27 @@ class WP_Job_Manager_Company_Listings {
 			include( 'includes/admin/class-wp-job-manager-company-listings-admin.php' );
 		}
 	}
+
+	// Tell WordPress to accept our custom query variable
+    public function insert_query_variable($vars) {
+        array_push($vars, 'fpage');
+        return $vars;
+    }
+
+    // Adding fake pages' rewrite rules for company-directory
+    public function insert_rewrite_rules($rules) {
+
+	    $upper = array('company-numeric','A', 'B', 'C', 'D', 'E', 'F', 'G','H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+	    );
+
+	    $page_id = get_option( 'company_listings_company_directory_page_id' );
+     
+		$newrules = array();
+		foreach ($upper as $slug )
+			$newrules['([^/]+)/' . $slug . '/?$'] = 'index.php?page_id='. $page_id .'&$matches[1]&fpage=' . $slug;
+     
+        return $newrules + $rules;
+    }
 
 	/**
 	 * Includes once plugins are loaded

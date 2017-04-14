@@ -237,6 +237,13 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 							'desc'		=> __( 'Select the page where you have placed the [companies] shortcode. This lets the plugin know where the company listings page is located.', 'wp-job-manager-company-listings' ),
 							'type'      => 'page'
 						),
+						array(
+							'name' 		=> 'company_listings_company_directory_page_id',
+							'std' 		=> '',
+							'label' 	=> __( 'Company Directory Page', 'wp-job-manager-company-listings' ),
+							'desc'		=> __( 'Select the page where you have placed the [company_directory] shortcode. This lets the plugin know where the company Directory page is located.', 'wp-job-manager-company-listings' ),
+							'type'      => 'page'
+						),
 					)
 				),
 				'company_visibility' => array(

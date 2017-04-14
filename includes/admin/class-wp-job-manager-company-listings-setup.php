@@ -113,7 +113,8 @@ class WP_Job_Manager_Company_Listings_Setup {
 			$pages_to_create = array(
 				'submit_company_form'  => '[submit_company_form]',
 				'company_dashboard' => '[company_dashboard]',
-				'companies'             => '[companies]'
+				'companies'             => '[companies]',
+				'company-directory'             => '[company_directory]',
 			);
 
 			foreach ( $pages_to_create as $page => $content ) {
@@ -189,6 +190,12 @@ class WP_Job_Manager_Company_Listings_Setup {
 								<td><input type="text" value="<?php echo esc_attr( _x( 'Companies', 'Default page title (wizard)', 'wp-job-manager-company-listings' ) ); ?>" name="wp-job-manager-company-listings-page-title[companies]" /></td>
 								<td><?php _e( 'This page allows users to browse, search, and filter company listings on the front-end of your site.', 'wp-job-manager-company-listings' ); ?></td>
 								<td><code>[companies]</code></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" checked="checked" name="wp-job-manager-company-listings-create-page[company_directory]" /></td>
+								<td><input type="text" value="<?php echo esc_attr( _x( 'Company Directory', 'Default page title (wizard)', 'wp-job-manager-company-listings' ) ); ?>" name="wp-job-manager-company-listings-page-title[company_directory]" /></td>
+								<td><?php _e( 'This page allows users to browse, search, and filter company listings on the front-end of your site.', 'wp-job-manager-company-listings' ); ?></td>
+								<td><code>[company_directory]</code></td>
 							</tr>
 						</tbody>
 						<tfoot>

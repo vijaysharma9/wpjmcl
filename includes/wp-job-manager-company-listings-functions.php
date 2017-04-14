@@ -86,6 +86,13 @@ function get_companies( $args = array() ) {
 		add_filter( 'posts_clauses', 'get_companies_keyword_search' );
 	}
 
+	$fpage = get_query_var('fpage');
+
+	if (isset($fpage) && ! empty($fpage)) {
+		$query_args['_directorykeyword'] = $fpage; // Does nothing but needed for unique hash
+		add_filter( 'posts_clauses', 'get_company_directory_letter_search' );
+	}
+
 	$query_args = apply_filters( 'company_listings_get_companies', $query_args, $args );
 
 	if ( empty( $query_args['meta_query'] ) ) {
@@ -113,6 +120,7 @@ function get_companies( $args = array() ) {
 	do_action( 'after_get_companies', $query_args, $args );
 
 	remove_filter( 'posts_clauses', 'get_companies_keyword_search' );
+	remove_filter( 'posts_clauses', 'get_company_directory_letter_search' );
 
 	return $result;
 }
@@ -142,6 +150,28 @@ if ( ! function_exists( 'get_companies_keyword_search' ) ) :
 		if ( $post_ids ) {
 			$conditions[] = "{$wpdb->posts}.ID IN (" . esc_sql( implode( ',', array_unique( $post_ids ) ) ) . ")";
 		}
+
+		$args['where'] .= " AND ( " . implode( ' OR ', $conditions ) . " ) ";
+
+		return $args;
+	}
+endif;
+
+if ( ! function_exists( 'get_company_directory_letter_search' ) ) :
+	/**
+	 * Join and where query for keywords
+	 *
+	 * @param array $args
+	 * @return array
+	 */
+	function get_company_directory_letter_search( $args ) {
+		global $wpdb, $company_listings_keyword;
+
+		$fpage = get_query_var('fpage');
+
+		// Title and content searching
+		$conditions = array();
+		$conditions[] = "{$wpdb->posts}.post_title LIKE '" . esc_sql( $fpage ) . "%'";
 
 		$args['where'] .= " AND ( " . implode( ' OR ', $conditions ) . " ) ";
 
