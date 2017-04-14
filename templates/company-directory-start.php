@@ -17,4 +17,4 @@
 		?>
 	</ul>
 </div>
-<ul class="companies">
+<ul class="company-directory">

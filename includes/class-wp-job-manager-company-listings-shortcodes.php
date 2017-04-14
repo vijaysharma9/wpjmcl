@@ -359,10 +359,6 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			$keywords = sanitize_text_field( $_GET['search_keywords'] );
 		}
 
-		if ( ! empty( $_GET['search_location'] ) ) {
-			$location = sanitize_text_field( $_GET['search_location'] );
-		}
-
 		if ( ! empty( $_GET['search_category'] ) ) {
 			$selected_category = sanitize_text_field( $_GET['search_category'] );
 		}
