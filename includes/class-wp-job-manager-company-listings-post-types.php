@@ -205,7 +205,11 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 					'search_items' 			=> sprintf( __( 'Search %s', 'wp-job-manager-company-listings' ), $plural ),
 					'not_found' 			=> sprintf( __( 'No %s found', 'wp-job-manager-company-listings' ), $plural ),
 					'not_found_in_trash' 	=> sprintf( __( 'No %s found in trash', 'wp-job-manager-company-listings' ), $plural ),
-					'parent' 				=> sprintf( __( 'Parent %s', 'wp-job-manager-company-listings' ), $singular )
+					'parent' 				=> sprintf( __( 'Parent %s', 'wp-job-manager-company-listings' ), $singular ),
+					'featured_image'        => __( 'Company Logo', 'wp-job-manager-company-listings' ),
+					'set_featured_image'    => __( 'Set company logo', 'wp-job-manager-company-listings' ),
+					'remove_featured_image' => __( 'Remove company logo', 'wp-job-manager-company-listings' ),
+					'use_featured_image'    => __( 'Use as company logo', 'wp-job-manager-company-listings' ),
 				),
 				'description' => __( 'This is where you can create and manage user companies.', 'wp-job-manager-company-listings' ),
 				'public' 				=> true,
@@ -227,7 +231,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 				'hierarchical' 			=> false,
 				'rewrite' 				=> $rewrite,
 				'query_var' 			=> true,
-				'supports' 				=> array( 'title', 'editor', 'custom-fields' ),
+				'supports' 				=> array( 'title', 'editor', 'custom-fields', 'thumbnail' ),
 				'has_archive' 			=> $has_archive,
 				'show_in_nav_menus' 	=> false,
 				'menu_icon'           => 'dashicons-building'
