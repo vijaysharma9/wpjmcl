@@ -40,10 +40,14 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-company-listings' ),
 				'description' => ''
 			),
-			'_company_photo' => array(
-				'label'       => __( 'Photo', 'wp-job-manager-company-listings' ),
-				'placeholder' => __( 'URL to the company photo', 'wp-job-manager-company-listings' ),
-				'type'        => 'file'
+			'_company_website' => array(
+				'label'       => __( 'WebSite', 'wp-job-manager-company-listings' ),
+				'type'        => 'text'
+			),
+			'_company_twitter' => array(
+				'label'       => __( 'Twitter', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( '@yourcompany', 'wp-job-manager-company-listings' ),
+				'type'        => 'text'
 			),
 			'_company_video' => array(
 				'label'       => __( 'Video', 'wp-job-manager-company-listings' ),
@@ -63,11 +67,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				'label' => __( 'Feature this Company?', 'wp-job-manager-company-listings' ),
 				'type'  => 'checkbox',
 				'description' => __( 'Featured companies will be sticky during searches, and can be styled differently.', 'wp-job-manager-company-listings' )
-			),
-			'_company_expires' => array(
-				'label'       => __( 'Expires', 'wp-job-manager-company-listings' ),
-				'placeholder' => __( 'yyyy-mm-dd', 'wp-job-manager-company-listings' )
-			),
+			)
 		) );
 
 		if ( ! get_option( 'company_listings_enable_company_upload' ) ) {

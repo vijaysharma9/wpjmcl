@@ -11,8 +11,10 @@ class WP_Job_Manager_Company_Listings_Ajax {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_nopriv_company_listings_get_companies', array( $this, 'get_companies' ) );
-		add_action( 'wp_ajax_company_listings_get_companies', array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_get_companies', 	array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_company_listings_get_companies', 			array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_company_listings_json_search_company',     array( $this, 'json_search_company' ) );
+		add_action( 'wp_ajax_company_listings_json_company_data',       array( $this, 'json_company_data' ) );
 	}
 
 	/**
@@ -122,6 +124,79 @@ class WP_Job_Manager_Company_Listings_Ajax {
 		echo '<!--WPJM_END-->';
 
 		die();
+	}
+
+
+	/**
+	 * Search for company and return json.
+	 */
+	public function json_search_company() {
+		ob_start();
+
+		$term    = stripslashes( $_GET['term'] );
+
+		if ( empty( $term ) ) {
+			die();
+		}
+
+		$query = new WP_Query( array( 's' => $term, 'post_type' => 'company' ) );
+
+		if ( $query->have_posts() ) {
+			// The Loop
+			$companies = array();
+
+			while ($query->have_posts()) {
+
+				$query->the_post();
+
+				$company_id = $query->post->ID;
+				$companies[$company_id] = array(
+					'title'     => $query->post->post_title
+				);
+			}
+
+			wp_send_json( apply_filters( 'json_search_company', $companies ) );
+		}
+
+		die();
+	}
+
+	/**
+	 * Get the selected company data
+	 */
+	public function json_company_data() {
+
+		ob_start();
+
+		$company_id = stripslashes( $_GET['company_id'] );
+
+		$data = array(
+			'location'  => get_post_meta( $company_id, '_company_location', true ),
+			'website'   => get_post_meta( $company_id, '_company_website', true ),
+			'tagline'   => get_post_meta( $company_id, '_company_title', true ),
+			'twitter'   => get_post_meta( $company_id, '_company_twitter', true ),
+			'video'     => get_post_meta( $company_id, '_company_video', true ),
+			'group_id'  => get_post_meta( $company_id, '_group_id', true )
+		);
+
+		//Company logo
+		$thumbnail_id  = get_post_thumbnail_id( $company_id );
+
+		if ( ! empty( $thumbnail_id ) ) {
+
+			if ( isset( $_GET['post_ID'] ) ) {
+				$data['logo_backend']  = _wp_post_thumbnail_html( $thumbnail_id, $_GET['post_ID'] );
+			} else {
+
+				ob_start();
+				get_job_manager_template( 'form-fields/uploaded-file-html.php', array( 'name' => 'current_company_logo', 'value' => $thumbnail_id ) );
+				$js_field_html_img = ob_get_clean();
+				$data['logo_frontend'] =  $js_field_html_img;
+			}
+		}
+
+
+		wp_send_json( apply_filters( 'json_company_data', $data ) );
 	}
 }
 
