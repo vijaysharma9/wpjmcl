@@ -171,12 +171,13 @@ class WP_Job_Manager_Company_Listings_Ajax {
 		$company_id = stripslashes( $_GET['company_id'] );
 
 		$data = array(
-			'location'  => get_post_meta( $company_id, '_company_location', true ),
-			'website'   => get_post_meta( $company_id, '_company_website', true ),
-			'tagline'   => get_post_meta( $company_id, '_company_title', true ),
-			'twitter'   => get_post_meta( $company_id, '_company_twitter', true ),
-			'video'     => get_post_meta( $company_id, '_company_video', true ),
-			'group_id'  => get_post_meta( $company_id, '_group_id', true )
+			'location'  	=> get_post_meta( $company_id, '_company_location', true ),
+			'application'  	=> get_post_meta( $company_id, '_company_email', true ),
+			'website'   	=> get_post_meta( $company_id, '_company_website', true ),
+			'tagline'   	=> get_post_meta( $company_id, '_company_title', true ),
+			'twitter'   	=> get_post_meta( $company_id, '_company_twitter', true ),
+			'video'     	=> get_post_meta( $company_id, '_company_video', true ),
+			'group_id'  	=> get_post_meta( $company_id, '_group_id', true )
 		);
 
 		//Company logo

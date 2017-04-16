@@ -430,10 +430,3 @@ function get_the_company_metavideo( $post = null ) {
 	}
 	return apply_filters( 'the_company_metavideo', $post->_company_video, $post );
 }
-
-function reorder_job_manager_job_listing_data_fields( $fields ) {
-	$fields['_company_name']['priority'] = 0;
-	return $fields;
-}
-
-add_filter( 'job_manager_job_listing_data_fields', 'reorder_job_manager_job_listing_data_fields' );

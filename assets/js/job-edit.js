@@ -68,6 +68,7 @@ jq( function() {
             var
                 company_id = $elmCmpText.val(),
                 elmCmpnyLocation = jq('#' + underscore + 'job_location'),
+                elmAppEmailURL  = jq('#' + underscore + 'application'),
                 elmCmpnyWebsite = jq('#' + underscore + 'company_website'),
                 elmCmpnyTagline = jq('#' + underscore + 'company_tagline'),
                 elmCmpnyTwiiter = jq('#' + underscore + 'company_twitter'),
@@ -105,7 +106,8 @@ jq( function() {
                     });
 
                     $elmCmpText.val($elmCmpText.select2('data').text);
-                    elmCmpnyLocation.val(response.location)
+                    elmCmpnyLocation.val(response.location);
+                    elmAppEmailURL.val(response.application);
                     elmCmpnyWebsite.val(response.website);
                     elmCmpnyTagline.val(response.tagline);
                     elmCmpnyTwiiter.val(response.twitter);
