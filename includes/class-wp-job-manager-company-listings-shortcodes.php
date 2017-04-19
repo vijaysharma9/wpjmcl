@@ -376,7 +376,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			<?php get_job_manager_template( 'company-directory-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 			<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
-				<?php get_job_manager_template_part( 'content', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_job_manager_template_part( 'company-directory', 'content', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 			<?php endwhile; ?>
 
 			<?php get_job_manager_template( 'company-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
