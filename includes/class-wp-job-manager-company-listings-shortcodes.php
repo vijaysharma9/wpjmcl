@@ -328,9 +328,9 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		extract( $atts = shortcode_atts( apply_filters( 'company_listings_output_companies_defaults', array(
 			'per_page'                  => get_option( 'company_listings_per_page' ),
-			'order'                     => 'DESC',
-			'orderby'                   => 'featured',
-			'show_filters'              => true,
+			'orderby'           => 'title',
+			'order'             => 'ASC',
+			'show_filters'              => false,
 			'show_categories'           => get_option( 'company_listings_enable_categories' ),
 			'categories'                => '',
 			'featured'                  => null, // True to show only featured, false to hide featured, leave null to show both.
@@ -363,7 +363,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			$selected_category = sanitize_text_field( $_GET['search_category'] );
 		}
 
-		$companies = get_companies( apply_filters( 'company_listings_output_companies_args', array(
+		$companies = get_company_directory( apply_filters( 'company_listings_output_companies_args', array(
 				'search_categories' => $categories,
 				'orderby'           => $orderby,
 				'order'             => $order,

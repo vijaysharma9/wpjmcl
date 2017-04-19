@@ -86,13 +86,6 @@ function get_companies( $args = array() ) {
 		add_filter( 'posts_clauses', 'get_companies_keyword_search' );
 	}
 
-	$fpage = get_query_var('fpage');
-
-	if (isset($fpage) && ! empty($fpage)) {
-		$query_args['_directorykeyword'] = $fpage; // Does nothing but needed for unique hash
-		add_filter( 'posts_clauses', 'get_company_directory_letter_search' );
-	}
-
 	$query_args = apply_filters( 'company_listings_get_companies', $query_args, $args );
 
 	if ( empty( $query_args['meta_query'] ) ) {
@@ -120,6 +113,86 @@ function get_companies( $args = array() ) {
 	do_action( 'after_get_companies', $query_args, $args );
 
 	remove_filter( 'posts_clauses', 'get_companies_keyword_search' );
+
+	return $result;
+}
+endif;
+
+if ( ! function_exists( 'get_company_directory' ) ) :
+/**
+ * Queries job listings with certain criteria and returns them
+ *
+ * @access public
+ * @return void
+ */
+function get_company_directory( $args = array() ) {
+	global $wpdb, $company_listings_keyword;
+
+	$args = wp_parse_args( $args, array(
+		'search_location'   => '',
+		'search_keywords'   => '',
+		'search_categories' => array(),
+		'offset'            => '',
+		'posts_per_page'    => '-1',
+		'orderby'           => 'title',
+		'order'             => 'ASC',
+		'featured'          => null,
+		'fields'            => 'all'
+	) );
+
+	$query_args = array(
+		'post_type'              => 'company',
+		'post_status'            => 'publish',
+		'ignore_sticky_posts'    => 1,
+		'offset'                 => absint( $args['offset'] ),
+		'posts_per_page'         => intval( $args['posts_per_page'] ),
+		'orderby'                => $args['orderby'],
+		'order'                  => $args['order'],
+		'tax_query'              => array(),
+		'meta_query'             => array(),
+		'update_post_term_cache' => false,
+		'update_post_meta_cache' => false,
+		'cache_results'          => false,
+		'fields'                 => $args['fields']
+	);
+
+	if ( $args['posts_per_page'] < 0 ) {
+		$query_args['no_found_rows'] = true;
+	}
+
+	$fpage = sanitize_text_field( get_query_var('fpage'));
+
+	if (isset($fpage) && ! empty($fpage)) {
+		$query_args['_directorykeyword'] = $fpage; // Does nothing but needed for unique hash
+		add_filter( 'posts_clauses', 'get_company_directory_letter_search' );
+	}
+
+	$query_args = apply_filters( 'company_listings_get_company_directory', $query_args, $args );
+
+	//if ( empty( $query_args['meta_query'] ) ) {
+		unset( $query_args['meta_query'] );
+	//}
+
+	//if ( empty( $query_args['tax_query'] ) ) {
+		unset( $query_args['tax_query'] );
+	//}
+
+	// Filter args
+	$query_args = apply_filters( 'get_company_directory_query_args', $query_args, $args );
+
+	// Generate hash
+	$to_hash         = defined( 'ICL_LANGUAGE_CODE' ) ? json_encode( $query_args ) . ICL_LANGUAGE_CODE : json_encode( $query_args );
+	$query_args_hash = 'jm_' . md5( $to_hash ) . WP_Job_Manager_Cache_Helper::get_transient_version( 'get_company_listings' );
+
+	do_action( 'before_get_company_directory', $query_args, $args );
+
+	if ( false === ( $result = get_transient( $query_args_hash ) ) ) {
+		$result = new WP_Query( $query_args );
+		set_transient( $query_args_hash, $result, DAY_IN_SECONDS * 30 );
+	}
+
+	do_action( 'after_get_company_directory', $query_args, $args );
+
 	remove_filter( 'posts_clauses', 'get_company_directory_letter_search' );
 
 	return $result;
