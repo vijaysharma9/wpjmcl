@@ -114,11 +114,13 @@ class WP_Job_Manager_Company_Listings {
 	    $upper = array('company-numeric','A', 'B', 'C', 'D', 'E', 'F', 'G','H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 	    );
 
-	    $page_id = get_option( 'company_listings_company_directory_page_id' );
+	    $company_directory_page_id = get_option( 'company_listings_company_directory_page_id' );
      
 		$newrules = array();
-		foreach ($upper as $slug )
-			$newrules['([^/]+)/' . $slug . '/?$'] = 'index.php?page_id='. $page_id .'&$matches[1]&fpage=' . $slug;
+		foreach ($upper as $slug ) {
+			$newrules['([^/]+)/' . $slug . '/?$'] = 
+			'index.php?page_id='. $company_directory_page_id .'&$matches[1]&fpage=' . $slug;
+		}
      
         return $newrules + $rules;
     }

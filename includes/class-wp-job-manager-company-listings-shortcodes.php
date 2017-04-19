@@ -424,7 +424,9 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 	 * Output some content when no results were found
 	 */
 	public function output_no_results() {
+		get_job_manager_template( 'company-directory-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 		get_job_manager_template( 'content-no-companies-found.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'company-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**
