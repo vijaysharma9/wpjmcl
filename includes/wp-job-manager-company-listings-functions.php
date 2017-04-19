@@ -162,20 +162,25 @@ function get_company_directory( $args = array() ) {
 
 	$fpage = sanitize_text_field( get_query_var('fpage'));
 
-	if (isset($fpage) && ! empty($fpage)) {
+	if (isset($fpage) && ('company-numeric' == $fpage )) {
+		$query_args['_directorykeyword'] = $fpage; // Does nothing but needed for unique hash
+		add_filter( 'posts_clauses', 'get_company_directory_company_numeric' );
+	} else if (isset($fpage) && ! empty($fpage)) {
 		$query_args['_directorykeyword'] = $fpage; // Does nothing but needed for unique hash
 		add_filter( 'posts_clauses', 'get_company_directory_letter_search' );
+	} else {
+		// do nothing 
 	}
 
 	$query_args = apply_filters( 'company_listings_get_company_directory', $query_args, $args );
 
-	//if ( empty( $query_args['meta_query'] ) ) {
+	if ( empty( $query_args['meta_query'] ) ) {
 		unset( $query_args['meta_query'] );
-	//}
+	}
 
-	//if ( empty( $query_args['tax_query'] ) ) {
+	if ( empty( $query_args['tax_query'] ) ) {
 		unset( $query_args['tax_query'] );
-	//}
+	}
 
 	// Filter args
 	$query_args = apply_filters( 'get_company_directory_query_args', $query_args, $args );
@@ -194,6 +199,7 @@ function get_company_directory( $args = array() ) {
 	do_action( 'after_get_company_directory', $query_args, $args );
 
 	remove_filter( 'posts_clauses', 'get_company_directory_letter_search' );
+	remove_filter( 'posts_clauses', 'get_company_directory_company_numeric' );
 
 	return $result;
 }
@@ -245,6 +251,27 @@ if ( ! function_exists( 'get_company_directory_letter_search' ) ) :
 		// Title and content searching
 		$conditions = array();
 		$conditions[] = "{$wpdb->posts}.post_title LIKE '" . esc_sql( $fpage ) . "%'";
+
+		$args['where'] .= " AND ( " . implode( ' OR ', $conditions ) . " ) ";
+
+
+		return $args;
+	}
+endif;
+
+if ( ! function_exists( 'get_company_directory_company_numeric' ) ) :
+	/**
+	 * Join and where query for keywords
+	 *
+	 * @param array $args
+	 * @return array
+	 */
+	function get_company_directory_company_numeric( $args ) {
+		global $wpdb, $company_listings_keyword;
+
+		// Title and content searching
+		$conditions = array();
+		$conditions[] = "{$wpdb->posts}.post_title  REGEXP '^[0-9]'";
 
 		$args['where'] .= " AND ( " . implode( ' OR ', $conditions ) . " ) ";
 
