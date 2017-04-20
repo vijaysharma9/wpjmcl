@@ -59,7 +59,7 @@ function the_company_metatitle( $before = '', $after = '', $echo = true, $post =
 	$title = $before . $title . $after;
 
 	if ( $echo )
-		echo $title;
+		echo '<span class="tagline">' . $title . '</span>';
 	else
 		return $title;
 }

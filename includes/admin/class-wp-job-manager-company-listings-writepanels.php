@@ -26,7 +26,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	public static function company_fields() {
 		$fields = apply_filters( 'company_listings_company_fields', array(
 			'_company_title' => array(
-				'label'       => __( 'Professional Title', 'wp-job-manager-company-listings' ),
+				'label'       => __( 'Company Tagline', 'wp-job-manager-company-listings' ),
 				'placeholder' => '',
 				'description' => ''
 			),
