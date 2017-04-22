@@ -55,18 +55,6 @@ if ( post_password_required() ) {
                         </span>
 						<span ><?php echo get_post_meta( $post->ID, '_company_location', true ) ?></span>
 					</p>
-					<div class="company-actions-bar">
-
-						<?php
-						$group_id = get_post_meta( $post->ID, '_group_id', true );
-						$group = groups_get_group( $group_id );
-
-						if ( $group->id != 0 ):  ?>
-							<a class="button btn" href="<?php echo bp_get_group_permalink( $group ) ?>">
-								<?php _e( 'Company Group', 'wp-job-manager-company-listings' ) ?>
-							</a>
-						<?php endif;?>
-					</div>
 				</div>
 			</div>
 		</div>
