@@ -60,7 +60,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 
 			<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
 
-				<?php get_job_manager_template_part( 'content', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_company_listings_template_part( 'content', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 			<?php endwhile; ?>
 

@@ -1,76 +1,117 @@
-<?php if ( company_listings_user_can_view_company( $post->ID ) ) : ?>
-	<div class="single-company-content">
+<?php
+/**
+ * The template for displaying company content in the single-company.php template
+ *
+ * This template can be overridden by copying it to yourtheme/buddypress_job_manager/content-single-job_company.php.
+ *
+ * HOWEVER, on occasion BuddyPress Job Manager will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @author 		Kishore
+ * @package 	BuddyPress Job Manager/Templates
+ * @version     1.1
+ */
 
-		<?php do_action( 'single_company_start' ); ?>
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
-		<div class="company-aside">
-			<?php the_company_metaphoto(); ?>
-			<?php the_company_metalinks(); ?>
-			<p class="job-title"><?php the_company_metatitle(); ?></p>
-			<p class="location"><?php the_company_metalocation(); ?></p>
-			<?php the_company_metainfo(); ?>
-			<?php the_company_metavideo(); ?>
-		</div>
+?>
 
-		<div class="company_description">
-			<?php echo apply_filters( 'the_company_metadescription', get_the_content() ); ?>
-		</div>
+<?php
 
-		<?php do_action( 'single_company_meta_start' ); ?>
+do_action( 'jmcl_before_single_company' );
 
-		<?php if ( ( $skills = wp_get_object_terms( $post->ID, 'company_skill', array( 'fields' => 'names' ) ) ) && is_array( $skills ) ) : ?>
-			<h2><?php _e( 'Skills', 'wp-job-manager-company-listings' ); ?></h2>
-			<ul class="company-listings-skills">
-				<?php echo '<li>' . implode( '</li><li>', $skills ) . '</li>'; ?>
-			</ul>
-		<?php endif; ?>
-			
-		<?php if ( get_the_company_metacategory() ) : ?>
-			<h2><?php _e( 'Industry', 'wp-job-manager-company-listings' ); ?></h2>
-			<ul class="meta">
-				<li class="company-category"><?php the_company_metacategory(); ?></li>
-			</ul>
-		<?php endif; ?>
+if ( post_password_required() ) {
+	echo get_the_password_form();
+	return;
+}
+?>
 
-		<?php if ( $items = get_post_meta( $post->ID, '_company_perk', true ) ) : ?>
-			<h2><?php _e( 'Perks', 'wp-job-manager-company-listings' ); ?></h2>
-			<ul class="company-listings-perk">
-			<?php
-				foreach( $items as $item ) : ?>
-					<li>
-						<?php echo wpautop( wptexturize( $item['notes'] ) ); ?>
-					</li>
+<div id="company-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-				<?php endforeach;
-			?>
-			</ul>
-		<?php endif; ?>
+	<?php
+	do_action( 'jmcl_before_single_company_summary' );
+	?>
 
-		<?php if ( $items = get_post_meta( $post->ID, '_company_press', true ) ) : ?>
-			<h2><?php _e( 'Press', 'wp-job-manager-company-listings' ); ?></h2>
-			<dl class="company-listings-experience">
-			<?php
-				foreach( $items as $item ) : ?>
+	<div class="summary entry-summary cmp-entry-summary">
 
-					<dt>
-						<h3>
-							<a target="_blank" href="<?php echo esc_html( $item['notes'] ); ?>"> 
-								<?php echo esc_html( $item['job_title'] ); ?>
+		<div class="cmp-top-card-module__container container-with-shadow">
+			<?php the_post_thumbnail( array(180,180), array( 'class'=> 'cmp-top-card-module__logo' ) ); ?>
+
+			<div class="cmp-top-card-module__details">
+				<div>
+					<h1>
+						<?php the_title() ?>
+						<span><?php echo get_post_meta( $post->ID, '_company_tagline', true ) ?></span>
+					</h1>
+					<p class="company-main-info-company-descriptions%">
+						<span class="company-industries cmp-top-card-module__dot-separated-list"><?php echo get_post_meta( $post->ID, '_company_industries', true ); ?></span>
+                        <span class="company-size cmp-top-card-module__dot-separated-list">
+                           <?php printf( __( '%d+ employees ', 'wp-job-manager-company-listings' ), get_post_meta( $post->ID, '_company_size', true ) ) ?>
+                        </span>
+						<span ><?php echo get_post_meta( $post->ID, '_company_location', true ) ?></span>
+					</p>
+					<div class="company-actions-bar">
+
+						<?php
+						$group_id = get_post_meta( $post->ID, '_group_id', true );
+						$group = groups_get_group( $group_id );
+
+						if ( $group->id != 0 ):  ?>
+							<a class="button btn" href="<?php echo bp_get_group_permalink( $group ) ?>">
+								<?php _e( 'Company Group', 'wp-job-manager-company-listings' ) ?>
 							</a>
-						</h3>
-					</dt>
+						<?php endif;?>
+					</div>
+				</div>
+			</div>
+		</div>
 
-				<?php endforeach;
-			?>
-			</dl>
-		<?php endif; ?>
+		<div class="cmp-content">
+			<?php echo $post->post_content  ?>
+		</div>
 
-		<?php do_action( 'single_company_meta_end' ); ?>
+		<div class="cmp-contact-info">
+			<p></p>
+			<h3 class="container-title"><?php _e( 'Contact Info', 'wp-job-manager-company-listings' ) ?></h3>
+			<table>
+				<tbody>
+				<tr>
+					<td class="label"><?php _e('Website', 'wp-job-manager-company-listings') ?></td>
+					<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_website', true ) ) ?></td>
+				</tr>
+				<tr>
+					<td class="label"><?php _e('Twitter', 'wp-job-manager-company-listings') ?></td>
+					<td class="data"><?php echo make_clickable(  'https://twitter.com/' .get_post_meta( $post->ID, '_company_twitter', true ) ) ?></td>
+				</tr>
+				<tr>
+					<td class="label"><?php _e('video', 'wp-job-manager-company-listings') ?></td>
+					<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_video', true ) ) ?></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 
-		<?php do_action( 'single_company_end' ); ?>
-	</div>
-<?php else : ?>
+		<div class="cmp-posted-jobs">
+			<p></p>
+			<h3 class="container-title"><?php _e( 'Posted Jobs', 'wp-job-manager-company-listings' ) ?></h3>
+			<?php echo do_shortcode('[jobs]'); ?>
+		</div>
 
-	<?php get_job_manager_template_part( 'access-denied', 'single-company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+		<?php
+		do_action( 'jmcl_single_company_summary' );
+		?>
 
-<?php endif; ?>
+	</div><!-- .summary -->
+
+	<?php
+	do_action( 'jmcl_after_single_company_summary' );
+	?>
+
+</div><!-- #product-<?php the_ID(); ?> -->
+
+<?php do_action( 'jmcl_after_single_company' ); ?>

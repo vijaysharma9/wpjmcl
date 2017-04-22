@@ -36,6 +36,7 @@ class WP_Job_Manager_Company_Listings {
 		// Includes
 		include( 'includes/wp-job-manager-company-listings-functions.php' );
 		include( 'includes/wp-job-manager-company-listings-template.php' );
+		include( 'includes/wp-job-manager-company-listings-template-functions.php' );
 		include( 'includes/wp-job-manager-company-listings-hooks.php' );
 		include( 'includes/class-wp-job-manager-company-listings-post-types.php' );
 		include( 'includes/class-wp-job-manager-company-listings-forms.php' );

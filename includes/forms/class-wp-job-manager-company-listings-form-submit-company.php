@@ -803,7 +803,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 				</div>
 				<div class="company_preview single-company">
 					<h1><?php the_title(); ?></h1>
-					<?php get_job_manager_template_part( 'content-single', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_company_listings_template_part( 'content-single', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 				</div>
 			</form>
 			<?php

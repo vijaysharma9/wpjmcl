@@ -2,431 +2,135 @@
 /**
  * Template Functions
  *
- * Template functions specifically created for companies
+ * Template functions specifically created for bp job manager
  *
- * @author 		Mike Jolley
  * @category 	Core
- * @package 	Company Manager/Template
- * @version     1.0.0
+ * @package 	BP Job Manager/Template
+ * @version     1.1
  */
 
 /**
- * Echo the location for a company/company
- * @param  boolean $map_link whether or not to link to the map on google maps
- * @param WP_Post|int $post (default: null)
- */
-function the_company_metalocation( $map_link = true, $post = null ) {
-	$location = get_the_company_metalocation( $post );
-
-	if ( $location ) {
-		if ( $map_link )
-			echo apply_filters( 'the_company_metalocation_map_link', '<a class="google_map_link company-location" href="http://maps.google.com/maps?q=' . urlencode( $location ) . '&zoom=14&size=512x512&maptype=roadmap&sensor=false">' . $location . '</a>', $location, $post );
-		else
-			echo '<span class="company-location">' . $location . '</span>';
-	}
-}
-
-/**
- * Get the location for a company/company
+ * Get and include template files.
  *
- * @param WP_Post|int $post (default: null)
- * @return string
- */
-function get_the_company_metalocation( $post = null ) {
-	$post = get_post( $post );
-	if ( $post->post_type !== 'company' )
-		return;
-
-	return apply_filters( 'the_company_metalocation', $post->_company_location, $post );
-}
-
-/**
- * Display a companys given job title
- *
- * @param  string  $before
- * @param  string  $after
- * @param  boolean $echo
- * @param WP_Post|int $post (default: null)
- * @return string
- */
-function the_company_metatitle( $before = '', $after = '', $echo = true, $post = null ) {
-	$title = get_the_company_metatitle( $post );
-
-	if ( strlen( $title ) == 0 )
-		return;
-
-	$title = esc_attr( strip_tags( $title ) );
-	$title = $before . $title . $after;
-
-	if ( $echo )
-		echo '<span class="tagline">' . $title . '</span>';
-	else
-		return $title;
-}
-
-/**
- * Get a companys given job title
- *
- * @param WP_Post|int $post (default: null)
- * @return string
- */
-function get_the_company_metatitle( $post = null ) {
-	$post = get_post( $post );
-
-	if ( $post->post_type !== 'company' )
-		return '';
-
-	return apply_filters( 'the_company_metatitle', $post->_company_title, $post );
-}
-
-/**
- * Output the photo for the company/company
- *
- * @param string $size (default: 'full')
- * @param mixed $default (default: null)
- * @param WP_Post|int $post (default: null)
- */
-function the_company_metaphoto( $size = 'thumbnail', $default = null, $post = null ) {
-	$logo = get_the_company_metaphoto( $post );
-
-	if ( $logo ) {
-
-		if ( $size !== 'full' ) {
-			$logo = job_manager_get_resized_image( $logo, $size );
-		}
-
-		echo '<img class="company_photo" src="' . $logo . '" alt="Photo" />';
-
-	} elseif ( $default )
-		echo '<img class="company_photo" src="' . $default . '" alt="Photo" />';
-	else
-		echo '<img class="company_photo" src="' . apply_filters( 'job_manager_default_company_logo', JOB_MANAGER_PLUGIN_URL . '/assets/images/company.png' ) . '" alt="Logo" />';
-}
-
-/**
- * Get the photo for the company/company
- *
- * @param WP_Post|int $post (default: null)
- * @return string
- */
-function get_the_company_metaphoto( $post = null ) {
-	$post = get_post( $post );
-	if ( $post->post_type !== 'company' )
-		return;
-
-	return apply_filters( 'the_company_metaphoto', get_the_post_thumbnail_url($post), $post );
-}
-
-/**
- * Output the category
- * @param WP_Post|int $post (default: null)
- */
-function the_company_metacategory( $post = null ) {
-	echo get_the_company_metacategory( $post );
-}
-
-/**
- * Get the category
- * @param WP_Post|int $post (default: null)
- * @return  string
- */
-function get_the_company_metacategory( $post = null ) {
-	$post = get_post( $post );
-	if ( $post->post_type !== 'company' )
-		return '';
-
-	if ( ! get_option( 'company_listings_enable_categories' ) )
-		return '';
-
-	$categories = wp_get_object_terms( $post->ID, 'company_category', array( 'fields' => 'names' ) );
-
-	if ( is_wp_error( $categories ) ) {
-		return '';
-	}
-
-	return implode( ', ', $categories );
-}
-
-/**
- * Outputs the jobs status
- *
- * @param WP_Post|int $post (default: null)
- */
-function the_company_metastatus( $post = null ) {
-	echo get_the_company_metastatus( $post );
-}
-
-/**
- * Gets the jobs status
- * @param WP_Post|int $post (default: null)
- * @return string
- */
-function get_the_company_metastatus( $post = null ) {
-	$post = get_post( $post );
-
-	$status = $post->post_status;
-
-	if ( $status == 'publish' )
-		$status = __( 'Published', 'wp-job-manager-company-listings' );
-	elseif ( $status == 'expired' )
-		$status = __( 'Expired', 'wp-job-manager-company-listings' );
-	elseif ( $status == 'pending' )
-		$status = __( 'Pending Review', 'wp-job-manager-company-listings' );
-	elseif ( $status == 'hidden' )
-		$status = __( 'Hidden', 'wp-job-manager-company-listings' );
-	else
-		$status = __( 'Inactive', 'wp-job-manager-company-listings' );
-
-	return apply_filters( 'the_company_metastatus', $status, $post );
-}
-
-/**
- * True if an the user can post a company. By default, you must be logged in.
- *
- * @return bool
- */
-function company_listings_user_can_post_company() {
-	$can_post = true;
-
-	if ( ! is_user_logged_in() ) {
-		if ( company_listings_user_requires_account() && ! company_listings_enable_registration() ) {
-			$can_post = false;
-		}
-	}
-
-	return apply_filters( 'company_listings_user_can_post_company', $can_post );
-}
-
-/**
- * True if registration is enabled.
- *
- * @return bool
- */
-function company_listings_enable_registration() {
-	return apply_filters( 'company_listings_enable_registration', get_option( 'company_listings_enable_registration' ) == 1 ? true : false );
-}
-
-/**
- * True if an account is required to post.
- *
- * @return bool
- */
-function company_listings_user_requires_account() {
-	return apply_filters( 'company_listings_user_requires_account', get_option( 'company_listings_user_requires_account' ) == 1 ? true : false );
-}
-
-/**
- * True if usernames are generated from email addresses.
- *
- * @return bool
- */
-function company_listings_generate_username_from_email() {
-	return apply_filters( 'company_listings_generate_username_from_email', get_option( 'company_listings_generate_username_from_email' ) == 1 ? true : false );
-}
-
-/**
- * Output the class
- *
- * @param string $class (default: '')
- * @param mixed $post_id (default: null)
+ * @param mixed $template_name
+ * @param array $args (default: array())
+ * @param string $template_path (default: '')
+ * @param string $default_path (default: '')
  * @return void
  */
-function company_class( $class = '', $post_id = null ) {
-	echo 'class="' . join( ' ', get_company_class( $class, $post_id ) ) . '"';
+function get_company_listings_template( $template_name, $args = array(), $template_path = 'company_listings', $default_path = '' ) {
+    if ( $args && is_array( $args ) ) {
+        extract( $args );
+    }
+    include( locate_company_listings_template( $template_name, $template_path, $default_path ) );
 }
 
 /**
- * Get the class
+ * Locate a template and return the path for inclusion.
  *
- * @access public
- * @return array
- */
-function get_company_class( $class = '', $post_id = null ) {
-	$post = get_post( $post_id );
-	if ( $post->post_type !== 'company' )
-		return array();
-
-	$classes = array();
-
-	if ( empty( $post ) ) {
-		return $classes;
-	}
-
-	$classes[] = 'company';
-
-	if ( is_company_featured( $post ) ) {
-		$classes[] = 'company_featured';
-	}
-
-	return get_post_class( $classes, $post->ID );
-}
-
-/**
- * Output the company permalinks
+ * This is the load order:
  *
- * @param WP_Post|int $post (default: null)
- */
-function the_company_metapermalink( $post = null ) {
-	$post = get_post( $post );
-	echo get_the_company_metapermalink( $post );
-}
-
-/**
- * Output the company links
+ *		yourtheme		/	$template_path	/	$template_name
+ *		yourtheme		/	$template_name
+ *		$default_path	/	$template_name
  *
- * @param WP_Post|int $post (default: null)
- */
-function the_company_metalinks( $post = null ) {
-	$post = get_post( $post );
-	get_job_manager_template( 'company-links.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
-}
-
-/**
- * Output the company info
- *
- * @param WP_Post|int $post (default: null)
- */
-function the_company_metainfo( $post = null ) {
-	$post = get_post( $post );
-	get_job_manager_template( 'company-info.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
-}
-
-/**
- * Get the company permalinks
- *
- * @param WP_Post|int $post (default: null)
+ * @param string $template_name
+ * @param string $template_path (default: 'job_manager')
+ * @param string|bool $default_path (default: '') False to not load a default
  * @return string
  */
-function get_the_company_metapermalink( $post = null ) {
-	$post = get_post( $post );
-	$link = get_permalink( $post );
+function locate_company_listings_template( $template_name, $template_path = 'company_listings', $default_path = '' ) {
+    // Look within passed path within the theme - this is priority
+    $template = locate_template(
+        array(
+            trailingslashit( $template_path ) . $template_name,
+            $template_name
+        )
+    );
 
-	return apply_filters( 'the_company_metapermalink', $link, $post );
+    // Get default template
+    if ( ! $template && $default_path !== false ) {
+        $default_path = $default_path ? $default_path : COMPANY_LISTINGS_PLUGIN_DIR . '/templates/';
+        if ( file_exists( trailingslashit( $default_path ) . $template_name ) ) {
+            $template = trailingslashit( $default_path ) . $template_name;
+        }
+    }
+
+    // Return what we found
+    return apply_filters( 'locate_company_listings_template', $template, $template_name, $template_path );
 }
 
 /**
- * Returns true or false based on whether the company has any website links to display.
- * @param  object $post
- * @return bool
- */
-function company_has_links( $post = null ) {
-	return sizeof( get_company_links( $post ) ) ? true : false;
-}
-
-/**
- * Returns true or false based on whether the company has any info to display.
- * @param  object $post
- * @return bool
- */
-function company_has_info( $post = null ) {
-	return sizeof( get_company_info( $post ) ) ? true : false;
-}
-
-/**
- * Returns true or false based on whether the company has a file uploaded.
- * @param  object $post
- * @return bool
- */
-function company_has_file( $post = null ) {
-	return get_company_file() ? true : false;
-}
-
-/**
- * Returns an array of links defined for a company
- * @param  object $post
- * @return array
- */
-function get_company_links( $post = null ) {
-	$post = get_post( $post );
-
-	return array_filter( (array) get_post_meta( $post->ID, '_links', true ) );
-}
-
-/**
- * Returns an array of info defined for a company
- * @param  object $post
- * @return array
- */
-function get_company_info( $post = null ) {
-	$post = get_post( $post );
-
-	return array_filter( (array) get_post_meta( $post->ID, '_info', true ) );
-}
-
-/**
- * If multiple files have been attached to the company_file field, return the in array format.
- * @return array
- */
-function get_company_files( $post = null ) {
-	$post  = get_post( $post );
-	$files = get_post_meta( $post->ID, '_company_file', true );
-	$files = is_array( $files ) ? $files : array( $files );
-	return $files;
-}
-
-/**
- * Returns the company file attached to a company.
- * @param  object $post
- * @return string
- */
-function get_company_file( $post = null ) {
-	$post = get_post( $post );
-	$file = get_post_meta( $post->ID, '_company_file', true );
-	return is_array( $file ) ? current( $file ) : $file;
-}
-
-/**
- * Returns a download link for a company file.
- * @param  object $post
- * @param  file key
- * @return string
- */
-function get_company_file_download_url( $post = null, $key = 0 ) {
-	$post = get_post( $post );
-	return add_query_arg( array( 'download-company' => $post->ID, 'file-id' => $key ) );
-}
-
-/**
- * Return whether or not the company has been featured
+ * Get template part (for templates in loops).
  *
- * @param  object $post
- * @return boolean
+ * @param string $slug
+ * @param string $name (default: '')
+ * @param string $template_path (default: 'company_listings')
+ * @param string|bool $default_path (default: '') False to not load a default
  */
-function is_company_featured( $post = null ) {
-	$post = get_post( $post );
+function get_company_listings_template_part( $slug, $name = '', $template_path = 'company_listings', $default_path = '' ) {
+    $template = '';
 
-	return $post->_featured ? true : false;
+    if ( $name ) {
+        $template = locate_company_listings_template( "{$slug}-{$name}.php", $template_path, $default_path );
+    }
+
+    // If template file doesn't exist, look in yourtheme/slug.php and yourtheme/company_listings/slug.php
+    if ( ! $template ) {
+        $template = locate_company_listings_template( "{$slug}.php", $template_path, $default_path );
+    }
+
+    if ( $template ) {
+        load_template( $template, false );
+    }
 }
 
 /**
- * Output the company video
- */
-function the_company_metavideo( $post = null ) {
-	$video    = get_the_company_metavideo( $post );
-	$video    = is_ssl() ? str_replace( 'http:', 'https:', $video ) : $video;
-	$filetype = wp_check_filetype( $video );
-
-	if ( ! empty( $filetype['ext'] ) ) {
-		$video_embed = wp_video_shortcode( array( 'src' => $video ) );
-	} else {
-		$video_embed = wp_oembed_get( $video );
-	}
-
-	if ( $video_embed ) {
-		echo '<div class="company-video">' . $video_embed . '</div>';
-	}
-}
-
-/**
- * Get the company video URL
+ * Get the default filename for a template.
  *
- * @param mixed $post (default: null)
+ */
+function jmcl_get_template_loader_default_file() {
+    if ( is_singular( 'company' ) ) {
+        $default_file = 'single-company.php';
+    } else {
+        $default_file = '';
+    }
+    return $default_file;
+}
+
+
+/**
+ * Load a template.
+ *
+ * Handles template usage so that we can use our own templates instead of the themes.
+ *
+ * Templates are in the 'templates' folder. woocommerce looks for theme.
+ * overrides in /theme/woocommerce/ by default.
+ *
+ * For beginners, it also looks for a woocommerce.php template first. If the user adds.
+ * this to the theme (containing a woocommerce() inside) this will be used for all.
+ * woocommerce templates.
+ *
+ * @param mixed $template
  * @return string
  */
-function get_the_company_metavideo( $post = null ) {
-	$post = get_post( $post );
-	if ( $post->post_type !== 'company' ) {
-		return;
-	}
-	return apply_filters( 'the_company_metavideo', $post->_company_video, $post );
+function jmcl_template_loader( $template ) {
+    if ( is_embed() ) {
+        return $template;
+    }
+
+    if ( $default_file = jmcl_get_template_loader_default_file() ) {
+        /**
+         * Filter hook to choose which files to find before WooCommerce does it's own logic.
+         *
+         * @since 2.7.0
+         * @var array
+         */
+        $template =  locate_company_listings_template( $default_file );
+    }
+
+    return $template;
 }
+
+
+add_filter( 'template_include','jmcl_template_loader'  );

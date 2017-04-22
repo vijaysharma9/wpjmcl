@@ -457,7 +457,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		if ( $post->post_type == 'company' ) {
 			ob_start();
 
-			get_job_manager_template_part( 'content-single', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+			get_company_listings_template_part( 'content-single', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 
 			$content = ob_get_clean();
 		}
