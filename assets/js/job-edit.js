@@ -8,11 +8,11 @@ jq( function() {
         underscore;
 
     if (jq('#_company_name').length) {
-        $elmCmpText = jq('#_company_name');
-        underscore = '_';
+        $elmCmpText     = jq('#_company_name');
+        underscore      = '_';
     } else if (jq('#company_name').length) {
-        $elmCmpText = jq('#company_name');
-        underscore = '';
+        $elmCmpText     = jq('#company_name');
+        underscore      = '';
     }
 
     if ($elmCmpText) {
@@ -66,13 +66,13 @@ jq( function() {
         $elmCmpText.on('change', function (e) {
 
             var
-                company_id = $elmCmpText.val(),
-                elmCmpnyLocation = jq('#' + underscore + 'job_location'),
-                elmAppEmailURL  = jq('#' + underscore + 'application'),
-                elmCmpnyWebsite = jq('#' + underscore + 'company_website'),
-                elmCmpnyTagline = jq('#' + underscore + 'company_tagline'),
-                elmCmpnyTwiiter = jq('#' + underscore + 'company_twitter'),
-                elmCmpnyVideo = jq('#' + underscore + 'company_video');
+                company_id          = $elmCmpText.val(),
+                elmCmpnyLocation    = jq('#' + underscore + 'job_location'),
+                elmAppEmailURL      = jq('#' + underscore + 'application'),
+                elmCmpnyWebsite     = jq('#' + underscore + 'company_website'),
+                elmCmpnyTagline     = jq('#' + underscore + 'company_tagline'),
+                elmCmpnyTwiiter     = jq('#' + underscore + 'company_twitter'),
+                elmCmpnyVideo       = jq('#' + underscore + 'company_video');
 
             //We are creating new company from an user input
             if (company_id == 0) {

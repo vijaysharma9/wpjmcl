@@ -11,7 +11,7 @@ class WP_Job_Manager_Company_Listings_Mapping {
 		//Job listing data
 		add_action( 'job_manager_job_listing_data_end',     array( $this, 'job_listing_data' ) );
         add_action( 'submit_job_form_company_fields_end',   array( $this, 'job_listing_data' ) );
-        add_action( 'job_manager_save_job_listing', array( $this, 'save_job_listing_data' ), 20, 2 );
+        add_action( 'job_manager_save_job_listing',         array( $this, 'save_job_listing_data' ), 20, 2 );
 	}
 
 	/**
@@ -69,11 +69,15 @@ class WP_Job_Manager_Company_Listings_Mapping {
             update_post_meta( $new_company_id, '_company_email',    $_POST[$underscore.'application'] );
 
             /* ------ Company logo ------- */
-            $thumbnail_id = get_post_meta( $thepostid, '_thumbnail_id', true );
+            $thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true );
             if ( ! empty( $thumbnail_id ) ) set_post_thumbnail( $new_company_id, $thumbnail_id );
 
             //@todo: why modify $_POST value?
-            //$_POST['_company_id'] = $new_company_id;
+            $_POST['_company_id'] = $new_company_id;
+        }
+
+        if ( isset( $_POST['_company_id'] ) ) {
+            update_post_meta( $post_id, '_company_id', $_POST['_company_id'] );
         }
     }	
 }
