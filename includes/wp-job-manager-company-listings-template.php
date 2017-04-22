@@ -114,7 +114,7 @@ function get_the_company_metaphoto( $post = null ) {
 	if ( $post->post_type !== 'company' )
 		return;
 
-	return apply_filters( 'the_company_metaphoto', $post->_company_photo, $post );
+	return apply_filters( 'the_company_metaphoto', get_the_post_thumbnail_url($post), $post );
 }
 
 /**
