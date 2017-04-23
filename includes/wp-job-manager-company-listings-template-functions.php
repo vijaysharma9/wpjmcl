@@ -430,3 +430,35 @@ function get_the_company_metavideo( $post = null ) {
 	}
 	return apply_filters( 'the_company_metavideo', $post->_company_video, $post );
 }
+
+if ( ! function_exists( 'jmcl_output_content_wrapper' ) ) {
+
+	/**
+	 * Output the start of the page wrapper.
+	 *
+	 */
+	function jmcl_output_content_wrapper() {
+		get_company_listings_template( 'global/wrapper-start.php' );
+	}
+}
+if ( ! function_exists( 'jmcl_output_content_wrapper_end' ) ) {
+
+	/**
+	 * Output the end of the page wrapper.
+	 *
+	 */
+	function jmcl_output_content_wrapper_end() {
+		get_company_listings_template( 'global/wrapper-end.php' );
+	}
+}
+
+if ( ! function_exists( 'jmcl_get_sidebar' ) ) {
+
+	/**
+	 * Get the sidebar template.
+	 *
+	 */
+	function jmcl_get_sidebar() {
+		get_company_listings_template( 'global/sidebar.php' );
+	}
+}

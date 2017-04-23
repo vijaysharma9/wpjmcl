@@ -12,6 +12,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
+
+/**
+ * Content Wrappers.
+ *
+ * @see jmcl_output_content_wrapper()
+ * @see jmcl_output_content_wrapper_end()
+ */
+add_action( 'jmcl_before_main_content', 'jmcl_output_content_wrapper', 10 );
+add_action( 'jmcl_after_main_content', 'jmcl_output_content_wrapper_end', 10 );
+
+
+/**
+ * Sidebar.
+ *
+ * @see jmcl_get_sidebar()
+ */
+add_action( 'jmcl_sidebar', 'jmcl_get_sidebar', 10 );
+
 /**
  * Move Company Name field on first position
  * @param $fields
@@ -49,7 +67,7 @@ function jmcl_filter_jobs( $query_args, $args ) {
         $query_args['post__in'] = $company_jobs;
     else
         $query_args['post__in'] = array(0);
-    
+
     return apply_filters( 'jmcl_filter_jobs', $query_args ) ;
 }
 

@@ -37,27 +37,23 @@ if ( post_password_required() ) {
 	do_action( 'jmcl_before_single_company_summary' );
 	?>
 
-	<div class="summary entry-summary cmp-entry-summary">
-
-		<div class="cmp-top-card-module__container container-with-shadow">
-			<?php the_post_thumbnail( array(180,180), array( 'class'=> 'cmp-top-card-module__logo' ) ); ?>
-
-			<div class="cmp-top-card-module__details">
-				<div>
-					<h1>
-						<?php the_title() ?>
-						<span><?php echo get_post_meta( $post->ID, '_company_tagline', true ) ?></span>
-					</h1>
-					<p class="company-main-info-company-descriptions%">
-						<span class="company-industries cmp-top-card-module__dot-separated-list"><?php echo get_post_meta( $post->ID, '_company_industries', true ); ?></span>
-                        <span class="company-size cmp-top-card-module__dot-separated-list">
-                           <?php printf( __( '%d+ employees ', 'wp-job-manager-company-listings' ), get_post_meta( $post->ID, '_company_size', true ) ) ?>
-                        </span>
-						<span ><?php echo get_post_meta( $post->ID, '_company_location', true ) ?></span>
-					</p>
-				</div>
-			</div>
+	<div class="jmcl-item-header">
+		<div class="jmcl-item-header-logo">
+			<a href="<?php the_post_thumbnail_url('full') ?>">
+				<?php the_post_thumbnail( array(180,180), array( 'class'=> 'cmp-top-card-module__logo' ) ); ?>
+			</a>
 		</div>
+		<div class="jmcl-item-header-content">
+			<a class="company-title" href=""><h3><?php the_title() ?></h3></a>
+			<p class="company-tagline"><?php echo the_company_metatitle() ?></p>
+			<div class="company-location"><?php the_company_metalocation() ?></div>
+			<ul class="company-info">
+				<?php the_company_metainfo() ?>
+			</ul>
+		</div>
+	</div>
+
+	<div class="summary entry-summary cmp-entry-summary">
 
 		<div class="cmp-content">
 			<?php echo $post->post_content  ?>
