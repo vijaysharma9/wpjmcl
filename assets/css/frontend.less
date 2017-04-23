@@ -173,7 +173,6 @@
 
 		}
 
-
 		ul.company-info-wrap {
 			list-style: none;
 			display: inline;
@@ -206,7 +205,7 @@
 	}
 
 
-	.company-listings-experience,
+	.company-listings-press,
 	.company-listings-perk {
 		padding: 0 0 0 1em;
 		margin: 0 0 1em;
@@ -762,8 +761,34 @@ ul.companies {
 			}
 		}
 	}
-}
 
+	ul.company-links {
+		list-style: none;
+		display: inline;
+		margin: 0;
+		padding: 0;
+		color: #787985;
+
+		li {
+			display: inline;
+
+			label {
+				display: inline;
+			}
+
+			&:after {
+				content: "\2022";
+				margin: 0 1rem;
+			}
+
+			&:last-child {
+				&:after{
+					content: '';
+				}
+			}
+		}
+	}
+}
 
 // Default theme fixes
 .twenty-eleven {

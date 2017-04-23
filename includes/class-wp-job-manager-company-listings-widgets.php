@@ -213,5 +213,231 @@ class WP_Job_Manager_Company_Listings_Widget_Featured_Company extends WP_Job_Man
 	}
 }
 
+/**
+ * Featured Companies Widget
+ */
+class WP_Job_Manager_Company_Listings_Widget_Press extends WP_Job_Manager_Widget {
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+
+		$this->widget_cssclass    = 'job_manager widget_press';
+		$this->widget_description = __( 'Display company press information on single company page.', 'wp-job-manager-company-listings' );
+		$this->widget_id          = 'widget_company_press';
+		$this->widget_name        = __( 'Company Press', 'wp-job-manager-company-listings' );
+		$this->settings           = array(
+			'title' => array(
+				'type'  => 'text',
+				'std'   => __( 'Press', 'wp-job-manager-company-listings' ),
+				'label' => __( 'Title', 'wp-job-manager-company-listings' )
+			)
+		);
+		$this->register();
+	}
+
+	/**
+	 * widget function.
+	 *
+	 * @see WP_Widget
+	 * @access public
+	 * @param array $args
+	 * @param array $instance
+	 */
+	public function widget( $args, $instance ) {
+		global $post;
+
+		if ( ! company_listings_user_can_browse_companies() ) {
+			return;
+		}
+
+		if ( $this->get_cached_widget( $args ) ) {
+			return;
+		}
+
+		ob_start();
+
+		extract( $args );
+
+		$title   = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
+
+		if ( $items = get_post_meta( $post->ID, '_company_press', true ) ) : ?>
+
+			<?php echo $before_widget; ?>
+
+			<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+
+			<ul class="company-listings-press">
+				<?php
+				foreach( $items as $item ) : ?>
+
+					<li>
+
+						<a target="_blank" href="<?php echo esc_html( $item['notes'] ); ?>">
+							<?php echo esc_html( $item['job_title'] ); ?>
+						</a>
+
+					</li>
+
+				<?php endforeach;
+				?>
+			</ul>
+
+			<?php echo $after_widget; ?>
+
+		<?php endif;
+
+		$content = ob_get_clean();
+
+		echo $content;
+
+		$this->cache_widget( $args, $content );
+	}
+}
+
+/**
+ * Featured Companies Widget
+ */
+class WP_Job_Manager_Company_Listings_Widget_Perks extends WP_Job_Manager_Widget {
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+
+		$this->widget_cssclass    = 'job_manager widget_perks';
+		$this->widget_description = __( 'Display company perks information on single company page.', 'wp-job-manager-company-listings' );
+		$this->widget_id          = 'widget_company_perks';
+		$this->widget_name        = __( 'Company Perks', 'wp-job-manager-company-listings' );
+		$this->settings           = array(
+			'title' => array(
+				'type'  => 'text',
+				'std'   => __( 'Perks', 'wp-job-manager-company-listings' ),
+				'label' => __( 'Title', 'wp-job-manager-company-listings' )
+			)
+		);
+		$this->register();
+	}
+
+	/**
+	 * widget function.
+	 *
+	 * @see WP_Widget
+	 * @access public
+	 * @param array $args
+	 * @param array $instance
+	 */
+	public function widget( $args, $instance ) {
+		global $post;
+
+		if ( ! company_listings_user_can_browse_companies() ) {
+			return;
+		}
+
+		if ( $this->get_cached_widget( $args ) ) {
+			return;
+		}
+
+		ob_start();
+
+		extract( $args );
+
+		$title   = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
+
+		if ( $items = get_post_meta( $post->ID, '_company_perk', true ) ) : ?>
+
+			<?php echo $before_widget; ?>
+
+			<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+
+			<ul class="company-listings-perk">
+				<?php
+				foreach( $items as $item ) : ?>
+					<li>
+						<?php echo wpautop( wptexturize( $item['notes'] ) ); ?>
+					</li>
+
+				<?php endforeach;
+				?>
+			</ul>
+
+			<?php echo $after_widget; ?>
+
+		<?php endif;
+
+		$content = ob_get_clean();
+
+		echo $content;
+
+		$this->cache_widget( $args, $content );
+	}
+}
+
+/**
+ * Featured Companies Widget
+ */
+class WP_Job_Manager_Company_Listings_Widget_Links extends WP_Job_Manager_Widget {
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+
+		$this->widget_cssclass    = 'job_manager widget_links';
+		$this->widget_description = __( 'Display company perks information on single company page.', 'wp-job-manager-company-listings' );
+		$this->widget_id          = 'widget_company_links';
+		$this->widget_name        = __( 'Company Links', 'wp-job-manager-company-listings' );
+		$this->settings           = array(
+			'title' => array(
+				'type'  => 'text',
+				'std'   => __( 'Links', 'wp-job-manager-company-listings' ),
+				'label' => __( 'Title', 'wp-job-manager-company-listings' )
+			)
+		);
+		$this->register();
+	}
+
+	/**
+	 * widget function.
+	 *
+	 * @see WP_Widget
+	 * @access public
+	 * @param array $args
+	 * @param array $instance
+	 */
+	public function widget( $args, $instance ) {
+		global $post;
+
+		if ( ! company_listings_user_can_browse_companies() ) {
+			return;
+		}
+
+		if ( $this->get_cached_widget( $args ) ) {
+			return;
+		}
+
+		ob_start();
+
+		extract( $args );
+
+		$title   = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
+
+		echo $before_widget;
+
+		if ( $title ) echo $before_title . $title . $after_title;
+
+		the_company_metalinks();
+
+		echo $after_widget;
+
+		$content = ob_get_clean();
+
+		echo $content;
+
+		$this->cache_widget( $args, $content );
+	}
+}
+
 register_widget( 'WP_Job_Manager_Company_Listings_Widget_Recent_Company' );
 register_widget( 'WP_Job_Manager_Company_Listings_Widget_Featured_Company' );
+register_widget( 'WP_Job_Manager_Company_Listings_Widget_Press' );
+register_widget( 'WP_Job_Manager_Company_Listings_Widget_Perks' );
+register_widget( 'WP_Job_Manager_Company_Listings_Widget_Links' );
