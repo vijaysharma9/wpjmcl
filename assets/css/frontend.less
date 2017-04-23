@@ -96,6 +96,18 @@
 		position: relative;
 	}
 
+	.type-company {
+		.entry-header,
+		.wp-post-image {
+			display: none;
+		}
+	}
+
+	.navigation,
+	.post-navigation {
+		display: none !important;
+	}
+
 	.jmcl-item-header {
 
 		display: flex;
@@ -116,6 +128,10 @@
 		.jmcl-item-header-logo {
 			padding: 15px;
 			padding: 0 5px;
+
+			.wp-post-image {
+				display: block !important;
+			}
 		}
 
 		.jmcl-item-header-content {
@@ -776,15 +792,9 @@ ul.companies {
 				display: inline;
 			}
 
-			&:after {
+			&:before {
 				content: "\2022";
 				margin: 0 1rem;
-			}
-
-			&:last-child {
-				&:after{
-					content: '';
-				}
 			}
 		}
 	}
