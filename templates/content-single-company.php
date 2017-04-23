@@ -55,6 +55,8 @@ if ( post_password_required() ) {
 
 	<div class="summary entry-summary cmp-entry-summary">
 
+		<?php the_company_metavideo() ?>
+
 		<div class="cmp-content">
 			<?php echo $post->post_content  ?>
 		</div>
