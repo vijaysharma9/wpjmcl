@@ -371,6 +371,15 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 				'featured'          => $featured
 		) ) );
 
+		?>
+
+		<div class="company-dir-header">
+			<p><?php _e('Browse through our company profiles to find the perfect company and role for you', 'wp-job-manager-company-listings' ) ?></p>
+			<i></i>
+		</div>
+
+		<?php
+
 		if ( $companies->have_posts() ) : ?>
 
 			<?php get_job_manager_template( 'company-directory-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
