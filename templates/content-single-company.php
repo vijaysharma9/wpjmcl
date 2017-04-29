@@ -84,7 +84,7 @@ if ( post_password_required() ) {
 
 		<div class="cmp-posted-jobs">
 			<p></p>
-			<h3 class="container-title"><?php _e( 'Posted Jobs', 'wp-job-manager-company-listings' ) ?></h3>
+			<h3 class="container-title"><?php printf( __( 'Jobs at %s', 'wp-job-manager-company-listings' ), get_the_title() )  ?></h3>
 			<?php echo do_shortcode('[jobs]'); ?>
 		</div>
 
