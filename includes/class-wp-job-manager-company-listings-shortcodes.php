@@ -326,6 +326,8 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			return ob_get_clean();
 		}
 
+		wp_enqueue_script('wp-job-manager-company-listings-company-directory');
+
 		extract( $atts = shortcode_atts( apply_filters( 'company_listings_output_companies_defaults', array(
 			'per_page'                  => get_option( 'company_listings_per_page' ),
 			'orderby'           => 'title',
