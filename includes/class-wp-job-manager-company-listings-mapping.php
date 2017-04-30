@@ -11,7 +11,8 @@ class WP_Job_Manager_Company_Listings_Mapping {
 		//Job listing data
 		add_action( 'job_manager_job_listing_data_end',     array( $this, 'job_listing_data' ) );
         add_action( 'submit_job_form_company_fields_end',   array( $this, 'job_listing_data' ) );
-        add_action( 'job_manager_save_job_listing',         array( $this, 'save_job_listing_data' ), 20, 2 );
+        add_action( 'save_post_job_listing',                array( $this, 'save_job_listing_data' ), 21, 1 );
+        add_action( 'job_manager_update_job_data',          array( $this, 'set_company_logo'), 10, 2 );
 	}
 
 	/**
@@ -34,15 +35,11 @@ class WP_Job_Manager_Company_Listings_Mapping {
 	 * @param mixed $post
 	 * @return void
 	 */
-	public function save_job_listing_data( $post_id, $post ) {
+	public function save_job_listing_data( $post_id ) {
 
-        if ( empty( $post_id ) || empty( $post ) || empty( $_POST ) ) return;
+        if ( empty( $post_id ) || empty( $_POST ) ) return;
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-        if ( is_int( wp_is_post_revision( $post ) ) ) return;
-        if ( is_int( wp_is_post_autosave( $post ) ) ) return;
         if ( ! current_user_can( 'edit_post', $post_id ) ) return;
-        if ( $post->post_type != 'job_listing' ) return;
-
 
         if ( isset( $_POST['_company_id'] ) && 'new' == $_POST['_company_id'] ) {
 
@@ -55,7 +52,7 @@ class WP_Job_Manager_Company_Listings_Mapping {
             /**
              * Create the company.
              */
-            $new_company_id = wp_update_post( array(
+            $new_company_id = wp_insert_post( array(
                 'post_status'    => 'pending',
                 'post_title'     => $_POST[$underscore.'company_name'],
                 'post_type'      => 'company',
@@ -79,7 +76,19 @@ class WP_Job_Manager_Company_Listings_Mapping {
         if ( isset( $_POST['_company_id'] ) ) {
             update_post_meta( $post_id, '_company_id', $_POST['_company_id'] );
         }
-    }	
+    }
+
+    /**
+     * The company logos
+     * @param $job_id
+     * @param $values
+     */
+    public function set_company_logo( $job_id, $values ) {
+        /* ------ Company logo ------- */
+        $thumbnail_id   = get_post_meta( $job_id, '_thumbnail_id', true );
+        $company_id     = get_post_meta( $job_id, '_company_id', true );
+        if ( ! empty( $thumbnail_id ) ) set_post_thumbnail( $company_id, $thumbnail_id );
+    }
 }
 
 new WP_Job_Manager_Company_Listings_Mapping();

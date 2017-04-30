@@ -165,12 +165,34 @@ class WP_Job_Manager_Company_Listings {
 			$ajax_filter_deps[] = 'chosen';
 		}
 
+		/*-- REGISTER SCRIPTS AND STYLES ------------------------------------------------*/
+
+		/**  STYLES ***/
+		wp_register_style( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2.css', array(), '3.5.4');
+		wp_register_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend.css' );
+		wp_register_style( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/job-edit.min.css' );
+
+		/** SCRIPTS *******************************************/
 		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/ajax-filters.min.js', $ajax_filter_deps, COMPANY_LISTINGS_VERSION, true );
 		wp_register_script( 'wp-job-manager-company-listings-company-dashboard', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-dashboard.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 		wp_register_script( 'wp-job-manager-company-listings-company-submission', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-submission.min.js', array( 'jquery', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
 		wp_register_script( 'wp-job-manager-company-listings-company-contact-details', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/contact-details.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 		wp_register_script( 'wp-job-manager-company-listings-company-directory', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-directory.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/job-edit.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 
+		/*-- ENQUEUE SCRIPTS AND STYLES ------------------------------------------------*/
+
+		/** STYLES ********************************************/
+		wp_enqueue_style( 'wp-job-manager-company-listings-select2' );
+		wp_enqueue_style( 'wp-job-manager-company-frontend' );
+
+		/** SCRIPTS ********************************************/
+		wp_enqueue_script( 'wp-job-manager-company-listings-select2' );
+		wp_enqueue_script( 'wp-job-manager-company-listings-job-edit' );
+
+		/*-- LOCALIZE SCRIPTS ------------------------------------------------*/
+		
 		wp_localize_script( 'wp-job-manager-company-listings-company-submission', 'company_listings_company_submission', array(
 			'i18n_navigate'       => __( 'If you wish to edit the posted details use the "edit company" button instead, otherwise changes may be lost.', 'wp-job-manager-company-listings' ),
 			'i18n_confirm_remove' => __( 'Are you sure you want to remove this item?', 'wp-job-manager-company-listings' ),
@@ -183,7 +205,6 @@ class WP_Job_Manager_Company_Listings {
 			'i18n_confirm_delete' => __( 'Are you sure you want to delete this company?', 'wp-job-manager-company-listings' )
 		) );
 
-		wp_enqueue_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend.css' );
 	}
 }
 
