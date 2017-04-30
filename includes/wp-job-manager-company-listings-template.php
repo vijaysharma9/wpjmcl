@@ -111,10 +111,10 @@ if ( ! function_exists( 'jmcl_default_company_tabs' ) ) {
         global $post;
 
         // Description tab - shows product content
-        $tabs['description'] = array(
-            'title'    => __( 'Description', 'wp-job-manager-company-listings' ),
+        $tabs['about'] = array(
+            'title'    => __( 'About', 'wp-job-manager-company-listings' ),
             'priority' => 10,
-            'callback' => 'company_listings_company_description_tab',
+            'callback' => 'company_listings_company_about_tab',
         );
 
         // Reviews tab - shows comments

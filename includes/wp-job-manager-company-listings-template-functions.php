@@ -466,34 +466,39 @@ if ( ! function_exists( 'jmcl_get_sidebar' ) ) {
 /**
  * Output the Description tab content on the company page
  */
-function company_listings_company_description_tab() {
+function company_listings_company_about_tab() {
 	global $post;
 	?>
-	<?php the_company_metavideo() ?>
+	<div class="cmp-about">
 
-	<div class="cmp-content">
-		<?php echo $post->post_content  ?>
-	</div>
+		<h3 class="container-title"><?php printf( __( 'About %s', 'wp-job-manager-company-listings' ), get_the_title() )  ?></h3>
 
-	<div class="cmp-contact-info">
-		<p></p>
-		<h3 class="container-title"><?php _e( 'Contact Info', 'wp-job-manager-company-listings' ) ?></h3>
-		<table>
-			<tbody>
-			<tr>
-				<td class="label"><?php _e('Website', 'wp-job-manager-company-listings') ?></td>
-				<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_website', true ) ) ?></td>
-			</tr>
-			<tr>
-				<td class="label"><?php _e('Twitter', 'wp-job-manager-company-listings') ?></td>
-				<td class="data"><?php echo make_clickable(  'https://twitter.com/' .get_post_meta( $post->ID, '_company_twitter', true ) ) ?></td>
-			</tr>
-			<tr>
-				<td class="label"><?php _e('video', 'wp-job-manager-company-listings') ?></td>
-				<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_video', true ) ) ?></td>
-			</tr>
-			</tbody>
-		</table>
+		<?php the_company_metavideo() ?>
+
+		<div class="cmp-content">
+			<?php echo $post->post_content  ?>
+		</div>
+
+		<div class="cmp-contact-info">
+			<p></p>
+			<h3 class="container-title"><?php _e( 'Contact Info', 'wp-job-manager-company-listings' ) ?></h3>
+			<table>
+				<tbody>
+				<tr>
+					<td class="label"><?php _e('Website', 'wp-job-manager-company-listings') ?></td>
+					<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_website', true ) ) ?></td>
+				</tr>
+				<tr>
+					<td class="label"><?php _e('Twitter', 'wp-job-manager-company-listings') ?></td>
+					<td class="data"><?php echo make_clickable(  'https://twitter.com/' .get_post_meta( $post->ID, '_company_twitter', true ) ) ?></td>
+				</tr>
+				<tr>
+					<td class="label"><?php _e('video', 'wp-job-manager-company-listings') ?></td>
+					<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_video', true ) ) ?></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 <?php
 }
