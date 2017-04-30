@@ -436,8 +436,73 @@ class WP_Job_Manager_Company_Listings_Widget_Links extends WP_Job_Manager_Widget
 	}
 }
 
+/**
+ * Companies Logo Widget
+ */
+class WP_Job_Manager_Company_Listings_Widget_Logo extends WP_Job_Manager_Widget {
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+
+		$this->widget_cssclass    = 'job_manager widget_logo';
+		$this->widget_description = __( 'Display company logo on single company page.', 'wp-job-manager-company-listings' );
+		$this->widget_id          = 'widget_company_logo';
+		$this->widget_name        = __( 'Company Logo', 'wp-job-manager-company-listings' );
+		$this->settings           = array(
+			'title' => array(
+				'type'  => 'text',
+				'std'   => __( 'Logo', 'wp-job-manager-company-listings' ),
+				'label' => __( 'Title', 'wp-job-manager-company-listings' )
+			)
+		);
+		$this->register();
+	}
+
+	/**
+	 * widget function.
+	 *
+	 * @see WP_Widget
+	 * @access public
+	 * @param array $args
+	 * @param array $instance
+	 */
+	public function widget( $args, $instance ) {
+		global $post;
+
+		if ( ! company_listings_user_can_browse_companies() ) {
+			return;
+		}
+
+		if ( $this->get_cached_widget( $args ) ) {
+			return;
+		}
+
+		ob_start();
+
+		extract( $args );
+
+		$title   = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
+
+		echo $before_widget;
+
+		if ( $title ) echo $before_title . $title . $after_title;
+
+		the_company_logo();
+
+		echo $after_widget;
+
+		$content = ob_get_clean();
+
+		echo $content;
+
+		$this->cache_widget( $args, $content );
+	}
+}
+
 register_widget( 'WP_Job_Manager_Company_Listings_Widget_Recent_Company' );
 register_widget( 'WP_Job_Manager_Company_Listings_Widget_Featured_Company' );
 register_widget( 'WP_Job_Manager_Company_Listings_Widget_Press' );
 register_widget( 'WP_Job_Manager_Company_Listings_Widget_Perks' );
 register_widget( 'WP_Job_Manager_Company_Listings_Widget_Links' );
+register_widget( 'WP_Job_Manager_Company_Listings_Widget_Logo' );

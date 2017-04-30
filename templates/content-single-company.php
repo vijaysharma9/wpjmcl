@@ -38,11 +38,6 @@ if ( post_password_required() ) {
 	?>
 
 	<div class="jmcl-item-header">
-		<div class="jmcl-item-header-logo">
-			<a href="<?php the_post_thumbnail_url('full') ?>">
-				<?php the_post_thumbnail( array(180,180), array( 'class'=> 'cmp-top-card-module__logo' ) ); ?>
-			</a>
-		</div>
 		<div class="jmcl-item-header-content">
 			<a class="company-title" href=""><h3><?php the_title() ?></h3></a>
 			<p class="company-tagline"><?php echo the_company_metatitle() ?></p>
