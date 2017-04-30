@@ -255,6 +255,10 @@ class WP_Job_Manager_Company_Listings_Widget_Press extends WP_Job_Manager_Widget
 			return;
 		}
 
+		if ( ! is_singular('company') ) {
+			return;
+		}
+
 		ob_start();
 
 		extract( $args );
@@ -337,6 +341,10 @@ class WP_Job_Manager_Company_Listings_Widget_Perks extends WP_Job_Manager_Widget
 			return;
 		}
 
+		if ( ! is_singular('company') ) {
+			return;
+		}
+
 		ob_start();
 
 		extract( $args );
@@ -414,6 +422,10 @@ class WP_Job_Manager_Company_Listings_Widget_Links extends WP_Job_Manager_Widget
 			return;
 		}
 
+		if ( ! is_singular('company') ) {
+			return;
+		}
+
 		ob_start();
 
 		extract( $args );
@@ -475,6 +487,10 @@ class WP_Job_Manager_Company_Listings_Widget_Logo extends WP_Job_Manager_Widget 
 		}
 
 		if ( $this->get_cached_widget( $args ) ) {
+			return;
+		}
+
+		if ( ! is_singular('company') ) {
 			return;
 		}
 
