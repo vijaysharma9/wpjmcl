@@ -585,3 +585,14 @@ function calculate_company_expiry( $company_id ) {
 
 	return '';
 }
+
+/**
+ * Get jobs count
+ * @param $company_id
+ * @return mixed
+ */
+function jmcl_get_company_jobs_counts( $company_id ) {
+	global $wpdb;
+	$query = $wpdb->prepare("SELECT count(post_id) FROM $wpdb->postmeta WHERE meta_key = %s AND meta_value = %s", '_company_id', $company_id );
+	return $wpdb->get_var( $query );
+}

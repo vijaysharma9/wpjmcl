@@ -50,39 +50,28 @@ if ( post_password_required() ) {
 
 	<div class="summary entry-summary cmp-entry-summary">
 
-		<?php the_company_metavideo() ?>
+		<?php
+		$tabs = apply_filters( 'jmcl_company_tabs', array() );
 
-		<div class="cmp-content">
-			<?php echo $post->post_content  ?>
-		</div>
+		if ( ! empty( $tabs ) ) : ?>
 
-		<div class="cmp-contact-info">
-			<p></p>
-			<h3 class="container-title"><?php _e( 'Contact Info', 'wp-job-manager-company-listings' ) ?></h3>
-			<table>
-				<tbody>
-				<tr>
-					<td class="label"><?php _e('Website', 'wp-job-manager-company-listings') ?></td>
-					<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_website', true ) ) ?></td>
-				</tr>
-				<tr>
-					<td class="label"><?php _e('Twitter', 'wp-job-manager-company-listings') ?></td>
-					<td class="data"><?php echo make_clickable(  'https://twitter.com/' .get_post_meta( $post->ID, '_company_twitter', true ) ) ?></td>
-				</tr>
-				<tr>
-					<td class="label"><?php _e('video', 'wp-job-manager-company-listings') ?></td>
-					<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_video', true ) ) ?></td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
+			<div class="company-listings-tabs jmcl-tabs-wrapper">
+				<ul class="tabs jmcl-tabs" role="tablist">
+					<?php foreach ( $tabs as $key => $tab ) : ?>
+						<li class="<?php echo esc_attr( $key ); ?>_tab" id="tab-title-<?php echo esc_attr( $key ); ?>" role="tab" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
+							<a href="#tab-<?php echo esc_attr( $key ); ?>"><?php echo apply_filters( 'company_listings_company_' . $key . '_tab_title', esc_html( $tab['title'] ), $key ); ?></a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+				<?php foreach ( $tabs as $key => $tab ) : ?>
+					<div class="company-listings-Tabs-panel company-listings-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
+						<?php call_user_func( $tab['callback'], $key, $tab ); ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
 
-		<div class="cmp-posted-jobs">
-			<p></p>
-			<h3 class="container-title"><?php printf( __( 'Jobs at %s', 'wp-job-manager-company-listings' ), get_the_title() )  ?></h3>
-			<?php echo do_shortcode('[jobs]'); ?>
-		</div>
-
+		<?php endif; ?>
+		
 		<?php
 		do_action( 'jmcl_single_company_summary' );
 		?>

@@ -180,6 +180,7 @@ class WP_Job_Manager_Company_Listings {
 		wp_register_script( 'wp-job-manager-company-listings-company-directory', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-directory.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 		wp_register_script( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 		wp_register_script( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/job-edit.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-main', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/wp-job-manager-company-listings.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 
 		/*-- ENQUEUE SCRIPTS AND STYLES ------------------------------------------------*/
 
@@ -190,9 +191,10 @@ class WP_Job_Manager_Company_Listings {
 		/** SCRIPTS ********************************************/
 		wp_enqueue_script( 'wp-job-manager-company-listings-select2' );
 		wp_enqueue_script( 'wp-job-manager-company-listings-job-edit' );
+		wp_enqueue_script( 'wp-job-manager-company-listings-main' );
 
 		/*-- LOCALIZE SCRIPTS ------------------------------------------------*/
-		
+
 		wp_localize_script( 'wp-job-manager-company-listings-company-submission', 'company_listings_company_submission', array(
 			'i18n_navigate'       => __( 'If you wish to edit the posted details use the "edit company" button instead, otherwise changes may be lost.', 'wp-job-manager-company-listings' ),
 			'i18n_confirm_remove' => __( 'Are you sure you want to remove this item?', 'wp-job-manager-company-listings' ),

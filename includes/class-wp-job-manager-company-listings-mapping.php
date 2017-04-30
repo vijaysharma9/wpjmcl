@@ -8,9 +8,12 @@ class WP_Job_Manager_Company_Listings_Mapping {
 	 * Constructor
 	 */
 	public function __construct() {
-		//Job listing data
+
+		//Job form
 		add_action( 'job_manager_job_listing_data_end',     array( $this, 'job_listing_data' ) );
         add_action( 'submit_job_form_company_fields_end',   array( $this, 'job_listing_data' ) );
+
+        //Job save
         add_action( 'save_post_job_listing',                array( $this, 'save_job_listing_data' ), 21, 1 );
         add_action( 'job_manager_update_job_data',          array( $this, 'set_company_logo'), 10, 2 );
 	}

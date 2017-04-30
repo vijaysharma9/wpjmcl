@@ -97,3 +97,65 @@ function jmcl_get_template_loader_default_file() {
     }
     return $default_file;
 }
+
+
+if ( ! function_exists( 'jmcl_default_company_tabs' ) ) {
+
+    /**
+     * Add default company tabs to compnay pages.
+     *
+     * @param array $tabs
+     * @return array
+     */
+    function jmcl_default_company_tabs( $tabs = array() ) {
+        global $post;
+
+        // Description tab - shows product content
+        $tabs['description'] = array(
+            'title'    => __( 'Description', 'wp-job-manager-company-listings' ),
+            'priority' => 10,
+            'callback' => 'company_listings_company_description_tab',
+        );
+
+        // Reviews tab - shows comments
+        $tabs['jobs'] = array(
+            'title'    => sprintf( __( 'Jobs (%d)', 'wp-job-manager-company-listings' ), jmcl_get_company_jobs_counts( $post->ID ) ),
+            'priority' => 20,
+            'callback' => 'company_listings_company_jobs_tab',
+        );
+
+        return $tabs;
+    }
+}
+
+if ( ! function_exists( 'jmcl_sort_company_tabs' ) ) {
+
+    /**
+     * Sort tabs by priority.
+     *
+     * @param array $tabs
+     * @return array
+     */
+    function jmcl_sort_company_tabs( $tabs = array() ) {
+
+        // Make sure the $tabs parameter is an array
+        if ( ! is_array( $tabs ) ) {
+            trigger_error( "Function jmcl_sort_company_tabs() expects an array as the first parameter. Defaulting to empty array." );
+            $tabs = array();
+        }
+
+        // Re-order tabs by priority
+        if ( ! function_exists( '_sort_priority_callback' ) ) {
+            function _sort_priority_callback( $a, $b ) {
+                if ( $a['priority'] === $b['priority'] ) {
+                    return 0;
+                }
+                return ( $a['priority'] < $b['priority'] ) ? -1 : 1;
+            }
+        }
+
+        uasort( $tabs, '_sort_priority_callback' );
+
+        return $tabs;
+    }
+}

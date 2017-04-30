@@ -11,8 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-
-
 /**
  * Content Wrappers.
  *
@@ -22,6 +20,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'jmcl_before_main_content', 'jmcl_output_content_wrapper', 10 );
 add_action( 'jmcl_after_main_content', 'jmcl_output_content_wrapper_end', 10 );
 
+
+/**
+ * Company page tabs.
+ */
+add_filter( 'jmcl_company_tabs', 'jmcl_default_company_tabs' );
+add_filter( 'jmcl_company_tabs', 'jmcl_sort_company_tabs', 99 );
 
 /**
  * Sidebar.
