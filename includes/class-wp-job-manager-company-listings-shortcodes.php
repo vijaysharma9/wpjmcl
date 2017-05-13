@@ -390,19 +390,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			<?php endwhile; ?>
 
 			<?php get_job_manager_template( 'company_listings-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
-
-			<?php if ( $companies->found_posts > $per_page && $show_more ) : ?>
-
-				<?php wp_enqueue_script( 'wp-job-manager-company-listings-ajax-filters' ); ?>
-
-				<?php if ( $show_pagination ) : ?>
-					<?php echo get_job_listing_pagination( $companies->max_num_pages ); ?>
-				<?php else : ?>
-					<a class="load_more_companies" href="#"><strong><?php _e( 'Load more companies', 'wp-job-manager-company-listings' ); ?></strong></a>
-				<?php endif; ?>
-
-			<?php endif; ?>
-
+			
 		<?php else :
 			do_action( 'company_listings_output_companies_no_results' );
 		endif;
@@ -415,7 +403,6 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			'keywords'        => $keywords,
 			'show_filters'    => $show_filters ? 'true' : 'false',
 			'show_pagination' => $show_pagination ? 'true' : 'false',
-			'per_page'        => $per_page,
 			'orderby'         => $orderby,
 			'order'           => $order,
 			'categories'      => implode( ',', $categories )
