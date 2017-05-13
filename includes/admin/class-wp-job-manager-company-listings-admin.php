@@ -69,7 +69,7 @@ class WP_Job_Manager_Company_Listings_Admin {
 	 * @return void
 	 */
 	public function admin_menu() {
-		add_submenu_page( 'edit.php?post_type=company', __( 'Settings', 'wp-job-manager-company-listings' ), __( 'Settings', 'wp-job-manager-company-listings' ), 'manage_options', 'company-listings-settings', array( $this->settings_page, 'output' ) );
+		add_submenu_page( 'edit.php?post_type=company_listings', __( 'Settings', 'wp-job-manager-company-listings' ), __( 'Settings', 'wp-job-manager-company-listings' ), 'manage_options', 'company-listings-settings', array( $this->settings_page, 'output' ) );
 	}
 }
 
