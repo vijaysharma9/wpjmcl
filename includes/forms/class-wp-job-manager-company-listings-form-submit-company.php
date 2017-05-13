@@ -515,7 +515,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			$this->fields = apply_filters( 'submit_company_form_fields_get_user_data', $this->fields, get_current_user_id() );
 		}
 
-		get_job_manager_template( 'company-submit.php', array(
+		get_job_manager_template( 'company_listings-submit.php', array(
 			'class'              => $this,
 			'form'               => $this->form_name,
 			'company_id'          => $this->get_company_id(),
