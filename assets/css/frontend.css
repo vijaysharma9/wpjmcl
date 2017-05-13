@@ -215,7 +215,7 @@
   float: right;
   margin-left: .25em;
 }
-.single-company_listings div.company {
+.single-company_listings div.company_listings {
   margin-bottom: 0;
   position: relative;
 }
@@ -233,12 +233,12 @@
   margin: 0;
   display: block;
 }
-.single-company_listings .type-company {
+.single-company_listings .type-company-listings {
   padding: 0;
   margin: 0;
 }
-.single-company_listings .type-company .entry-header,
-.single-company_listings .type-company .wp-post-image {
+.single-company_listings .type-company-listings .entry-header,
+.single-company_listings .type-company-listings .wp-post-image {
   display: none;
 }
 .single-company_listings .navigation,
