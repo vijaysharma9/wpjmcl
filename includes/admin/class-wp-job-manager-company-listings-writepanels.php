@@ -81,11 +81,11 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * add_meta_boxes function.
 	 */
 	public function add_meta_boxes() {
-		add_meta_box( 'company_data', __( 'Company Data', 'wp-job-manager-company-listings' ), array( $this, 'company_data' ), 'company', 'normal', 'high' );
-		add_meta_box( 'company_url_data', __( 'URL(s)', 'wp-job-manager-company-listings' ), array( $this, 'url_data' ), 'company', 'side', 'low' );
-		add_meta_box( 'company_info_data', __( 'Company Info', 'wp-job-manager-company-listings' ), array( $this, 'info_data' ), 'company', 'side', 'low' );
-		add_meta_box( 'company_perk_data', __( 'Perks', 'wp-job-manager-company-listings' ), array( $this, 'perk_data' ), 'company', 'normal', 'high' );
-		add_meta_box( 'company_press_data', __( 'Press', 'wp-job-manager-company-listings' ), array( $this, 'experience_data' ), 'company', 'normal', 'high' );
+		add_meta_box( 'company_data', __( 'Company Data', 'wp-job-manager-company-listings' ), array( $this, 'company_data' ), 'company_listings', 'normal', 'high' );
+		add_meta_box( 'company_url_data', __( 'URL(s)', 'wp-job-manager-company-listings' ), array( $this, 'url_data' ), 'company_listings', 'side', 'low' );
+		add_meta_box( 'company_info_data', __( 'Company Info', 'wp-job-manager-company-listings' ), array( $this, 'info_data' ), 'company_listings', 'side', 'low' );
+		add_meta_box( 'company_perk_data', __( 'Perks', 'wp-job-manager-company-listings' ), array( $this, 'perk_data' ), 'company_listings', 'normal', 'high' );
+		add_meta_box( 'company_press_data', __( 'Press', 'wp-job-manager-company-listings' ), array( $this, 'experience_data' ), 'company_listings', 'normal', 'high' );
 	}
 
 	/**
@@ -325,7 +325,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 		if ( is_int( wp_is_post_autosave( $post ) ) ) return;
 		if ( empty( $_POST['company_listings_nonce'] ) || ! wp_verify_nonce( $_POST['company_listings_nonce'], 'save_meta_data' ) ) return;
 		if ( ! current_user_can( 'edit_post', $post_id ) ) return;
-		if ( $post->post_type != 'company' ) return;
+		if ( $post->post_type != 'company_listings' ) return;
 
 		do_action( 'company_listings_save_company', $post_id, $post );
 	}

@@ -20,8 +20,8 @@ class WP_Job_Manager_Company_Listings_Admin {
 		include_once( 'class-wp-job-manager-company-listings-setup.php' );
 
 		add_action( 'job_manager_admin_screen_ids', array( $this, 'add_screen_ids' ) );
-		add_action( 'admin_menu', array( $this, 'admin_menu' ), 12 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 20 );
+		add_action( 'admin_menu', 					array( $this, 'admin_menu' ), 12 );
+		add_action( 'admin_enqueue_scripts', 		array( $this, 'admin_enqueue_scripts' ), 20 );
 
 		$this->settings_page = new WP_Job_Manager_Company_Listings_Settings();
 	}
@@ -32,8 +32,8 @@ class WP_Job_Manager_Company_Listings_Admin {
 	 * @return  array
 	 */
 	public function add_screen_ids( $screen_ids ) {
-		$screen_ids[] = 'edit-company';
-		$screen_ids[] = 'company';
+		$screen_ids[] = 'edit-company_listings';
+		$screen_ids[] = 'company_listings';
 		return $screen_ids;
 	}
 

@@ -34,7 +34,7 @@ function the_company_metalocation( $map_link = true, $post = null ) {
  */
 function get_the_company_metalocation( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'company' )
+	if ( $post->post_type !== 'company_listings' )
 		return;
 
 	return apply_filters( 'the_company_metalocation', $post->_company_location, $post );
@@ -73,7 +73,7 @@ function the_company_metatitle( $before = '', $after = '', $echo = true, $post =
 function get_the_company_metatitle( $post = null ) {
 	$post = get_post( $post );
 
-	if ( $post->post_type !== 'company' )
+	if ( $post->post_type !== 'company_listings' )
 		return '';
 
 	return apply_filters( 'the_company_metatitle', $post->_company_title, $post );
@@ -111,7 +111,7 @@ function the_company_metaphoto( $size = 'thumbnail', $default = null, $post = nu
  */
 function get_the_company_metaphoto( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'company' )
+	if ( $post->post_type !== 'company_listings' )
 		return;
 
 	return apply_filters( 'the_company_metaphoto', get_the_post_thumbnail_url($post), $post );
@@ -132,7 +132,7 @@ function the_company_metacategory( $post = null ) {
  */
 function get_the_company_metacategory( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'company' )
+	if ( $post->post_type !== 'company_listings' )
 		return '';
 
 	if ( ! get_option( 'company_listings_enable_categories' ) )
@@ -243,7 +243,7 @@ function company_class( $class = '', $post_id = null ) {
  */
 function get_company_class( $class = '', $post_id = null ) {
 	$post = get_post( $post_id );
-	if ( $post->post_type !== 'company' )
+	if ( $post->post_type !== 'company_listings' )
 		return array();
 
 	$classes = array();
@@ -252,7 +252,7 @@ function get_company_class( $class = '', $post_id = null ) {
 		return $classes;
 	}
 
-	$classes[] = 'company';
+	$classes[] = 'company_listings';
 
 	if ( is_company_featured( $post ) ) {
 		$classes[] = 'company_featured';
@@ -278,7 +278,7 @@ function the_company_metapermalink( $post = null ) {
  */
 function the_company_metalinks( $post = null ) {
 	$post = get_post( $post );
-	get_job_manager_template( 'company-links.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+	get_job_manager_template( 'company_listings-links.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 }
 
 /**
@@ -288,7 +288,7 @@ function the_company_metalinks( $post = null ) {
  */
 function the_company_metainfo( $post = null ) {
 	$post = get_post( $post );
-	get_job_manager_template( 'company-info.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+	get_job_manager_template( 'company_listings-info.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 }
 
 /**
@@ -425,7 +425,7 @@ function the_company_metavideo( $post = null ) {
  */
 function get_the_company_metavideo( $post = null ) {
 	$post = get_post( $post );
-	if ( $post->post_type !== 'company' ) {
+	if ( $post->post_type !== 'company_listings' ) {
 		return;
 	}
 	return apply_filters( 'the_company_metavideo', $post->_company_video, $post );

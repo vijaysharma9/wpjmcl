@@ -84,7 +84,7 @@ function jmcl_search_form_group_field( $atts ) {
     global $wpdb, $post;
 
 
-    if ( ! is_singular( 'company' ) ) {
+    if ( ! is_singular( 'company_listings' ) ) {
         return false;
     } ?>
     <input type="hidden" name="job_company_id" value="<?php echo $post->ID; ?>" />

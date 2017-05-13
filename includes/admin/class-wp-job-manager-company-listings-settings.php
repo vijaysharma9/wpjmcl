@@ -139,7 +139,7 @@ class WP_Job_Manager_Company_Listings_Settings extends WP_Job_Manager_Settings {
 						),
 						array(
 							'name'       => 'company_listings_registration_role',
-							'std'        => 'company',
+							'std'        => 'company_listings',
 							'label'      => __( 'Account Role', 'wp-job-manager-company-listings' ),
 							'desc'       => __( 'If you enable registration on your submission form, choose a role for the new user.', 'wp-job-manager-company-listings' ),
 							'type'       => 'select',

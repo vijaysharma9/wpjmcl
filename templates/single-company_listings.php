@@ -28,7 +28,7 @@ do_action( 'jmcl_before_main_content' );
 <?php while ( have_posts() ) : the_post(); ?>
 
 
-    <?php get_company_listings_template_part( 'content-single', 'company' ); ?>
+    <?php get_company_listings_template_part( 'content-single', 'company_listings' ); ?>
 
 <?php endwhile; // end of the loop. ?>
 

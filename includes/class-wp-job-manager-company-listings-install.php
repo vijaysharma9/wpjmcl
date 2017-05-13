@@ -27,13 +27,13 @@ class WP_Job_Manager_Company_Listings_Install {
 
 		// Meta update
 		if ( version_compare( get_option( 'wp_company_listings_version' ), '1.6.1', '<' ) ) {
-			$wpdb->query( "INSERT INTO {$wpdb->postmeta}( post_id, meta_key, meta_value ) SELECT DISTINCT ID AS post_id, '_featured' AS meta_key, 0 AS meta_value FROM {$wpdb->posts} WHERE post_type = 'company' AND post_status = 'publish';" );
+			$wpdb->query( "INSERT INTO {$wpdb->postmeta}( post_id, meta_key, meta_value ) SELECT DISTINCT ID AS post_id, '_featured' AS meta_key, 0 AS meta_value FROM {$wpdb->posts} WHERE post_type = 'company_listings' AND post_status = 'publish';" );
 		}
 
 		// Update featured posts ordering
 		if ( version_compare( get_option( 'wp_company_listings_version', COMPANY_LISTINGS_VERSION ), '1.12.0', '<' ) ) {
-			$wpdb->query( "UPDATE {$wpdb->posts} p SET p.menu_order = 0 WHERE p.post_type='company';" );
-			$wpdb->query( "UPDATE {$wpdb->posts} p LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id SET p.menu_order = -1 WHERE pm.meta_key = '_featured' AND pm.meta_value='1' AND p.post_type='company';" );
+			$wpdb->query( "UPDATE {$wpdb->posts} p SET p.menu_order = 0 WHERE p.post_type='company_listings';" );
+			$wpdb->query( "UPDATE {$wpdb->posts} p LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id SET p.menu_order = -1 WHERE pm.meta_key = '_featured' AND pm.meta_value='1' AND p.post_type='company_listings';" );
 		}
 
 		// Update legacy options

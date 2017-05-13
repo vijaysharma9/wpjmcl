@@ -22,11 +22,11 @@ class WP_Job_Manager_Company_Listings_Widget_Recent_Company extends WP_Job_Manag
 		$this->widget_cssclass    = 'job_manager widget_recent_companies';
 		$this->widget_description = __( 'Display a list of recent listings on your site, optionally matching a keyword and location.', 'wp-job-manager-company-listings' );
 		$this->widget_id          = 'widget_recent_companies';
-		$this->widget_name        = sprintf( __( 'Recent %s', 'wp-job-manager-company-listings' ), $wp_post_types['company']->labels->name );
+		$this->widget_name        = sprintf( __( 'Recent %s', 'wp-job-manager-company-listings' ), $wp_post_types['company_listings']->labels->name );
 		$this->settings           = array(
 			'title' => array(
 				'type'  => 'text',
-				'std'   => sprintf( __( 'Recent %s', 'wp-job-manager-company-listings' ), $wp_post_types['company']->labels->name ),
+				'std'   => sprintf( __( 'Recent %s', 'wp-job-manager-company-listings' ), $wp_post_types['company_listings']->labels->name ),
 				'label' => __( 'Title', 'wp-job-manager-company-listings' )
 			),
 			'keyword' => array(
@@ -92,7 +92,7 @@ class WP_Job_Manager_Company_Listings_Widget_Recent_Company extends WP_Job_Manag
 
 				<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
 
-					<?php get_company_listings_template_part( 'content-widget', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_company_listings_template_part( 'content-widget', 'company_listings', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php endwhile; ?>
 
@@ -130,11 +130,11 @@ class WP_Job_Manager_Company_Listings_Widget_Featured_Company extends WP_Job_Man
 		$this->widget_cssclass    = 'job_manager widget_featured_companies';
 		$this->widget_description = __( 'Display a list of featured listings on your site.', 'wp-job-manager-company-listings' );
 		$this->widget_id          = 'widget_featured_companies';
-		$this->widget_name        = sprintf( __( 'Featured %s', 'wp-job-manager-company-listings' ), $wp_post_types['company']->labels->name );
+		$this->widget_name        = sprintf( __( 'Featured %s', 'wp-job-manager-company-listings' ), $wp_post_types['company_listings']->labels->name );
 		$this->settings           = array(
 			'title' => array(
 				'type'  => 'text',
-				'std'   => sprintf( __( 'Featured %s', 'wp-job-manager-company-listings' ), $wp_post_types['company']->labels->name ),
+				'std'   => sprintf( __( 'Featured %s', 'wp-job-manager-company-listings' ), $wp_post_types['company_listings']->labels->name ),
 				'label' => __( 'Title', 'wp-job-manager-company-listings' )
 			),
 			'number' => array(
@@ -189,7 +189,7 @@ class WP_Job_Manager_Company_Listings_Widget_Featured_Company extends WP_Job_Man
 
 				<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
 
-					<?php get_company_listings_template_part( 'content-widget', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_company_listings_template_part( 'content-widget', 'company_listings', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php endwhile; ?>
 
@@ -255,7 +255,7 @@ class WP_Job_Manager_Company_Listings_Widget_Press extends WP_Job_Manager_Widget
 			return;
 		}
 
-		if ( ! is_singular('company') ) {
+		if ( ! is_singular('company_listings') ) {
 			return;
 		}
 
@@ -341,7 +341,7 @@ class WP_Job_Manager_Company_Listings_Widget_Perks extends WP_Job_Manager_Widget
 			return;
 		}
 
-		if ( ! is_singular('company') ) {
+		if ( ! is_singular('company_listings') ) {
 			return;
 		}
 
@@ -422,7 +422,7 @@ class WP_Job_Manager_Company_Listings_Widget_Links extends WP_Job_Manager_Widget
 			return;
 		}
 
-		if ( ! is_singular('company') ) {
+		if ( ! is_singular('company_listings') ) {
 			return;
 		}
 
@@ -490,7 +490,7 @@ class WP_Job_Manager_Company_Listings_Widget_Logo extends WP_Job_Manager_Widget 
 			return;
 		}
 
-		if ( ! is_singular('company') ) {
+		if ( ! is_singular('company_listings') ) {
 			return;
 		}
 

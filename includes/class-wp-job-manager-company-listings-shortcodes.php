@@ -122,7 +122,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		if ( ! is_user_logged_in() ) {
 			ob_start();
-			get_job_manager_template( 'company-dashboard-login.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template( 'company_listings-dashboard-login.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 			return ob_get_clean();
 		}
 
@@ -146,7 +146,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		// ....If not show the company dashboard
 		$args = apply_filters( 'company_listings_get_dashboard_companies_args', array(
-			'post_type'           => 'company',
+			'post_type'           => 'company_listings',
 			'post_status'         => array( 'publish', 'expired', 'pending', 'hidden' ),
 			'ignore_sticky_posts' => 1,
 			'posts_per_page'      => $posts_per_page,
@@ -174,7 +174,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			unset( $company_dashboard_columns['company-category'] );
 		}
 
-		get_job_manager_template( 'company-dashboard.php', array( 'companies' => $companies->query( $args ), 'max_num_pages' => $companies->max_num_pages, 'company_dashboard_columns' => $company_dashboard_columns ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'company_listings-dashboard.php', array( 'companies' => $companies->query( $args ), 'max_num_pages' => $companies->max_num_pages, 'company_dashboard_columns' => $company_dashboard_columns ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 
 		return ob_get_clean();
 	}
@@ -239,7 +239,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		if ( $show_filters ) {
 
-			get_job_manager_template( 'company-filters.php', array( 'per_page' => $per_page, 'orderby' => $orderby, 'order' => $order, 'show_categories' => $show_categories, 'categories' => $categories, 'selected_category' => $selected_category, 'atts' => $atts, 'location' => $location, 'keywords' => $keywords, 'show_category_multiselect' => $show_category_multiselect ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+			get_job_manager_template( 'company_listings-filters.php', array( 'per_page' => $per_page, 'orderby' => $orderby, 'order' => $order, 'show_categories' => $show_categories, 'categories' => $categories, 'selected_category' => $selected_category, 'atts' => $atts, 'location' => $location, 'keywords' => $keywords, 'show_category_multiselect' => $show_category_multiselect ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 
 			get_job_manager_template( 'companies-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 			get_job_manager_template( 'companies-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
@@ -263,7 +263,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 				<?php get_job_manager_template( 'companies-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 				<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
-					<?php get_company_listings_template_part( 'content', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_company_listings_template_part( 'content', 'company_listings', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 				<?php endwhile; ?>
 
 				<?php get_job_manager_template( 'companies-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
@@ -383,13 +383,13 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 
 		if ( $companies->have_posts() ) : ?>
 
-			<?php get_job_manager_template( 'company-directory-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+			<?php get_job_manager_template( 'company_listings-directory-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 			<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
-				<?php get_company_listings_template_part( 'company-directory', 'content', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_company_listings_template_part( 'company_listings-directory', 'content', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 			<?php endwhile; ?>
 
-			<?php get_job_manager_template( 'company-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+			<?php get_job_manager_template( 'company_listings-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 			<?php if ( $companies->found_posts > $per_page && $show_more ) : ?>
 
@@ -434,9 +434,9 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 	 * Output some content when no results were found
 	 */
 	public function output_no_results() {
-		get_job_manager_template( 'company-directory-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'company_listings-directory-start.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 		get_job_manager_template( 'content-no-companies-found.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
-		get_job_manager_template( 'company-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'company_listings-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 	}
 
 	/**

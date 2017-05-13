@@ -76,7 +76,7 @@ class WP_Job_Manager_Company_Listings_Apply {
 	private function get_user_companies() {
 		if ( is_user_logged_in() ) {
 			$args = apply_filters( 'company_listings_get_application_form_companies_args', array(
-				'post_type'           => 'company',
+				'post_type'           => 'company_listing',
 				'post_status'         => array( 'publish', 'pending', 'hidden' ),
 				'ignore_sticky_posts' => 1,
 				'posts_per_page'      => -1,

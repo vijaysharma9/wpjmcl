@@ -562,12 +562,12 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					}
 					if ( ! empty( $_POST['company_email'] ) ) {
 						if ( version_compare( JOB_MANAGER_VERSION, '1.20.0', '<' ) ) {
-							$create_account = wp_job_manager_create_account( $_POST['company_email'], get_option( 'company_listings_registration_role', 'company' ) );
+							$create_account = wp_job_manager_create_account( $_POST['company_email'], get_option( 'company_listings_registration_role', 'company_listings' ) );
 						} else {
 							$create_account = wp_job_manager_create_account( array(
 								'username' => empty( $_POST['create_account_username'] ) ? '' : $_POST['create_account_username'],
 								'email'    => $_POST['company_email'],
-								'role'     => get_option( 'company_listings_registration_role', 'company' )
+								'role'     => get_option( 'company_listings_registration_role', 'company_listings' )
 							) );
 						}
 					}
@@ -629,7 +629,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		$data = array(
 			'post_title'     => $post_title,
 			'post_content'   => $post_content,
-			'post_type'      => 'company',
+			'post_type'      => 'company_listings',
 			'comment_status' => 'closed',
 			'post_password'  => '',
 			'post_name'      => sanitize_title( implode( '-', $company_slug ) )
@@ -803,7 +803,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 				</div>
 				<div class="company_preview single-company">
 					<h1><?php the_title(); ?></h1>
-					<?php get_company_listings_template_part( 'content-single', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+					<?php get_company_listings_template_part( 'content-single', 'company_listings', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 				</div>
 			</form>
 			<?php
@@ -855,7 +855,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 */
 	public function done() {
 		do_action( 'company_listings_company_submitted', $this->company_id );
-		get_job_manager_template( 'company-submitted.php', array( 'company' => get_post( $this->company_id ), 'job_id' => $this->job_id ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+		get_job_manager_template( 'company-submitted.php', array( 'company_listings' => get_post( $this->company_id ), 'job_id' => $this->job_id ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 
 		// Allow application
 		if ( $this->job_id ) {

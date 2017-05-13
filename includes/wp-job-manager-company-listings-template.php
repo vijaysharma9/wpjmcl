@@ -90,7 +90,7 @@ function get_company_listings_template_part( $slug, $name = '', $template_path =
  *
  */
 function jmcl_get_template_loader_default_file() {
-    if ( is_singular( 'company' ) ) {
+    if ( is_singular( 'company_listings' ) ) {
         $default_file = 'single-company.php';
     } else {
         $default_file = '';

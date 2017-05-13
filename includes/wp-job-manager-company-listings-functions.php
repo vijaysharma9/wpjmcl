@@ -22,7 +22,7 @@ function get_companies( $args = array() ) {
 	) );
 
 	$query_args = array(
-		'post_type'              => 'company',
+		'post_type'              => 'company_listings',
 		'post_status'            => 'publish',
 		'ignore_sticky_posts'    => 1,
 		'offset'                 => absint( $args['offset'] ),
@@ -141,7 +141,7 @@ function get_company_directory( $args = array() ) {
 	) );
 
 	$query_args = array(
-		'post_type'              => 'company',
+		'post_type'              => 'company_listings',
 		'post_status'            => 'publish',
 		'ignore_sticky_posts'    => 1,
 		'offset'                 => absint( $args['offset'] ),
@@ -548,7 +548,7 @@ function company_listings_count_user_companies( $user_id = 0 ) {
 		$user_id = get_current_user_id();
 	}
 
-	return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'company' AND post_status IN ( 'publish', 'pending', 'expired', 'hidden' );", $user_id ) );
+	return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'company_listings' AND post_status IN ( 'publish', 'pending', 'expired', 'hidden' );", $user_id ) );
 }
 
 /**

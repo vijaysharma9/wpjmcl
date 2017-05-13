@@ -36,8 +36,8 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 		}
 
 		ob_start();
-		get_job_manager_template( 'company-submitted-notification.php', array(
-			'company'        => $company,
+		get_job_manager_template( 'company_listings-submitted-notification.php', array(
+			'company_listings'        => $company,
 			'company_id'     => $company_id,
 			'custom_fields' => $custom_fields
 		), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );

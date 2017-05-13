@@ -58,7 +58,7 @@ class WP_Job_Manager_Company_Listings_Mapping {
             $new_company_id = wp_insert_post( array(
                 'post_status'    => 'pending',
                 'post_title'     => $_POST[$underscore.'company_name'],
-                'post_type'      => 'company',
+                'post_type'      => 'company_listings',
             ));
 
             update_post_meta( $new_company_id, '_company_website',  $_POST[$underscore.'company_website'] );

@@ -60,7 +60,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 
 			<?php while ( $companies->have_posts() ) : $companies->the_post(); ?>
 
-				<?php get_company_listings_template_part( 'content', 'company', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+				<?php get_company_listings_template_part( 'content', 'company_listings', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
 
 			<?php endwhile; ?>
 
@@ -139,7 +139,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			die();
 		}
 
-		$query = new WP_Query( array( 's' => $term, 'post_type' => 'company' ) );
+		$query = new WP_Query( array( 's' => $term, 'post_type' => 'company_listings' ) );
 
 		if ( $query->have_posts() ) {
 			// The Loop

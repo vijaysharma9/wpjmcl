@@ -15,9 +15,9 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 */
 	public function __construct() {
 		add_filter( 'enter_title_here', array( $this, 'enter_title_here' ), 1, 2 );
-		add_filter( 'manage_edit-company_columns', array( $this, 'columns' ) );
-		add_action( 'manage_company_posts_custom_column', array( $this, 'custom_columns' ), 2 );
-		add_filter( 'manage_edit-company_sortable_columns', array( $this, 'sortable_columns' ) );
+		add_filter( 'manage_edit-company_listings_columns', array( $this, 'columns' ) );
+		add_action( 'manage_company_listings_posts_custom_column', array( $this, 'custom_columns' ), 2 );
+		add_filter( 'manage_edit-company_listings_sortable_columns', array( $this, 'sortable_columns' ) );
 		add_action( 'parse_query', array( $this, 'search_meta' ) );
 		add_filter( 'get_search_query', array( $this, 'search_meta_label' ) );
 		add_filter( 'request', array( $this, 'sort_columns' ) );
@@ -42,7 +42,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function add_bulk_actions() {
 		global $post_type;
 
-		if ( $post_type == 'company' ) {
+		if ( $post_type == 'company_listings' ) {
 			?>
 			<script type="text/javascript">
 		      jQuery(document).ready(function() {
@@ -108,7 +108,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function approved_notice() {
 		 global $post_type, $pagenow;
 
-		if ( $pagenow == 'edit.php' && $post_type == 'company' && ! empty( $_REQUEST['approved_companies'] ) ) {
+		if ( $pagenow == 'edit.php' && $post_type == 'company_listings' && ! empty( $_REQUEST['approved_companies'] ) ) {
 			$approved_companies = $_REQUEST['approved_companies'];
 			if ( is_array( $approved_companies ) ) {
 				$approved_companies = array_map( 'absint', $approved_companies );
@@ -135,7 +135,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function companies_by_category( $show_counts = 1, $hierarchical = 1, $show_uncategorized = 1, $orderby = '' ) {
 		global $typenow, $wp_query;
 
-	    if ( $typenow != 'company' || ! taxonomy_exists( 'company_category' ) ) {
+	    if ( $typenow != 'company_listings' || ! taxonomy_exists( 'company_category' ) ) {
 	    	return;
 	    }
 
@@ -196,7 +196,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 * @return string
 	 */
 	public function enter_title_here( $text, $post ) {
-		if ( $post->post_type == 'company' ) {
+		if ( $post->post_type == 'company_listings' ) {
 			return __( 'Company name', 'wp-job-manager-company-listings' );
 		}
 		return $text;
@@ -210,7 +210,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function post_updated_messages( $messages ) {
 		global $post, $post_ID;
 
-		$messages['company'] = array(
+		$messages['company_listings'] = array(
 			0 => '',
 			1 => sprintf( __( 'Company updated. <a href="%s">View Company</a>', 'wp-job-manager-company-listings' ), esc_url( get_permalink( $post_ID ) ) ),
 			2 => __( 'Custom field updated.', 'wp-job-manager-company-listings' ),
@@ -241,7 +241,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 
 		unset( $columns['title'], $columns['date'] );
 
-		$columns["company"]          = __( "Company", 'wp-job-manager-company-listings' );
+		$columns['company_listings']          = __( 'Company', 'wp-job-manager-company-listings' );
 		$columns["company_location"] = __( "Location", 'wp-job-manager-company-listings' );
 		$columns['company_status']   = '<span class="tips" data-tip="' . __( "Status", 'wp-job-manager-company-listings' ) . '">' . __( "Status", 'wp-job-manager-company-listings' ) . '</span>';
 		$columns["company_posted"]   = __( "Posted", 'wp-job-manager-company-listings' );
@@ -269,7 +269,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function sortable_columns( $columns ) {
 		$custom = array(
 			'company_posted'      => 'date',
-			'company'          => 'title',
+			'company_listings'          => 'title',
 			'company_location' => 'company_location',
 			'company_expires'     => 'company_expires'
 		);
@@ -283,7 +283,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function search_meta( $wp ) {
 		global $pagenow, $wpdb;
 
-		if ( 'edit.php' != $pagenow || empty( $wp->query_vars['s'] ) || $wp->query_vars['post_type'] != 'company' ) {
+		if ( 'edit.php' != $pagenow || empty( $wp->query_vars['s'] ) || $wp->query_vars['post_type'] != 'company_listings' ) {
 			return;
 		}
 
@@ -296,7 +296,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 					WHERE p1.meta_value LIKE '%%%s%%'
 					OR posts.post_title LIKE '%%%s%%'
 					OR posts.post_content LIKE '%%%s%%'
-					AND posts.post_type = 'company'
+					AND posts.post_type = 'company_listings'
 					",
 					esc_attr( $wp->query_vars['s'] ),
 					esc_attr( $wp->query_vars['s'] ),
@@ -320,7 +320,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	public function search_meta_label( $query ) {
 		global $pagenow, $typenow;
 
-		if ( 'edit.php' != $pagenow || $typenow != 'company' || ! get_query_var( 'company_search' ) ) {
+		if ( 'edit.php' != $pagenow || $typenow != 'company_listings' || ! get_query_var( 'company_search' ) ) {
 			return $query;
 		}
 
@@ -357,7 +357,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 		global $post;
 
 		switch ( $column ) {
-			case "company" :
+			case "company_listings" :
 				echo '<a href="' . admin_url('post.php?post=' . $post->ID . '&action=edit') . '" class="tips company_name" data-tip="' . sprintf( __( 'Company ID: %d', 'wp-job-manager-company-listings' ), $post->ID ) . '">' . $post->post_title . '</a>';
 				echo '<div class="company_title">';
 				the_company_metatitle();
@@ -448,7 +448,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 		global $wp_post_statuses, $post, $post_type;
 
 		// Abort if we're on the wrong post type, but only if we got a restriction
-		if ( 'company' !== $post_type ) {
+		if ( 'company_listings' !== $post_type ) {
 			return;
 		}
 

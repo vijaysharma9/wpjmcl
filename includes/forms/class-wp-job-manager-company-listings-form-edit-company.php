@@ -80,7 +80,7 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 
 		$this->fields = apply_filters( 'submit_company_form_fields_get_company_data', $this->fields, $company );
 
-		get_job_manager_template( 'company-submit.php', array(
+		get_job_manager_template( 'company_listings-submit.php', array(
 			'class'              => $this,
 			'form'               => $this->form_name,
 			'job_id'             => '',
