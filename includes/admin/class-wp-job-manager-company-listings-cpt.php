@@ -78,7 +78,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 							$approved_companies[] = $post_id;
 					}
 
-				wp_redirect( remove_query_arg( 'approve_companies', add_query_arg( 'approved_companies', $approved_companies, admin_url( 'edit.php?post_type=company' ) ) ) );
+				wp_redirect( remove_query_arg( 'approve_companies', add_query_arg( 'approved_companies', $approved_companies, admin_url( 'edit.php?post_type=company_listings' ) ) ) );
 				exit;
 			break;
 		}
@@ -97,7 +97,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 				'post_status' => 'publish'
 			);
 			wp_update_post( $company_data );
-			wp_redirect( remove_query_arg( 'approve_company', add_query_arg( 'approved_companies', $post_id, admin_url( 'edit.php?post_type=company' ) ) ) );
+			wp_redirect( remove_query_arg( 'approve_company', add_query_arg( 'approved_companies', $post_id, admin_url( 'edit.php?post_type=company_listings' ) ) ) );
 			exit;
 		}
 	}

@@ -217,8 +217,8 @@ class WP_Job_Manager_Company_Listings_Setup {
 				<p><?php _e( 'Looks like you\'re all set to start using the plugin. In case you\'re wondering where to go next:', 'wp-job-manager-company-listings' ); ?></p>
 
 				<ul class="wp-job-manager-company-listings-next-steps">
-					<li><a href="<?php echo admin_url( 'edit.php?post_type=company&page=company-listings-settings' ); ?>"><?php _e( 'Tweak the plugin settings', 'wp-job-manager-company-listings' ); ?></a></li>
-					<li><a href="<?php echo admin_url( 'post-new.php?post_type=company' ); ?>"><?php _e( 'Add a company via the back-end', 'wp-job-manager-company-listings' ); ?></a></li>
+					<li><a href="<?php echo admin_url( 'edit.php?post_type=company_listings&page=company-listings-settings' ); ?>"><?php _e( 'Tweak the plugin settings', 'wp-job-manager-company-listings' ); ?></a></li>
+					<li><a href="<?php echo admin_url( 'post-new.php?post_type=company_listings' ); ?>"><?php _e( 'Add a company via the back-end', 'wp-job-manager-company-listings' ); ?></a></li>
 
 					<?php if ( $permalink = company_listings_get_permalink( 'submit_company_form' ) ) : ?>
 						<li><a href="<?php echo esc_url( $permalink ); ?>"><?php _e( 'Add a company via the front-end', 'wp-job-manager-company-listings' ); ?></a></li>
