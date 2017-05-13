@@ -233,12 +233,12 @@
   margin: 0;
   display: block;
 }
-.single-company_listings .type-company-listings {
+.single-company_listings .type-company_listings {
   padding: 0;
   margin: 0;
 }
-.single-company_listings .type-company-listings .entry-header,
-.single-company_listings .type-company-listings .wp-post-image {
+.single-company_listings .type-company_listings .entry-header,
+.single-company_listings .type-company_listings .wp-post-image {
   display: none;
 }
 .single-company_listings .navigation,
@@ -859,19 +859,19 @@ ul.companies.loading {
   border-bottom: 1px solid #eee;
   background: url(../images/ajax-loader.gif) no-repeat center 32px;
 }
-ul.companies li.company,
+ul.companies li.company_listings,
 ul.companies li.no_companies_found {
   list-style: none outside;
   padding: 0;
   margin: 0;
   border-bottom: 1px solid #eee;
 }
-ul.companies li.company.no_companies_found,
+ul.companies li.company_listings.no_companies_found,
 ul.companies li.no_companies_found.no_companies_found {
   padding: 1em;
   border-bottom: 1px solid #eee;
 }
-ul.companies li.company a,
+ul.companies li.company_listings a,
 ul.companies li.no_companies_found a {
   display: block;
   padding: 1em 1em 1em 2em;
@@ -882,13 +882,13 @@ ul.companies li.no_companies_found a {
   font-size: 1em;
   text-decoration: none;
 }
-ul.companies li.company a:hover,
+ul.companies li.company_listings a:hover,
 ul.companies li.no_companies_found a:hover,
-ul.companies li.company a:focus,
+ul.companies li.company_listings a:focus,
 ul.companies li.no_companies_found a:focus {
   background-color: #fcfcfc;
 }
-ul.companies li.company a img,
+ul.companies li.company_listings a img,
 ul.companies li.no_companies_found a img {
   width: 42px;
   height: 42px;
@@ -899,11 +899,11 @@ ul.companies li.no_companies_found a img {
   vertical-align: middle;
   box-shadow: none;
 }
-ul.companies li.company a div.company-column,
+ul.companies li.company_listings a div.company-column,
 ul.companies li.no_companies_found a div.company-column,
-ul.companies li.company a div.location-column,
+ul.companies li.company_listings a div.location-column,
 ul.companies li.no_companies_found a div.location-column,
-ul.companies li.company a .company-posted-column,
+ul.companies li.company_listings a .company-posted-column,
 ul.companies li.no_companies_found a .company-posted-column {
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
@@ -912,28 +912,28 @@ ul.companies li.no_companies_found a .company-posted-column {
   box-sizing: border-box;
   /* Opera/IE 8+ */
 }
-ul.companies li.company a div.company-column,
+ul.companies li.company_listings a div.company-column,
 ul.companies li.no_companies_found a div.company-column {
   float: left;
   padding: 0 1em 0 42px;
   line-height: 1.5em;
 }
-ul.companies li.company a div.company-column h3,
+ul.companies li.company_listings a div.company-column h3,
 ul.companies li.no_companies_found a div.company-column h3 {
   margin: 0;
   padding: 0;
   font-size: 1em;
   line-height: 1.5em;
 }
-ul.companies li.company a div.company-column .company-title,
+ul.companies li.company_listings a div.company-column .company-title,
 ul.companies li.no_companies_found a div.company-column .company-title {
   color: #999;
 }
-ul.companies li.company a div.company-column .company-title .tagline,
+ul.companies li.company_listings a div.company-column .company-title .tagline,
 ul.companies li.no_companies_found a div.company-column .company-title .tagline {
   color: #333;
 }
-ul.companies li.company a .company-location-column,
+ul.companies li.company_listings a .company-location-column,
 ul.companies li.no_companies_found a .company-location-column {
   float: left;
   text-align: left;
@@ -949,7 +949,7 @@ ul.companies li.no_companies_found a .company-location-column {
   box-sizing: border-box;
   /* Opera/IE 8+ */
 }
-ul.companies li.company a .company-posted-column,
+ul.companies li.company_listings a .company-posted-column,
 ul.companies li.no_companies_found a .company-posted-column {
   float: right;
   text-align: right;
@@ -966,11 +966,11 @@ ul.companies li.no_companies_found a .company-posted-column {
   box-sizing: border-box;
   /* Opera/IE 8+ */
 }
-ul.companies li.company a .company-meta,
+ul.companies li.company_listings a .company-meta,
 ul.companies li.no_companies_found a .company-meta {
   line-height: 2.03em;
 }
-ul.companies li.company a .company-category:before,
+ul.companies li.company_listings a .company-category:before,
 ul.companies li.no_companies_found a .company-category:before {
   display: inline-block;
   width: 16px;
@@ -987,13 +987,13 @@ ul.companies li.no_companies_found a .company-category:before {
   *zoom: 1;
   *display: inline;
 }
-ul.companies li.company.company_featured a,
+ul.companies li.company_listings.company_featured a,
 ul.companies li.no_companies_found.company_featured a {
   background: #fefee5;
 }
-ul.companies li.company.company_featured a:hover,
+ul.companies li.company_listings.company_featured a:hover,
 ul.companies li.no_companies_found.company_featured a:hover,
-ul.companies li.company.company_featured a:focus,
+ul.companies li.company_listings.company_featured a:focus,
 ul.companies li.no_companies_found.company_featured a:focus {
   background-color: #fefed8;
 }
@@ -1012,37 +1012,37 @@ ul.companies li.no_companies_found.company_featured a:focus {
   box-sizing: border-box;
   /* Opera/IE 8+ */
 }
-.widget ul.companies li.company a {
+.widget ul.companies li.company_listings a {
   padding: 1em 0;
 }
-.widget ul.companies li.company .company {
+.widget ul.companies li.company_listings .company_listings {
   float: none;
   width: auto;
   padding: 0;
 }
-.widget ul.companies li.company .company h3 {
+.widget ul.companies li.company_listings .company_listings h3 {
   margin: 0;
   padding: 0;
 }
-.widget ul.companies li.company ul.meta {
+.widget ul.companies li.company_listings ul.meta {
   float: none;
   width: auto;
   padding: 0;
   margin: 0;
   text-align: left;
 }
-.widget ul.companies li.company ul.meta li {
+.widget ul.companies li.company_listings ul.meta li {
   float: none;
   display: inline;
   padding: 0;
   margin: 0 .5em 0 0;
   font-weight: normal;
 }
-.widget ul.companies li.company ul.meta li:after {
+.widget ul.companies li.company_listings ul.meta li:after {
   padding: 0 0 0 .5em;
   content: "\2023";
 }
-.widget ul.companies li.company ul.meta li:last-child:after {
+.widget ul.companies li.company_listings ul.meta li:last-child:after {
   content: '';
 }
 .widget ul.company-links {
