@@ -160,16 +160,24 @@ function get_company_directory( $args = array() ) {
 		$query_args['no_found_rows'] = true;
 	}
 
-	$fpage = sanitize_text_field( get_query_var('fpage'));
+	$fpage  = sanitize_text_field( get_query_var('fpage')); // Search letter
+	$search = sanitize_text_field( get_query_var('search')); // Search keyword
 
+	// Search company by number
 	if (isset($fpage) && ('company-numeric' == $fpage )) {
-		$query_args['_directorykeyword'] = $fpage; // Does nothing but needed for unique hash
+		$query_args['_directorykeyword'] = '#'; // Does nothing but needed for unique hash
 		add_filter( 'posts_clauses', 'get_company_directory_company_numeric' );
-	} else if (isset($fpage) && ! empty($fpage)) {
+
+	// Search company by character
+	} else if ( preg_match( "/^[a-zA-Z]$/", $fpage ) ) {
 		$query_args['_directorykeyword'] = $fpage; // Does nothing but needed for unique hash
 		add_filter( 'posts_clauses', 'get_company_directory_letter_search' );
-	} else {
-		// do nothing 
+	}
+
+	// Search company by keyword
+	if ( ! empty( $search ) ) {
+		$company_listings_keyword = $query_args['_directorykeyword'] = $search; // Does nothing but needed for unique hash
+		add_filter( 'posts_clauses', 'get_companies_keyword_search' );
 	}
 
 	$query_args = apply_filters( 'company_listings_get_company_directory', $query_args, $args );
@@ -596,3 +604,4 @@ function jmcl_get_company_jobs_counts( $company_id ) {
 	$query = $wpdb->prepare("SELECT count(m.post_id) FROM $wpdb->postmeta m INNER JOIN $wpdb->posts p ON m.post_id = p.ID WHERE m.meta_key = %s AND m.meta_value = %s AND post_status='publish'", '_company_id', $company_id );
 	return $wpdb->get_var( $query );
 }
+

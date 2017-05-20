@@ -92,3 +92,28 @@ function jmcl_search_form_group_field( $atts ) {
 }
 
 add_action( 'job_manager_job_filters_search_jobs_start', 'jmcl_search_form_group_field', 10, 1 );
+
+
+/**
+ * Redirect to search results page if needed
+ *
+ * @return If a redirect is not needed
+ */
+function jmlcl_search_results_redirect() {
+
+    // Bail if not a search request action
+    if (  empty( $_GET['action'] ) && ( 'jmcl-search-request' !== $_GET['action'] ) ) {
+        return;
+    }
+
+    // Get the redirect URL
+    $redirect_to = jmcl_get_search_results_url();
+    if ( empty( $redirect_to ) ) {
+        return;
+    }
+
+    // Redirect and bail
+    wp_redirect( $redirect_to );
+}
+
+add_action( 'template_redirect', 'jmlcl_search_results_redirect', 8 );

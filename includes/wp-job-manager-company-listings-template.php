@@ -159,3 +159,87 @@ if ( ! function_exists( 'jmcl_sort_company_tabs' ) ) {
         return $tabs;
     }
 }
+
+
+/**
+ * Output the search url
+ *
+ * @uses jmcl_get_search_url() To get the search url
+ */
+function jmcl_search_url() {
+    echo esc_url( jmcl_get_search_url() );
+}
+/**
+ * Return the search url
+ *
+ * @return string Search url
+ */
+function jmcl_get_search_url() {
+
+    // Pretty permalinkss
+    $page_id = (int) get_option( 'company_listings_company_directory_page_id' );
+    $url = trailingslashit( get_permalink( $page_id ) . 'search' );
+
+    return apply_filters( 'jmcl_get_search_url', $url );
+}
+
+/**
+ * Output the search results url
+ *
+ */
+function jmcl_search_results_url() {
+    echo esc_url( jmcl_get_search_results_url() );
+}
+/**
+ * Return the search url
+ *
+ * @return string Search url
+ */
+function jmcl_get_search_results_url() {
+
+    // Get the search terms
+    $search_terms = get_query_var('search');
+
+    $page_id = (int) get_option( 'company_listings_company_directory_page_id' );
+    $url =    trailingslashit( get_permalink( $page_id ) . 'search' );
+
+    // Append search terms
+    if ( ! empty( $search_terms ) ) {
+        $url = trailingslashit( $url ) . urlencode( $search_terms );
+    }
+
+    // Run through home_url()
+    $url = user_trailingslashit( $url );
+
+    return apply_filters( 'jmcl_get_search_results_url', $url );
+}
+
+/**
+ * Output the search terms
+ */
+function jmcl_search_terms( $search_terms = '' ) {
+    echo jmcl_get_search_terms( $search_terms );
+}
+
+/**
+ * Get the search terms
+ * 
+ * @return bool|string Search terms on success, false on failure
+ */
+function jmcl_get_search_terms( $passed_terms = '' ) {
+
+    // Sanitize terms if they were passed in
+    if ( ! empty( $passed_terms ) ) {
+        $search_terms = sanitize_title( $passed_terms );
+
+        // Use query variable if not
+    } else {
+        $search_terms = get_query_var( 'search' );
+    }
+
+    // Trim whitespace and decode, or set explicitly to false if empty
+    $search_terms = ! empty( $search_terms ) ? urldecode( trim( $search_terms ) ) : false;
+
+    return apply_filters( 'jmcl_get_search_terms', $search_terms, $passed_terms );
+}
+

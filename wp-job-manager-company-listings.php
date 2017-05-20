@@ -122,13 +122,16 @@ class WP_Job_Manager_Company_Listings {
 			$newrules['([^/]+)/' . $slug . '/?$'] = 
 			'index.php?page_id='. $company_directory_page_id .'&$matches[1]&fpage=' . $slug;
 		}
-     
+
+		// Company directory search url
+		$newrules['([^/]+)/search/([^/]+)/?$'] =  'index.php?page_id='. $company_directory_page_id .'&search=$matches[2]';
+
         return $newrules + $rules;
     }
 
 	/**
 	 * Includes once plugins are loaded
-	 */
+	 */ 
 	public function widgets_init() {
 		include_once( 'includes/class-wp-job-manager-company-listings-widgets.php' );
 	}
