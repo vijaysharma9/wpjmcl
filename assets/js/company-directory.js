@@ -74,7 +74,7 @@ if ( typeof jq == "undefined" ) {
         columnGap: 0
     };
 
-    jq('.company-dir-list').columnizeList();
+//    jq('.company-dir-list').columnizeList();
 
     jq('#jmcl_search')
 
