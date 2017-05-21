@@ -102,7 +102,7 @@ add_action( 'job_manager_job_filters_search_jobs_start', 'jmcl_search_form_group
 function jmlcl_search_results_redirect() {
 
     // Bail if not a search request action
-    if (  empty( $_GET['action'] ) && ( 'jmcl-search-request' !== $_GET['action'] ) ) {
+    if ( empty( $_GET['action'] ) || ( 'jmcl-search-request' !== $_GET['action'] ) ) {
         return;
     }
 
