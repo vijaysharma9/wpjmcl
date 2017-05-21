@@ -5,8 +5,7 @@
 			<div>
 				<label class="screen-reader-text hidden" for="jmcl_search"><?php esc_html_e( 'Search for:', 'wp-job-manager-company-listings' ); ?></label>
 				<input type="hidden" name="action" value="jmcl-search-request" />
-				<input type="text" value="<?php echo esc_attr( jmcl_get_search_terms() ); ?>" name="search" id="jmcl_search" />
-				<input class="button" type="submit" id="jmcl_search_submit" value="<?php esc_attr_e( 'Search', 'wp-job-manager-company-listings' ); ?>" />
+				<input type="text" value="<?php echo esc_attr( jmcl_get_search_terms() ); ?>" name="search" id="jmcl_search" placeholder="<?php _e( 'Search...', 'wp-job-manager-company-listings' ) ?>" />
 			</div>
 		</form>
 	</div>

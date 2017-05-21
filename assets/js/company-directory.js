@@ -74,6 +74,21 @@ if ( typeof jq == "undefined" ) {
         columnGap: 0
     };
 
-})(jq);
+    jq('.company-dir-list').columnizeList();
 
-jq('.company-dir-list').columnizeList();
+    jq('#jmcl_search')
+
+    .click(function(e) {
+        var mousePosInElement = e.pageX - jq(this).position().left;
+        if (mousePosInElement > jq(this).width()) {
+           jq('#company-search-form').submit();
+        }
+    })
+
+    .keypress(function (e) {
+        if (e.which == 13) {
+            jq('#company-search-form').submit();
+        }
+    });
+
+})(jq);
