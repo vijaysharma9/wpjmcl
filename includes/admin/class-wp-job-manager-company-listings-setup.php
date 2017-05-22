@@ -111,10 +111,10 @@ class WP_Job_Manager_Company_Listings_Setup {
 			$create_pages    = isset( $_POST['wp-job-manager-company-listings-create-page'] ) ? $_POST['wp-job-manager-company-listings-create-page'] : array();
 			$page_titles     = $_POST['wp-job-manager-company-listings-page-title'];
 			$pages_to_create = array(
-				'submit_company_form'  => '[submit_company_form]',
-				'company_dashboard' => '[company_dashboard]',
+				'submit_company_form'  	=> '[submit_company_form]',
+				'company_dashboard' 	=> '[company_dashboard]',
 				'companies'             => '[companies]',
-				'company-directory'             => '[company_directory]',
+				'company_directory'     => '[company_directory]',
 			);
 
 			foreach ( $pages_to_create as $page => $content ) {
