@@ -77,6 +77,11 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 	public static function get_from_address() {
 		$site_url  = parse_url( site_url() );
 		$nice_host = str_replace( 'www.', '', $site_url['host'] );
+
+		// Basic check that the request URL ends with the domain (leading dot).
+		if ( false === stripos( $site_url['host'], '.' ) )
+			$nice_host .= '.local';
+
 		return sanitize_email( 'noreply@' . $nice_host );
 	}
 }
