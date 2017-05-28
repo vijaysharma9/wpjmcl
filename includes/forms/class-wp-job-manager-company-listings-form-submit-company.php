@@ -126,17 +126,17 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		$this->fields = apply_filters( 'submit_company_form_fields', array(
 			'company_fields' => array(
 				'company_name' => array(
-					'label'       => __( 'Your name', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Company name', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
-					'placeholder' => __( 'Your full name', 'wp-job-manager-company-listings' ),
+					'placeholder' => __( 'Company name', 'wp-job-manager-company-listings' ),
 					'priority'    => 1
 				),
 				'company_email' => array(
-					'label'       => __( 'Your email', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Company email', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
-					'placeholder' => __( 'you@yourdomain.com', 'wp-job-manager-company-listings' ),
+					'placeholder' => __( 'contact@companydomain.com', 'wp-job-manager-company-listings' ),
 					'priority'    => 2
 				),
 				'company_title' => array(

@@ -14,7 +14,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 */
 	public function __construct() {
 		add_action( 'add_meta_boxes', 				 array( $this, 'add_meta_boxes' ) );
-		add_action( 'save_post_company', 		 	 array( $this, 'save_post' ), 1, 2 );
+		add_action( 'save_post', 		 	 array( $this, 'save_post' ), 1, 2 );
 		add_action( 'company_listings_save_company', array( $this, 'save_company_data' ), 1, 2 );
 	}
 
