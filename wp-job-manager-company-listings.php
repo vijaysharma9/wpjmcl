@@ -31,6 +31,7 @@ class WP_Job_Manager_Company_Listings {
 		// Define constants
 		define( 'COMPANY_LISTINGS_VERSION', '1.0.0' );
 		define( 'COMPANY_LISTINGS_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+		define( 'COMPANY_LISTINGS_PLUGIN_FILE',  __FILE__  );
 		define( 'COMPANY_LISTINGS_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 
 		// Includes
@@ -46,6 +47,7 @@ class WP_Job_Manager_Company_Listings {
 		include( 'includes/class-wp-job-manager-company-listings-email-notification.php' );
 		include( 'includes/class-wp-job-manager-company-listings-apply.php' );
 		include( 'includes/class-wp-job-manager-company-listings-mapping.php' );
+		include( 'includes/class-wp-job-manager-company-listings-updater.php' );
 
 
 		// Init classes
