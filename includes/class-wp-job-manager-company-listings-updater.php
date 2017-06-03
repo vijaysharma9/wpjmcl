@@ -51,7 +51,7 @@ class WP_Job_Mananger_Company_Listings_Updater {
 			define( 'JMCL_UPDATER_STORE_URL', 'http://wpdrift.com' );
 
 		if ( !defined( 'JMCL_UPDATER_ITEM_NAME' ) )
-			define( 'JMCL_UPDATER_ITEM_NAME', 'WP Job Manager -  Company Listings' );
+			define( 'JMCL_UPDATER_ITEM_NAME', 'WP Job Manager - Company Listings' );
 	}
 
 	/**
