@@ -30,7 +30,7 @@
 </div>
 
 <div class="company-dir-title">
-	<h2><?php printf( __( ' %1$s Companies', 'wp-job-manager-company-listings' ),  get_query_var('fpage') ); ?></h2>
+	<h2><?php printf( __( ' %1$s Companies', 'wp-job-manager-company-listings' ),  get_query_var('cdpage') ); ?></h2>
 </div>
 
 <ul class="company-dir-list">

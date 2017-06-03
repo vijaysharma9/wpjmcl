@@ -107,7 +107,7 @@ class WP_Job_Manager_Company_Listings {
 
 	// Tell WordPress to accept our custom query variable
     public function insert_query_variable($vars) {
-        array_push($vars, 'fpage');
+        array_push($vars, 'cdpage');
         return $vars;
     }
 
@@ -122,7 +122,7 @@ class WP_Job_Manager_Company_Listings {
 		$newrules = array();
 		foreach ($upper as $slug ) {
 			$newrules['([^/]+)/' . $slug . '/?$'] = 
-			'index.php?page_id='. $company_directory_page_id .'&$matches[1]&fpage=' . $slug;
+			'index.php?page_id='. $company_directory_page_id .'&$matches[1]&cdpage=' . $slug;
 		}
 
 		// Company directory search url

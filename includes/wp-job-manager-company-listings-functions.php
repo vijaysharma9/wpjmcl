@@ -160,17 +160,17 @@ function get_company_directory( $args = array() ) {
 		$query_args['no_found_rows'] = true;
 	}
 
-	$fpage  = sanitize_text_field( get_query_var('fpage')); // Search letter
+	$cdpage  = sanitize_text_field( get_query_var('cdpage')); // Search letter
 	$search = sanitize_text_field( get_query_var('search')); // Search keyword
 
 	// Search company by number
-	if (isset($fpage) && ('company-numeric' == $fpage )) {
+	if (isset($cdpage) && ('company-numeric' == $cdpage )) {
 		$query_args['_directorykeyword'] = '#'; // Does nothing but needed for unique hash
 		add_filter( 'posts_clauses', 'get_company_directory_company_numeric' );
 
 	// Search company by character
-	} else if ( preg_match( "/^[a-zA-Z]$/", $fpage ) ) {
-		$query_args['_directorykeyword'] = $fpage; // Does nothing but needed for unique hash
+	} else if ( preg_match( "/^[a-zA-Z]$/", $cdpage ) ) {
+		$query_args['_directorykeyword'] = $cdpage; // Does nothing but needed for unique hash
 		add_filter( 'posts_clauses', 'get_company_directory_letter_search' );
 	}
 
@@ -254,11 +254,11 @@ if ( ! function_exists( 'get_company_directory_letter_search' ) ) :
 	function get_company_directory_letter_search( $args ) {
 		global $wpdb, $company_listings_keyword;
 
-		$fpage = get_query_var('fpage');
+		$cdpage = get_query_var('cdpage');
 
 		// Title and content searching
 		$conditions = array();
-		$conditions[] = "{$wpdb->posts}.post_title LIKE '" . esc_sql( $fpage ) . "%'";
+		$conditions[] = "{$wpdb->posts}.post_title LIKE '" . esc_sql( $cdpage ) . "%'";
 
 		$args['where'] .= " AND ( " . implode( ' OR ', $conditions ) . " ) ";
 
