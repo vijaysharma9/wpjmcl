@@ -11,14 +11,14 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( ! class_exists( 'WPDrift_Plugin_Updater' ) ) :
+if ( ! class_exists( 'WPDrift_Plugin_Jmcl_Updater' ) ) :
 
 /**
  * Allows plugins to use their own update API.
  *
  * @version 1.6.12
  */
-	class WPDrift_Plugin_Updater {
+	class WPDrift_Plugin_Jmcl_Updater {
 		private $api_url   = '';
 		private $api_data  = array();
 		private $name      = '';

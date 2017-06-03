@@ -58,9 +58,9 @@ class WP_Job_Mananger_Company_Listings_Updater {
 	 * Include required files
 	*/
 	private function includes() {
-		if ( !class_exists( 'WPDrift_Plugin_Updater' ) ) {
+		if ( !class_exists( 'WPDrift_Plugin_Jmcl_Updater' ) ) {
 			// load our custom updater
-			include( COMPANY_LISTINGS_PLUGIN_DIR. '/includes/class-wpdrift-updater.php' );
+			include( COMPANY_LISTINGS_PLUGIN_DIR. '/includes/class-wpdrift-jmcl-updater.php' );
 		}
 	}
 
@@ -73,7 +73,7 @@ class WP_Job_Mananger_Company_Listings_Updater {
 		$license = trim( get_site_option( 'jmcl_license_key' ) );
 
 		// setup the updater
-		$edd_updater = new WPDrift_Plugin_Updater( JMCL_UPDATER_STORE_URL, COMPANY_LISTINGS_PLUGIN_FILE, array(
+		$edd_updater = new WPDrift_Plugin_Jmcl_Updater( JMCL_UPDATER_STORE_URL, COMPANY_LISTINGS_PLUGIN_FILE, array(
 				'version' 	=> COMPANY_LISTINGS_VERSION, 		// current version number
 				'license' 	=> $license, 						// license key (used get_site_option above to retrieve from DB)
 				'item_name' => JMCL_UPDATER_ITEM_NAME, 			// name of this plugin
