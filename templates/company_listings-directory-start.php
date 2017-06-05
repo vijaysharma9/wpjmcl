@@ -10,7 +10,10 @@
 		</form>
 	</div>
 
-	<strong class="xs-mr1 xs-block sm-inline-block xs-mbh0 sm-mb0"><?php _e('Find by name:', 'wp-job-manager-company-listings' ) ?></strong>
+	<div class="filter-alpha-label">
+		<strong class="xs-mr1 xs-block sm-inline-block xs-mbh0 sm-mb0"><?php _e('Find by name:', 'wp-job-manager-company-listings' ) ?></strong>
+	</div>
+
 	<ul class="bare-list inline-list">
 		<li class="inline-list__item xs-mlh0">
 		  	<a href="<?php echo str_replace('?','', esc_url( add_query_arg( 'company-numeric','', get_permalink() ) )); ?>">#</a>
@@ -26,6 +29,9 @@
 		  <?php
 		}
 		?>
+		<li class="inline-list__item xs-mlh0">
+			<a href="<?php the_permalink() ?>" style="color: #a00;"><?php _e('Reset', 'wp-job-manager-company-listings') ?></a>
+		</li>
 	</ul>
 </div>
 
