@@ -534,17 +534,6 @@ function get_company_post_statuses() {
 endif;
 
 /**
- * Upload dir
- */
-function company_listings_upload_dir( $dir, $field ) {
-	if ( 'company_file' === $field ) {
-		$dir = 'companies/company_files';
-	}
-	return $dir;
-}
-add_filter( 'job_manager_upload_dir', 'company_listings_upload_dir', 10, 2 );
-
-/**
  * Count user companies
  * @param  integer $user_id
  * @return int
