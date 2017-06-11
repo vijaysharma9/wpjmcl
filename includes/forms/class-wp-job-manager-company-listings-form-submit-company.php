@@ -29,7 +29,8 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp', array( $this, 'process' ) );
+		add_action( 'wp', 									array( $this, 'process' ) );
+		add_action( 'company_listings_update_company_data', array( $this, 'process_company_logo' ), 10, 2 );
 
 		$this->steps  = (array) apply_filters( 'submit_company_steps', array(
 			'submit' => array(
@@ -153,8 +154,8 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-company-listings' ),
 					'priority'    => 4
 				),
-				'company_photo' => array(
-					'label'       => __( 'Photo', 'wp-job-manager-company-listings' ),
+				'company_logo' => array(
+					'label'       => __( 'Logo', 'wp-job-manager-company-listings' ),
 					'type'        => 'file',
 					'required'    => false,
 					'placeholder' => '',
@@ -593,6 +594,34 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			$this->add_error( $e->getMessage() );
 			return;
 		}
+	}
+
+	/**
+	 * Set the company logo/post thumbnail
+	 *
+	 * @param $company_id
+	 * @param $values
+	 */
+	public function process_company_logo( $company_id, $values ) {
+
+		$logo_url = $_POST['current_company_logo'];
+
+		$attachment = array(
+			'post_title'   => get_the_title( $this->company_id ),
+			'post_content' => '',
+			'post_status'  => 'inherit',
+			'post_parent'  => $this->company_id,
+			'guid'         => $logo_url
+		);
+
+		if ( $info = wp_check_filetype( $logo_url ) ) {
+			$attachment['post_mime_type'] = $info['type'];
+		}
+
+		$attachment_id = wp_insert_attachment( $attachment, $logo_url, $this->company_id );
+
+		if ( ! empty( $attachment_id ) ) set_post_thumbnail( $this->company_id, $attachment_id );
+
 	}
 
 	/**

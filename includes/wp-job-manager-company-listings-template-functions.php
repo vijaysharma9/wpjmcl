@@ -95,12 +95,12 @@ function the_company_metaphoto( $size = 'thumbnail', $default = null, $post = nu
 			$logo = job_manager_get_resized_image( $logo, $size );
 		}
 
-		echo '<img class="company_photo" src="' . $logo . '" alt="Photo" />';
+		echo '<img class="company_logo" src="' . $logo . '" alt="Photo" />';
 
 	} elseif ( $default )
-		echo '<img class="company_photo" src="' . $default . '" alt="Photo" />';
+		echo '<img class="company_logo" src="' . $default . '" alt="Photo" />';
 	else
-		echo '<img class="company_photo" src="' . apply_filters( 'job_manager_default_company_logo', JOB_MANAGER_PLUGIN_URL . '/assets/images/company.png' ) . '" alt="Logo" />';
+		echo '<img class="company_logo" src="' . apply_filters( 'job_manager_default_company_logo', JOB_MANAGER_PLUGIN_URL . '/assets/images/company.png' ) . '" alt="Logo" />';
 }
 
 /**

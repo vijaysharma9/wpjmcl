@@ -167,7 +167,7 @@ jQuery(document).ready(function($) {
 					if ( photo_field ) {
 						var photo_field_name = photo_field.find(':input[type="file"]').attr( 'name' );
 					}
-					$('.fieldset-company_photo .field').prepend('<div class="job-manager-uploaded-files"><div class="job-manager-uploaded-file"><span class="job-manager-uploaded-file-preview"><img src="' + profile.pictureUrl + '" /> <a class="job-manager-remove-uploaded-file" href="#">[' + company_listings_company_submission.i18n_remove + ']</a></span><input type="hidden" class="input-text" name="current_' + photo_field_name + '" value="' + profile.pictureUrl + '" /></div></div>');
+					$('.fieldset-company_logo .field').prepend('<div class="job-manager-uploaded-files"><div class="job-manager-uploaded-file"><span class="job-manager-uploaded-file-preview"><img src="' + profile.pictureUrl + '" /> <a class="job-manager-remove-uploaded-file" href="#">[' + company_listings_company_submission.i18n_remove + ']</a></span><input type="hidden" class="input-text" name="current_' + photo_field_name + '" value="' + profile.pictureUrl + '" /></div></div>');
 				}
 
 				$form.trigger( 'linkedin_import', profile );
