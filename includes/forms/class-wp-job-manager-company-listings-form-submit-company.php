@@ -884,7 +884,12 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 */
 	public function done() {
 		do_action( 'company_listings_company_submitted', $this->company_id );
-		get_job_manager_template( 'company-submitted.php', array( 'company_listings' => get_post( $this->company_id ), 'job_id' => $this->job_id ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+		
+		get_job_manager_template(
+			'company_listings-submitted.php',
+			array( 'company_listings' => get_post( $this->company_id ),
+			'job_id' => $this->job_id ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' 
+		);
 
 		// Allow application
 		if ( $this->job_id ) {
