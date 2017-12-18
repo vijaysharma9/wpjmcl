@@ -22,13 +22,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <?php
-
-do_action( 'jmcl_before_single_company' );
-
 if ( post_password_required() ) {
 	echo get_the_password_form();
 	return;
 }
+
+do_action( 'jmcl_before_single_company' );
 ?>
 
 <div id="company-<?php the_ID(); ?>" <?php post_class(); ?>>

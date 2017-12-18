@@ -27,7 +27,7 @@ class WP_Job_Manager_Company_Listings {
 	/**
 	 * __construct function.
 	 */
-	public function __construct() {
+	public function __construct () {
 		// Define constants
 		define( 'COMPANY_LISTINGS_VERSION', '1.0.0' );
 		define( 'COMPANY_LISTINGS_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
@@ -35,6 +35,8 @@ class WP_Job_Manager_Company_Listings {
 		define( 'COMPANY_LISTINGS_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 
 		// Includes
+		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		
 		include( 'includes/wp-job-manager-company-listings-functions.php' );
 		include( 'includes/wp-job-manager-company-listings-template.php' );
 		include( 'includes/wp-job-manager-company-listings-template-functions.php' );
@@ -46,6 +48,7 @@ class WP_Job_Manager_Company_Listings {
 		include( 'includes/class-wp-job-manager-company-listings-geocode.php' );
 		include( 'includes/class-wp-job-manager-company-listings-email-notification.php' );
 		include( 'includes/class-wp-job-manager-company-listings-apply.php' );
+		include( 'includes/class-wp-job-manager-company-listings-bookmarks.php' );
 		include( 'includes/class-wp-job-manager-company-listings-mapping.php' );
 		include( 'includes/class-wp-job-manager-company-listings-updater.php' );
 
