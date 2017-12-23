@@ -20,7 +20,7 @@ class WP_Job_Manager_Company_Listings_Install {
 		$this->create_files();
 		$this->cron();
 
-		// Redirect to setup screen for new insalls
+		// Redirect to setup screen for new install
 		if ( ! get_option( 'wp_company_listings_version' ) ) {
 			set_transient( '_company_listings_activation_redirect', 1, HOUR_IN_SECONDS );
 		}

@@ -71,7 +71,6 @@ class WP_Job_Manager_Company_Listings {
 		add_action( 'switch_theme', array( $this->post_types, 'register_post_types' ), 10 );
 		add_action( 'switch_theme', 'flush_rewrite_rules', 15 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
-		add_action( 'admin_init', array( $this, 'updater' ) );
 
 		// Filters
 		add_filter('rewrite_rules_array', array( $this, 'insert_rewrite_rules' ));
@@ -87,15 +86,6 @@ class WP_Job_Manager_Company_Listings {
 			?><div class="error"><p><?php _e( 'Company Manager requires WP Job Manager to be installed!', 'wp-job-manager-applications' ); ?></p></div><?php
 		} elseif ( version_compare( JOB_MANAGER_VERSION, $required_jm_version, '<' ) ) {
 			?><div class="error"><p><?php printf( __( 'Company Manager requires WP Job Manager %s (you are using %s)', 'wp-job-manager-applications' ), $required_jm_version, JOB_MANAGER_VERSION ); ?></p></div><?php
-		}
-	}
-
-	/**
-	 * Handle Updates
-	 */
-	public function updater() {
-		if ( version_compare( COMPANY_LISTINGS_VERSION, get_option( 'wp_company_listings_version' ), '>' ) ) {
-			include_once( 'includes/class-wp-job-manager-company-listings-install.php' );
 		}
 	}
 
