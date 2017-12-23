@@ -27,7 +27,9 @@ To install this plugin, please refer to the guide here: [http://codex.wordpress.
 == Changelog ==
 
 = 1.0.1 =
-* New - Ability to bookmark company when WP Job Manager - Bookmarks plugin is enabled
+* New - Ability to bookmark company when WP Job Manager - Bookmarks plugin is enabled.
+* Fix - Installer fail to run on the new install.
+* Fix - Various notices/warnings.
 
 = 1.0.0 =
 * First release.
