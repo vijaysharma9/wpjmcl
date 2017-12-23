@@ -31,14 +31,11 @@ if ( $items = get_post_meta( $company_id, '_links', true ) ) {
 	$message['link_end'] = "\n" . '-----------' . "\n" . "\n";
 }
 
-// Education
+// Perks
 if ( $items = get_post_meta( $company_id, '_company_perk', true ) ) {
-	$message['perk_start'] = __( 'Education:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
+	$message['perk_start'] = __( 'Perks:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 	foreach ( $items as $key => $item ) {
-		$message[ 'perk_location_' . $key ]      = sprintf( __( 'Location: %s', 'wp-job-manager-company-listings' ), $item['location'] ) . "\n";
-		$message[ 'perk_date_' . $key ]          = sprintf( __( 'Date: %s', 'wp-job-manager-company-listings' ), $item['date'] ) . "\n";
-		$message[ 'perk_qualification_' . $key ] = sprintf( __( 'Qualification: %s', 'wp-job-manager-company-listings' ), $item['qualification'] ) . "\n";
-		$message[ 'perk_notes_' . $key ]         = $item['notes'] . "\n" . "\n";
+		$message[ 'perk_notes_' . $key ] = $item['notes'] . "\n" . "\n";
 	}
 	$message['perk_end'] = '-----------' . "\n" . "\n";
 }

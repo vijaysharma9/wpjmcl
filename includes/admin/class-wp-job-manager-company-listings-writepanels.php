@@ -42,6 +42,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 			),
 			'_company_website' => array(
 				'label'       => __( 'WebSite', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( 'URL to the company website', 'wp-job-manager-company-listings' ),
 				'type'        => 'text'
 			),
 			'_company_twitter' => array(
@@ -61,7 +62,8 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 			),
 			'_company_author' => array(
 				'label' => __( 'Posted by', 'wp-job-manager-company-listings' ),
-				'type'  => 'author'
+				'type'  => 'author',
+				'placeholder' => '',
 			),
 			'_featured' => array(
 				'label' => __( 'Feature this Company?', 'wp-job-manager-company-listings' ),
