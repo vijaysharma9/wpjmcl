@@ -36,7 +36,7 @@ class WP_Job_Manager_Company_Listings {
 
 		// Includes
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-		
+
 		include( 'includes/wp-job-manager-company-listings-functions.php' );
 		include( 'includes/wp-job-manager-company-listings-template.php' );
 		include( 'includes/wp-job-manager-company-listings-template-functions.php' );
@@ -50,8 +50,6 @@ class WP_Job_Manager_Company_Listings {
 		include( 'includes/class-wp-job-manager-company-listings-apply.php' );
 		include( 'includes/class-wp-job-manager-company-listings-bookmarks.php' );
 		include( 'includes/class-wp-job-manager-company-listings-mapping.php' );
-		include( 'includes/class-wp-job-manager-company-listings-updater.php' );
-
 
 		// Init classes
 		$this->apply      = new WP_Job_Manager_Company_Listings_Apply();
@@ -111,10 +109,10 @@ class WP_Job_Manager_Company_Listings {
 	    );
 
 	    $company_directory_page_id = get_option( 'company_listings_company_directory_page_id' );
-     
+
 		$newrules = array();
 		foreach ($upper as $slug ) {
-			$newrules['([^/]+)/' . $slug . '/?$'] = 
+			$newrules['([^/]+)/' . $slug . '/?$'] =
 			'index.php?page_id='. $company_directory_page_id .'&$matches[1]&cdpage=' . $slug;
 		}
 
@@ -126,7 +124,7 @@ class WP_Job_Manager_Company_Listings {
 
 	/**
 	 * Includes once plugins are loaded
-	 */ 
+	 */
 	public function widgets_init() {
 		include_once( 'includes/class-wp-job-manager-company-listings-widgets.php' );
 	}

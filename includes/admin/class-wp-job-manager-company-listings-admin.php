@@ -14,16 +14,18 @@ class WP_Job_Manager_Company_Listings_Admin {
 	 * @return void
 	 */
 	public function __construct() {
-		
+
 		if ( version_compare( COMPANY_LISTINGS_VERSION, get_option( 'wp_company_listings_version' ), '>' ) ) {
 			// Run setup/install
 			include_once( COMPANY_LISTINGS_PLUGIN_DIR.'/includes/class-wp-job-manager-company-listings-install.php' );
 		}
-		
+
 		include_once( 'class-wp-job-manager-company-listings-cpt.php' );
 		include_once( 'class-wp-job-manager-company-listings-writepanels.php' );
 		include_once( 'class-wp-job-manager-company-listings-settings.php' );
 		include_once( 'class-wp-job-manager-company-listings-setup.php' );
+		include_once( 'class-wp-job-manager-company-listings-license.php' );
+		include_once( 'class-wp-job-manager-company-listings-updater.php' );
 
 		add_action( 'job_manager_admin_screen_ids', array( $this, 'add_screen_ids' ) );
 		add_action( 'admin_menu', 					array( $this, 'admin_menu' ), 12 );
