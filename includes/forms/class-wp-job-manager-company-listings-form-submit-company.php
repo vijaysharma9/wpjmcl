@@ -505,7 +505,13 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 				foreach ( $fields as $key => $field ) {
 					switch ( $key ) {
 						case 'company_name' :
-							$this->fields[ $group_key ][ $key ]['value'] = $user->first_name . ' ' . $user->last_name;
+							if ($user->first_name || $user->last_name) {
+								$placeholder_company_name = $user->first_name . ' ' . $user->last_name;
+							} else {
+								$placeholder_company_name = $user->display_name;
+							}
+
+							$this->fields[ $group_key ][ $key ]['value'] = $placeholder_company_name;
 						break;
 						case 'company_email' :
 							$this->fields[ $group_key ][ $key ]['value'] = $user->user_email;
@@ -604,7 +610,11 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 */
 	public function process_company_logo( $company_id, $values ) {
 
-		$logo_url = $_POST['current_company_logo'];
+		$logo_url = isset( $_POST['current_company_logo'] ) ? $_POST['current_company_logo'] : '';
+
+		if ( ! $logo_url ) {
+			return;
+		}
 
 		$attachment = array(
 			'post_title'   => get_the_title( $this->company_id ),
@@ -884,11 +894,11 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 */
 	public function done() {
 		do_action( 'company_listings_company_submitted', $this->company_id );
-		
+
 		get_job_manager_template(
 			'company_listings-submitted.php',
 			array( 'company_listings' => get_post( $this->company_id ),
-			'job_id' => $this->job_id ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' 
+			'job_id' => $this->job_id ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/'
 		);
 
 		// Allow application

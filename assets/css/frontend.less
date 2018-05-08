@@ -992,6 +992,22 @@ ul.companies {
 	}
 }
 
+/* Company name fixes */
+.fieldset-company_name {
+	.required-field {
+		position: relative;
+
+		> #company_name {
+			display: inherit !important;
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			z-index: -1;
+		}
+	}
+}
+
 // Default theme fixes
 .twenty-eleven {
 	ul.companies {

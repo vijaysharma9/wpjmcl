@@ -19,6 +19,7 @@ jq( function() {
 
         // Ajax customer search boxes
         var select2_args = {
+            allowClear: true,
             minimumInputLength: '3',
             initSelection: function (element, callback) {
                 var pre_filled = element.val();
@@ -77,7 +78,11 @@ jq( function() {
             //We are creating new company from an user input
             if (company_id == 0) {
                 jq('#_company_id').val('new');
-                $elmCmpText.val($elmCmpText.select2('data').text);
+
+                if ($elmCmpText.select2('data')) {
+                    $elmCmpText.val($elmCmpText.select2('data').text);
+                }
+
                 return false;
             }
 
