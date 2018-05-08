@@ -538,7 +538,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 	 * @return array
 	 */
 	public function fix_post_name( $data, $postarr ) {
-		 if ( 'company_listings' === $data['post_type'] && 'pending' === $data['post_status'] && ! current_user_can( 'publish_posts' ) ) {
+		 if ( 'company_listings' === $data['post_type'] && 'pending' === $data['post_status'] && ! current_user_can( 'publish_posts' ) && isset( $postarr['post_name'] ) ) {
 			$data['post_name'] = $postarr['post_name'];
 		 }
 		 return $data;

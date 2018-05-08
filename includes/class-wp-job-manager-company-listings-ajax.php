@@ -139,7 +139,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			die();
 		}
 
-		$query = new WP_Query( array( 's' => $term, 'post_type' => 'company_listings' ) );
+		$query = new WP_Query( array( 's' => $term, 'post_type' => 'company_listings', 'post_status' => 'publish' ) );
 
 		if ( $query->have_posts() ) {
 			// The Loop
