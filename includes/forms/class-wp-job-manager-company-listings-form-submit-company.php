@@ -610,7 +610,11 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 */
 	public function process_company_logo( $company_id, $values ) {
 
-		$logo_url = $_POST['current_company_logo'];
+		$logo_url = isset( $_POST['current_company_logo'] ) ? $_POST['current_company_logo'] : '';
+
+		if ( ! $logo_url ) {
+			return;
+		}
 
 		$attachment = array(
 			'post_title'   => get_the_title( $this->company_id ),
