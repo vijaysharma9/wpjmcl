@@ -87,21 +87,40 @@ class WP_Job_Manager_Company_Listings_Mapping {
                 $underscore = '';
             }
 
+            $post_title = $_POST[$underscore . 'company_name'];
+            $company_title = $_POST[$underscore . 'company_tagline'];
+            $company_location = $_POST[$underscore . 'job_location'];
+
+            $prefix = wp_generate_password( 10 );
+
+            $company_slug = array();
+            $company_slug[] = current( explode( ' ', $post_title ) );
+            $company_slug[] = $prefix;
+
+            if ( ! empty( $company_title ) ) {
+                $company_slug[] = $company_title;
+            }
+
+            if ( ! empty( $company_location ) ) {
+                $company_slug[] = $company_location;
+            }
+
             /**
              * Create the company.
              */
             $company_id = wp_insert_post( array(
-                'post_status'    => 'preview',
-                'post_title'     => $_POST[$underscore.'company_name'],
-                'post_type'      => 'company_listings',
+                'post_status' => 'preview',
+                'post_title'  => $post_title,
+                'post_type'   => 'company_listings',
+                'post_name'   => sanitize_title( implode( '-', $company_slug ) ),
             ));
 
-            update_post_meta( $company_id, '_company_website',  $_POST[$underscore.'company_website'] );
-            update_post_meta( $company_id, '_company_title',    $_POST[$underscore.'company_tagline'] );
-            update_post_meta( $company_id, '_company_location', $_POST[$underscore.'job_location'] );
-            update_post_meta( $company_id, '_company_twitter',  $_POST[$underscore.'company_twitter'] );
-            update_post_meta( $company_id, '_company_video',    $_POST[$underscore.'company_video'] );
-            update_post_meta( $company_id, '_company_email',    $_POST[$underscore.'application'] );
+            update_post_meta( $company_id, '_company_website',  $_POST[$underscore . 'company_website'] );
+            update_post_meta( $company_id, '_company_title',    $company_title );
+            update_post_meta( $company_id, '_company_location', $company_location );
+            update_post_meta( $company_id, '_company_twitter',  $_POST[$underscore . 'company_twitter'] );
+            update_post_meta( $company_id, '_company_video',    $_POST[$underscore . 'company_video'] );
+            update_post_meta( $company_id, '_company_email',    $_POST[$underscore . 'application'] );
 
             /* ------ Company logo ------- */
             $thumbnail_id = intval( get_post_meta( $job_id, '_thumbnail_id', true ) );
