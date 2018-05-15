@@ -115,12 +115,13 @@ class WP_Job_Manager_Company_Listings_Mapping {
                 'post_name'   => sanitize_title( implode( '-', $company_slug ) ),
             ));
 
-            update_post_meta( $company_id, '_company_website',  $_POST[$underscore . 'company_website'] );
-            update_post_meta( $company_id, '_company_title',    $company_title );
+            update_post_meta( $company_id, '_company_website', $_POST[$underscore . 'company_website'] );
+            update_post_meta( $company_id, '_company_title', $company_title );
             update_post_meta( $company_id, '_company_location', $company_location );
-            update_post_meta( $company_id, '_company_twitter',  $_POST[$underscore . 'company_twitter'] );
-            update_post_meta( $company_id, '_company_video',    $_POST[$underscore . 'company_video'] );
-            update_post_meta( $company_id, '_company_email',    $_POST[$underscore . 'application'] );
+            update_post_meta( $company_id, '_company_twitter', $_POST[$underscore . 'company_twitter'] );
+            update_post_meta( $company_id, '_company_video', $_POST[$underscore . 'company_video'] );
+            update_post_meta( $company_id, '_company_email', $_POST[$underscore . 'application'] );
+            update_post_meta( $company_id, '_company_name_prefix', $prefix );
 
             /* ------ Company logo ------- */
             $thumbnail_id = intval( get_post_meta( $job_id, '_thumbnail_id', true ) );
