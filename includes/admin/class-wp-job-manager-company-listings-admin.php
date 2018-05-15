@@ -65,7 +65,7 @@ class WP_Job_Manager_Company_Listings_Admin {
 
 		/** SCRIPTS ******************************************************************************/
 		wp_enqueue_script('select2-script', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2.min.js', array(), '3.5.4');
-		wp_register_script( 'jquery-tiptip', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/jquery-tiptip/jquery.tipTip.min.js', array( 'jquery' ), JOB_MANAGER_VERSION, true );
+		wp_register_script( 'jquery-tiptip', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/jquery-tiptip/jquery.tipTip.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 		wp_enqueue_script( 'company_listings_admin_js', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/admin.min.js', array( 'jquery', 'jquery-tiptip', 'jquery-ui-datepicker', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
 		wp_enqueue_script( 'job-edit-script', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/job-edit.js', array( 'jquery'  ), COMPANY_LISTINGS_VERSION, true );
 	}
