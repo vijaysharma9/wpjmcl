@@ -47,12 +47,10 @@ class WP_Job_Manager_Company_Listings {
 		include( 'includes/class-wp-job-manager-company-listings-shortcodes.php' );
 		include( 'includes/class-wp-job-manager-company-listings-geocode.php' );
 		include( 'includes/class-wp-job-manager-company-listings-email-notification.php' );
-		include( 'includes/class-wp-job-manager-company-listings-apply.php' );
 		include( 'includes/class-wp-job-manager-company-listings-bookmarks.php' );
 		include( 'includes/class-wp-job-manager-company-listings-mapping.php' );
 
 		// Init classes
-		$this->apply      = new WP_Job_Manager_Company_Listings_Apply();
 		$this->forms      = new WP_Job_Manager_Company_Listings_Forms();
 		$this->post_types = new WP_Job_Manager_Company_Listings_Post_Types();
 
