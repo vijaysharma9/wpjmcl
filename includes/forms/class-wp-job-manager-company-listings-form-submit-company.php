@@ -66,13 +66,8 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		// Load company details
 		if ( $this->company_id ) {
 			$company_status = get_post_status( $this->company_id );
-			if ( 'expired' === $company_status ) {
-				if ( ! company_listings_user_can_edit_company( $this->company_id ) ) {
-					$this->company_id = 0;
-					$this->job_id    = 0;
-					$this->step      = 0;
-				}
-			} elseif ( 0 === $this->step && ! in_array( $company_status, apply_filters( 'company_listings_valid_submit_company_statuses', array( 'preview' ) ) ) && empty( $_POST['company_application_submit_button'] ) ) {
+
+			if ( 0 === $this->step && ! in_array( $company_status, apply_filters( 'company_listings_valid_submit_company_statuses', array( 'preview' ) ) ) && empty( $_POST['company_application_submit_button'] ) ) {
 				$this->company_id = 0;
 				$this->job_id    = 0;
 				$this->step      = 0;
@@ -868,10 +863,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		if ( ! empty( $_POST['continue'] ) ) {
 			$company = get_post( $this->company_id );
 
-			if ( in_array( $company->post_status, array( 'preview', 'expired' ) ) ) {
-				// Reset expiry
-				delete_post_meta( $company->ID, '_company_expires' );
-
+			if ( in_array( $company->post_status, array( 'preview' ) ) ) {
 				// Update listing
 				$update_company                  = array();
 				$update_company['ID']            = $company->ID;

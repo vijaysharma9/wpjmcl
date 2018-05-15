@@ -1,5 +1,5 @@
 <?php
-$submission_limit           = get_option( 'company_listings_submission_limit' );
+$submission_limit = get_option( 'company_listings_submission_limit' );
 $submit_company_form_page_id = get_option( 'company_listings_submit_company_form_page_id' );
 ?>
 <div id="company-listings-company-dashboard">
@@ -41,11 +41,6 @@ $submit_company_form_page_id = get_option( 'company_listings_submit_company_form
 													$actions['edit'] = array( 'label' => __( 'Edit', 'wp-job-manager-company-listings' ), 'nonce' => false );
 													$actions['publish'] = array( 'label' => __( 'Publish', 'wp-job-manager-company-listings' ), 'nonce' => true );
 												break;
-												case 'expired' :
-													if ( get_option( 'company_listings_submit_company_form_page_id' ) ) {
-														$actions['relist'] = array( 'label' => __( 'Relist', 'wp-job-manager-company-listings' ), 'nonce' => true );
-													}
-												break;
 											}
 
 											$actions['delete'] = array( 'label' => __( 'Delete', 'wp-job-manager-company-listings' ), 'nonce' => true );
@@ -69,13 +64,7 @@ $submit_company_form_page_id = get_option( 'company_listings_submit_company_form
 								<?php elseif ( 'status' === $key ) : ?>
 									<?php the_company_metastatus( $company ); ?>
 								<?php elseif ( 'date' === $key ) : ?>
-									<?php
-									if ( ! empty( $company->_company_expires ) && strtotime( $company->_company_expires ) > current_time( 'timestamp' ) ) {
-										printf( __( 'Expires %s', 'wp-job-manager-company-listings' ), date_i18n( get_option( 'date_format' ), strtotime( $company->_company_expires ) ) );
-									} else {
-										echo date_i18n( get_option( 'date_format' ), strtotime( $company->post_date ) );
-									}
-									?>
+									<?php echo date_i18n( get_option( 'date_format' ), strtotime( $company->post_date ) ); ?>
 								<?php else : ?>
 									<?php do_action( 'company_listings_company_dashboard_column_' . $key, $company ); ?>
 								<?php endif; ?>

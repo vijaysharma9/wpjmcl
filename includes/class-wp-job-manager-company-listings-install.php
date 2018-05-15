@@ -18,7 +18,6 @@ class WP_Job_Manager_Company_Listings_Install {
 
 		$this->init_user_roles();
 		$this->create_files();
-		$this->cron();
 
 		// Redirect to setup screen for new install
 		if ( ! get_option( 'wp_company_listings_version' ) ) {
@@ -100,14 +99,6 @@ class WP_Job_Manager_Company_Listings_Install {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Setup cron jobs
-	 */
-	public function cron() {
-		wp_clear_scheduled_hook( 'company_listings_check_for_expired_companies' );
-		wp_schedule_event( time(), 'hourly', 'company_listings_check_for_expired_companies' );
 	}
 }
 

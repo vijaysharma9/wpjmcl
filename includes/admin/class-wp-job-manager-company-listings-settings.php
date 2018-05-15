@@ -184,14 +184,6 @@ class WP_Job_Manager_Company_Listings_Settings {
 						    'type'        => 'input'
 						),
 						array(
-							'name'        => 'company_listings_submission_duration',
-							'std'         => '',
-							'label'       => __( 'Listing Duration', 'wp-job-manager-company-listings' ),
-							'desc'        => __( 'How many <strong>days</strong> listings are live before expiring. Can be left blank to never expire. Expired listings must be relisted to become visible.', 'wp-job-manager-company-listings' ),
-							'attributes'  => array(),
-							'placeholder' => __( 'Never expire', 'wp-job-manager-company-listings' )
-						),
-						array(
 							'name'       => 'company_listings_autohide',
 							'std'        => '',
 							'label'      => __( 'Auto-hide Companies', 'wp-job-manager-company-listings' ),

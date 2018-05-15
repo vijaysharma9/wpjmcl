@@ -3,8 +3,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit();
 }
 
-wp_clear_scheduled_hook( 'company_listings_check_for_expired_companies' );
-
 wp_trash_post( get_option( 'company_listings_submit_company_form_page_id' ) );
 
 $options = array(

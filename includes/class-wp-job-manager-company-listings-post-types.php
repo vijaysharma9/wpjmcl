@@ -29,19 +29,11 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		add_action( 'draft_to_publish', array( $this, 'setup_autohide_cron' ) );
 		add_action( 'auto-draft_to_publish', array( $this, 'setup_autohide_cron' ) );
 		add_action( 'hidden_to_publish', array( $this, 'setup_autohide_cron' ) );
-		add_action( 'expired_to_publish', array( $this, 'setup_autohide_cron' ) );
 		add_action( 'save_post', array( $this, 'setup_autohide_cron' ) );
 		add_action( 'auto-hide-company', array( $this, 'hide_company' ) );
 
 		add_action( 'update_post_meta', array( $this, 'maybe_update_menu_order' ), 10, 4 );
 		add_filter( 'wp_insert_post_data', array( $this, 'fix_post_name' ), 10, 2 );
-		add_action( 'pending_payment_to_publish', array( $this, 'set_expiry' ) );
-		add_action( 'pending_to_publish', array( $this, 'set_expiry' ) );
-		add_action( 'preview_to_publish', array( $this, 'set_expiry' ) );
-		add_action( 'draft_to_publish', array( $this, 'set_expiry' ) );
-		add_action( 'auto-draft_to_publish', array( $this, 'set_expiry' ) );
-		add_action( 'expired_to_publish', array( $this, 'set_expiry' ) );
-		add_action( 'company_listings_check_for_expired_companies', array( $this, 'check_for_expired_companies' ) );
 
 		add_action( 'save_post', array( $this, 'flush_get_company_listings_cache' ) );
 		add_action( 'company_listings_my_company_do_action', array( $this, 'company_listings_my_company_do_action' ) );
@@ -542,90 +534,5 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 			$data['post_name'] = $postarr['post_name'];
 		 }
 		 return $data;
-	}
-
-	/**
-	 * Typo -.-
-	 */
-	public function set_expirey( $post ) {
-		$this->set_expiry( $post );
-	}
-
-	/**
-	 * Set expirey date when company status changes
-	 */
-	public function set_expiry( $post ) {
-		if ( $post->post_type !== 'company_listings' ) {
-			return;
-		}
-
-		// See if it is already set
-		if ( metadata_exists( 'post', $post->ID, '_company_expires' ) ) {
-			$expires = get_post_meta( $post->ID, '_company_expires', true );
-			if ( $expires && strtotime( $expires ) < current_time( 'timestamp' ) ) {
-				update_post_meta( $post->ID, '_company_expires', '' );
-				$_POST[ '_company_expires' ] = '';
-			}
-			return;
-		}
-
-		// No metadata set so we can generate an expiry date
-		// See if the user has set the expiry manually:
-		if ( ! empty( $_POST[ '_company_expires' ] ) ) {
-			update_post_meta( $post->ID, '_company_expires', date( 'Y-m-d', strtotime( sanitize_text_field( $_POST[ '_company_expires' ] ) ) ) );
-
-		// No manual setting? Lets generate a date
-		} else {
-			$expires = calculate_company_expiry( $post->ID );
-			update_post_meta( $post->ID, '_company_expires', $expires );
-
-			// In case we are saving a post, ensure post data is updated so the field is not overridden
-			if ( isset( $_POST[ '_company_expires' ] ) ) {
-				$_POST[ '_company_expires' ] = $expires;
-			}
-		}
-	}
-
-	/**
-	 * Expire companies
-	 */
-	public function check_for_expired_companies() {
-		global $wpdb;
-
-		// Change status to expired
-		$company_ids = $wpdb->get_col( $wpdb->prepare( "
-			SELECT postmeta.post_id FROM {$wpdb->postmeta} as postmeta
-			LEFT JOIN {$wpdb->posts} as posts ON postmeta.post_id = posts.ID
-			WHERE postmeta.meta_key = '_company_expires'
-			AND postmeta.meta_value > 0
-			AND postmeta.meta_value < %s
-			AND posts.post_status = 'publish'
-			AND posts.post_type = 'company_listings'
-		", date( 'Y-m-d', current_time( 'timestamp' ) ) ) );
-
-		if ( $company_ids ) {
-			foreach ( $company_ids as $company_id ) {
-				$data                = array();
-				$data['ID']          = $company_id;
-				$data['post_status'] = 'expired';
-				wp_update_post( $data );
-			}
-		}
-
-		// Delete old expired companies
-		if ( apply_filters( 'company_listings_delete_expired_companies', true ) ) {
-			$company_ids = $wpdb->get_col( $wpdb->prepare( "
-				SELECT posts.ID FROM {$wpdb->posts} as posts
-				WHERE posts.post_type = 'company_listings'
-				AND posts.post_modified < %s
-				AND posts.post_status = 'expired'
-			", date( 'Y-m-d', strtotime( '-' . apply_filters( 'company_listings_delete_expired_companies_days', 30 ) . ' days', current_time( 'timestamp' ) ) ) ) );
-
-			if ( $company_ids ) {
-				foreach ( $company_ids as $company_id ) {
-					wp_trash_post( $company_id );
-				}
-			}
-		}
 	}
 }

@@ -168,8 +168,6 @@ function get_the_company_metastatus( $post = null ) {
 
 	if ( $status == 'publish' )
 		$status = __( 'Published', 'wp-job-manager-company-listings' );
-	elseif ( $status == 'expired' )
-		$status = __( 'Expired', 'wp-job-manager-company-listings' );
 	elseif ( $status == 'pending' )
 		$status = __( 'Pending Review', 'wp-job-manager-company-listings' );
 	elseif ( $status == 'hidden' )

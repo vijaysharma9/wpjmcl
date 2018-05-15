@@ -13,8 +13,8 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 * @return void
 	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', 				 array( $this, 'add_meta_boxes' ) );
-		add_action( 'save_post', 		 	 array( $this, 'save_post' ), 1, 2 );
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+		add_action( 'save_post', array( $this, 'save_post' ), 1, 2 );
 		add_action( 'company_listings_save_company', array( $this, 'save_company_data' ), 1, 2 );
 	}
 
@@ -346,16 +346,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 
 		foreach ( $this->company_fields() as $key => $field ) {
 
-			// Expirey date
-			if ( '_company_expires' === $key ) {
-				if ( ! empty( $_POST[ $key ] ) ) {
-					update_post_meta( $post_id, $key, date( 'Y-m-d', strtotime( sanitize_text_field( $_POST[ $key ] ) ) ) );
-				} else {
-					update_post_meta( $post_id, $key, '' );
-				}
-			}
-
-			elseif ( '_company_location' === $key ) {
+			if ( '_company_location' === $key ) {
 				if ( update_post_meta( $post_id, $key, sanitize_text_field( $_POST[ $key ] ) ) ) {
 					do_action( 'company_listings_company_location_edited', $post_id, sanitize_text_field( $_POST[ $key ] ) );
 				} elseif ( apply_filters( 'company_listings_geolocation_enabled', true ) && ! WP_Job_Manager_Geocode::has_location_data( $post_id ) ) {
@@ -364,7 +355,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				continue;
 			}
 
-			elseif( '_company_author' === $key ) {
+			elseif ( '_company_author' === $key ) {
 				$wpdb->update( $wpdb->posts, array( 'post_author' => $_POST[ $key ] > 0 ? absint( $_POST[ $key ] ) : 0 ), array( 'ID' => $post_id ) );
 			}
 

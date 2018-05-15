@@ -147,7 +147,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 		// ....If not show the company dashboard
 		$args = apply_filters( 'company_listings_get_dashboard_companies_args', array(
 			'post_type'           => 'company_listings',
-			'post_status'         => array( 'publish', 'expired', 'pending', 'hidden' ),
+			'post_status'         => array( 'publish', 'pending', 'hidden' ),
 			'ignore_sticky_posts' => 1,
 			'posts_per_page'      => $posts_per_page,
 			'offset'              => ( max( 1, get_query_var('paged') ) - 1 ) * $posts_per_page,
@@ -390,7 +390,7 @@ class WP_Job_Manager_Company_Listings_Shortcodes {
 			<?php endwhile; ?>
 
 			<?php get_job_manager_template( 'company_listings-directory-end.php', array(), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
-			
+
 		<?php else :
 			do_action( 'company_listings_output_companies_no_results' );
 		endif;
