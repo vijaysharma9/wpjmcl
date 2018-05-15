@@ -11,10 +11,12 @@ class WP_Job_Manager_Company_Listings_Ajax {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_nopriv_company_listings_get_companies', 	array( $this, 'get_companies' ) );
-		add_action( 'wp_ajax_company_listings_get_companies', 			array( $this, 'get_companies' ) );
-		add_action( 'wp_ajax_company_listings_json_search_company',     array( $this, 'json_search_company' ) );
-		add_action( 'wp_ajax_company_listings_json_company_data',       array( $this, 'json_company_data' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_get_companies', array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_company_listings_get_companies', array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_json_search_company', array( $this, 'json_search_company' ) );
+		add_action( 'wp_ajax_company_listings_json_search_company', array( $this, 'json_search_company' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_json_company_data', array( $this, 'json_company_data' ) );
+		add_action( 'wp_ajax_company_listings_json_company_data', array( $this, 'json_company_data' ) );
 	}
 
 	/**

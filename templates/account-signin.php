@@ -39,7 +39,7 @@
 			<fieldset>
 				<label><?php _e( 'Username', 'wp-job-manager-company-listings' ); ?> <?php echo apply_filters( 'submit_company_form_required_label', ( ! $account_required ) ? ' <small>' . __( '(optional)', 'wp-job-manager' ) . '</small>' : '' ); ?></label>
 				<div class="field">
-					<input type="text" class="input-text" name="create_account_username" id="account_username" value="<?php if ( ! empty( $_POST['create_account_username'] ) ) echo sanitize_text_field( stripslashes( $_POST['create_account_username'] ) ); ?>" />
+					<input type="text" class="input-text" name="create_account_username" id="account_username" value="<?php if ( ! empty( $_POST['create_account_username'] ) ) echo sanitize_text_field( stripslashes( $_POST['create_account_username'] ) ); ?>" required />
 				</div>
 			</fieldset>
 		<?php endif; ?>
