@@ -588,4 +588,3 @@ function jmcl_get_company_jobs_counts( $company_id ) {
 	$query = $wpdb->prepare("SELECT count(m.post_id) FROM $wpdb->postmeta m INNER JOIN $wpdb->posts p ON m.post_id = p.ID WHERE m.meta_key = %s AND m.meta_value = %s AND post_status='publish'", '_company_id', $company_id );
 	return $wpdb->get_var( $query );
 }
-

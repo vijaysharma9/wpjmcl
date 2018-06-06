@@ -35,9 +35,9 @@ module.exports = function( grunt ){
 			minify: {
 				expand: true,
 				cwd: '<%= dirs.css %>/',
-				src: ['*.css'],
+				src: ['*.css', '!*.min.css'],
 				dest: '<%= dirs.css %>/',
-				ext: '.css'
+				ext: '.min.css'
 			}
 		},
 
@@ -114,6 +114,7 @@ module.exports = function( grunt ){
 
 	// Register tasks
 	grunt.registerTask( 'default', [
+		'watch',
 		'less',
 		'cssmin',
 		'uglify'

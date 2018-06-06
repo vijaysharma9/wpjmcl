@@ -56,18 +56,18 @@ class WP_Job_Manager_Company_Listings_Admin {
 
 		$jquery_version = isset( $wp_scripts->registered['jquery-ui-core']->ver ) ? $wp_scripts->registered['jquery-ui-core']->ver : '1.9.2';
 
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		/** STYLE ******************************************************************************/
-		wp_enqueue_style('select2-style', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2.css', array(), '3.5.4');
+		wp_enqueue_style( 'select2-style', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2' . $suffix . '.css', array(), '4.0.5' );
 		wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/' . $jquery_version . '/themes/smoothness/jquery-ui.css' );
-		wp_enqueue_style( 'company_listings_admin_css', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/admin.css' );
-		wp_enqueue_style( 'job-edit-style', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/job-edit.css' );
+		wp_enqueue_style( 'company_listings_admin_css', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/admin' . $suffix . '.css' );
 
 		/** SCRIPTS ******************************************************************************/
-		wp_enqueue_script('select2-script', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2.min.js', array(), '3.5.4');
-		wp_register_script( 'jquery-tiptip', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/jquery-tiptip/jquery.tipTip.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_enqueue_script( 'company_listings_admin_js', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/admin.min.js', array( 'jquery', 'jquery-tiptip', 'jquery-ui-datepicker', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
-		wp_enqueue_script( 'job-edit-script', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/job-edit.js', array( 'jquery'  ), COMPANY_LISTINGS_VERSION, true );
+		wp_enqueue_script( 'select2-script', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2' . $suffix . '.js', array(), '4.0.5' );
+		wp_register_script( 'jquery-tiptip', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/jquery-tiptip/jquery.tipTip' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_enqueue_script( 'company_listings_admin_js', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/admin' . $suffix . '.js', array( 'jquery', 'jquery-tiptip', 'jquery-ui-datepicker', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
+		wp_enqueue_script( 'job-edit-script', COMPANY_LISTINGS_PLUGIN_URL. '/assets/js/job-edit' . $suffix . '.js', array( 'jquery'  ), COMPANY_LISTINGS_VERSION, true );
 	}
 
 	/**

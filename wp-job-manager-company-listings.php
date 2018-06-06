@@ -161,20 +161,21 @@ class WP_Job_Manager_Company_Listings {
 
 		/*-- REGISTER SCRIPTS AND STYLES ------------------------------------------------*/
 
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 		/**  STYLES ***/
-		wp_register_style( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2.css', array(), '3.5.4');
+		wp_register_style( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2' . $suffix . '.css', array(), '4.0.5');
 		wp_register_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend.css' );
-		wp_register_style( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/job-edit.min.css' );
 
 		/** SCRIPTS *******************************************/
-		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/ajax-filters.min.js', $ajax_filter_deps, COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-dashboard', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-dashboard.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-submission', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-submission.min.js', array( 'jquery', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-contact-details', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/contact-details.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-directory', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-directory.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/job-edit.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-main', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/wp-job-manager-company-listings.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/ajax-filters' . $suffix . '.js', $ajax_filter_deps, COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-dashboard', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-dashboard' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-submission', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-submission' . $suffix . '.js', array( 'jquery', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-contact-details', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/contact-details' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-directory', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-directory' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2.full' . $suffix . '.js', array( 'jquery' ), '4.0.5', true );
+		wp_register_script( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/job-edit' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-main', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/wp-job-manager-company-listings' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 
 		/*-- ENQUEUE SCRIPTS AND STYLES ------------------------------------------------*/
 

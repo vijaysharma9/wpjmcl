@@ -74,7 +74,8 @@ class WP_Job_Manager_Company_Listings_Setup {
 	 * Enqueue scripts for setup page
 	 */
 	public function admin_enqueue_scripts() {
-		wp_enqueue_style( 'company_listings_setup_css', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/setup.css', array( 'dashicons' ) );
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		wp_enqueue_style( 'company_listings_setup_css', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/setup' . $suffix . '.css', array( 'dashicons' ) );
 	}
 
 	/**
