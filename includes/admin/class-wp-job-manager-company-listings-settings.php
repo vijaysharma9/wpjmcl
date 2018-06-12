@@ -177,14 +177,6 @@ class WP_Job_Manager_Company_Listings_Settings {
 						    'type'        => 'input'
 						),
 						array(
-							'name'       => 'company_listings_autohide',
-							'std'        => '',
-							'label'      => __( 'Auto-hide Companies', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'How many <strong>days</strong> un-modified companies should be published before being hidden. Can be left blank to never hide companies automaticaly. Companies can re-publish hidden companies form their dashboard.', 'wp-job-manager-company-listings' ),
-							'attributes' => array(),
-							'placeholder' => __( 'Never auto-hide', 'wp-job-manager-company-listings' )
-						),
-						array(
 							'name'        => 'company_listings_submission_limit',
 							'std'         => '',
 							'label'       => __( 'Listing Limit', 'wp-job-manager-company-listings' ),

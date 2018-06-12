@@ -15,7 +15,6 @@ $options = array(
 	'company_listings_enable_application',
 	'company_listings_force_company',
 	'company_listings_force_application',
-	'company_listings_autohide',
 	'company_listings_user_requires_account',
 	'company_listings_enable_registration',
 	'company_listings_registration_role',

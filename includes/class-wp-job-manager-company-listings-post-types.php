@@ -24,14 +24,6 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 
 		add_action( 'company_listings_contact_details', array( $this, 'contact_details_email' ) );
 
-		add_action( 'pending_to_publish', array( $this, 'setup_autohide_cron' ) );
-		add_action( 'preview_to_publish', array( $this, 'setup_autohide_cron' ) );
-		add_action( 'draft_to_publish', array( $this, 'setup_autohide_cron' ) );
-		add_action( 'auto-draft_to_publish', array( $this, 'setup_autohide_cron' ) );
-		add_action( 'hidden_to_publish', array( $this, 'setup_autohide_cron' ) );
-		add_action( 'save_post', array( $this, 'setup_autohide_cron' ) );
-		add_action( 'auto-hide-company', array( $this, 'hide_company' ) );
-
 		add_action( 'update_post_meta', array( $this, 'maybe_update_menu_order' ), 10, 4 );
 		add_filter( 'wp_insert_post_data', array( $this, 'fix_post_name' ), 10, 2 );
 
@@ -469,41 +461,6 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 		$subject = sprintf( __( 'Contact via the company for "%s" on %s', 'wp-job-manager-company-listings' ), single_post_title( '', false ), home_url() );
 
 		get_job_manager_template( 'contact-details-email.php', array( 'email' => $email, 'subject' => $subject ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
-	}
-
-	/**
-	 * Setup event to hide a company after X days
-	 * @param  object $post
-	 */
-	public function setup_autohide_cron( $post ) {
-		if ( ! is_object( $post ) ) {
-			$post = get_post( $post );
-		}
-		if ( $post->post_type !== 'company_listings' ) {
-			return;
-		}
-
-		add_post_meta( $post->ID, '_featured', 0, true );
-		wp_clear_scheduled_hook( 'auto-hide-company', array( $post->ID ) );
-
-		$company_listings_autohide = get_option( 'company_listings_autohide' );
-
-		if ( $company_listings_autohide ) {
-			wp_schedule_single_event( strtotime( "+{$company_listings_autohide} day" ), 'auto-hide-company', array( $post->ID ) );
-		}
-	}
-
-	/**
-	 * Hide a company
-	 * @param  int
-	 */
-	public function hide_company( $company_id ) {
-		$company = get_post( $company_id );
-		if ( $company->post_status === 'publish' ) {
-			$update_company = array( 'ID' => $company_id, 'post_status' => 'hidden' );
-			wp_update_post( $update_company );
-			wp_clear_scheduled_hook( 'auto-hide-company', array( $company_id ) );
-		}
 	}
 
 	/**
