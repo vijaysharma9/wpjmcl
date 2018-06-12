@@ -165,7 +165,7 @@ class WP_Job_Manager_Company_Listings {
 
 		/**  STYLES ***/
 		wp_register_style( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2' . $suffix . '.css', array(), '4.0.5');
-		wp_register_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend.css' );
+		wp_register_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend' . $suffix . '.css' );
 
 		/** SCRIPTS *******************************************/
 		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/ajax-filters' . $suffix . '.js', $ajax_filter_deps, COMPANY_LISTINGS_VERSION, true );
