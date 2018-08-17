@@ -74,15 +74,6 @@ $submit_company_form_page_id = get_option( 'company_listings_submit_company_form
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</tbody>
-		<?php if ( $submit_company_form_page_id && ( company_listings_count_user_companies() < $submission_limit || ! $submission_limit ) ) : ?>
-			<tfoot>
-				<tr>
-					<td colspan="<?php echo sizeof( $company_dashboard_columns ); ?>">
-						<a href="<?php echo esc_url( get_permalink( $submit_company_form_page_id ) ); ?>"><?php _e( 'Add Company', 'wp-job-manager-company-listings' ); ?></a>
-					</td>
-				</tr>
-			</tfoot>
-		<?php endif; ?>
 	</table>
 	<?php get_job_manager_template( 'pagination.php', array( 'max_num_pages' => $max_num_pages ) ); ?>
 </div>
