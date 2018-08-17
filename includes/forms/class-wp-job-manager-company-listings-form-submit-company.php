@@ -517,6 +517,20 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			$this->fields = apply_filters( 'submit_company_form_fields_get_user_data', $this->fields, get_current_user_id() );
 		}
 
+		if ( isset( $_POST['submit_company'] ) ) {
+			if ( isset( $_POST['company_name'] ) ) {
+			    $value = $_POST['company_name'];
+
+			    $company_id = $company_name = $value;
+			    $submitted_fields = $this->fields;
+
+			    $submitted_fields['company_fields']['company_name']['company_id'] = $company_id;
+			    $submitted_fields['company_fields']['company_name']['company_name'] = $company_name;
+			}
+
+		    $this->fields = apply_filters( 'submit_new_company_set_form_fields', $submitted_fields, $this->fields );
+		}
+
 		get_job_manager_template( 'company_listings-submit.php', array(
 			'class'              => $this,
 			'form'               => $this->form_name,
