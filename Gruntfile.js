@@ -101,7 +101,16 @@ module.exports = function( grunt ){
 					]
 				}
 			}
-		}
+		},
+
+		// Generate README.md
+		wp_readme_to_markdown: {
+			wpjmsq: {
+				files: {
+					'README.md': 'readme.txt'
+				},
+			},
+		},
 
 	});
 
@@ -111,6 +120,7 @@ module.exports = function( grunt ){
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
+	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
 
 	// Register tasks
 	grunt.registerTask( 'default', [
@@ -127,6 +137,11 @@ module.exports = function( grunt ){
 
 	grunt.registerTask( 'dev', [
 		'default'
+	]);
+
+	// Just an alias to generate README.md file
+	grunt.registerTask( 'generatereadme', [
+		'wp_readme_to_markdown'
 	]);
 
 };
