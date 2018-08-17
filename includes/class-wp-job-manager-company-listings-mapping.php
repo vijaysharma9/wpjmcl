@@ -131,6 +131,7 @@ class WP_Job_Manager_Company_Listings_Mapping {
             } else {
                 $company_data['post_title'] = $company->post_title;
                 $company_data['ID'] = $company->ID;
+                $company_data['post_date'] = $company->post_date;
             }
 
             $company_id = wp_insert_post( $company_data );

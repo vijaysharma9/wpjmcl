@@ -8,7 +8,7 @@ jq( function() {
     if (jq('#company_id').length) {
         $elmCmpText = jq('#company_id');
     } else if (jq('#company_name').length) {
-        $elmCmpText = '';
+        $elmCmpText = jq('#company_name');
     }
 
     if ($elmCmpText) {
@@ -89,7 +89,7 @@ jq( function() {
                         if (response.logo_backend) jq('#postimagediv .inside').html(response.logo_backend);
                         if (response.logo_frontend) jq('.job-manager-uploaded-files').html(response.logo_frontend);
                     },
-                    cache: true
+                    cache: true,
                 });
 
             } else {
@@ -99,7 +99,7 @@ jq( function() {
                 elmCmpnyTagline.val('');
                 elmCmpnyTwiiter.val('');
                 elmCmpnyVideo.val('');
-                jq('#_job_group_id').val('')
+                jq('#_job_group_id').val('');
 
                 jq('#postimagediv .inside').html('');
                 jq('.job-manager-uploaded-files').html('');

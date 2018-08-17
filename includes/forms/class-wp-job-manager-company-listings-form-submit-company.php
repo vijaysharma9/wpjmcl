@@ -123,7 +123,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			'company_fields' => array(
 				'company_name' => array(
 					'label'       => __( 'Company name', 'wp-job-manager-company-listings' ),
-					'type'        => 'text',
+					'type'        => 'select-company',
 					'required'    => true,
 					'placeholder' => __( 'Company name', 'wp-job-manager-company-listings' ),
 					'priority'    => 1
