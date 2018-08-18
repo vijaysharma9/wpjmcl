@@ -32,7 +32,7 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 			$this->company_id = 0;
 		}
 
-		//set company name
+		// set company name
 		add_action( 'submit_company_form_fields_get_company_data', array( $this, 'set_company_name' ), 10, 2 );
 	}
 
@@ -64,6 +64,7 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 				if ( ! isset( $this->fields[ $group_key ][ $key ]['value'] ) ) {
 					if ( 'company_name' === $key ) {
 						$this->fields[ $group_key ][ $key ]['value'] = $company->post_title;
+						$this->fields[ $group_key ][ $key ]['option_value'] = 'post_title';
 
 					} elseif ( 'company_content' === $key ) {
 						$this->fields[ $group_key ][ $key ]['value'] = $company->post_content;
@@ -138,23 +139,14 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 	        foreach ( $fields as $group_key => $group_fields ) {
 	            foreach ( $group_fields as $key => $field ) {
 	                if ( $field['type'] === 'select-company' ) {
+						$value = $company->post_title;
+
 	                    if ( isset( $_POST[ $key ] ) ) {
 	                        $value = $_POST[ $key ];
-	                    } elseif ( $company ) {
-	                        $value = $company->ID;
 	                    }
 
-	                    $company_id = $company_name = $value;
-
-	                    if ( $company = get_post( intval( $value ) ) ) {
-	                        if ( $company->post_type === 'company_listings' ) {
-	                            $company_id = $value;
-	                            $company_name = $company->post_title;
-	                        }
-	                    }
-
-	                    $fields[ $group_key ][ $key ]['company_id'] = $company_id;
-	                    $fields[ $group_key ][ $key ]['company_name'] = $company_name;
+	                    $fields[ $group_key ][ $key ]['company_id'] = $value;
+	                    $fields[ $group_key ][ $key ]['company_name'] = $value;
 	                }
 	            }
 	        }

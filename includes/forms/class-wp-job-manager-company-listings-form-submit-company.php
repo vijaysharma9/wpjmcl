@@ -466,49 +466,16 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 
 		$this->init_fields();
 
-		// Load data if neccessary
-		if ( $this->company_id ) {
-			$company = get_post( $this->company_id );
-			foreach ( $this->fields as $group_key => $fields ) {
-				foreach ( $fields as $key => $field ) {
-					switch ( $key ) {
-						case 'company_name' :
-							$this->fields[ $group_key ][ $key ]['value'] = $company->post_title;
-						break;
-						case 'company_content' :
-							$this->fields[ $group_key ][ $key ]['value'] = $company->post_content;
-						break;
-						case 'company_skills' :
-							$this->fields[ $group_key ][ $key ]['value'] = implode( ', ', wp_get_object_terms( $company->ID, 'company_skill', array( 'fields' => 'names' ) ) );
-						break;
-						case 'company_category' :
-							$this->fields[ $group_key ][ $key ]['value'] = wp_get_object_terms( $company->ID, 'company_category', array( 'fields' => 'ids' ) );
-						break;
-						default:
-							$this->fields[ $group_key ][ $key ]['value'] = get_post_meta( $company->ID, '_' . $key, true );
-						break;
-					}
-				}
-			}
-			$this->fields = apply_filters( 'submit_company_form_fields_get_company_data', $this->fields, $company );
-
-		// Get user meta
-		} elseif ( is_user_logged_in() && empty( $_POST['submit_company'] ) ) {
+		if ( is_user_logged_in() && empty( $_POST['submit_company'] ) ) {
 			$user = wp_get_current_user();
 			foreach ( $this->fields as $group_key => $fields ) {
 				foreach ( $fields as $key => $field ) {
 					switch ( $key ) {
 						case 'company_name' :
-							if ($user->first_name || $user->last_name) {
-								$placeholder_company_name = $user->first_name . ' ' . $user->last_name;
-							} else {
-								$placeholder_company_name = $user->display_name;
-							}
-
-							$this->fields[ $group_key ][ $key ]['value'] = $placeholder_company_name;
+						$this->fields[ $group_key ][ $key ]['option_value'] = 'post_title';
 						break;
 						case 'company_email' :
-							$this->fields[ $group_key ][ $key ]['value'] = $user->user_email;
+						$this->fields[ $group_key ][ $key ]['value'] = $user->user_email;
 						break;
 					}
 				}

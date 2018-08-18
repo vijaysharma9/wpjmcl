@@ -5,12 +5,14 @@ if ( typeof jq == "undefined" ) {
 jq( function() {
     var $elmCmpText;
     var updateFields = true;
+    var optionValue = 'id';
 
     if (jq('#company_id').length) {
         $elmCmpText = jq('#company_id');
     } else if (jq('#company_name').length) {
         $elmCmpText = jq('#company_name');
         updateFields = false;
+        optionValue = $elmCmpText.attr('data-option-value');
     }
 
     if ($elmCmpText) {
@@ -30,6 +32,7 @@ jq( function() {
                 data: function(params) {
                     return {
                         term: params.term,
+                        option_value: optionValue,
                         action: 'company_listings_json_search_company',
                     };
                 },

@@ -134,6 +134,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 	 */
 	public function json_search_company() {
 		$term = isset( $_POST['term'] ) ? $_POST['term'] : '';
+		$option_value = isset( $_POST['option_value'] ) ? $_POST['option_value'] : '';
 		$companies = array();
 
 		if ( $term ) {
@@ -149,7 +150,7 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			if ( $posts ) {
 				foreach ($posts as $post) {
 					$companies[] = array(
-						'id'   => $post->ID,
+						'id'   => $option_value == 'post_title' ? $post->post_title : $post->ID,
 						'text' => $post->post_title,
 					);
 				}
