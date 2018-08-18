@@ -747,8 +747,11 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					$attachment_id = is_numeric( $values[ $group_key ][ $key ] ) ? absint( $values[ $group_key ][ $key ] ) : $this->create_attachment( $values[ $group_key ][ $key ] );
 					if ( empty( $attachment_id ) ) {
 						delete_post_thumbnail( $this->company_id );
+						delete_post_meta( $this->company_id, '_company_logo' );
 					} else {
 						set_post_thumbnail( $this->company_id, $attachment_id );
+						$company_logo_path = wp_get_attachment_url( $attachment_id );
+						update_post_meta( $this->company_id, '_company_logo', $company_logo_path );
 					}
 
 					// Save meta data.
