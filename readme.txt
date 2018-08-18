@@ -3,7 +3,7 @@ Contributors: WPdrift, upnrunn, kishores, shamimmoeen
 Tags: wp-job-manager, wp-job-manager-company, wp-job-manager-company-listings, company-listings
 Requires at least: 4.4
 Tested up to: 4.9.8
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 5.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -69,6 +69,25 @@ The manual installation method involves downloading the plugin and uploading it 
 
 == Changelog ==
 
+improve the company submission system
+
+= 1.0.2 =
+* Update readme.txt and added README.md files
+* Improve the company submission system
+* Fix company featured image attach issue
+* Turn the company name field into searchable field
+* Remove 'Add Company' link from the company listings table
+* Fix localization issue and updated pot file
+* Remove company autohide features
+* Load minimized version of frontend.css if SCRIPT_DEBUG is enabled
+* Update select2 plugin
+* Make username field required
+* Fix issues on plugin settings page
+* Fix wrong constant name issue
+* Add missing jquery-tiptip library
+* Remove company expire related functionality
+* Generate unique slug for company when creating company
+
 = 1.0.1 =
 * New - Ability to bookmark company when WP Job Manager - Bookmarks plugin is enabled.
 * Fix - Installer fail to run on the new install.
@@ -78,3 +97,20 @@ The manual installation method involves downloading the plugin and uploading it 
 * First release.
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+* Update readme.txt and added README.md files
+* Improve the company submission system
+* Fix company featured image attach issue
+* Turn the company name field into searchable field
+* Remove 'Add Company' link from the company listings table
+* Fix localization issue and updated pot file
+* Remove company autohide features
+* Load minimized version of frontend.css if SCRIPT_DEBUG is enabled
+* Update select2 plugin
+* Make username field required
+* Fix issues on plugin settings page
+* Fix wrong constant name issue
+* Add missing jquery-tiptip library
+* Remove company expire related functionality
+* Generate unique slug for company when creating company
