@@ -11,10 +11,12 @@ class WP_Job_Manager_Company_Listings_Ajax {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_nopriv_company_listings_get_companies', 	array( $this, 'get_companies' ) );
-		add_action( 'wp_ajax_company_listings_get_companies', 			array( $this, 'get_companies' ) );
-		add_action( 'wp_ajax_company_listings_json_search_company',     array( $this, 'json_search_company' ) );
-		add_action( 'wp_ajax_company_listings_json_company_data',       array( $this, 'json_company_data' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_get_companies', array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_company_listings_get_companies', array( $this, 'get_companies' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_json_search_company', array( $this, 'json_search_company' ) );
+		add_action( 'wp_ajax_company_listings_json_search_company', array( $this, 'json_search_company' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_json_company_data', array( $this, 'json_company_data' ) );
+		add_action( 'wp_ajax_company_listings_json_company_data', array( $this, 'json_company_data' ) );
 	}
 
 	/**
@@ -131,34 +133,32 @@ class WP_Job_Manager_Company_Listings_Ajax {
 	 * Search for company and return json.
 	 */
 	public function json_search_company() {
-		ob_start();
+		$term = isset( $_POST['term'] ) ? $_POST['term'] : '';
+		$option_value = isset( $_POST['option_value'] ) ? $_POST['option_value'] : '';
+		$companies = array();
 
-		$term    = stripslashes( $_GET['term'] );
+		if ( $term ) {
+			$args = apply_filters( 'search_company_listings_args', array(
+				'post_type'      => 'company_listings',
+				'post_status'    => 'publish' ,
+				'posts_per_page' => -1,
+				's'              => $term,
+			) );
 
-		if ( empty( $term ) ) {
-			die();
-		}
+			$posts = get_posts( $args );
 
-		$query = new WP_Query( array( 's' => $term, 'post_type' => 'company_listings', 'post_status' => 'publish' ) );
-
-		if ( $query->have_posts() ) {
-			// The Loop
-			$companies = array();
-
-			while ($query->have_posts()) {
-
-				$query->the_post();
-
-				$company_id = $query->post->ID;
-				$companies[$company_id] = array(
-					'title'     => $query->post->post_title
-				);
+			if ( $posts ) {
+				foreach ($posts as $post) {
+					$companies[] = array(
+						'id'   => $option_value == 'post_title' ? $post->post_title : $post->ID,
+						'text' => $post->post_title,
+					);
+				}
 			}
-
-			wp_send_json( apply_filters( 'json_search_company', $companies ) );
 		}
 
-		die();
+		echo json_encode( $companies );
+		exit;
 	}
 
 	/**

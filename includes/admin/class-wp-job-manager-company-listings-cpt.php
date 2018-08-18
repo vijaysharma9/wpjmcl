@@ -241,11 +241,10 @@ class WP_Job_Manager_Company_Listings_CPT {
 
 		unset( $columns['title'], $columns['date'] );
 
-		$columns['company_listings']          = __( 'Company', 'wp-job-manager-company-listings' );
+		$columns['company_listings'] = __( 'Company', 'wp-job-manager-company-listings' );
 		$columns["company_location"] = __( "Location", 'wp-job-manager-company-listings' );
 		$columns['company_status']   = '<span class="tips" data-tip="' . __( "Status", 'wp-job-manager-company-listings' ) . '">' . __( "Status", 'wp-job-manager-company-listings' ) . '</span>';
 		$columns["company_posted"]   = __( "Posted", 'wp-job-manager-company-listings' );
-		$columns["company_expires"]  = __( "Expires", 'wp-job-manager-company-listings' );
 
 		if ( get_option( 'company_listings_enable_skills' ) ) {
 			$columns["company_skills"] = __( "Skills", 'wp-job-manager-company-listings' );
@@ -268,10 +267,9 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 */
 	public function sortable_columns( $columns ) {
 		$custom = array(
-			'company_posted'      => 'date',
-			'company_listings'          => 'title',
+			'company_posted'   => 'date',
+			'company_listings' => 'title',
 			'company_location' => 'company_location',
-			'company_expires'     => 'company_expires'
 		);
 		return wp_parse_args( $custom, $columns );
 	}
@@ -334,12 +332,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 	 */
 	public function sort_columns( $vars ) {
 		if ( isset( $vars['orderby'] ) ) {
-			if ( 'company_expires' === $vars['orderby'] ) {
-				$vars = array_merge( $vars, array(
-					'meta_key' 	=> '_company_expires',
-					'orderby' 	=> 'meta_value'
-				) );
-			} elseif ( 'company_location' === $vars['orderby'] ) {
+			if ( 'company_location' === $vars['orderby'] ) {
 				$vars = array_merge( $vars, array(
 					'meta_key' 	=> '_company_location',
 					'orderby' 	=> 'meta_value'
@@ -376,13 +369,6 @@ class WP_Job_Manager_Company_Listings_CPT {
 			case "company_posted" :
 				echo '<strong>' . date_i18n( __( 'M j, Y', 'wp-job-manager-company-listings' ), strtotime( $post->post_date ) ) . '</strong><span>';
 				echo ( empty( $post->post_author ) ? __( 'by a guest', 'wp-job-manager-company-listings' ) : sprintf( __( 'by %s', 'wp-job-manager-company-listings' ), '<a href="' . get_edit_user_link( $post->post_author ) . '">' . get_the_author() . '</a>' ) ) . '</span>';
-			break;
-			case "company_expires" :
-				if ( $post->_company_expires ) {
-					echo '<strong>' . date_i18n( __( 'M j, Y', 'wp-job-manager-company-listings' ), strtotime( $post->_company_expires ) ) . '</strong>';
-				} else {
-					echo '&ndash;';
-				}
 			break;
 			case "featured_company" :
 				if ( is_company_featured( $post ) ) echo '&#10004;'; else echo '&ndash;';

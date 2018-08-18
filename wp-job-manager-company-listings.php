@@ -3,13 +3,13 @@
 Plugin Name: WP Job Manager - Company Listings
 Plugin URI: http://wpdrift.com/wp-job-manager-company-listings/
 Description: Outputs a list of all companies that have submitted jobs with links to their listings and profile.
-Version: 1.0.1
-Author: WPDrift
+Version: 1.0.2
+Author: WPdrift
 Author URI: http://wpdrift.com
-Requires at least: 4.1
-Tested up to: 4.9.1
+Requires at least: 4.4
+Tested up to: 4.9.8
 
-Copyright: 2017 WPDrift
+Copyright: 2017 WPdrift
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -29,7 +29,7 @@ class WP_Job_Manager_Company_Listings {
 	 */
 	public function __construct () {
 		// Define constants
-		define( 'COMPANY_LISTINGS_VERSION', '1.0.1' );
+		define( 'COMPANY_LISTINGS_VERSION', '1.0.2' );
 		define( 'COMPANY_LISTINGS_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 		define( 'COMPANY_LISTINGS_PLUGIN_FILE',  __FILE__  );
 		define( 'COMPANY_LISTINGS_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
@@ -47,12 +47,10 @@ class WP_Job_Manager_Company_Listings {
 		include( 'includes/class-wp-job-manager-company-listings-shortcodes.php' );
 		include( 'includes/class-wp-job-manager-company-listings-geocode.php' );
 		include( 'includes/class-wp-job-manager-company-listings-email-notification.php' );
-		include( 'includes/class-wp-job-manager-company-listings-apply.php' );
 		include( 'includes/class-wp-job-manager-company-listings-bookmarks.php' );
 		include( 'includes/class-wp-job-manager-company-listings-mapping.php' );
 
 		// Init classes
-		$this->apply      = new WP_Job_Manager_Company_Listings_Apply();
 		$this->forms      = new WP_Job_Manager_Company_Listings_Forms();
 		$this->post_types = new WP_Job_Manager_Company_Listings_Post_Types();
 
@@ -81,9 +79,9 @@ class WP_Job_Manager_Company_Listings {
 	public function version_check() {
 		$required_jm_version      = '1.22.0';
 		if ( ! defined( 'JOB_MANAGER_VERSION' ) ) {
-			?><div class="error"><p><?php _e( 'Company Manager requires WP Job Manager to be installed!', 'wp-job-manager-applications' ); ?></p></div><?php
+			?><div class="error"><p><?php _e( 'Company Manager requires WP Job Manager to be installed!', 'wp-job-manager-company-listings' ); ?></p></div><?php
 		} elseif ( version_compare( JOB_MANAGER_VERSION, $required_jm_version, '<' ) ) {
-			?><div class="error"><p><?php printf( __( 'Company Manager requires WP Job Manager %s (you are using %s)', 'wp-job-manager-applications' ), $required_jm_version, JOB_MANAGER_VERSION ); ?></p></div><?php
+			?><div class="error"><p><?php printf( __( 'Company Manager requires WP Job Manager %s (you are using %s)', 'wp-job-manager-company-listings' ), $required_jm_version, JOB_MANAGER_VERSION ); ?></p></div><?php
 		}
 	}
 
@@ -163,20 +161,21 @@ class WP_Job_Manager_Company_Listings {
 
 		/*-- REGISTER SCRIPTS AND STYLES ------------------------------------------------*/
 
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 		/**  STYLES ***/
-		wp_register_style( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2.css', array(), '3.5.4');
-		wp_register_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend.css' );
-		wp_register_style( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/job-edit.min.css' );
+		wp_register_style( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2' . $suffix . '.css', array(), '4.0.5');
+		wp_register_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend' . $suffix . '.css' );
 
 		/** SCRIPTS *******************************************/
-		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/ajax-filters.min.js', $ajax_filter_deps, COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-dashboard', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-dashboard.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-submission', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-submission.min.js', array( 'jquery', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-contact-details', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/contact-details.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-company-directory', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-directory.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/job-edit.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
-		wp_register_script( 'wp-job-manager-company-listings-main', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/wp-job-manager-company-listings.min.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-ajax-filters', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/ajax-filters' . $suffix . '.js', $ajax_filter_deps, COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-dashboard', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-dashboard' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-submission', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-submission' . $suffix . '.js', array( 'jquery', 'jquery-ui-sortable' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-contact-details', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/contact-details' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-company-directory', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/company-directory' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/select2/select2.full' . $suffix . '.js', array( 'jquery' ), '4.0.5', true );
+		wp_register_script( 'wp-job-manager-company-listings-job-edit', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/job-edit' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
+		wp_register_script( 'wp-job-manager-company-listings-main', COMPANY_LISTINGS_PLUGIN_URL . '/assets/js/wp-job-manager-company-listings' . $suffix . '.js', array( 'jquery' ), COMPANY_LISTINGS_VERSION, true );
 
 		/*-- ENQUEUE SCRIPTS AND STYLES ------------------------------------------------*/
 

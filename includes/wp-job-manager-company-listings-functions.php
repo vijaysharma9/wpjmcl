@@ -467,10 +467,6 @@ function company_listings_user_can_view_company( $company_id ) {
 		}
 	}
 
-	if ( $company->post_status === 'expired' ) {
-		$can_view = false;
-	}
-
 	if ( $company->post_author > 0 && $company->post_author == get_current_user_id() ) {
 		$can_view = true;
 	}
@@ -523,7 +519,6 @@ if ( ! function_exists( 'get_company_post_statuses' ) ) :
 function get_company_post_statuses() {
 	return apply_filters( 'company_post_statuses', array(
 		'draft'           => _x( 'Draft', 'post status', 'wp-job-manager-company-listings' ),
-		'expired'         => _x( 'Expired', 'post status', 'wp-job-manager-company-listings' ),
 		'hidden'          => _x( 'Hidden', 'post status', 'wp-job-manager-company-listings' ),
 		'preview'         => _x( 'Preview', 'post status', 'wp-job-manager-company-listings' ),
 		'pending'         => _x( 'Pending approval', 'post status', 'wp-job-manager-company-listings' ),
@@ -545,7 +540,7 @@ function company_listings_count_user_companies( $user_id = 0 ) {
 		$user_id = get_current_user_id();
 	}
 
-	return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'company_listings' AND post_status IN ( 'publish', 'pending', 'expired', 'hidden' );", $user_id ) );
+	return $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_author = %d AND post_type = 'company_listings' AND post_status IN ( 'publish', 'pending', 'hidden' );", $user_id ) );
 }
 
 /**
@@ -593,4 +588,3 @@ function jmcl_get_company_jobs_counts( $company_id ) {
 	$query = $wpdb->prepare("SELECT count(m.post_id) FROM $wpdb->postmeta m INNER JOIN $wpdb->posts p ON m.post_id = p.ID WHERE m.meta_key = %s AND m.meta_value = %s AND post_status='publish'", '_company_id', $company_id );
 	return $wpdb->get_var( $query );
 }
-

@@ -8,28 +8,27 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WP_Job_Manager_Company_Listings_Settings {
 
-	private $settings 		 	= array();
-	private static $errors   	= array();
-	private static $messages 	= array();
-	private static $overrides 	= array();
+	/**
+	 * Our Settings.
+	 *
+	 * @var        array          Settings.
+	 */
+	private $settings = array();
 
 	/**
 	 * __construct function.
 	 *
-	 * @access public
-	 * @return void
+	 * @access     public
 	 */
 	public function __construct() {
 		$this->settings_group = 'wp-job-manager-company-listings';
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
-		add_action( 'admin_init', array( $this, 'save_settings' ) );
 	}
 
 	/**
 	 * init_settings function.
 	 *
-	 * @access protected
-	 * @return void
+	 * @access     protected
 	 */
 	protected function init_settings() {
 		// Prepare roles option
@@ -41,12 +40,6 @@ class WP_Job_Manager_Company_Listings_Settings {
 				continue;
 			}
 			$account_roles[ $key ] = $role['name'];
-		}
-
-		if ( 'valid' == get_option('jmcl_license_status') ) {
-			$license_desc = __( '<strong style="color: green;">Valid license</strong>, To deactivate license key, delete license key and click "Save Changes" button', 'wp-job-manager-company-listings' );
-		} else {
-			$license_desc = __( '<strong style="color: red";>Invalid license</strong>, Enter the license key from your purchase receipt.', 'wp-job-manager-company-listings');
 		}
 
 		$this->settings = apply_filters( 'company_listings_settings',
@@ -184,22 +177,6 @@ class WP_Job_Manager_Company_Listings_Settings {
 						    'type'        => 'input'
 						),
 						array(
-							'name'        => 'company_listings_submission_duration',
-							'std'         => '',
-							'label'       => __( 'Listing Duration', 'wp-job-manager-company-listings' ),
-							'desc'        => __( 'How many <strong>days</strong> listings are live before expiring. Can be left blank to never expire. Expired listings must be relisted to become visible.', 'wp-job-manager-company-listings' ),
-							'attributes'  => array(),
-							'placeholder' => __( 'Never expire', 'wp-job-manager-company-listings' )
-						),
-						array(
-							'name'       => 'company_listings_autohide',
-							'std'        => '',
-							'label'      => __( 'Auto-hide Companies', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'How many <strong>days</strong> un-modified companies should be published before being hidden. Can be left blank to never hide companies automaticaly. Companies can re-publish hidden companies form their dashboard.', 'wp-job-manager-company-listings' ),
-							'attributes' => array(),
-							'placeholder' => __( 'Never auto-hide', 'wp-job-manager-company-listings' )
-						),
-						array(
 							'name'        => 'company_listings_submission_limit',
 							'std'         => '',
 							'label'       => __( 'Listing Limit', 'wp-job-manager-company-listings' ),
@@ -291,32 +268,14 @@ class WP_Job_Manager_Company_Listings_Settings {
 						),
 					),
 				),
-				'license' => array(
-					__( 'License', 'wp-job-manager-company-listings' ),
-					array(
-						array(
-							'std' 		  => '',
-							'name'        => 'jmcl_license_key',
-							'label'       => __( 'License Key', 'wp-job-manager-company-listings' ),
-							'desc'        => $license_desc,
-							'attributes'  => array()
-						)
-					),
-				),
-
 			)
 		);
-
-		if ( ! class_exists( 'WP_Job_Manager_Applications' ) ) {
-			unset( $this->settings['company_application'][1][1] );
-		}
 	}
 
 	/**
 	 * register_settings function.
 	 *
-	 * @access public
-	 * @return void
+	 * @access     public
 	 */
 	public function register_settings() {
 		$this->init_settings();
@@ -331,36 +290,15 @@ class WP_Job_Manager_Company_Listings_Settings {
 	}
 
 	/**
-	 * save settings function.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function save_settings() {
-
-		if ( isset( $_POST['option_page']  ) && $_POST['option_page'] == 'wp-job-manager-company-listings' ) {
-
-			foreach ( $this->settings as $section ) {
-
-				foreach ( $section[1] as $option ) {
-					update_option( $option['name'], $_POST[$option['name']] );
-				}
-			}
-		}
-	}
-
-	/**
 	 * output function.
 	 *
-	 * @access public
-	 * @return void
+	 * @access     public
 	 */
 	public function output() {
 		$this->init_settings();
-
 		?>
 		<div class="wrap wp-job-manager-company-listings-settings-wrap">
-			<form method="post" action="">
+			<form class="wp-job-manager-company-listings-options" method="post" action="options.php">
 
 				<?php settings_fields( $this->settings_group ); ?>
 
@@ -373,9 +311,6 @@ class WP_Job_Manager_Company_Listings_Settings {
 				</h2>
 
 				<?php
-				//Show error, warning or submit status
-				self::show_messages();
-
 				if ( ! empty( $_GET['settings-updated'] ) ) {
 					flush_rewrite_rules();
 					echo '<div class="updated fade wp-job-manager-company-listings-updated"><p>' . __( 'Settings successfully saved', 'wp-job-manager-company-listings' ) . '</p></div>';
@@ -495,55 +430,33 @@ class WP_Job_Manager_Company_Listings_Settings {
 		</div>
 		<script type="text/javascript">
 			jQuery('.nav-tab-wrapper a').click(function() {
+				if ( '#' !== jQuery(this).attr( 'href' ).substr( 0, 1 ) ) {
+					return false;
+				}
 				jQuery('.settings_panel').hide();
 				jQuery('.nav-tab-active').removeClass('nav-tab-active');
 				jQuery( jQuery(this).attr('href') ).show();
 				jQuery(this).addClass('nav-tab-active');
+				window.location.hash = jQuery(this).attr('href');
+				jQuery( 'form.wp-job-manager-company-listings-options' ).attr( 'action', 'options.php' + jQuery(this).attr( 'href' ) );
 				return false;
 			});
-			jQuery('.nav-tab-wrapper a:first').click();
+			var goto_hash = window.location.hash;
+			if ( '#' === goto_hash.substr( 0, 1 ) ) {
+				jQuery( 'form.wp-job-manager-company-listings-options' ).attr( 'action', 'options.php' + jQuery(this).attr( 'href' ) );
+			}
+			if ( goto_hash ) {
+				var the_tab = jQuery( 'a[href="' + goto_hash + '"]' );
+				if ( the_tab.length > 0 ) {
+					the_tab.click();
+				} else {
+					jQuery( '.nav-tab-wrapper a:first' ).click();
+				}
+			} else {
+				jQuery( '.nav-tab-wrapper a:first' ).click();
+			}
 		</script>
 		<?php
-	}
-
-	/**
-	 * Add a message
-	 * @param string $text
-	 */
-	public static function add_message( $text ) {
-		self::$messages[] = $text;
-	}
-
-	/**
-	 * Add an override
-	 * @param string $text
-	 */
-	public static function add_override( $text ) {
-		self::$overrides[] = $text;
-	}
-
-	/**
-	 * Add an error
-	 * @param string $text
-	 */
-	public static function add_error( $text ) {
-		self::$errors[] = $text;
-	}
-
-	/**
-	 * Output messages + overrides + errors
-	 */
-	public static function show_messages() {
-		if ( sizeof( self::$errors ) > 0 ) {
-			foreach ( self::$errors as $error )
-				echo '<div id="message" class="error fade"><p><strong>' . esc_html( $error ) . '</strong></p></div>';
-		} elseif ( sizeof( self::$overrides ) > 0 ) {
-			foreach ( self::$overrides as $override )
-				echo '<div id="message" class="updated fade"><p><strong>' . esc_html( $override ) . '</strong></p></div>';
-		} elseif ( sizeof( self::$messages ) > 0 ) {
-			foreach ( self::$messages as $message )
-				echo '<div id="message" class="updated fade"><p><strong>' . esc_html( $message ) . '</strong></p></div>';
-		}
 	}
 
 }
