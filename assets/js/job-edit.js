@@ -94,7 +94,7 @@ jq( function() {
 
             } else {
 
-                elmCmpnyLocation.val('');
+                // elmCmpnyLocation.val(''); // Don't change the job location if trying to create new company
                 elmCmpnyWebsite.val('');
                 elmCmpnyTagline.val('');
                 elmCmpnyTwiiter.val('');

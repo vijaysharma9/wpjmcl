@@ -30,7 +30,6 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 */
 	public function __construct() {
 		add_action( 'wp', 									array( $this, 'process' ) );
-		add_action( 'company_listings_update_company_data', array( $this, 'process_company_logo' ), 10, 2 );
 
 		$this->steps  = (array) apply_filters( 'submit_company_steps', array(
 			'submit' => array(
@@ -612,17 +611,20 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	}
 
 	/**
-	 * Set the company logo/post thumbnail
+	 * Creates a file attachment.
 	 *
-	 * @param $company_id
-	 * @param $values
+	 * @param  string $attachment_url
+	 * @return int attachment id.
 	 */
-	public function process_company_logo( $company_id, $values ) {
+	protected function create_attachment( $attachment_url ) {
+		include_once ABSPATH . 'wp-admin/includes/image.php';
+		include_once ABSPATH . 'wp-admin/includes/media.php';
 
-		$logo_url = isset( $_POST['current_company_logo'] ) ? $_POST['current_company_logo'] : '';
+		$upload_dir     = wp_upload_dir();
+		$attachment_url = str_replace( array( $upload_dir['baseurl'], WP_CONTENT_URL, site_url( '/' ) ), array( $upload_dir['basedir'], WP_CONTENT_DIR, ABSPATH ), $attachment_url );
 
-		if ( ! $logo_url ) {
-			return;
+		if ( empty( $attachment_url ) || ! is_string( $attachment_url ) ) {
+			return 0;
 		}
 
 		$attachment = array(
@@ -630,17 +632,22 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			'post_content' => '',
 			'post_status'  => 'inherit',
 			'post_parent'  => $this->company_id,
-			'guid'         => $logo_url
+			'guid'         => $attachment_url,
 		);
 
-		if ( $info = wp_check_filetype( $logo_url ) ) {
+		$info = wp_check_filetype( $attachment_url );
+		if ( $info ) {
 			$attachment['post_mime_type'] = $info['type'];
 		}
 
-		$attachment_id = wp_insert_attachment( $attachment, $logo_url, $this->company_id );
+		$attachment_id = wp_insert_attachment( $attachment, $attachment_url, $this->company_id );
 
-		if ( ! empty( $attachment_id ) ) set_post_thumbnail( $this->company_id, $attachment_id );
+		if ( ! is_wp_error( $attachment_id ) ) {
+			wp_update_attachment_metadata( $attachment_id, wp_generate_attachment_metadata( $attachment_id, $attachment_url ) );
+			return $attachment_id;
+		}
 
+		return 0;
 	}
 
 	/**
@@ -735,21 +742,49 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 						wp_set_object_terms( $this->company_id, array( $values[ $group_key ][ $key ] ), $field['taxonomy'], false );
 					}
 
-				// Save meta data
+					// Save meta data
+				} elseif ( 'company_logo' === $key ) {
+					$attachment_id = is_numeric( $values[ $group_key ][ $key ] ) ? absint( $values[ $group_key ][ $key ] ) : $this->create_attachment( $values[ $group_key ][ $key ] );
+					if ( empty( $attachment_id ) ) {
+						delete_post_thumbnail( $this->company_id );
+					} else {
+						set_post_thumbnail( $this->company_id, $attachment_id );
+					}
+
+					// Save meta data.
 				} else {
 					update_post_meta( $this->company_id, '_' . $key, $values[ $group_key ][ $key ] );
-				}
 
-				// Handle attachments
-				if ( 'file' === $field['type'] ) {
-					// Must be absolute
-					if ( is_array( $values[ $group_key ][ $key ] ) ) {
-						foreach ( $values[ $group_key ][ $key ] as $file_url ) {
-							$maybe_attach[] = str_replace( array( WP_CONTENT_URL, site_url() ), array( WP_CONTENT_DIR, ABSPATH ), $file_url );
+					// Handle attachments.
+					if ( 'file' === $field['type'] ) {
+						if ( is_array( $values[ $group_key ][ $key ] ) ) {
+							foreach ( $values[ $group_key ][ $key ] as $file_url ) {
+								$maybe_attach[] = $file_url;
+							}
+						} else {
+							$maybe_attach[] = $values[ $group_key ][ $key ];
 						}
-					} else {
-						$maybe_attach[] = str_replace( array( WP_CONTENT_URL, site_url() ), array( WP_CONTENT_DIR, ABSPATH ), $values[ $group_key ][ $key ] );
 					}
+				}
+			}
+		}
+
+		$maybe_attach = array_filter( $maybe_attach );
+
+		// Handle attachments.
+		if ( count( $maybe_attach ) && apply_filters( 'company_listings_attach_uploaded_files', true ) ) {
+			// Get attachments.
+			$attachments     = get_posts( 'post_parent=' . $this->company_id . '&post_type=attachment&fields=ids&numberposts=-1' );
+			$attachment_urls = array();
+
+			// Loop attachments already attached to the job.
+			foreach ( $attachments as $attachment_id ) {
+				$attachment_urls[] = wp_get_attachment_url( $attachment_id );
+			}
+
+			foreach ( $maybe_attach as $attachment_url ) {
+				if ( ! in_array( $attachment_url, $attachment_urls, true ) ) {
+					$this->create_attachment( $attachment_url );
 				}
 			}
 		}
@@ -781,43 +816,6 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			}
 
 			wp_set_object_terms( $this->company_id, $tags, 'company_skill', false );
-		}
-
-		// Handle attachments
-		if ( sizeof( $maybe_attach ) && apply_filters( 'company_listings_attach_uploaded_files', false ) ) {
-			/** WordPress Administration Image API */
-			include_once( ABSPATH . 'wp-admin/includes/image.php' );
-
-			// Get attachments
-			$attachments     = get_posts( 'post_parent=' . $this->company_id . '&post_type=attachment&fields=ids&post_mime_type=image&numberposts=-1' );
-			$attachment_urls = array();
-
-			// Loop attachments already attached to the job
-			foreach ( $attachments as $attachment_key => $attachment ) {
-				$attachment_urls[] = str_replace( array( WP_CONTENT_URL, site_url() ), array( WP_CONTENT_DIR, ABSPATH ), wp_get_attachment_url( $attachment ) );
-			}
-
-			foreach ( $maybe_attach as $attachment_url ) {
-				if ( ! in_array( $attachment_url, $attachment_urls ) ) {
-					$attachment = array(
-						'post_title'   => get_the_title( $this->company_id ),
-						'post_content' => '',
-						'post_status'  => 'inherit',
-						'post_parent'  => $this->company_id,
-						'guid'         => $attachment_url
-					);
-
-					if ( $info = wp_check_filetype( $attachment_url ) ) {
-						$attachment['post_mime_type'] = $info['type'];
-					}
-
-					$attachment_id = wp_insert_attachment( $attachment, $attachment_url, $this->company_id );
-
-					if ( ! is_wp_error( $attachment_id ) ) {
-						wp_update_attachment_metadata( $attachment_id, wp_generate_attachment_metadata( $attachment_id, $attachment_url ) );
-					}
-				}
-			}
 		}
 
 		do_action( 'company_listings_update_company_data', $this->company_id, $values );

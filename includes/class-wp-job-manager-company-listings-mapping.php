@@ -152,7 +152,6 @@ class WP_Job_Manager_Company_Listings_Mapping {
                     if ( $thumbnail_id ) {
                         set_post_thumbnail( $company_id, $thumbnail_id );
                         $company_logo_path = wp_get_attachment_url( $thumbnail_id );
-                        update_post_meta( $company_id, '_company_logo', $company_logo_path );
                     }
                 }
 
