@@ -7,10 +7,10 @@ jq( function() {
     var updateFields = true;
     var optionValue = 'id';
 
-    if (jq('#company_id').length) {
-        $elmCmpText = jq('#company_id');
-    } else if (jq('#company_name').length) {
-        $elmCmpText = jq('#company_name');
+    if (jq('select#company_id').length) {
+        $elmCmpText = jq('select#company_id');
+    } else if (jq('select#company_name').length) {
+        $elmCmpText = jq('select#company_name');
         updateFields = false;
         optionValue = $elmCmpText.attr('data-option-value');
     }
