@@ -109,7 +109,16 @@ class WP_Job_Manager_Company_Listings_Settings {
 							'desc'       => __( 'Choose whether to allow companys to upload a company file.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
-						)
+						),
+						array(
+							'name'       => 'company_only_self',
+							'std'        => '0',
+							'label'      => __( 'Company Name Dropdown', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Show only self companies', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'Choose whether to show only self companies in the company name dropdown.', 'wp-job-manager-company-listings' ),
+							'type'       => 'checkbox',
+							'attributes' => array()
+						),
 					),
 				),
 				'company_submission' => array(
@@ -175,6 +184,15 @@ class WP_Job_Manager_Company_Listings_Settings {
 						    'label' 	  => __( 'Notify Email Address(es)', 'wp-job-manager-company-listings' ),
 						    'desc'		  => __( 'Instead of the admin, email notifications to these these folks instead. Comma separate addresses.', 'wp-job-manager-company-listings' ),
 						    'type'        => 'input'
+						),
+						array(
+							'name'       => 'company_listings_submit_company_field_type_text',
+							'std'        => '0',
+							'label'      => __( 'Company Name Field Type', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Enable field type text', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'Choose whether to enable field type text for the company name.', 'wp-job-manager-company-listings' ),
+							'type'       => 'checkbox',
+							'attributes' => array()
 						),
 						array(
 							'name'        => 'company_listings_submission_limit',
@@ -439,6 +457,7 @@ class WP_Job_Manager_Company_Listings_Settings {
 				jQuery(this).addClass('nav-tab-active');
 				window.location.hash = jQuery(this).attr('href');
 				jQuery( 'form.wp-job-manager-company-listings-options' ).attr( 'action', 'options.php' + jQuery(this).attr( 'href' ) );
+				window.scrollTo( 0, 0 );
 				return false;
 			});
 			var goto_hash = window.location.hash;

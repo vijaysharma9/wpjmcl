@@ -122,7 +122,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			'company_fields' => array(
 				'company_name' => array(
 					'label'       => __( 'Company name', 'wp-job-manager-company-listings' ),
-					'type'        => 'select-company',
+					'type'        => get_option( 'company_listings_submit_company_field_type_text' ) == 1 ? 'text' : 'select-company',
 					'required'    => true,
 					'placeholder' => __( 'Company name', 'wp-job-manager-company-listings' ),
 					'priority'    => 1
@@ -648,13 +648,16 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			$company_slug[] = $values['company_fields']['company_location'];
 		}
 
+		$post_name = sanitize_title( implode( '-', $company_slug ) );
+		$post_name = apply_filters( 'company_listing_post_slug', $post_name, $values );
+
 		$data = array(
 			'post_title'     => $post_title,
 			'post_content'   => $post_content,
 			'post_type'      => 'company_listings',
 			'comment_status' => 'closed',
 			'post_password'  => '',
-			'post_name'      => sanitize_title( implode( '-', $company_slug ) )
+			'post_name'      => $post_name,
 		);
 
 		if ( $status ) {

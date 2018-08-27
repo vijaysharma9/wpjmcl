@@ -138,12 +138,19 @@ class WP_Job_Manager_Company_Listings_Ajax {
 		$companies = array();
 
 		if ( $term ) {
-			$args = apply_filters( 'search_company_listings_args', array(
+			$args = array(
 				'post_type'      => 'company_listings',
 				'post_status'    => 'publish' ,
 				'posts_per_page' => -1,
-				's'              => $term,
-			) );
+			);
+
+			if ( get_option( 'company_only_self' ) == 1 ) {
+				$args['author'] = get_current_user_id();
+			}
+
+			$args = apply_filters( 'search_company_listings_args', $args );
+
+			$args['s'] = $term;
 
 			$posts = get_posts( $args );
 

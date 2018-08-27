@@ -126,8 +126,11 @@ class WP_Job_Manager_Company_Listings_Mapping {
                     $company_slug[] = $company_location;
                 }
 
+                $post_name = sanitize_title( implode( '-', $company_slug ) );
+                $post_name = apply_filters( 'company_listing_post_slug', $post_name, $data );
+
                 $company_data['post_title'] = $post_title;
-                $company_data['post_name'] = sanitize_title( implode( '-', $company_slug ) );
+                $company_data['post_name'] = $post_name;
             } else {
                 $company_data['post_title'] = $company->post_title;
                 $company_data['ID'] = $company->ID;
