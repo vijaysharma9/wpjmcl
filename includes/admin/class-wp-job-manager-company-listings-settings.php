@@ -109,7 +109,16 @@ class WP_Job_Manager_Company_Listings_Settings {
 							'desc'       => __( 'Choose whether to allow companys to upload a company file.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
 							'attributes' => array()
-						)
+						),
+						array(
+							'name'       => 'company_only_self',
+							'std'        => '0',
+							'label'      => __( 'Company Name Dropdown', 'wp-job-manager-company-listings' ),
+							'cb_label'   => __( 'Show only self companies', 'wp-job-manager-company-listings' ),
+							'desc'       => __( 'Choose whether to show only self companies in the company name dropdown.', 'wp-job-manager-company-listings' ),
+							'type'       => 'checkbox',
+							'attributes' => array()
+						),
 					),
 				),
 				'company_submission' => array(
