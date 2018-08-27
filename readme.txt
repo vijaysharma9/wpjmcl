@@ -69,7 +69,11 @@ The manual installation method involves downloading the plugin and uploading it 
 
 == Changelog ==
 
-improve the company submission system
+= 1.0.3 =
+* Fix scroll to bottom issue on plugin settings page
+* Add filter to modify company slug, filter available 'company_listing_post_slug'
+* Add option to enable company name field type text
+* Add option to show only self companies
 
 = 1.0.2 =
 * Update readme.txt and added README.md files
@@ -97,6 +101,12 @@ improve the company submission system
 * First release.
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+* Fix scroll to bottom issue on plugin settings page
+* Add filter to modify company slug, filter available 'company_listing_post_slug'
+* Add option to enable company name field type text
+* Add option to show only self companies
 
 = 1.0.2 =
 * Update readme.txt and added README.md files
