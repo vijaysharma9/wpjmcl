@@ -239,7 +239,12 @@ class WP_Job_Manager_Company_Listings_CPT {
 			$columns = array();
 		}
 
-		unset( $columns['title'], $columns['date'] );
+		unset( $columns['title'], $columns['date'], $columns['author'] );
+
+		// remove coauthors column coming from 'co-authors-plus' plugin
+		if ( array_key_exists( 'coauthors', $columns ) ) {
+			unset( $columns['coauthors'] );
+		}
 
 		$columns['company_listings'] = __( 'Company', 'wp-job-manager-company-listings' );
 		$columns["company_location"] = __( "Location", 'wp-job-manager-company-listings' );
