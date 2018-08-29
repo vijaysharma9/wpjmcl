@@ -215,7 +215,7 @@ class WP_Job_Manager_Company_Listings_Post_Types {
 				'hierarchical' 			=> false,
 				'rewrite' 				=> $rewrite,
 				'query_var' 			=> true,
-				'supports' 				=> array( 'title', 'editor', 'custom-fields', 'thumbnail' ),
+				'supports' 				=> array( 'title', 'editor', 'author', 'custom-fields', 'thumbnail' ),
 				'has_archive' 			=> $has_archive,
 				'show_in_nav_menus' 	=> false,
 				'menu_icon'           => 'dashicons-building'
