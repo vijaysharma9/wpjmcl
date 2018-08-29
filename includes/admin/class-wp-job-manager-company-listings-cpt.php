@@ -246,10 +246,14 @@ class WP_Job_Manager_Company_Listings_CPT {
 			unset( $columns['coauthors'] );
 		}
 
+		$columns = apply_filters( 'company_listings_list_table_columns_before_company_listings', $columns );
+
 		$columns['company_listings'] = __( 'Company', 'wp-job-manager-company-listings' );
 		$columns["company_location"] = __( "Location", 'wp-job-manager-company-listings' );
 		$columns['company_status']   = '<span class="tips" data-tip="' . __( "Status", 'wp-job-manager-company-listings' ) . '">' . __( "Status", 'wp-job-manager-company-listings' ) . '</span>';
 		$columns["company_posted"]   = __( "Posted", 'wp-job-manager-company-listings' );
+
+		$columns = apply_filters( 'company_listings_list_table_columns_after_company_posted', $columns );
 
 		if ( get_option( 'company_listings_enable_skills' ) ) {
 			$columns["company_skills"] = __( "Skills", 'wp-job-manager-company-listings' );
@@ -259,8 +263,12 @@ class WP_Job_Manager_Company_Listings_CPT {
 			$columns["company_category"] = __( "Categories", 'wp-job-manager-company-listings' );
 		}
 
+		$columns = apply_filters( 'company_listings_list_table_columns_before_featured_company', $columns );
+
 		$columns['featured_company'] = '<span class="tips" data-tip="' . __( "Featured?", 'wp-job-manager-company-listings' ) . '">' . __( "Featured?", 'wp-job-manager-company-listings' ) . '</span>';
 		$columns['company_actions']  = __( "Actions", 'wp-job-manager-company-listings' );
+
+		$columns = apply_filters( 'company_listings_list_table_columns_after_company_actions', $columns );
 
 		return $columns;
 	}
