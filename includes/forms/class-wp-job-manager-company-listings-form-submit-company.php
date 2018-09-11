@@ -121,32 +121,33 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		$this->fields = apply_filters( 'submit_company_form_fields', array(
 			'company_fields' => array(
 				'company_name' => array(
-					'label'       => __( 'Company name', 'wp-job-manager-company-listings' ),
-					'type'        => get_option( 'company_listings_submit_company_field_type_text' ) == 1 ? 'text' : 'select-company',
-					'required'    => true,
-					'placeholder' => __( 'Company name', 'wp-job-manager-company-listings' ),
-					'priority'    => 1
-				),
-				'company_email' => array(
-					'label'       => __( 'Company email', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Name', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
-					'placeholder' => __( 'contact@companydomain.com', 'wp-job-manager-company-listings' ),
-					'priority'    => 2
+					'placeholder' => __( 'Company name', 'wp-job-manager-company-listings' ),
+					'priority'    => 1,
 				),
-				'company_title' => array(
-					'label'       => __( 'Professional title', 'wp-job-manager-company-listings' ),
+				'company_email' => array(
+					'label'       => __( 'Email', 'wp-job-manager-company-listings' ),
+					'type'        => 'text',
+					'sanitizer'   => 'email',
+					'required'    => true,
+					'placeholder' => __( 'contact@companydomain.com', 'wp-job-manager-company-listings' ),
+					'priority'    => 2,
+				),
+				'company_tagline' => array(
+					'label'       => __( 'Tagline', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
 					'placeholder' => __( 'e.g. "Web Developer"', 'wp-job-manager-company-listings' ),
-					'priority'    => 3
+					'priority'    => 3,
 				),
 				'company_location' => array(
 					'label'       => __( 'Location', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => true,
 					'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-company-listings' ),
-					'priority'    => 4
+					'priority'    => 4,
 				),
 				'company_logo' => array(
 					'label'       => __( 'Logo', 'wp-job-manager-company-listings' ),
@@ -165,9 +166,25 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 				'company_video' => array(
 					'label'       => __( 'Video', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
+					'sanitizer'   => 'url',
 					'required'    => false,
 					'priority'    => 6,
 					'placeholder' => __( 'A link to a video about yourself', 'wp-job-manager-company-listings' ),
+				),
+				'company_website' => array(
+					'label'       => __( 'Website', 'wp-job-manager-company-listings' ),
+					'type'        => 'text',
+					'sanitizer'   => 'url',
+					'required'    => false,
+					'priority'    => 7,
+					'placeholder' => 'http://',
+				),
+				'company_twitter' => array(
+					'label'       => __( 'Twitter username', 'wp-job-manager-company-listings' ),
+					'type'        => 'text',
+					'required'    => false,
+					'priority'    => 8,
+					'placeholder' => '@yourcompany',
 				),
 				'company_category' => array(
 					'label'       => __( 'Industry Type', 'wp-job-manager-company-listings' ),
@@ -175,21 +192,21 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'taxonomy'    => 'company_category',
 					'required'    => true,
 					'placeholder' => '',
-					'priority'    => 7
+					'priority'    => 9,
 				),
 				'company_content' => array(
-					'label'       => __( 'Company Content', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Content', 'wp-job-manager-company-listings' ),
 					'type'        => 'wp-editor',
 					'required'    => true,
 					'placeholder' => '',
-					'priority'    => 8
+					'priority'    => 10,
 				),
 				'company_skills' => array(
 					'label'       => __( 'Skills', 'wp-job-manager-company-listings' ),
 					'type'        => 'text',
 					'required'    => false,
 					'placeholder' => __( 'Comma separate a list of relevant skills', 'wp-job-manager-company-listings' ) . $max,
-					'priority'    => 9
+					'priority'    => 11,
 				),
 				'links' => array(
 					'label'       => __( 'URL(s)', 'wp-job-manager-company-listings' ),
@@ -198,48 +215,49 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'required'    => false,
 					'placeholder' => '',
 					'description' => __( 'Optionally provide links to any of your websites or social network profiles.', 'wp-job-manager-company-listings' ),
-					'priority'    => 10,
+					'priority'    => 12,
 					'fields'      => array(
 						'name' => array(
 							'label'       => __( 'Name', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => '',
-							'priority'    => 1
+							'priority'    => 1,
 						),
 						'url' => array(
 							'label'       => __( 'URL', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
+							'sanitizer'   => 'url',
 							'required'    => true,
 							'placeholder' => '',
-							'priority'    => 2
-						)
-					)
+							'priority'    => 2,
+						),
+					),
 				),
 				'info' => array(
-					'label'       => __( 'Info', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'Info(s)', 'wp-job-manager-company-listings' ),
 					'add_row'     => __( 'Add Info', 'wp-job-manager-company-listings' ),
 					'type'        => 'links', // repeated
 					'required'    => false,
 					'placeholder' => '',
 					'description' => __( 'Optionally provide information of your company foundation date, type, strength etc.', 'wp-job-manager-company-listings' ),
-					'priority'    => 11,
+					'priority'    => 13,
 					'fields'      => array(
 						'name' => array(
 							'label'       => __( 'Name', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => '',
-							'priority'    => 1
+							'priority'    => 1,
 						),
 						'info' => array(
 							'label'       => __( 'Info', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
 							'placeholder' => '',
-							'priority'    => 2
-						)
-					)
+							'priority'    => 2,
+						),
+					),
 				),
 				'company_perk' => array(
 					'label'       => __( 'Perks', 'wp-job-manager-company-listings' ),
@@ -247,29 +265,31 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					'type'        => 'perk', // repeated
 					'required'    => false,
 					'placeholder' => '',
-					'priority'    => 12,
+					'priority'    => 14,
 					'fields'      => array(
 						'notes' => array(
 							'label'       => __( 'Notes', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
-							'required'    => false,
-							'placeholder' => ''
-						)
-					)
+							'required'    => true,
+							'placeholder' => '',
+							'priority'    => 1,
+						),
+					),
 				),
 				'company_press' => array(
 					'label'       => __( 'Press', 'wp-job-manager-company-listings' ),
-					'add_row'     => __( 'Add Post', 'wp-job-manager-company-listings' ),
+					'add_row'     => __( 'Add Press', 'wp-job-manager-company-listings' ),
 					'type'        => 'press', // repeated
 					'required'    => false,
 					'placeholder' => '',
-					'priority'    => 13,
+					'priority'    => 15,
 					'fields'      => array(
 						'job_title' => array(
-							'label'       => __( 'Post Title', 'wp-job-manager-company-listings' ),
+							'label'       => __( 'Title', 'wp-job-manager-company-listings' ),
 							'type'        => 'text',
 							'required'    => true,
-							'placeholder' => ''
+							'placeholder' => '',
+							'priority'    => 1,
 						),
 						'notes' => array(
 							'label'       => __( 'URL', 'wp-job-manager-company-listings' ),
@@ -277,17 +297,19 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 							'description' => '',
 							'required'    => true,
 							'type'        => 'text',
-						)
-					)
+							'sanitizer'   => 'url',
+							'priority'    => 2,
+						),
+					),
 				),
 				'company_file' => array(
-					'label'       => __( 'Company file', 'wp-job-manager-company-listings' ),
+					'label'       => __( 'File', 'wp-job-manager-company-listings' ),
 					'type'        => 'file',
 					'required'    => false,
 					'ajax'        => true,
-					'description' => sprintf( __( 'Optionally upload your company for employers to view. Max. file size: %s.', 'wp-job-manager-company-listings' ), size_format( wp_max_upload_size() ) ),
-					'priority'    => 14,
-					'placeholder' => ''
+					'description' => sprintf( __( 'Upload your company for employers to view. Max. file size: %s.', 'wp-job-manager-company-listings' ), size_format( wp_max_upload_size() ) ),
+					'priority'    => 16,
+					'placeholder' => '',
 				),
 			)
 		) );
@@ -340,7 +362,18 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 							if ( is_array( $_POST[ $field_name ] ) ) {
 								$item[ $key ] = array_filter( array_map( 'sanitize_text_field', array_map( 'stripslashes', $_POST[ $field_name ] ) ) );
 							} else {
-								$item[ $key ] = sanitize_text_field( stripslashes( $_POST[ $field_name ] ) );
+								if ( isset( $field['sanitizer'] ) ) {
+									// do the sanitization for url and email
+									$sanitizer = $field['sanitizer'];
+
+									if ( $sanitizer === 'url' ) {
+										$item[ $key ] = esc_url_raw( $_POST[ $field_name ] );
+									} elseif ( $sanitizer === 'email' ) {
+										$item[ $key ] = sanitize_email( $_POST[ $field_name ] );
+									}
+								} else {
+									$item[ $key ] = sanitize_text_field( stripslashes( $_POST[ $field_name ] ) );
+								}
 							}
 						break;
 					}
@@ -355,8 +388,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	}
 
 	/**
-	 * Get the value of a posted repeated field
-	 * @since  1.22.4
+	 * Get the value of field type 'repeated'
 	 * @param  string $key
 	 * @param  array $field
 	 * @return string
@@ -366,7 +398,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	}
 
 	/**
-	 * Get the value of a posted file field
+	 * Get the value of field type 'links'
 	 * @param  string $key
 	 * @param  array $field
 	 * @return string
@@ -376,7 +408,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	}
 
 	/**
-	 * Get the value of a posted file field
+	 * Get the value of field type 'perk'
 	 * @param  string $key
 	 * @param  array $field
 	 * @return string
@@ -386,13 +418,13 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	}
 
 	/**
-	 * Get the value of a posted file field
+	 * Get the value of field type 'press'
 	 * @param  string $key
 	 * @param  array $field
 	 * @return string
 	 */
-	public function get_posted_experience_field( $key, $field ) {
-		return apply_filters( 'submit_company_form_fields_get_experience_data', $this->get_repeated_field( $key, $field['fields'] ) );
+	public function get_posted_press_field( $key, $field ) {
+		return apply_filters( 'submit_company_form_fields_get_press_data', $this->get_repeated_field( $key, $field['fields'] ) );
 	}
 
 	/**
@@ -471,9 +503,6 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			foreach ( $this->fields as $group_key => $fields ) {
 				foreach ( $fields as $key => $field ) {
 					switch ( $key ) {
-						case 'company_name' :
-						$this->fields[ $group_key ][ $key ]['option_value'] = 'post_title';
-						break;
 						case 'company_email' :
 						$this->fields[ $group_key ][ $key ]['value'] = $user->user_email;
 						break;
@@ -483,27 +512,13 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			$this->fields = apply_filters( 'submit_company_form_fields_get_user_data', $this->fields, get_current_user_id() );
 		}
 
-		if ( isset( $_POST['submit_company'] ) ) {
-			if ( isset( $_POST['company_name'] ) ) {
-			    $value = $_POST['company_name'];
-
-			    $company_id = $company_name = $value;
-			    $submitted_fields = $this->fields;
-
-			    $submitted_fields['company_fields']['company_name']['company_id'] = $company_id;
-			    $submitted_fields['company_fields']['company_name']['company_name'] = $company_name;
-			}
-
-		    $this->fields = apply_filters( 'submit_new_company_set_form_fields', $submitted_fields, $this->fields );
-		}
-
 		get_job_manager_template( 'company_listings-submit.php', array(
 			'class'              => $this,
 			'form'               => $this->form_name,
-			'company_id'          => $this->get_company_id(),
+			'company_id'         => $this->get_company_id(),
 			'job_id'             => $this->get_job_id(),
 			'action'             => $this->get_action(),
-			'company_fields'      => $this->get_fields( 'company_fields' ),
+			'company_fields'     => $this->get_fields( 'company_fields' ),
 			'step'               => $this->get_step(),
 			'submit_button_text' => apply_filters( 'submit_company_form_submit_button_text', __( 'Preview &rarr;', 'wp-job-manager-company-listings' ) )
 		), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );

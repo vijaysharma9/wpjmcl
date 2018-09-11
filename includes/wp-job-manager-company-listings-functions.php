@@ -588,3 +588,107 @@ function jmcl_get_company_jobs_counts( $company_id ) {
 	$query = $wpdb->prepare("SELECT count(m.post_id) FROM $wpdb->postmeta m INNER JOIN $wpdb->posts p ON m.post_id = p.ID WHERE m.meta_key = %s AND m.meta_value = %s AND post_status='publish'", '_company_id', $company_id );
 	return $wpdb->get_var( $query );
 }
+
+/**
+ * Gets the company id.
+ *
+ * @since      1.0.4
+ *
+ * @return     string
+ */
+function jmcl_get_the_company() {
+    global $post;
+
+    if ( ! $post || 'job_listing' !== $post->post_type ) {
+        return '';
+    }
+
+    $company_id = get_post_meta( $post->ID, '_company_id', true );
+
+    return apply_filters( 'jmcl_get_the_company', $company_id, $post );
+}
+
+/**
+ * Gets the company name.
+ *
+ * @since      1.0.4
+ *
+ * @param      string   $company_name  The company name
+ * @param      WP_Post  $post          The post
+ *
+ * @return     string
+ */
+function jmcl_get_the_company_name( $company_name, $post ) {
+	$company_id = jmcl_get_the_company();
+
+	return get_the_title( $company_id );
+}
+add_filter( 'the_company_name', 'jmcl_get_the_company_name', 10, 2 );
+
+/**
+ * Gets the company website.
+ *
+ * @since      1.0.4
+ *
+ * @param      string   $company_name  The company website
+ * @param      WP_Post  $post          The post
+ *
+ * @return     string
+ */
+function jmcl_get_the_company_website( $website, $post ) {
+	$company_id = jmcl_get_the_company();
+
+	return get_post_meta( $company_id, '_company_website', true );
+}
+add_filter( 'the_company_website', 'jmcl_get_the_company_website', 10, 2 );
+
+/**
+ * Gets the company twitter.
+ *
+ * @since      1.0.4
+ *
+ * @param      string   $company_name  The company twitter
+ * @param      WP_Post  $post          The post
+ *
+ * @return     string
+ */
+function jmcl_get_the_company_twitter( $twitter, $post ) {
+	$company_id = jmcl_get_the_company();
+
+	return get_post_meta( $company_id, '_company_twitter', true );
+}
+add_filter( 'the_company_twitter', 'jmcl_get_the_company_twitter', 10, 2 );
+
+/**
+ * Gets the company tagline.
+ *
+ * @since      1.0.4
+ *
+ * @param      string   $company_name  The company tagline
+ * @param      WP_Post  $post          The post
+ *
+ * @return     string
+ */
+function jmcl_get_the_company_tagline( $tagline, $post ) {
+	$company_id = jmcl_get_the_company();
+
+	return get_post_meta( $company_id, '_company_tagline', true );
+}
+add_filter( 'the_company_tagline', 'jmcl_get_the_company_tagline', 10, 2 );
+
+/**
+ * Gets the company video.
+ *
+ * @since      1.0.4
+ *
+ * @param      string   $company_name  The company video
+ * @param      WP_Post  $post          The post
+ *
+ * @return     string
+ */
+function jmcl_get_the_company_video( $video, $post ) {
+	$company_id = jmcl_get_the_company();
+
+	return get_post_meta( $company_id, '_company_video', true );
+}
+add_filter( 'the_company_video', 'jmcl_get_the_company_video', 10, 2 );

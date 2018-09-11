@@ -21,14 +21,8 @@ jQuery(document).ready(function($) {
 		opacity: 0.65
 	});
 
-	// Datepicker
-	$( "input#_company_expires" ).datepicker({
-		dateFormat: 'yy-mm-dd',
-		minDate: 0
-	});
-
 	// Settings
-	$('.job-manager-settings-wrap')
+	$('.wp-job-manager-company-listings-settings-wrap')
 		.on( 'change', '#setting-company_listings_enable_skills', function() {
 			if ( $( this ).is(':checked') ) {
 				$('#setting-company_listings_max_skills').closest('tr').show();

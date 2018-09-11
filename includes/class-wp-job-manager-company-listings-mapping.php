@@ -19,25 +19,22 @@ class WP_Job_Manager_Company_Listings_Mapping {
 
         //include custom form-field-type
         add_action( 'job_manager_locate_template', array( $this, 'include_templates' ), 10, 3 );
-
-        //set company name
-        add_action( 'submit_job_form_fields_get_job_data', array( $this, 'set_company_name' ), 10, 2 );
     }
 
     /**
      * Change the 'company_name' field type to 'select' from 'text'
      */
     public function update_form_fields( $fields ) {
-        if ( isset( $fields['company']['company_name'] ) ) {
-            unset( $fields['company']['company_name'] );
+        if ( isset( $fields['company'] ) ) {
+            unset( $fields['company'] );
         }
 
-        $fields['company']['company_id'] = array(
-            'label'       => __( 'Company name', 'wp-job-manager-company-listings' ),
-            'type'        => 'select-company',
+        $fields['job']['company_id'] = array(
+            'label'       => __( 'Company', 'wp-job-manager-company-listings' ),
+            'type'        => 'select',
             'required'    => true,
-            'placeholder' => __( 'Enter the name of the company', 'wp-job-manager-company-listings' ),
-            'priority'    => 1,
+            'placeholder' => __( 'Select the company', 'wp-job-manager-company-listings' ),
+            'priority'    => 0,
             'options'     => array(),
         );
 
@@ -199,45 +196,11 @@ class WP_Job_Manager_Company_Listings_Mapping {
     public function include_templates( $template, $template_name, $template_path ) {
         if ( $template_name === 'form-fields/select-company-field.php' ) {
             $template = COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' . $template_name;
+        } elseif ( $template_name === 'content-single-job_listing-company.php' ) {
+            $template = COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' . $template_name;
         }
 
         return $template;
-    }
-
-    /**
-     * Sets the company name.
-     *
-     * @param      array   $fields  The fields
-     * @param      object  $job     The job
-     */
-    public function set_company_name( $fields, $job ) {
-        if ( $fields ) {
-            foreach ( $fields as $group_key => $group_fields ) {
-                foreach ( $group_fields as $key => $field ) {
-                    if ( $field['type'] === 'select-company' ) {
-                        if ( isset( $_POST[ $key ] ) ) {
-                            $value = $_POST[ $key ];
-                        } elseif ( $job ) {
-                            $value = get_post_meta( $job->ID, '_company_id', true );
-                        }
-
-                        $company_id = $company_name = $value;
-
-                        if ( $company = get_post( intval( $value ) ) ) {
-                            if ( $company->post_type === 'company_listings' ) {
-                                $company_id = $value;
-                                $company_name = $company->post_title;
-                            }
-                        }
-
-                        $fields[ $group_key ][ $key ]['company_id'] = $company_id;
-                        $fields[ $group_key ][ $key ]['company_name'] = $company_name;
-                    }
-                }
-            }
-        }
-
-        return $fields;
     }
 }
 
