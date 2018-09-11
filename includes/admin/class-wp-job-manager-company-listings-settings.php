@@ -202,22 +202,6 @@ class WP_Job_Manager_Company_Listings_Settings {
 							'attributes'  => array(),
 							'placeholder' => __( 'No limit', 'wp-job-manager-company-listings' )
 						),
-						array(
-							'name' 		=> 'company_listings_linkedin_import',
-							'std'        => '0',
-							'label'      => __( 'Linkedin Import', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Allow import of company data from LinkedIn', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'If enabled, users will be able to login to LinkedIn and have the company submission form automatically populated.', 'wp-job-manager-company-listings' ),
-							'type'       => 'checkbox',
-							'attributes' => array()
-						),
-						'api_key' => array(
-							'name' 		=> 'job_manager_linkedin_api_key',
-							'std' 		=> '',
-							'label' 	=> __( 'Linkedin Api Key', 'wp-job-manager-company-listings' ),
-							'desc'		=> __( 'Get your API key by creating a new application on https://www.linkedin.com/secure/developer', 'wp-job-manager-company-listings' ),
-							'type'      => 'input'
-						),
 					)
 				),
 				'company_pages' => array(
