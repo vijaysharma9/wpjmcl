@@ -186,15 +186,6 @@ class WP_Job_Manager_Company_Listings_Settings {
 						    'type'        => 'input'
 						),
 						array(
-							'name'       => 'company_listings_submit_company_field_type_text',
-							'std'        => '0',
-							'label'      => __( 'Company Name Field Type', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Enable field type text', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'Choose whether to enable field type text for the company name.', 'wp-job-manager-company-listings' ),
-							'type'       => 'checkbox',
-							'attributes' => array()
-						),
-						array(
 							'name'        => 'company_listings_submission_limit',
 							'std'         => '',
 							'label'       => __( 'Listing Limit', 'wp-job-manager-company-listings' ),
