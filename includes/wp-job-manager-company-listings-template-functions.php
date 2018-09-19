@@ -554,6 +554,7 @@ if ( ! function_exists( 'jmcl_output_content_wrapper' ) ) {
 		get_company_listings_template( 'global/wrapper-start.php' );
 	}
 }
+
 if ( ! function_exists( 'jmcl_output_content_wrapper_end' ) ) {
 
 	/**

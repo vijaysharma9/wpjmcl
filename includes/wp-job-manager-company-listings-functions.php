@@ -558,27 +558,6 @@ function company_listings_get_permalink( $page ) {
 }
 
 /**
- * Calculate and return the company expiry date
- * @param  int $company_id
- * @return string
- */
-function calculate_company_expiry( $company_id ) {
-	// Get duration from the product if set...
-	$duration = get_post_meta( $company_id, '_company_duration', true );
-
-	// ...otherwise use the global option
-	if ( ! $duration ) {
-		$duration = absint( get_option( 'company_listings_submission_duration' ) );
-	}
-
-	if ( $duration ) {
-		return date( 'Y-m-d', strtotime( "+{$duration} days", current_time( 'timestamp' ) ) );
-	}
-
-	return '';
-}
-
-/**
  * Get jobs count
  * @param $company_id
  * @return mixed
@@ -596,8 +575,8 @@ function jmcl_get_company_jobs_counts( $company_id ) {
  *
  * @return     string
  */
-function jmcl_get_the_company() {
-    global $post;
+function jmcl_get_the_company( $post = null ) {
+    $post = get_post( $post );
 
     if ( ! $post || 'job_listing' !== $post->post_type ) {
         return '';
@@ -619,7 +598,7 @@ function jmcl_get_the_company() {
  * @return     string
  */
 function jmcl_get_the_company_name( $company_name, $post ) {
-	$company_id = jmcl_get_the_company();
+	$company_id = jmcl_get_the_company( $post );
 
 	return get_the_title( $company_id );
 }
@@ -636,7 +615,7 @@ add_filter( 'the_company_name', 'jmcl_get_the_company_name', 10, 2 );
  * @return     string
  */
 function jmcl_get_the_company_website( $website, $post ) {
-	$company_id = jmcl_get_the_company();
+	$company_id = jmcl_get_the_company( $post );
 
 	return get_post_meta( $company_id, '_company_website', true );
 }
@@ -653,7 +632,7 @@ add_filter( 'the_company_website', 'jmcl_get_the_company_website', 10, 2 );
  * @return     string
  */
 function jmcl_get_the_company_twitter( $twitter, $post ) {
-	$company_id = jmcl_get_the_company();
+	$company_id = jmcl_get_the_company( $post );
 
 	return get_post_meta( $company_id, '_company_twitter', true );
 }
@@ -670,7 +649,7 @@ add_filter( 'the_company_twitter', 'jmcl_get_the_company_twitter', 10, 2 );
  * @return     string
  */
 function jmcl_get_the_company_tagline( $tagline, $post ) {
-	$company_id = jmcl_get_the_company();
+	$company_id = jmcl_get_the_company( $post );
 
 	return get_post_meta( $company_id, '_company_tagline', true );
 }
@@ -687,8 +666,65 @@ add_filter( 'the_company_tagline', 'jmcl_get_the_company_tagline', 10, 2 );
  * @return     string
  */
 function jmcl_get_the_company_video( $video, $post ) {
-	$company_id = jmcl_get_the_company();
+	$company_id = jmcl_get_the_company( $post );
 
 	return get_post_meta( $company_id, '_company_video', true );
 }
 add_filter( 'the_company_video', 'jmcl_get_the_company_video', 10, 2 );
+
+/**
+ * Choose whether the company field should be normal select field or searchable
+ * select field.
+ *
+ * @return     boolean  If true then make the field searchable select field
+ */
+function jmcl_company_field_enable_select2_search() {
+	return apply_filters( 'company_field_enable_select2_search', true );
+}
+
+/**
+ * Company select2 search field minimum input length.
+ *
+ * @return     int
+ */
+function jmcl_company_field_minimumInputLength() {
+	return apply_filters( 'jmcl_company_field_minimumInputLength', 3 );
+}
+
+/**
+ * Choose whether the company dropdown should show only self created companies
+ * or not.
+ *
+ * @return     boolean  If true then show only self companies
+ */
+function jmcl_only_self_companies() {
+	return apply_filters( 'jmcl_only_self_companies', get_option( 'company_only_self', 0 ) );
+}
+
+/**
+ * Gets the companies for dropdown field.
+ *
+ * @return     array  An array with company id as key and title as value
+ */
+function jmcl_get_companies_for_dropdown_field() {
+	$args = array(
+		'post_type'      => 'company_listings',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+	);
+
+	if ( jmcl_only_self_companies() ) {
+		$args['author'] = get_current_user_id();
+	}
+
+	$args = apply_filters( 'jmcl_get_companies_for_dropdown_field_args', $args );
+
+	$posts = get_posts( $args );
+	$companies = array( '' => __( '-- Select Company --', 'wp-job-manager-company-listings' ) );
+
+	foreach ( $posts as $post ) {
+		$companies[ $post->ID ] = $post->post_title;
+	}
+
+	return apply_filters( 'jmcl_get_companies_for_dropdown_field', $companies, $posts );
+}

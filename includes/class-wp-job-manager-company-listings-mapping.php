@@ -8,34 +8,66 @@ class WP_Job_Manager_Company_Listings_Mapping {
      * Constructor
      */
     public function __construct() {
-        //Job form
+        // Job form
         add_action( 'submit_job_form_fields', array( $this, 'update_form_fields' ) );
         add_action( 'job_manager_job_listing_data_end', array( $this, 'job_listing_data' ) );
-        add_filter( 'submit_job_form_fields_get_user_data', array( $this, 'hide_user_company_data' ) );
 
-        //Job save
-        add_action( 'job_manager_update_job_data', array( $this, 'save_company_listing' ), 10, 2 );
-        add_action( 'job_manager_job_submitted', array( $this, 'update_company_status') );
-
-        //include custom form-field-type
+        // include custom templates
         add_action( 'job_manager_locate_template', array( $this, 'include_templates' ), 10, 3 );
+
+        // set company data
+        add_action( 'submit_job_form_fields_get_job_data', array( $this, 'set_company_data' ), 10, 2 );
     }
 
     /**
-     * Change the 'company_name' field type to 'select' from 'text'
+     * Modify job form fields.
+     *
+     * @param      array  $fields  The job form fields
+     *
+     * @return     array  Updated job form fields
      */
     public function update_form_fields( $fields ) {
         if ( isset( $fields['company'] ) ) {
             unset( $fields['company'] );
         }
 
+        $company_field_required = apply_filters( 'submit_job_form_fields_select_company_field_required', true );
+        $company_field_position = apply_filters( 'submit_job_form_fields_select_company_field_position', 0 );
+
+        $job_logo_field_required = apply_filters( 'submit_job_form_fields_job_logo_field_required', false );
+        $job_logo_field_position = apply_filters( 'submit_job_form_fields_job_logo_field_position', 7 );
+
+        $options = array();
+        $type = 'select-company';
+
+        if ( ! jmcl_company_field_enable_select2_search() ) {
+            $options = jmcl_get_companies_for_dropdown_field();
+            $type = 'select';
+        }
+
         $fields['job']['company_id'] = array(
             'label'       => __( 'Company', 'wp-job-manager-company-listings' ),
-            'type'        => 'select',
-            'required'    => true,
-            'placeholder' => __( 'Select the company', 'wp-job-manager-company-listings' ),
-            'priority'    => 0,
-            'options'     => array(),
+            'type'        => $type,
+            'required'    => $company_field_required,
+            'placeholder' => __( 'Select company', 'wp-job-manager-company-listings' ),
+            'priority'    => $company_field_position,
+            'options'     => $options,
+        );
+
+        $fields['job']['company_logo'] = array(
+            'label'              => __( 'Logo', 'wp-job-manager-company-listings' ),
+            'type'               => 'file',
+            'required'           => $job_logo_field_required,
+            'placeholder'        => '',
+            'priority'           => $job_logo_field_position,
+            'ajax'               => true,
+            'multiple'           => false,
+            'allowed_mime_types' => array(
+                'jpg'  => 'image/jpeg',
+                'jpeg' => 'image/jpeg',
+                'gif'  => 'image/gif',
+                'png'  => 'image/png',
+            ),
         );
 
         return $fields;
@@ -51,137 +83,6 @@ class WP_Job_Manager_Company_Listings_Mapping {
         ?>
             <input type="hidden" name="_company_id" id="_company_id" value="<?php echo $company_id ?>" />
         <?php
-    }
-
-    /**
-     * Hides the user company data when creating a new job post.
-     *
-     * @param      array  $fields  The fields
-     *
-     * @return     array
-     */
-    public function hide_user_company_data( $fields ) {
-        if ( $fields ) {
-            foreach ( $fields as $section => $section_fields ) {
-                if ( $section === 'company' ) {
-                    foreach ($section_fields as $key => $array) {
-                        if ( $key === 'company_name' ) {
-                            unset( $fields[$section][$key]['value'] );
-                        }
-                    }
-                }
-            }
-        }
-
-        return $fields;
-    }
-
-    /**
-     * Saves a company listing.
-     *
-     * @param      int    $job_id  The job identifier
-     * @param      array  $data    The data
-     */
-    public function save_company_listing( $job_id, $data ) {
-        if ( ! $job_id ) {
-            return;
-        }
-
-        if ( isset( $_POST['company_id'] ) ) {
-            $post_title = sanitize_text_field( $_POST['company_id'] );
-            $new_company = true;
-            $post_status = 'pending';
-
-            if ( $company = get_post( intval( $_POST['company_id'] ) ) ) {
-                if ( $company->post_type === 'company_listings' ) {
-                    $post_title = $company->post_title;
-                    $post_status = $company->post_status;
-                    $new_company = false;
-                }
-            }
-
-            $company_title = $_POST['company_tagline'];
-            $company_location = $_POST['job_location'];
-
-            $company_data = array(
-                'post_type'   => 'company_listings',
-                'post_status' => $post_status,
-            );
-
-            if ( $new_company ) {
-                $prefix = wp_generate_password( 10 );
-
-                $company_slug = array();
-                $company_slug[] = current( explode( ' ', $post_title ) );
-                $company_slug[] = $prefix;
-
-                if ( ! empty( $company_title ) ) {
-                    $company_slug[] = $company_title;
-                }
-
-                if ( ! empty( $company_location ) ) {
-                    $company_slug[] = $company_location;
-                }
-
-                $post_name = sanitize_title( implode( '-', $company_slug ) );
-                $post_name = apply_filters( 'company_listing_post_slug', $post_name, $data );
-
-                $company_data['post_title'] = $post_title;
-                $company_data['post_name'] = $post_name;
-            } else {
-                $company_data['post_title'] = $company->post_title;
-                $company_data['ID'] = $company->ID;
-                $company_data['post_date'] = $company->post_date;
-            }
-
-            $company_id = wp_insert_post( $company_data );
-
-            if ( $company_id ) {
-                if ( $new_company ) {
-                    update_post_meta( $company_id, '_company_website', $_POST['company_website'] );
-                    update_post_meta( $company_id, '_company_title', $company_title );
-                    update_post_meta( $company_id, '_company_location', $company_location );
-                    update_post_meta( $company_id, '_company_twitter', $_POST['company_twitter'] );
-                    update_post_meta( $company_id, '_company_video', $_POST['company_video'] );
-                    update_post_meta( $company_id, '_company_email', $_POST['application'] );
-                    update_post_meta( $company_id, '_company_name_prefix', $prefix );
-
-                    /* ------ Company logo ------- */
-                    $thumbnail_id = intval( get_post_meta( $job_id, '_thumbnail_id', true ) );
-
-                    if ( $thumbnail_id ) {
-                        set_post_thumbnail( $company_id, $thumbnail_id );
-                        $company_logo_path = wp_get_attachment_url( $thumbnail_id );
-                        update_post_meta( $company_id, '_company_logo', $company_logo_path );
-                    }
-                }
-
-                update_post_meta( $job_id, '_company_name', $post_title );
-                update_post_meta( $job_id, '_company_id', $company_id );
-
-                $_POST['company_id'] = $company_id;
-            }
-        }
-    }
-
-    /**
-     * Update company status.
-     *
-     * @param      int   $job_id  The job identifier
-     */
-    public function update_company_status( $job_id ) {
-        $company_id = intval( get_post_meta( $job_id, '_company_id', true ) );
-
-        if ( $company_id ) {
-            $company = get_post( $company_id );
-
-            if ( $company && $company->post_status === 'preview' ) {
-                wp_update_post(array(
-                    'ID'          => $company_id,
-                    'post_status' => apply_filters( 'submit_company_post_status', get_option( 'company_listings_submission_requires_approval' ) ? 'pending' : 'publish', $company ),
-                ));
-            }
-        }
     }
 
     /**
@@ -201,6 +102,39 @@ class WP_Job_Manager_Company_Listings_Mapping {
         }
 
         return $template;
+    }
+
+    /**
+     * Sets the company.
+     *
+     * @param      array   $fields  The job form fields
+     * @param      object  $job     The job post object
+     *
+     * @return     array
+     */
+    public function set_company_data( $fields, $job ) {
+        if ( $fields ) {
+            foreach ( $fields as $group_key => $group_fields ) {
+                foreach ( $group_fields as $key => $field ) {
+                    if ( $field['type'] === 'select-company' ) {
+                        $company_id = $company_name = '';
+
+                        if ( isset( $_POST[ $key ] ) ) {
+                            $company_id = $_POST[ $key ];
+                        } elseif ( $job ) {
+                            $company_id = jmcl_get_the_company( $job );
+                        }
+
+                        $company_name = apply_filters( 'submit_job_form_fields_set_select2_company_name', get_the_title( $company_id ), $company_id );
+
+                        $fields[ $group_key ][ $key ]['company_id'] = $company_id;
+                        $fields[ $group_key ][ $key ]['company_name'] = $company_name;
+                    }
+                }
+            }
+        }
+
+        return $fields;
     }
 }
 
