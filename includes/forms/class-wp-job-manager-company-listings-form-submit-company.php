@@ -898,7 +898,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			$post = get_post( $this->company_id );
 			setup_postdata( $post );
 			?>
-			<form method="post" id="company_preview">
+			<form method="post" id="company_preview" action="<?php echo esc_url( $this->get_action() ); ?>">
 				<div class="company_preview_title">
 					<input type="submit" name="continue" id="company_preview_submit_button" class="button" value="<?php echo apply_filters( 'submit_company_step_preview_submit_text', __( 'Submit Company &rarr;', 'wp-job-manager-company-listings' ) ); ?>" />
 					<input type="submit" name="edit_company" class="button" value="<?php _e( '&larr; Edit company', 'wp-job-manager-company-listings' ); ?>" />

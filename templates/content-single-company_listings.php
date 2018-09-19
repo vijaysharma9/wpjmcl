@@ -30,7 +30,7 @@ if ( post_password_required() ) {
 do_action( 'jmcl_before_single_company' );
 ?>
 
-<div id="company-<?php the_ID(); ?>" <?php post_class(); ?>>
+<div class="single_company_listing">
 
 	<?php
 	do_action( 'jmcl_before_single_company_summary' );
