@@ -5,18 +5,52 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * WP_Job_Manager_Company_Listings_Form_Submit_Companies class.
  */
-class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager_Form {
+class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager_Company_Form {
 
-	public    $form_name = 'submit-company';
+	/**
+	 * Form name.
+	 *
+	 * @var        string
+	 */
+	public $form_name = 'submit-company';
+
+	/**
+	 * Company ID.
+	 *
+	 * @access     protected
+	 * @var        int
+	 */
 	protected $company_id;
+
+	/**
+	 * Job listing ID.
+	 *
+	 * @access     protected
+	 * @var        int
+	 */
 	protected $job_id;
+
+	/**
+	 * Preview company
+	 *
+	 * @access     protected
+	 * @var        string
+	 */
 	protected $preview_company;
 
-	/** @var WP_Job_Manager_Company_Listings_Form_Submit_Companies The single instance of the class */
+	/**
+	 * Stores static instance of class.
+	 *
+	 * @access     protected
+	 *
+	 * @var        WP_Job_Manager_Company_Listings_Form_Submit_Company          The single instance of the class
+	 */
 	protected static $_instance = null;
 
 	/**
-	 * Main Instance
+	 * Returns static instance of class.
+	 *
+	 * @return     self
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -29,28 +63,31 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp', 									array( $this, 'process' ) );
+		add_action( 'wp', array( $this, 'process' ) );
 
-		$this->steps  = (array) apply_filters( 'submit_company_steps', array(
-			'submit' => array(
-				'name'     => __( 'Submit Details', 'wp-job-manager-company-listings' ),
-				'view'     => array( $this, 'submit' ),
-				'handler'  => array( $this, 'submit_handler' ),
-				'priority' => 10
+		$this->steps  = (array) apply_filters(
+			'submit_company_steps',
+			array(
+				'submit' => array(
+					'name'     => __( 'Submit Details', 'wp-job-manager-company-listings' ),
+					'view'     => array( $this, 'submit' ),
+					'handler'  => array( $this, 'submit_handler' ),
+					'priority' => 10,
 				),
-			'preview' => array(
-				'name'     => __( 'Preview', 'wp-job-manager-company-listings' ),
-				'view'     => array( $this, 'preview' ),
-				'handler'  => array( $this, 'preview_handler' ),
-				'priority' => 20
-			),
-			'done' => array(
-				'name'     => __( 'Done', 'wp-job-manager-company-listings' ),
-				'view'     => array( $this, 'done' ),
-				'handler'  => '',
-				'priority' => 30
+				'preview' => array(
+					'name'     => __( 'Preview', 'wp-job-manager-company-listings' ),
+					'view'     => array( $this, 'preview' ),
+					'handler'  => array( $this, 'preview_handler' ),
+					'priority' => 20,
+				),
+				'done' => array(
+					'name'     => __( 'Done', 'wp-job-manager-company-listings' ),
+					'view'     => array( $this, 'done' ),
+					'handler'  => '',
+					'priority' => 30,
+				),
 			)
-		) );
+		);
 
 		uasort( $this->steps, array( $this, 'sort_by_priority' ) );
 
@@ -60,7 +97,20 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		}
 
 		$this->company_id = ! empty( $_REQUEST['company_id'] ) ? absint( $_REQUEST[ 'company_id' ] ) : 0;
-		$this->job_id    = ! empty( $_REQUEST['job_id'] ) ? absint( $_REQUEST[ 'job_id' ] ) : 0;
+		$this->job_id = ! empty( $_REQUEST['job_id'] ) ? absint( $_REQUEST[ 'job_id' ] ) : 0;
+
+		// Allow resuming from cookie.
+		$this->resume_edit = false;
+
+		if ( ! isset( $_GET['new'] ) && ! empty( $_COOKIE['wp-job-manager-submitting-company-id'] ) && ! empty( $_COOKIE['wp-job-manager-submitting-company-key'] ) ) {
+			$company_id = absint( $_COOKIE['wp-job-manager-submitting-company-id'] );
+			$company_status = get_post_status( $company_id );
+
+			if ( 'preview' === $company_status && get_post_meta( $company_id, '_submitting_key', true ) === $_COOKIE['wp-job-manager-submitting-company-key'] ) {
+				$this->company_id = $company_id;
+				$this->resume_edit = get_post_meta( $company_id, '_submitting_key', true );
+			}
+		}
 
 		// Load company details
 		if ( $this->company_id ) {
@@ -68,8 +118,8 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 
 			if ( 0 === $this->step && ! in_array( $company_status, apply_filters( 'company_listings_valid_submit_company_statuses', array( 'preview' ) ) ) && empty( $_POST['company_application_submit_button'] ) ) {
 				$this->company_id = 0;
-				$this->job_id    = 0;
-				$this->step      = 0;
+				$this->job_id = 0;
+				$this->step = 0;
 			}
 		}
 	}
@@ -498,8 +548,36 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 
 		$this->init_fields();
 
-		if ( is_user_logged_in() && empty( $_POST['submit_company'] ) ) {
+		if ( $this->company_id ) {
+			$company = get_post( $this->company_id );
+
+			foreach ( $this->fields as $group_key => $group_fields ) {
+				foreach ( $group_fields as $key => $field ) {
+					switch ( $key ) {
+						case 'company_name':
+							$this->fields[ $group_key ][ $key ]['value'] = $company->post_title;
+							break;
+						case 'company_content':
+							$this->fields[ $group_key ][ $key ]['value'] = $company->post_content;
+							break;
+						case 'company_category':
+							$this->fields[ $group_key ][ $key ]['value'] = wp_get_object_terms( $company->ID, 'company_category', array( 'fields' => 'ids' ) );
+							break;
+						case 'company_logo':
+							$this->fields[ $group_key ][ $key ]['value'] = has_post_thumbnail( $company->ID ) ? get_post_thumbnail_id( $company->ID ) : get_post_meta( $company->ID, '_' . $key, true );
+							break;
+						default:
+							$this->fields[ $group_key ][ $key ]['value'] = get_post_meta( $company->ID, '_' . $key, true );
+							break;
+					}
+				}
+			}
+
+			$this->fields = apply_filters( 'submit_company_form_fields_get_company_data', $this->fields, $company );
+
+		} elseif ( is_user_logged_in() && empty( $_POST['submit_company'] ) ) {
 			$user = wp_get_current_user();
+
 			foreach ( $this->fields as $group_key => $fields ) {
 				foreach ( $fields as $key => $field ) {
 					switch ( $key ) {
@@ -509,6 +587,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					}
 				}
 			}
+
 			$this->fields = apply_filters( 'submit_company_form_fields_get_user_data', $this->fields, get_current_user_id() );
 		}
 
@@ -517,6 +596,7 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			'form'               => $this->form_name,
 			'company_id'         => $this->get_company_id(),
 			'job_id'             => $this->get_job_id(),
+			'resume_edit'        => $this->resume_edit,
 			'action'             => $this->get_action(),
 			'company_fields'     => $this->get_fields( 'company_fields' ),
 			'step'               => $this->get_step(),
@@ -648,10 +728,10 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 				$prefix = wp_generate_password( 10 );
 			}
 		} else {
-			$prefix        = wp_generate_password( 10 );
+			$prefix = wp_generate_password( 10 );
 		}
 
-		$company_slug   = array();
+		$company_slug = array();
 		$company_slug[] = current( explode( ' ', $post_title ) );
 		$company_slug[] = $prefix;
 
@@ -688,18 +768,13 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 			$this->company_id = wp_insert_post( $data );
 			update_post_meta( $this->company_id, '_company_name_prefix', $prefix );
 
-			// Save profile fields
-			$current_user   = wp_get_current_user();
-			$company_name = explode( ' ', $post_title );
+			if ( ! headers_sent() ) {
+				$submitting_key = uniqid();
 
-			if ( empty( $current_user->first_name ) && empty( $current_user->last_name ) && sizeof( $company_name ) > 1 ) {
-				wp_update_user(
-					array(
-						'ID'         => $current_user->ID,
-						'first_name' => current( $company_name ),
-						'last_name'  => end( $company_name )
-					)
-				);
+				setcookie( 'wp-job-manager-submitting-company-id', $this->company_id, false, COOKIEPATH, COOKIE_DOMAIN, false );
+				setcookie( 'wp-job-manager-submitting-company-key', $submitting_key, false, COOKIEPATH, COOKIE_DOMAIN, false );
+
+				update_post_meta( $this->company_id, '_submitting_key', $submitting_key );
 			}
 		}
 	}
