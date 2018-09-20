@@ -639,12 +639,12 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 					}
 					if ( ! empty( $_POST['company_email'] ) ) {
 						if ( version_compare( JOB_MANAGER_VERSION, '1.20.0', '<' ) ) {
-							$create_account = wp_job_manager_create_account( $_POST['company_email'], get_option( 'company_listings_registration_role', 'company_listings' ) );
+							$create_account = wp_job_manager_create_account( $_POST['company_email'], get_option( 'company_listings_registration_role', 'company' ) );
 						} else {
 							$create_account = wp_job_manager_create_account( array(
 								'username' => empty( $_POST['create_account_username'] ) ? '' : $_POST['create_account_username'],
 								'email'    => $_POST['company_email'],
-								'role'     => get_option( 'company_listings_registration_role', 'company_listings' )
+								'role'     => get_option( 'company_listings_registration_role', 'company' )
 							) );
 						}
 					}
