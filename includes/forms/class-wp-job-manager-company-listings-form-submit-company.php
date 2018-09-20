@@ -735,10 +735,6 @@ class WP_Job_Manager_Company_Listings_Form_Submit_Company extends WP_Job_Manager
 		$company_slug[] = current( explode( ' ', $post_title ) );
 		$company_slug[] = $prefix;
 
-		if ( ! empty( $values['company_fields']['company_title'] ) ) {
-			$company_slug[] = $values['company_fields']['company_title'];
-		}
-
 		if ( ! empty( $values['company_fields']['company_location'] ) ) {
 			$company_slug[] = $values['company_fields']['company_location'];
 		}
