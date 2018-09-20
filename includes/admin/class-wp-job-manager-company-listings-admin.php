@@ -31,6 +31,8 @@ class WP_Job_Manager_Company_Listings_Admin {
 		add_action( 'admin_menu', 					array( $this, 'admin_menu' ), 12 );
 		add_action( 'admin_enqueue_scripts', 		array( $this, 'admin_enqueue_scripts' ), 20 );
 
+		add_filter( 'job_manager_job_listing_data_fields', array( $this, 'update_job_listing_data_fields' ) );
+
 		$this->settings_page = new WP_Job_Manager_Company_Listings_Settings();
 	}
 
@@ -77,6 +79,43 @@ class WP_Job_Manager_Company_Listings_Admin {
 	 */
 	public function admin_menu() {
 		add_submenu_page( 'edit.php?post_type=company_listings', __( 'Settings', 'wp-job-manager-company-listings' ), __( 'Settings', 'wp-job-manager-company-listings' ), 'manage_options', 'company-listings-settings', array( $this->settings_page, 'output' ) );
+	}
+
+	public function update_job_listing_data_fields( $fields ) {
+		if ( isset( $fields['_company_name'] ) ) {
+			unset( $fields['_company_name'] );
+		}
+
+		if ( isset( $fields['_company_website'] ) ) {
+			unset( $fields['_company_website'] );
+		}
+
+		if ( isset( $fields['_company_tagline'] ) ) {
+			unset( $fields['_company_tagline'] );
+		}
+
+		if ( isset( $fields['_company_twitter'] ) ) {
+			unset( $fields['_company_twitter'] );
+		}
+
+		if ( isset( $fields['_company_video'] ) ) {
+			unset( $fields['_company_video'] );
+		}
+
+		$company_field_required = apply_filters( 'submit_job_form_fields_select_company_field_required', true );
+		$company_field_position = apply_filters( 'submit_job_form_fields_select_company_field_position', 0 );
+		$options = jmcl_get_companies_for_dropdown_field();
+
+		$fields['_company_id'] = array(
+		    'label'       => __( 'Company', 'wp-job-manager-company-listings' ),
+		    'type'        => 'select',
+		    'required'    => $company_field_required,
+		    'placeholder' => __( 'Select company', 'wp-job-manager-company-listings' ),
+		    'priority'    => $company_field_position,
+		    'options'     => $options,
+		);
+
+		return $fields;
 	}
 }
 

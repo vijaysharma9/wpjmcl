@@ -717,6 +717,14 @@ function jmcl_get_companies_for_dropdown_field() {
 		$args['author'] = get_current_user_id();
 	}
 
+	if ( is_admin() && isset( $args['author'] ) ) {
+		$current_user = wp_get_current_user();
+
+		if ( $current_user->has_cap( 'manage_job_listings' ) ) {
+			unset( $args['author'] );
+		}
+	}
+
 	$args = apply_filters( 'jmcl_get_companies_for_dropdown_field_args', $args );
 
 	$posts = get_posts( $args );

@@ -10,7 +10,6 @@ class WP_Job_Manager_Company_Listings_Mapping {
     public function __construct() {
         // Job form
         add_action( 'submit_job_form_fields', array( $this, 'update_form_fields' ) );
-        add_action( 'job_manager_job_listing_data_end', array( $this, 'job_listing_data' ) );
 
         // include custom templates
         add_action( 'job_manager_locate_template', array( $this, 'include_templates' ), 10, 3 );
@@ -71,18 +70,6 @@ class WP_Job_Manager_Company_Listings_Mapping {
         );
 
         return $fields;
-    }
-
-    /**
-     * Company input fields in an add job form
-     */
-    public function job_listing_data( $post_id ) {
-        $company_id = get_post_meta( $post_id, '_company_id', true );
-        if ( ! $company_id )
-            $company_id = 'new';
-        ?>
-            <input type="hidden" name="_company_id" id="_company_id" value="<?php echo $company_id ?>" />
-        <?php
     }
 
     /**
