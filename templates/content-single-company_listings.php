@@ -30,20 +30,19 @@ if ( post_password_required() ) {
 do_action( 'jmcl_before_single_company' );
 ?>
 
-<div id="company-<?php the_ID(); ?>" <?php post_class(); ?>>
+<div class="single_company_listing">
 
 	<?php
 	do_action( 'jmcl_before_single_company_summary' );
 	?>
 
 	<div class="jmcl-item-header">
+		<div class="jmcl-item-header-logo"><?php the_post_thumbnail(); ?></div>
+
 		<div class="jmcl-item-header-content">
-			<a class="company-title" href=""><h3><?php the_title() ?></h3></a>
-			<p class="company-tagline"><?php echo the_company_metatitle() ?></p>
-			<div class="company-location"><?php the_company_metalocation() ?></div>
-			<ul class="company-info">
-				<?php the_company_metainfo() ?>
-			</ul>
+			<h3><?php the_title(); ?></h3>
+			<p class="company-tagline"><?php echo the_company_metatitle(); ?></p>
+			<p class="company-location"><?php the_company_metalocation(); ?></p>
 		</div>
 	</div>
 
@@ -70,7 +69,7 @@ do_action( 'jmcl_before_single_company' );
 			</div>
 
 		<?php endif; ?>
-		
+
 		<?php
 		do_action( 'jmcl_single_company_summary' );
 		?>

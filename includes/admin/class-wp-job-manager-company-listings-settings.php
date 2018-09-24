@@ -113,7 +113,7 @@ class WP_Job_Manager_Company_Listings_Settings {
 						array(
 							'name'       => 'company_only_self',
 							'std'        => '0',
-							'label'      => __( 'Company Name Dropdown', 'wp-job-manager-company-listings' ),
+							'label'      => __( 'Company Dropdown', 'wp-job-manager-company-listings' ),
 							'cb_label'   => __( 'Show only self companies', 'wp-job-manager-company-listings' ),
 							'desc'       => __( 'Choose whether to show only self companies in the company name dropdown.', 'wp-job-manager-company-listings' ),
 							'type'       => 'checkbox',
@@ -153,7 +153,7 @@ class WP_Job_Manager_Company_Listings_Settings {
 						),
 						array(
 							'name'       => 'company_listings_registration_role',
-							'std'        => 'company_listings',
+							'std'        => 'company',
 							'label'      => __( 'Account Role', 'wp-job-manager-company-listings' ),
 							'desc'       => __( 'If you enable registration on your submission form, choose a role for the new user.', 'wp-job-manager-company-listings' ),
 							'type'       => 'select',
@@ -186,37 +186,12 @@ class WP_Job_Manager_Company_Listings_Settings {
 						    'type'        => 'input'
 						),
 						array(
-							'name'       => 'company_listings_submit_company_field_type_text',
-							'std'        => '0',
-							'label'      => __( 'Company Name Field Type', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Enable field type text', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'Choose whether to enable field type text for the company name.', 'wp-job-manager-company-listings' ),
-							'type'       => 'checkbox',
-							'attributes' => array()
-						),
-						array(
 							'name'        => 'company_listings_submission_limit',
 							'std'         => '',
 							'label'       => __( 'Listing Limit', 'wp-job-manager-company-listings' ),
 							'desc'        => __( 'How many listings are users allowed to post. Can be left blank to allow unlimited listings per account.', 'wp-job-manager-company-listings' ),
 							'attributes'  => array(),
 							'placeholder' => __( 'No limit', 'wp-job-manager-company-listings' )
-						),
-						array(
-							'name' 		=> 'company_listings_linkedin_import',
-							'std'        => '0',
-							'label'      => __( 'Linkedin Import', 'wp-job-manager-company-listings' ),
-							'cb_label'   => __( 'Allow import of company data from LinkedIn', 'wp-job-manager-company-listings' ),
-							'desc'       => __( 'If enabled, users will be able to login to LinkedIn and have the company submission form automatically populated.', 'wp-job-manager-company-listings' ),
-							'type'       => 'checkbox',
-							'attributes' => array()
-						),
-						'api_key' => array(
-							'name' 		=> 'job_manager_linkedin_api_key',
-							'std' 		=> '',
-							'label' 	=> __( 'Linkedin Api Key', 'wp-job-manager-company-listings' ),
-							'desc'		=> __( 'Get your API key by creating a new application on https://www.linkedin.com/secure/developer', 'wp-job-manager-company-listings' ),
-							'type'      => 'input'
 						),
 					)
 				),

@@ -20,7 +20,7 @@ function the_company_metalocation( $map_link = true, $post = null ) {
 
 	if ( $location ) {
 		if ( $map_link )
-			echo apply_filters( 'the_company_metalocation_map_link', '<a class="google_map_link company-location" href="http://maps.google.com/maps?q=' . urlencode( $location ) . '&zoom=14&size=512x512&maptype=roadmap&sensor=false">' . $location . '</a>', $location, $post );
+			echo apply_filters( 'the_company_metalocation_map_link', '<a class="google_map_link company-location" href="http://maps.google.com/maps?q=' . urlencode( $location ) . '&zoom=14&size=512x512&maptype=roadmap&sensor=false" target="_blank">' . $location . '</a>', $location, $post );
 		else
 			echo '<span class="company-location">' . $location . '</span>';
 	}
@@ -76,7 +76,7 @@ function get_the_company_metatitle( $post = null ) {
 	if ( $post->post_type !== 'company_listings' )
 		return '';
 
-	return apply_filters( 'the_company_metatitle', $post->_company_title, $post );
+	return apply_filters( 'the_company_metatitle', $post->_company_tagline, $post );
 }
 
 /**
@@ -126,6 +126,14 @@ function the_company_metacategory( $post = null ) {
 }
 
 /**
+ * Output the skills
+ * @param WP_Post|int $post (default: null)
+ */
+function the_company_metaskills( $post = null ) {
+	echo get_the_company_metaskills( $post );
+}
+
+/**
  * Get the category
  * @param WP_Post|int $post (default: null)
  * @return  string
@@ -145,6 +153,28 @@ function get_the_company_metacategory( $post = null ) {
 	}
 
 	return implode( ', ', $categories );
+}
+
+/**
+ * Get the skills
+ * @param WP_Post|int $post (default: null)
+ * @return  string
+ */
+function get_the_company_metaskills( $post = null ) {
+	$post = get_post( $post );
+	if ( $post->post_type !== 'company_listings' )
+		return '';
+
+	if ( ! get_option( 'company_listings_enable_skills' ) )
+		return '';
+
+	$skills = wp_get_object_terms( $post->ID, 'company_skill', array( 'fields' => 'names' ) );
+
+	if ( is_wp_error( $skills ) ) {
+		return '';
+	}
+
+	return implode( ', ', $skills );
 }
 
 /**
@@ -270,6 +300,26 @@ function the_company_metapermalink( $post = null ) {
 }
 
 /**
+ * Output the company about
+ *
+ * @param WP_Post|int $post (default: null)
+ */
+function the_company_about( $post = null ) {
+	$post = get_post( $post );
+	get_job_manager_template( 'company_listings-about.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+}
+
+/**
+ * Output the company contact info
+ *
+ * @param WP_Post|int $post (default: null)
+ */
+function the_company_contact_info( $post = null ) {
+	$post = get_post( $post );
+	get_job_manager_template( 'company_listings-contact-info.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+}
+
+/**
  * Output the company links
  *
  * @param WP_Post|int $post (default: null)
@@ -286,7 +336,27 @@ function the_company_metalinks( $post = null ) {
  */
 function the_company_metainfo( $post = null ) {
 	$post = get_post( $post );
-	get_job_manager_template( 'company_listings-info.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+	get_job_manager_template( 'company_listings-meta-info.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+}
+
+/**
+ * Output the company perks
+ *
+ * @param WP_Post|int $post (default: null)
+ */
+function the_company_perks( $post = null ) {
+	$post = get_post( $post );
+	get_job_manager_template( 'company_listings-perks.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
+}
+
+/**
+ * Output the company press
+ *
+ * @param WP_Post|int $post (default: null)
+ */
+function the_company_press( $post = null ) {
+	$post = get_post( $post );
+	get_job_manager_template( 'company_listings-press.php', array( 'post' => $post ), 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' );
 }
 
 /**
@@ -330,6 +400,24 @@ function company_has_file( $post = null ) {
 }
 
 /**
+ * Returns true or false based on whether the company has any perks to display.
+ * @param  object $post
+ * @return bool
+ */
+function company_has_perks( $post = null ) {
+	return get_company_perks() ? true : false;
+}
+
+/**
+ * Returns true or false based on whether the company has any press to display.
+ * @param  object $post
+ * @return bool
+ */
+function company_has_press( $post = null ) {
+	return get_company_press() ? true : false;
+}
+
+/**
  * Returns an array of links defined for a company
  * @param  object $post
  * @return array
@@ -352,6 +440,28 @@ function get_company_info( $post = null ) {
 }
 
 /**
+ * Returns an array of perks defined for a company
+ * @param  object $post
+ * @return array
+ */
+function get_company_perks( $post = null ) {
+	$post = get_post( $post );
+
+	return array_filter( (array) get_post_meta( $post->ID, '_company_perk', true ) );
+}
+
+/**
+ * Returns an array of press defined for a company
+ * @param  object $post
+ * @return array
+ */
+function get_company_press( $post = null ) {
+	$post = get_post( $post );
+
+	return array_filter( (array) get_post_meta( $post->ID, '_company_press', true ) );
+}
+
+/**
  * If multiple files have been attached to the company_file field, return the in array format.
  * @return array
  */
@@ -370,7 +480,12 @@ function get_company_files( $post = null ) {
 function get_company_file( $post = null ) {
 	$post = get_post( $post );
 	$file = get_post_meta( $post->ID, '_company_file', true );
-	return is_array( $file ) ? current( $file ) : $file;
+
+	if ( get_option( 'company_listings_enable_company_upload' ) ) {
+		return is_array( $file ) ? current( $file ) : $file;
+	} else {
+		return;
+	}
 }
 
 /**
@@ -439,6 +554,7 @@ if ( ! function_exists( 'jmcl_output_content_wrapper' ) ) {
 		get_company_listings_template( 'global/wrapper-start.php' );
 	}
 }
+
 if ( ! function_exists( 'jmcl_output_content_wrapper_end' ) ) {
 
 	/**
@@ -465,40 +581,16 @@ if ( ! function_exists( 'jmcl_get_sidebar' ) ) {
  * Output the Description tab content on the company page
  */
 function company_listings_company_about_tab() {
-	global $post;
-	?>
-	<div class="cmp-about">
+	do_action( 'company_listings_company_about_tab_before' );
 
-		<h3 class="container-title"><?php printf( __( 'About %s', 'wp-job-manager-company-listings' ), get_the_title() )  ?></h3>
+	the_company_about();
+	the_company_contact_info();
+	the_company_metalinks();
+	the_company_metainfo();
+	the_company_perks();
+	the_company_press();
 
-		<?php the_company_metavideo() ?>
-
-		<div class="cmp-content">
-			<?php echo $post->post_content  ?>
-		</div>
-
-		<div class="cmp-contact-info">
-			<p></p>
-			<h3 class="container-title"><?php _e( 'Contact Info', 'wp-job-manager-company-listings' ) ?></h3>
-			<table>
-				<tbody>
-				<tr>
-					<td class="label"><?php _e('Website', 'wp-job-manager-company-listings') ?></td>
-					<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_website', true ) ) ?></td>
-				</tr>
-				<tr>
-					<td class="label"><?php _e('Twitter', 'wp-job-manager-company-listings') ?></td>
-					<td class="data"><?php echo make_clickable(  'https://twitter.com/' .get_post_meta( $post->ID, '_company_twitter', true ) ) ?></td>
-				</tr>
-				<tr>
-					<td class="label"><?php _e('video', 'wp-job-manager-company-listings') ?></td>
-					<td class="data"><?php echo make_clickable( get_post_meta( $post->ID, '_company_video', true ) ) ?></td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-<?php
+	do_action( 'company_listings_company_about_tab_after' );
 }
 
 /**
@@ -506,7 +598,6 @@ function company_listings_company_about_tab() {
  */
 function company_listings_company_jobs_tab() { ?>
 	<div class="cmp-posted-jobs">
-		<p></p>
 		<h3 class="container-title"><?php printf( __( 'Jobs at %s', 'wp-job-manager-company-listings' ), get_the_title() )  ?></h3>
 		<?php echo do_shortcode('[jobs]'); ?>
 	</div> <?php
