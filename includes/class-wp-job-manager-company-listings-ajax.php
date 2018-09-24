@@ -15,6 +15,8 @@ class WP_Job_Manager_Company_Listings_Ajax {
 		add_action( 'wp_ajax_company_listings_get_companies', array( $this, 'get_companies' ) );
 		add_action( 'wp_ajax_nopriv_company_listings_json_search_company', array( $this, 'json_search_company' ) );
 		add_action( 'wp_ajax_company_listings_json_search_company', array( $this, 'json_search_company' ) );
+		add_action( 'wp_ajax_nopriv_company_listings_json_company_data', array( $this, 'json_company_data' ) );
+		add_action( 'wp_ajax_company_listings_json_company_data', array( $this, 'json_company_data' ) );
 	}
 
 	/**
@@ -126,21 +128,23 @@ class WP_Job_Manager_Company_Listings_Ajax {
 		die();
 	}
 
+
 	/**
 	 * Search for company and return json.
 	 */
 	public function json_search_company() {
 		$term = isset( $_POST['term'] ) ? $_POST['term'] : '';
+		$option_value = isset( $_POST['option_value'] ) ? $_POST['option_value'] : '';
 		$companies = array();
 
 		if ( $term ) {
 			$args = array(
 				'post_type'      => 'company_listings',
-				'post_status'    => 'publish',
+				'post_status'    => 'publish' ,
 				'posts_per_page' => -1,
 			);
 
-			if ( jmcl_only_self_companies() ) {
+			if ( get_option( 'company_only_self' ) == 1 ) {
 				$args['author'] = get_current_user_id();
 			}
 
@@ -153,14 +157,54 @@ class WP_Job_Manager_Company_Listings_Ajax {
 			if ( $posts ) {
 				foreach ($posts as $post) {
 					$companies[] = array(
-						'id'   => $post->ID,
+						'id'   => $option_value == 'post_title' ? $post->post_title : $post->ID,
 						'text' => $post->post_title,
 					);
 				}
 			}
 		}
 
-		wp_send_json( apply_filters( 'json_search_company', $companies, $posts ) );
+		echo json_encode( $companies );
+		exit;
+	}
+
+	/**
+	 * Get the selected company data
+	 */
+	public function json_company_data() {
+
+		ob_start();
+
+		$company_id = stripslashes( $_GET['company_id'] );
+
+		$data = array(
+			'location'  	=> get_post_meta( $company_id, '_company_location', true ),
+			'application'  	=> get_post_meta( $company_id, '_company_email', true ),
+			'website'   	=> get_post_meta( $company_id, '_company_website', true ),
+			'tagline'   	=> get_post_meta( $company_id, '_company_title', true ),
+			'twitter'   	=> get_post_meta( $company_id, '_company_twitter', true ),
+			'video'     	=> get_post_meta( $company_id, '_company_video', true ),
+			'group_id'  	=> get_post_meta( $company_id, '_group_id', true )
+		);
+
+		//Company logo
+		$thumbnail_id  = get_post_thumbnail_id( $company_id );
+
+		if ( ! empty( $thumbnail_id ) ) {
+
+			if ( isset( $_GET['post_ID'] ) ) {
+				$data['logo_backend']  = _wp_post_thumbnail_html( $thumbnail_id, $_GET['post_ID'] );
+			} else {
+
+				ob_start();
+				get_job_manager_template( 'form-fields/uploaded-file-html.php', array( 'name' => 'current_company_logo', 'value' => $thumbnail_id ) );
+				$js_field_html_img = ob_get_clean();
+				$data['logo_frontend'] =  $js_field_html_img;
+			}
+		}
+
+
+		wp_send_json( apply_filters( 'json_company_data', $data ) );
 	}
 }
 

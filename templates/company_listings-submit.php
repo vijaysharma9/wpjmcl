@@ -18,6 +18,12 @@ wp_enqueue_script( 'wp-job-manager-company-listings-company-submission' );
 
 	<?php if ( company_listings_user_can_post_company() ) : ?>
 
+		<?php if ( get_option( 'company_listings_linkedin_import' ) ) : ?>
+
+			<?php get_job_manager_template( 'linkedin-import.php', '', 'wp-job-manager-company-listings', COMPANY_LISTINGS_PLUGIN_DIR . '/templates/' ); ?>
+
+		<?php endif; ?>
+
 		<!-- Company Fields -->
 		<?php do_action( 'submit_company_form_company_fields_start' ); ?>
 

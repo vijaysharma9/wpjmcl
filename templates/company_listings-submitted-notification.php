@@ -5,7 +5,7 @@
  * Note: This is in plain text format
  */
 $message             = array();
-$message['greeting'] = __( 'Hello,', 'wp-job-manager-company-listings' ) . "\n" . "\n";
+$message['greeting'] = __( 'Hello', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 $message['intro']    = sprintf( __( 'A new company has just been submitted by *%s*. The details of their company are as follows:', 'wp-job-manager-company-listings' ), $company->post_title ) . "\n" . "\n";
 
 // Get admin custom fields and loop through
@@ -22,22 +22,13 @@ foreach ( $custom_fields as $meta_key => $field ) {
 $message['content_intro'] = "\n" . __( 'The content of their company is as follows:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 $message['content']       = strip_tags( $company->post_content ) . "\n" . "\n" . '-----------' . "\n" . "\n";
 
-// Output URL(s)
+// Output Links
 if ( $items = get_post_meta( $company_id, '_links', true ) ) {
-	$message['link_start'] = __( 'URL(s):', 'wp-job-manager-company-listings' ) . "\n" . "\n";
+	$message['link_start'] = __( 'Links:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 	foreach ( $items as $key => $item ) {
 		$message[ 'link_' . $key ] = $item['name'] . ': ' . $item['url'] . "\n";
 	}
 	$message['link_end'] = "\n" . '-----------' . "\n" . "\n";
-}
-
-// Output Info(s)
-if ( $items = get_post_meta( $company_id, '_info', true ) ) {
-	$message['info_start'] = __( 'Info(s):', 'wp-job-manager-company-listings' ) . "\n" . "\n";
-	foreach ( $items as $key => $item ) {
-		$message[ 'info_' . $key ] = $item['name'] . ': ' . $item['info'] . "\n";
-	}
-	$message['info_end'] = "\n" . '-----------' . "\n" . "\n";
 }
 
 // Perks
@@ -51,11 +42,14 @@ if ( $items = get_post_meta( $company_id, '_company_perk', true ) ) {
 
 // Press
 if ( $items = get_post_meta( $company_id, '_company_press', true ) ) {
-	$message['press_start'] = __( 'Press:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
+	$message['experience_start'] = __( 'Press:', 'wp-job-manager-company-listings' ) . "\n" . "\n";
 	foreach ( $items as $key => $item ) {
-		$message[ 'press_' . $key ] = $item['job_title'] . ': ' . $item['notes'] . "\n";
+		$message[ 'experience_employer_' . $key ] = sprintf( __( 'Employer: %s', 'wp-job-manager-company-listings' ), $item['employer'] ) . "\n";
+		$message[ 'experience_location_' . $key ] = sprintf( __( 'Date: %s', 'wp-job-manager-company-listings' ), $item['date'] ) . "\n";
+		$message[ 'experience_title_' . $key ]    = sprintf( __( 'Job Title: %s', 'wp-job-manager-company-listings' ), $item['job_title'] ) . "\n";
+		$message[ 'experience_notes_' . $key ]    = $item['notes'] . "\n" . "\n";
 	}
-	$message['press_end'] = "\n" . '-----------' . "\n" . "\n";
+	$message['experience_end'] = '-----------' . "\n" . "\n";
 }
 
 $message['view_company_link']       = sprintf( __( 'You can view this company here: %s' ), get_permalink( $company_id ) ) . "\n";

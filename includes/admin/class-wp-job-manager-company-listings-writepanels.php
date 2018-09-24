@@ -25,15 +25,14 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	 */
 	public static function company_fields() {
 		$fields = apply_filters( 'company_listings_company_fields', array(
+			'_company_title' => array(
+				'label'       => __( 'Company Tagline', 'wp-job-manager-company-listings' ),
+				'placeholder' => '',
+				'description' => ''
+			),
 			'_company_email' => array(
 				'label'       => __( 'Contact Email', 'wp-job-manager-company-listings' ),
 				'placeholder' => __( 'you@yourdomain.com', 'wp-job-manager-company-listings' ),
-				'description' => '',
-				'sanitizer'   => 'email',
-			),
-			'_company_tagline' => array(
-				'label'       => __( 'Company Tagline', 'wp-job-manager-company-listings' ),
-				'placeholder' => '',
 				'description' => ''
 			),
 			'_company_location' => array(
@@ -41,21 +40,19 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				'placeholder' => __( 'e.g. "London, UK", "New York", "Houston, TX"', 'wp-job-manager-company-listings' ),
 				'description' => ''
 			),
-			'_company_video' => array(
-				'label'       => __( 'Video', 'wp-job-manager-company-listings' ),
-				'placeholder' => __( 'URL to the company video', 'wp-job-manager-company-listings' ),
-				'type'        => 'text',
-				'sanitizer'   => 'url',
-			),
 			'_company_website' => array(
-				'label'       => __( 'Website', 'wp-job-manager-company-listings' ),
+				'label'       => __( 'WebSite', 'wp-job-manager-company-listings' ),
 				'placeholder' => __( 'URL to the company website', 'wp-job-manager-company-listings' ),
-				'type'        => 'text',
-				'sanitizer'   => 'url',
+				'type'        => 'text'
 			),
 			'_company_twitter' => array(
 				'label'       => __( 'Twitter', 'wp-job-manager-company-listings' ),
 				'placeholder' => __( '@yourcompany', 'wp-job-manager-company-listings' ),
+				'type'        => 'text'
+			),
+			'_company_video' => array(
+				'label'       => __( 'Video', 'wp-job-manager-company-listings' ),
+				'placeholder' => __( 'URL to the company video', 'wp-job-manager-company-listings' ),
 				'type'        => 'text'
 			),
 			'_company_file' => array(
@@ -72,7 +69,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 				'label' => __( 'Feature this Company?', 'wp-job-manager-company-listings' ),
 				'type'  => 'checkbox',
 				'description' => __( 'Featured companies will be sticky during searches, and can be styled differently.', 'wp-job-manager-company-listings' )
-			),
+			)
 		) );
 
 		if ( ! get_option( 'company_listings_enable_company_upload' ) ) {
@@ -89,8 +86,8 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 		add_meta_box( 'company_data', __( 'Company Data', 'wp-job-manager-company-listings' ), array( $this, 'company_data' ), 'company_listings', 'normal', 'high' );
 		add_meta_box( 'company_url_data', __( 'URL(s)', 'wp-job-manager-company-listings' ), array( $this, 'url_data' ), 'company_listings', 'side', 'low' );
 		add_meta_box( 'company_info_data', __( 'Company Info', 'wp-job-manager-company-listings' ), array( $this, 'info_data' ), 'company_listings', 'side', 'low' );
-		add_meta_box( 'company_perks_data', __( 'Perks', 'wp-job-manager-company-listings' ), array( $this, 'perks_data' ), 'company_listings', 'normal', 'high' );
-		add_meta_box( 'company_press_data', __( 'Press', 'wp-job-manager-company-listings' ), array( $this, 'press_data' ), 'company_listings', 'normal', 'high' );
+		add_meta_box( 'company_perk_data', __( 'Perks', 'wp-job-manager-company-listings' ), array( $this, 'perk_data' ), 'company_listings', 'normal', 'high' );
+		add_meta_box( 'company_press_data', __( 'Press', 'wp-job-manager-company-listings' ), array( $this, 'experience_data' ), 'company_listings', 'normal', 'high' );
 	}
 
 	/**
@@ -208,7 +205,6 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 			'url' => array(
 				'label'       => __( 'URL', 'wp-job-manager-company-listings' ),
 				'name'        => 'company_url[]',
-				'sanitizer'   => 'url',
 				'placeholder' => 'http://',
 				'description' => '',
 				'required'    => true
@@ -262,7 +258,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	public static function company_press_fields() {
 		return apply_filters( 'company_listings_company_press_fields', array(
 			'job_title' => array(
-				'label'       => __( 'Title', 'wp-job-manager-company-listings' ),
+				'label'       => __( 'Post Title', 'wp-job-manager-company-listings' ),
 				'name'        => 'company_press_job_title[]',
 				'placeholder' => '',
 				'description' => '',
@@ -271,7 +267,6 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 			'notes' => array(
 				'label'       => __( 'URL', 'wp-job-manager-company-listings' ),
 				'name'        => 'company_press_notes[]',
-				'sanitizer'   => 'url',
 				'placeholder' => 'http://',
 				'description' => '',
 				'required'    => true
@@ -300,21 +295,21 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 	}
 
 	/**
-	 * Company Perks data
+	 * Company Education data
 	 *
 	 * @param mixed $post
 	 */
-	public function perks_data( $post ) {
+	public function perk_data( $post ) {
 		$fields = $this->company_perk_fields();
 		$this->repeated_rows_html( __( 'Perks', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_company_perk', true ) );
 	}
 
 	/**
-	 * Company Press data
+	 * Company Education data
 	 *
 	 * @param mixed $post
 	 */
-	public function press_data( $post ) {
+	public function experience_data( $post ) {
 		$fields = $this->company_press_fields();
 		$this->repeated_rows_html( __( 'Press', 'wp-job-manager-company-listings' ), $fields, get_post_meta( $post->ID, '_company_press', true ) );
 	}
@@ -383,20 +378,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 						if ( is_array( $_POST[ $key ] ) ) {
 							update_post_meta( $post_id, $key, array_filter( array_map( 'sanitize_text_field', $_POST[ $key ] ) ) );
 						} else {
-							$posted_value = $_POST[ $key ];
-
-							if ( isset( $field['sanitizer'] ) ) {
-								// do the sanitization for url and email
-								$sanitizer = $field['sanitizer'];
-
-								if ( $sanitizer === 'url' ) {
-									$posted_value = esc_url_raw( $posted_value );
-								} elseif ( $sanitizer === 'email' ) {
-									$posted_value = sanitize_email( $posted_value );
-								}
-							}
-
-							update_post_meta( $post_id, $key, sanitize_text_field( $posted_value ) );
+							update_post_meta( $post_id, $key, sanitize_text_field( $_POST[ $key ] ) );
 						}
 					break;
 				}
@@ -440,18 +422,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 							if ( is_array( $_POST[ $input_name ][ $posted_key ] ) ) {
 								$item[ $key ] = array_filter( array_map( 'sanitize_text_field', array_map( 'stripslashes', $_POST[ $input_name ][ $posted_key ] ) ) );
 							} else {
-								if ( isset( $field['sanitizer'] ) ) {
-									// do the sanitization for url and email
-									$sanitizer = $field['sanitizer'];
-
-									if ( $sanitizer === 'url' ) {
-										$item[ $key ] = esc_url_raw( $_POST[ $input_name ][ $posted_key ] );
-									} elseif ( $sanitizer === 'email' ) {
-										$item[ $key ] = sanitize_email( $_POST[ $input_name ][ $posted_key ] );
-									}
-								} else {
-									$item[ $key ] = sanitize_text_field( stripslashes( $_POST[ $input_name ][ $posted_key ] ) );
-								}
+								$item[ $key ] = sanitize_text_field( stripslashes( $_POST[ $input_name ][ $posted_key ] ) );
 							}
 						break;
 					}

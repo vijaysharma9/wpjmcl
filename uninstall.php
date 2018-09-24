@@ -20,6 +20,8 @@ $options = array(
 	'company_listings_registration_role',
 	'company_listings_submission_requires_approval',
 	'company_listings_submission_duration',
+	'company_listings_linkedin_import',
+	'job_manager_linkedin_api_key',
 	'company_listings_browse_company_capability',
 	'company_listings_view_company_capability',
 	'company_listings_contact_company_capability',

@@ -31,8 +31,6 @@ class WP_Job_Manager_Company_Listings_Forms {
 			include( JOB_MANAGER_PLUGIN_DIR . '/includes/abstracts/abstract-wp-job-manager-form.php' );
 		}
 
-		require_once COMPANY_LISTINGS_PLUGIN_DIR . '/includes/forms/class-wp-job-manager-company-listings-company-form.php';
-
 		// Now try to load the form_name
 		$form_class  = 'WP_Job_Manager_Company_Listings_Form_' . str_replace( '-', '_', $form_name );
 		$form_file   = COMPANY_LISTINGS_PLUGIN_DIR . '/includes/forms/class-wp-job-manager-company-listings-form-' . $form_name . '.php';

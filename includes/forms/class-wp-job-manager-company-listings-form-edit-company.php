@@ -31,6 +31,9 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 		if  ( ! company_listings_user_can_edit_company( $this->company_id ) ) {
 			$this->company_id = 0;
 		}
+
+		// set company name
+		add_action( 'submit_company_form_fields_get_company_data', array( $this, 'set_company_name' ), 10, 2 );
 	}
 
 	/**
@@ -61,13 +64,10 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 				if ( ! isset( $this->fields[ $group_key ][ $key ]['value'] ) ) {
 					if ( 'company_name' === $key ) {
 						$this->fields[ $group_key ][ $key ]['value'] = $company->post_title;
+						$this->fields[ $group_key ][ $key ]['option_value'] = 'post_title';
 
 					} elseif ( 'company_content' === $key ) {
 						$this->fields[ $group_key ][ $key ]['value'] = $company->post_content;
-
-					} elseif ( 'company_logo' === $key ) {
-						$logo_id = get_post_thumbnail_id( $company );
-						$this->fields[ $group_key ][ $key ]['value'] = $logo_id;
 
 					} elseif ( ! empty( $field['taxonomy'] ) ) {
 						$this->fields[ $group_key ][ $key ]['value'] = wp_get_object_terms( $company->ID, $field['taxonomy'], array( 'fields' => 'ids' ) );
@@ -126,5 +126,32 @@ class WP_Job_Manager_Company_Listings_Form_Edit_Company extends WP_Job_Manager_C
 			echo '<div class="job-manager-error">' . $e->getMessage() . '</div>';
 			return;
 		}
+	}
+
+	/**
+	 * Sets the company name.
+	 *
+	 * @param      array   $fields   The fields
+	 * @param      object  $company  The company
+	 */
+	public function set_company_name( $fields, $company ) {
+	    if ( $fields ) {
+	        foreach ( $fields as $group_key => $group_fields ) {
+	            foreach ( $group_fields as $key => $field ) {
+	                if ( $field['type'] === 'select-company' ) {
+						$value = $company->post_title;
+
+	                    if ( isset( $_POST[ $key ] ) ) {
+	                        $value = $_POST[ $key ];
+	                    }
+
+	                    $fields[ $group_key ][ $key ]['company_id'] = $value;
+	                    $fields[ $group_key ][ $key ]['company_name'] = $value;
+	                }
+	            }
+	        }
+	    }
+
+	    return $fields;
 	}
 }

@@ -21,8 +21,14 @@ jQuery(document).ready(function($) {
 		opacity: 0.65
 	});
 
+	// Datepicker
+	$( "input#_company_expires" ).datepicker({
+		dateFormat: 'yy-mm-dd',
+		minDate: 0
+	});
+
 	// Settings
-	$('.wp-job-manager-company-listings-settings-wrap')
+	$('.job-manager-settings-wrap')
 		.on( 'change', '#setting-company_listings_enable_skills', function() {
 			if ( $( this ).is(':checked') ) {
 				$('#setting-company_listings_max_skills').closest('tr').show();
@@ -37,6 +43,13 @@ jQuery(document).ready(function($) {
 				$('#setting-company_listings_enable_default_category_multiselect, #setting-company_listings_category_filter_type').closest('tr').hide();
 			}
 		})
+		.on( 'change', '#setting-company_listings_linkedin_import', function() {
+			if ( $( this ).is(':checked') ) {
+				$('#setting-job_manager_linkedin_api_key').closest('tr').show();
+			} else {
+				$('#setting-job_manager_linkedin_api_key').closest('tr').hide();
+			}
+		})
 		.on( 'change', '#setting-company_listings_enable_registration', function() {
 			if ( $( this ).is(':checked') ) {
 				$('#setting-company_listings_generate_username_from_email, #setting-company_listings_registration_role').closest('tr').show();
@@ -45,5 +58,5 @@ jQuery(document).ready(function($) {
 			}
 		});
 
-	$('#setting-company_listings_enable_skills, #setting-company_listings_enable_categories, #setting-company_listings_enable_registration').change();
+	$('#setting-company_listings_enable_skills, #setting-company_listings_enable_categories, #setting-company_listings_linkedin_import, #setting-company_listings_enable_registration').change();
 });
