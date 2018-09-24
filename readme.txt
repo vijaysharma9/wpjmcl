@@ -3,7 +3,7 @@ Contributors: WPdrift, upnrunn, kishores, shamimmoeen
 Tags: wp-job-manager, wp-job-manager-company, wp-job-manager-company-listings, company-listings
 Requires at least: 4.4
 Tested up to: 4.9.8
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires PHP: 5.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
