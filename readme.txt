@@ -3,7 +3,7 @@ Contributors: WPdrift, upnrunn, kishores, shamimmoeen
 Tags: wp-job-manager, wp-job-manager-company, wp-job-manager-company-listings, company-listings
 Requires at least: 4.4
 Tested up to: 4.9.8
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires PHP: 5.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -69,6 +69,24 @@ The manual installation method involves downloading the plugin and uploading it 
 
 == Changelog ==
 
+= 1.0.5 - 2018-09-25 =
+* Remove fields from submit-job-form and move to submit-company-form
+* Update submit-company-form
+* Add missing company datas to single company post page
+* Remove unnecessary scripts
+* Add option to filter companies by featured in list table
+* Remove linkedin import feature
+* Remove option to make the company name field to text field
+* Add filters to modify company select field
+* Load select2 scripts only when needed
+* Fix - preview company then press edit erases the company data
+* Fix design issues on company preview page
+* Set default user role to 'company' when creating user from the submit company form
+* Fix company permalink issue
+* Update submitted company email template
+* Remove custom fields from wp-admin related to company from job post type
+* Updated pot file
+
 = 1.0.4 =
 * Add filters to modify the columns of companies list table
 * Add supports the feature 'author' for post type 'company_listings'
@@ -106,29 +124,5 @@ The manual installation method involves downloading the plugin and uploading it 
 
 == Upgrade Notice ==
 
-= 1.0.4 =
-* Add filters to modify the columns of companies list table
-* Add supports the feature 'author' for post type 'company_listings'
-
-= 1.0.3 =
-* Fix scroll to bottom issue on plugin settings page
-* Add filter to modify company slug, filter available 'company_listing_post_slug'
-* Add option to enable company name field type text
-* Add option to show only self companies
-
-= 1.0.2 =
-* Update readme.txt and added README.md files
-* Improve the company submission system
-* Fix company featured image attach issue
-* Turn the company name field into searchable field
-* Remove 'Add Company' link from the company listings table
-* Fix localization issue and updated pot file
-* Remove company autohide features
-* Load minimized version of frontend.css if SCRIPT_DEBUG is enabled
-* Update select2 plugin
-* Make username field required
-* Fix issues on plugin settings page
-* Fix wrong constant name issue
-* Add missing jquery-tiptip library
-* Remove company expire related functionality
-* Generate unique slug for company when creating company
+= 1.0.5 =
+This is a major update. Make a full site backup before updating this plugin.

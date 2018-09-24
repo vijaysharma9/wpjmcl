@@ -5,163 +5,181 @@ msgstr ""
 "Project-Id-Version: WP Job Manager - Company Listings 1.0.4\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/wp-job-manager-company-listings\n"
-"POT-Creation-Date: 2018-08-29 06:52:59+00:00\n"
+"POT-Creation-Date: 2018-09-24 18:00:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: grunt-wp-i18n 0.5.4\n"
+"X-Generator: grunt-wp-i18n1.0.2\n"
 
-#: includes/admin/class-wp-job-manager-company-listings-admin.php:80
+#: includes/admin/class-wp-job-manager-company-listings-admin.php:81
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:49
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:50
+#: includes/admin/class-wp-job-manager-company-listings-admin.php:110
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:317
+#: includes/class-wp-job-manager-company-listings-install.php:63
+#: includes/class-wp-job-manager-company-listings-mapping.php:48
+#: includes/class-wp-job-manager-company-listings-post-types.php:159
+msgid "Company"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-admin.php:113
+#: includes/class-wp-job-manager-company-listings-mapping.php:51
+msgid "Select company"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:52
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:53
 msgid "Approve Companies"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:118
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:120
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:121
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:123
 msgid "%s approved"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:168
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:171
 msgid "Select a category"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:200
-#: includes/class-wp-job-manager-company-listings-mapping.php:36
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:124
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:127
-msgid "Company name"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:215
-msgid "Company updated. <a href=\"%s\">View Company</a>"
-msgstr ""
-
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:216
-msgid "Custom field updated."
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:217
-msgid "Custom field deleted."
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:218
-msgid "Company updated."
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:219
-msgid "Company restored to revision from %s"
+msgid "Select Featured"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-cpt.php:220
+msgid "Featured"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:224
+msgid "Not Featured"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:266
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:177
+msgid "Company name"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:281
+msgid "Company updated. <a href=\"%s\">View Company</a>"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:282
+msgid "Custom field updated."
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:283
+msgid "Custom field deleted."
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:284
+msgid "Company updated."
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:285
+msgid "Company restored to revision from %s"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:286
 msgid "Company published. <a href=\"%s\">View Company</a>"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:221
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:287
 msgid "Company saved."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:222
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:288
 msgid "Company submitted. <a target=\"_blank\" href=\"%s\">Preview Company</a>"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:223
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:289
 msgid ""
 "Company scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" "
 "href=\"%2$s\">Preview Company</a>"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:224
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:290
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:225
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:291
 msgid "Company draft updated. <a target=\"_blank\" href=\"%s\">Preview Company</a>"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:251
-#: includes/class-wp-job-manager-company-listings-install.php:63
-#: includes/class-wp-job-manager-company-listings-post-types.php:159
-msgid "Company"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:252
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:318
 #: includes/class-wp-job-manager-company-listings-shortcodes.php:187
 #: includes/class-wp-job-manager-company-listings-widgets.php:40
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:145
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:196
 #: templates/company_listings-filters.php:16
 msgid "Location"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:253
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:319
 msgid "Status"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:254
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:320
 msgid "Posted"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:259
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:325
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:90
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:188
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:255
+#: templates/company_listings-about.php:19
 msgid "Skills"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:263
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:329
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:61
 msgid "Categories"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:268
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:334
 msgid "Featured?"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:269
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:335
 msgid "Actions"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:367
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:466
 msgid "Company ID: %d"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:383
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:482
 msgid "M j, Y"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:384
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:483
 msgid "by a guest"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:384
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:483
 msgid "by %s"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:399
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:498
 msgid "Approve"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:407
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:506
 msgid "View"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:413
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:512
 msgid "Email Company"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:419
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:518
 #: includes/class-wp-job-manager-company-listings-post-types.php:184
 #: templates/company_listings-dashboard.php:37
 #: templates/company_listings-dashboard.php:41
 msgid "Edit"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-cpt.php:424
+#: includes/admin/class-wp-job-manager-company-listings-cpt.php:523
 #: templates/company_listings-dashboard.php:46
 msgid "Delete"
 msgstr ""
@@ -311,7 +329,7 @@ msgid "Choose whether to allow companys to upload a company file."
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:116
-msgid "Company Name Dropdown"
+msgid "Company Dropdown"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:117
@@ -414,156 +432,120 @@ msgid ""
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-settings.php:191
-msgid "Company Name Field Type"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:192
-msgid "Enable field type text"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:193
-msgid "Choose whether to enable field type text for the company name."
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:200
 msgid "Listing Limit"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:201
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:192
 msgid ""
 "How many listings are users allowed to post. Can be left blank to allow "
 "unlimited listings per account."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:203
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:194
 msgid "No limit"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:208
-msgid "Linkedin Import"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:209
-msgid "Allow import of company data from LinkedIn"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:210
-msgid ""
-"If enabled, users will be able to login to LinkedIn and have the company "
-"submission form automatically populated."
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:217
-msgid "Linkedin Api Key"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:218
-msgid ""
-"Get your API key by creating a new application on "
-"https://www.linkedin.com/secure/developer"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:224
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:199
 msgid "Pages"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:229
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:204
 msgid "Submit Company Page"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:230
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:205
 msgid ""
 "Select the page where you have placed the [submit_company_form] shortcode. "
 "This lets the plugin know where the form is located."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:236
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:211
 msgid "Company Dashboard Page"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:237
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:212
 msgid ""
 "Select the page where you have placed the [company_dashboard] shortcode. "
 "This lets the plugin know where the dashboard is located."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:243
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:218
 msgid "Company Listings Page"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:244
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:219
 msgid ""
 "Select the page where you have placed the [companies] shortcode. This lets "
 "the plugin know where the company listings page is located."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:250
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:225
 msgid "Company Directory Page"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:251
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:226
 msgid ""
 "Select the page where you have placed the [company_directory] shortcode. "
 "This lets the plugin know where the company Directory page is located."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:257
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:232
 msgid "Company Visibility"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:262
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:237
 msgid "View Company name Capability"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:264
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:239
 msgid ""
 "Enter the <a href=\"%s\">capability</a> required in order to view companies "
 "names. Supports a comma separated list of roles/capabilities."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:269
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:244
 msgid "Browse Company Capability"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:271
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:246
 msgid ""
 "Enter the <a href=\"%s\">capability</a> required in order to browse "
 "companies. Supports a comma separated list of roles/capabilities."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:276
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:251
 msgid "View Company Capability"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:278
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:253
 msgid ""
 "Enter the <a href=\"%s\">capability</a> required in order to view a single "
 "company. Supports a comma separated list of roles/capabilities."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:283
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:258
 msgid "Contact Details Capability"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:285
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:260
 msgid ""
 "Enter the <a href=\"%s\">capability</a> required in order to view contact "
 "details on a company. Supports a comma separated list of roles/capabilities."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:334
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:309
 msgid "Settings successfully saved"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:394
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:369
 msgid "--no page--"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:399
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:374
 msgid "Select a page&hellip;"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-settings.php:445
+#: includes/admin/class-wp-job-manager-company-listings-settings.php:420
 msgid "Save Changes"
 msgstr ""
 
@@ -758,169 +740,183 @@ msgid "Error"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:29
-msgid "Company Tagline"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:34
 msgid "Contact Email"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:35
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:30
 msgid "you@yourdomain.com"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:39
-msgid "Company Location"
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:35
+msgid "Company Tagline"
 msgstr ""
 
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:40
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:148
+msgid "Company Location"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:41
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:199
 msgid "e.g. \"London, UK\", \"New York\", \"Houston, TX\""
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:44
-msgid "WebSite"
-msgstr ""
-
 #: includes/admin/class-wp-job-manager-company-listings-writepanels.php:45
-msgid "URL to the company website"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:49
-#: includes/wp-job-manager-company-listings-template-functions.php:490
-msgid "Twitter"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:50
-msgid "@yourcompany"
-msgstr ""
-
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:54
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:166
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:217
+#: templates/company_listings-contact-info.php:33
 msgid "Video"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:55
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:46
 msgid "URL to the company video"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:59
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:51
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:225
+#: templates/company_listings-contact-info.php:19
+#: templates/content-single-job_listing-company.php:32
+msgid "Website"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:52
+msgid "URL to the company website"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:57
+#: templates/company_listings-contact-info.php:26
+msgid "Twitter"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:58
+msgid "@yourcompany"
+msgstr ""
+
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:62
 msgid "Company File"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:60
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:63
 msgid "URL to the company's company file"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:64
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:67
 msgid "Posted by"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:69
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:72
 msgid "Feature this Company?"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:71
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:74
 msgid ""
 "Featured companies will be sticky during searches, and can be styled "
 "differently."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:86
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:89
 msgid "Company Data"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:87
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:195
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:90
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:262
+#: templates/company_listings-links.php:3
 msgid "URL(s)"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:88
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:91
 msgid "Company Info"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:89
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:304
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:92
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:309
 #: includes/class-wp-job-manager-company-listings-widgets.php:318
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:245
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:313
+#: templates/company_listings-perks.php:3
 msgid "Perks"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:90
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:314
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:93
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:319
 #: includes/class-wp-job-manager-company-listings-widgets.php:232
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:261
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:330
+#: templates/company_listings-press.php:3
 msgid "Press"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:142
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:145
 #: includes/class-wp-job-manager-company-listings-post-types.php:183
 msgid "Add %s"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:199
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:222
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:202
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:226
 #: includes/class-wp-job-manager-company-listings-shortcodes.php:185
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:204
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:229
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:174
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:271
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:297
 msgid "Name"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:201
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:204
 msgid "Your site"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:206
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:268
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:284
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:211
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:275
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:209
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:272
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:289
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:278
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:345
 msgid "URL"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:224
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:229
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:294
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:220
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:236
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:228
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:233
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:299
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:304
 msgid "Info"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:245
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:253
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:249
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:321
 msgid "Notes"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:261
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:269
-msgid "Post Title"
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:265
+#: includes/class-wp-job-manager-company-listings-shortcodes.php:186
+#: includes/class-wp-job-manager-company-listings-widgets.php:30
+#: includes/class-wp-job-manager-company-listings-widgets.php:138
+#: includes/class-wp-job-manager-company-listings-widgets.php:233
+#: includes/class-wp-job-manager-company-listings-widgets.php:319
+#: includes/class-wp-job-manager-company-listings-widgets.php:400
+#: includes/class-wp-job-manager-company-listings-widgets.php:468
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:338
+msgid "Title"
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:282
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:200
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:287
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:267
 msgid "Optionally provide links to any of your websites or social network profiles."
 msgstr ""
 
-#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:292
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:225
+#: includes/admin/class-wp-job-manager-company-listings-writepanels.php:297
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:293
 msgid ""
 "Optionally provide information of your company foundation date, type, "
 "strength etc."
 msgstr ""
 
-#: includes/class-wp-job-manager-company-listings-ajax.php:71
+#: includes/class-wp-job-manager-company-listings-ajax.php:69
 msgid "No companies found matching your selection."
 msgstr ""
 
-#: includes/class-wp-job-manager-company-listings-ajax.php:97
+#: includes/class-wp-job-manager-company-listings-ajax.php:95
 msgid "Showing &ldquo;%s&rdquo; %scompanies"
 msgstr ""
 
-#: includes/class-wp-job-manager-company-listings-ajax.php:99
+#: includes/class-wp-job-manager-company-listings-ajax.php:97
 msgid "Showing all %scompanies"
 msgstr ""
 
-#: includes/class-wp-job-manager-company-listings-ajax.php:102
+#: includes/class-wp-job-manager-company-listings-ajax.php:100
 msgid "located in &ldquo;%s&rdquo;"
 msgstr ""
 
@@ -928,8 +924,10 @@ msgstr ""
 msgid "New Company Submission From %s"
 msgstr ""
 
-#: includes/class-wp-job-manager-company-listings-mapping.php:39
-msgid "Enter the name of the company"
+#: includes/class-wp-job-manager-company-listings-mapping.php:57
+#: includes/class-wp-job-manager-company-listings-widgets.php:467
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:203
+msgid "Logo"
 msgstr ""
 
 #: includes/class-wp-job-manager-company-listings-post-types.php:67
@@ -1073,16 +1071,6 @@ msgstr ""
 msgid "%s has been published"
 msgstr ""
 
-#: includes/class-wp-job-manager-company-listings-shortcodes.php:186
-#: includes/class-wp-job-manager-company-listings-widgets.php:30
-#: includes/class-wp-job-manager-company-listings-widgets.php:138
-#: includes/class-wp-job-manager-company-listings-widgets.php:233
-#: includes/class-wp-job-manager-company-listings-widgets.php:319
-#: includes/class-wp-job-manager-company-listings-widgets.php:400
-#: includes/class-wp-job-manager-company-listings-widgets.php:468
-msgid "Title"
-msgstr ""
-
 #: includes/class-wp-job-manager-company-listings-shortcodes.php:188
 #: templates/company_listings-filters.php:26
 msgid "Category"
@@ -1161,12 +1149,7 @@ msgstr ""
 msgid "Display company logo on single company page."
 msgstr ""
 
-#: includes/class-wp-job-manager-company-listings-widgets.php:467
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:152
-msgid "Logo"
-msgstr ""
-
-#: includes/forms/class-wp-job-manager-company-listings-form-edit-company.php:56
+#: includes/forms/class-wp-job-manager-company-listings-form-edit-company.php:53
 msgid "Invalid company"
 msgstr ""
 
@@ -1182,122 +1165,133 @@ msgstr ""
 msgid "View Company &rarr;"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:36
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:72
 msgid "Submit Details"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:42
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:820
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:78
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:906
 msgid "Preview"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:48
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:84
 msgid "Done"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:118
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:168
 msgid "Maximum of %d."
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:131
-msgid "Company email"
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:181
+msgid "Email"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:134
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:185
 msgid "contact@companydomain.com"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:138
-msgid "Professional title"
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:189
+msgid "Tagline"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:141
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:192
 msgid "e.g. \"Web Developer\""
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:170
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:222
 msgid "A link to a video about yourself"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:173
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:233
+msgid "Twitter username"
+msgstr ""
+
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:240
+#: templates/company_listings-about.php:12
 msgid "Industry Type"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:181
-msgid "Company Content"
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:248
+msgid "Content"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:191
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:258
 msgid "Comma separate a list of relevant skills"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:196
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:263
 #: templates/form-fields/repeated-field.php:45
 msgid "Add URL"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:221
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:288
+#: templates/company_listings-meta-info.php:3
+msgid "Info(s)"
+msgstr ""
+
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:289
 msgid "Add Info"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:246
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:314
 msgid "Add Perks"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:262
-msgid "Add Post"
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:331
+msgid "Add Press"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:284
-msgid "Company file"
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:356
+#: templates/content-company_listings-file.php:4
+msgid "File"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:288
-msgid "Optionally upload your company for employers to view. Max. file size: %s."
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:360
+msgid "Upload your company for employers to view. Max. file size: %s."
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:407
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:489
 msgid "%s is a required field"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:413
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:418
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:495
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:500
 msgid "%s is invalid"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:425
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:507
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:438
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:520
 msgid "Please enter no more than %d skills."
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:508
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:603
 msgid "Preview &rarr;"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:539
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:634
 msgid "Please enter a username."
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:542
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:637
 msgid "Please enter your email address."
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:564
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:659
 msgid "You must be signed in to post your company."
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:813
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:899
 msgid "Submit Company &rarr;"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:814
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:900
 msgid "&larr; Edit company"
 msgstr ""
 
-#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:883
+#: includes/forms/class-wp-job-manager-company-listings-form-submit-company.php:969
 msgid "Submit your application to the job \"%s\"."
 msgstr ""
 
@@ -1306,39 +1300,27 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: includes/wp-job-manager-company-listings-template-functions.php:170
+#: includes/wp-job-manager-company-listings-functions.php:731
+msgid "-- Select Company --"
+msgstr ""
+
+#: includes/wp-job-manager-company-listings-template-functions.php:200
 msgid "Published"
 msgstr ""
 
-#: includes/wp-job-manager-company-listings-template-functions.php:172
+#: includes/wp-job-manager-company-listings-template-functions.php:202
 msgid "Pending Review"
 msgstr ""
 
-#: includes/wp-job-manager-company-listings-template-functions.php:174
+#: includes/wp-job-manager-company-listings-template-functions.php:204
 msgid "Hidden"
 msgstr ""
 
-#: includes/wp-job-manager-company-listings-template-functions.php:176
+#: includes/wp-job-manager-company-listings-template-functions.php:206
 msgid "Inactive"
 msgstr ""
 
-#: includes/wp-job-manager-company-listings-template-functions.php:472
-msgid "About %s"
-msgstr ""
-
-#: includes/wp-job-manager-company-listings-template-functions.php:482
-msgid "Contact Info"
-msgstr ""
-
-#: includes/wp-job-manager-company-listings-template-functions.php:486
-msgid "Website"
-msgstr ""
-
-#: includes/wp-job-manager-company-listings-template-functions.php:494
-msgid "video"
-msgstr ""
-
-#: includes/wp-job-manager-company-listings-template-functions.php:510
+#: includes/wp-job-manager-company-listings-template-functions.php:601
 msgid "Jobs at %s"
 msgstr ""
 
@@ -1393,10 +1375,18 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: templates/account-signin.php:40 templates/company_listings-submit.php:32
+#: templates/account-signin.php:40 templates/company_listings-submit.php:26
 #: templates/form-fields/repeated-field.php:8
 #: templates/form-fields/repeated-field.php:32
 msgid "(optional)"
+msgstr ""
+
+#: templates/company_listings-about.php:2
+msgid "About %s"
+msgstr ""
+
+#: templates/company_listings-contact-info.php:13
+msgid "Contact Info"
 msgstr ""
 
 #: templates/company_listings-dashboard-login.php:3
@@ -1454,7 +1444,7 @@ msgid "Any category"
 msgstr ""
 
 #: templates/company_listings-submitted-notification.php:8
-msgid "Hello"
+msgid "Hello,"
 msgstr ""
 
 #: templates/company_listings-submitted-notification.php:9
@@ -1468,34 +1458,26 @@ msgid "The content of their company is as follows:"
 msgstr ""
 
 #: templates/company_listings-submitted-notification.php:27
-msgid "Links:"
+msgid "URL(s):"
 msgstr ""
 
 #: templates/company_listings-submitted-notification.php:36
-msgid "Perks:"
+msgid "Info(s):"
 msgstr ""
 
 #: templates/company_listings-submitted-notification.php:45
+msgid "Perks:"
+msgstr ""
+
+#: templates/company_listings-submitted-notification.php:54
 msgid "Press:"
 msgstr ""
 
-#: templates/company_listings-submitted-notification.php:47
-msgid "Employer: %s"
-msgstr ""
-
-#: templates/company_listings-submitted-notification.php:48
-msgid "Date: %s"
-msgstr ""
-
-#: templates/company_listings-submitted-notification.php:49
-msgid "Job Title: %s"
-msgstr ""
-
-#: templates/company_listings-submitted-notification.php:55
+#: templates/company_listings-submitted-notification.php:61
 msgid "You can view this company here: %s"
 msgstr ""
 
-#: templates/company_listings-submitted-notification.php:56
+#: templates/company_listings-submitted-notification.php:62
 msgid "You can view/edit this company in the backend by clicking here: %s"
 msgstr ""
 
@@ -1526,14 +1508,6 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: templates/linkedin-import.php:6
-msgid "LinkedIn"
-msgstr ""
-
-#: templates/linkedin-import.php:8
-msgid "Import from LinkedIn"
-msgstr ""
-
 #: wp-job-manager-company-listings.php:82
 msgid "Company Manager requires WP Job Manager to be installed!"
 msgstr ""
@@ -1542,21 +1516,41 @@ msgstr ""
 msgid "Company Manager requires WP Job Manager %s (you are using %s)"
 msgstr ""
 
-#: wp-job-manager-company-listings.php:194
+#: wp-job-manager-company-listings.php:196
+msgid "The results could not be loaded."
+msgstr ""
+
+#: wp-job-manager-company-listings.php:197
+msgid "Please enter %s or more characters"
+msgstr ""
+
+#: wp-job-manager-company-listings.php:198
+msgid "Loading more results..."
+msgstr ""
+
+#: wp-job-manager-company-listings.php:199
+msgid "No results found"
+msgstr ""
+
+#: wp-job-manager-company-listings.php:200
+msgid "Searching..."
+msgstr ""
+
+#: wp-job-manager-company-listings.php:204
 msgid ""
 "If you wish to edit the posted details use the \"edit company\" button "
 "instead, otherwise changes may be lost."
 msgstr ""
 
-#: wp-job-manager-company-listings.php:195
+#: wp-job-manager-company-listings.php:205
 msgid "Are you sure you want to remove this item?"
 msgstr ""
 
-#: wp-job-manager-company-listings.php:196
+#: wp-job-manager-company-listings.php:206
 msgid "remove"
 msgstr ""
 
-#: wp-job-manager-company-listings.php:202
+#: wp-job-manager-company-listings.php:214
 msgid "Are you sure you want to delete this company?"
 msgstr ""
 
