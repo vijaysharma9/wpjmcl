@@ -19,6 +19,7 @@ class WP_Job_Manager_Company_Listings_CPT {
 		add_action( 'manage_company_listings_posts_custom_column', array( $this, 'custom_columns' ), 2 );
 		add_filter( 'manage_edit-company_listings_sortable_columns', array( $this, 'sortable_columns' ) );
 		add_action( 'parse_query', array( $this, 'search_meta' ) );
+		add_action( 'parse_query', array( $this, 'filter_meta' ) );
 		add_filter( 'get_search_query', array( $this, 'search_meta_label' ) );
 		add_filter( 'request', array( $this, 'sort_columns' ) );
 		add_filter( 'post_updated_messages', array( $this, 'post_updated_messages' ) );
@@ -30,6 +31,8 @@ class WP_Job_Manager_Company_Listings_CPT {
 		if ( get_option( 'company_listings_enable_categories' ) ) {
 			add_action( "restrict_manage_posts", array( $this, "companies_by_category" ) );
 		}
+
+		add_action( 'restrict_manage_posts', array( $this, 'companies_meta_filters' ) );
 
 		foreach ( array( 'post', 'post-new' ) as $hook ) {
 			add_action( "admin_footer-{$hook}.php", array( $this,'extend_submitdiv_post_status' ) );
@@ -192,6 +195,69 @@ class WP_Job_Manager_Company_Listings_CPT {
 	}
 
 	/**
+	 * Output dropdowns for filters based on post meta.
+	 *
+	 * @since 1.0.4
+	 */
+	public function companies_meta_filters() {
+		global $typenow;
+
+		// Only add the filters for job_listings.
+		if ( 'company_listings' !== $typenow ) {
+			return;
+		}
+
+		// Filter by Featured.
+		$this->companies_filter_dropdown(
+			'company_listing_featured',
+			array(
+				array(
+					'value' => '',
+					'text'  => __( 'Select Featured', 'wp-job-manager-company-listings' ),
+				),
+				array(
+					'value' => '1',
+					'text'  => __( 'Featured', 'wp-job-manager-company-listings' ),
+				),
+				array(
+					'value' => '0',
+					'text'  => __( 'Not Featured', 'wp-job-manager-company-listings' ),
+				),
+			)
+		);
+	}
+
+	/**
+	 * Shows dropdown to filter by the given URL parameter. The dropdown will
+	 * have three options: "Select $name", "$name", and "Not $name".
+	 *
+	 * The $options element should be an array of arrays, each with the
+	 * attributes needed to create an <option> HTML element. The attributes are
+	 * as follows:
+	 *
+	 * $options[i]['value']  The value for the <option> HTML element.
+	 * $options[i]['text']   The text for the <option> HTML element.
+	 *
+	 * @since 1.31.0
+	 *
+	 * @param string $param        The URL parameter.
+	 * @param array  $options      The options for the dropdown. See the description above.
+	 */
+	private function companies_filter_dropdown( $param, $options ) {
+		$selected = isset( $_GET[ $param ] ) ? $_GET[ $param ] : '';
+
+		echo '<select name="' . esc_attr( $param ) . '" id="dropdown_' . esc_attr( $param ) . '">';
+
+		foreach ( $options as $option ) {
+			echo '<option value="' . esc_attr( $option['value'] ) . '"'
+				. ( $selected === $option['value'] ? ' selected' : '' )
+				. '>' . esc_html( $option['text'] ) . '</option>';
+		}
+		echo '</select>';
+
+	}
+
+	/**
 	 * enter_title_here function.
 	 * @return string
 	 */
@@ -321,6 +387,39 @@ class WP_Job_Manager_Company_Listings_CPT {
 		unset( $wp->query_vars['s'] );
 		$wp->query_vars['company_search'] = true;
 		$wp->query_vars['post__in'] = $post_ids;
+	}
+
+	/**
+	 * Filters by meta fields.
+	 *
+	 * @since      1.0.4
+	 *
+	 * @param WP_Query $wp
+	 */
+	public function filter_meta( $wp ) {
+		global $pagenow;
+
+		if ( 'edit.php' !== $pagenow || empty( $wp->query_vars['post_type'] ) || 'company_listings' !== $wp->query_vars['post_type'] ) {
+			return;
+		}
+
+		$meta_query = $wp->get( 'meta_query' );
+		if ( ! is_array( $meta_query ) ) {
+			$meta_query = array();
+		}
+
+		// Filter on _featured meta.
+		if ( isset( $_GET['company_listing_featured'] ) && '' !== $_GET['company_listing_featured'] ) {
+			$meta_query[] = array(
+				'key'   => '_featured',
+				'value' => $_GET['company_listing_featured'],
+			);
+		}
+
+		// Set new meta query.
+		if ( ! empty( $meta_query ) ) {
+			$wp->set( 'meta_query', $meta_query );
+		}
 	}
 
 	/**

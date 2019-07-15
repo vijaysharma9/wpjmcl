@@ -2,117 +2,56 @@ if ( typeof jq == "undefined" ) {
     var jq = jQuery;
 }
 
-jq( function() {
-    var $elmCmpText;
-    var updateFields = true;
-    var optionValue = 'id';
+if (company_listings_company_field.company_field_enable_select2_search && jQuery().select2) {
+    jq( function() {
+        var $element = jq(company_listings_company_field.company_field_selector);
 
-    if (jq('select#company_id').length) {
-        $elmCmpText = jq('select#company_id');
-    } else if (jq('select#company_name').length) {
-        $elmCmpText = jq('select#company_name');
-        updateFields = false;
-        optionValue = $elmCmpText.attr('data-option-value');
-    }
+        if ($element) {
+            // remove client side 'required' validation
+            $element.removeAttr('required');
 
-    if ($elmCmpText) {
-        // remove client side 'required' validation
-        $elmCmpText.removeAttr('required');
-
-        // Ajax customer search boxes
-        var select2_args = {
-            tags: true,
-            allowClear: true,
-            minimumInputLength: '3',
-            ajax: {
-                url: ajaxurl,
-                type: 'POST',
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        term: params.term,
-                        option_value: optionValue,
-                        action: 'company_listings_json_search_company',
-                    };
+            // Ajax customer search boxes
+            var select2_args = {
+                allowClear: company_listings_company_field.company_field_allowclear,
+                minimumInputLength: company_listings_company_field.company_field_minimumInputLength,
+                ajax: {
+                    url: ajaxurl,
+                    type: 'POST',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term,
+                            action: 'company_listings_json_search_company',
+                        };
+                    },
+                    processResults: function(data, params) {
+                        return {
+                            results: data,
+                        };
+                    },
+                    cache: true,
                 },
-                processResults: function(data, params) {
-                    return {
-                        results: data,
-                    };
+                language: {
+                    errorLoading: function() {
+                        return company_listings_company_field.select2_errorLoading;
+                    },
+                    inputTooShort: function() {
+                        return company_listings_company_field.select2_inputTooShort;
+                    },
+                    loadingMore: function() {
+                        return company_listings_company_field.select2_loadingMore;
+                    },
+                    noResults: function() {
+                        return company_listings_company_field.select2_noResults;
+                    },
+                    searching: function() {
+                        return company_listings_company_field.select2_searching;
+                    },
                 },
-                cache: true,
-            },
+            };
 
-        };
-
-        $elmCmpText.select2(select2_args);
-
-        // Only update the fields from company data when posting a job
-        if (updateFields) {
-            $elmCmpText.on('change', function (e, data) {
-
-                var
-                    company_id          = $elmCmpText.val(),
-                    elmCmpnyLocation    = jq('#job_location'),
-                    elmCmpnyWebsite     = jq('#company_website'),
-                    elmCmpnyTagline     = jq('#company_tagline'),
-                    elmCmpnyTwiiter     = jq('#company_twitter'),
-                    elmCmpnyVideo       = jq('#company_video');
-
-                if (parseInt(company_id) > 0) {
-
-                    var data = {
-                        action: 'company_listings_json_company_data',
-                        company_id: company_id,
-                    };
-
-                    if (jq('#post_ID').length) {
-                        data.post_ID = jq('#post_ID').val();
-                    }
-
-                    jq.ajax({
-                        url: ajaxurl,
-                        dataType: 'json',
-                        data: data,
-                        beforeSend: function (jqxhr, obj) {
-                            [elmCmpnyWebsite, elmCmpnyTagline, elmCmpnyTwiiter, elmCmpnyVideo].forEach(function (element) {
-                                element.addClass('busy-input-gif');
-                            });
-                        },
-                        success: function (response) {
-
-                            [elmCmpnyWebsite, elmCmpnyTagline, elmCmpnyTwiiter, elmCmpnyVideo].forEach(function (element) {
-                                element.removeClass('busy-input-gif');
-                            });
-
-                            elmCmpnyLocation.val(response.location);
-                            elmCmpnyWebsite.val(response.website);
-                            elmCmpnyTagline.val(response.tagline);
-                            elmCmpnyTwiiter.val(response.twitter);
-                            elmCmpnyVideo.val(response.video);
-                            jq('#_job_group_id').val(response.group_id);
-
-                            if (response.logo_backend) jq('#postimagediv .inside').html(response.logo_backend);
-                            if (response.logo_frontend) jq('.job-manager-uploaded-files').html(response.logo_frontend);
-                        },
-                        cache: true,
-                    });
-
-                } else {
-
-                    // elmCmpnyLocation.val(''); // Don't change the job location if trying to create new company
-                    elmCmpnyWebsite.val('');
-                    elmCmpnyTagline.val('');
-                    elmCmpnyTwiiter.val('');
-                    elmCmpnyVideo.val('');
-                    jq('#_job_group_id').val('');
-
-                    jq('#postimagediv .inside').html('');
-                    jq('.job-manager-uploaded-files').html('');
-
-                }
-            });
+            $element.select2(select2_args);
         }
-    }
-});
+    });
+}

@@ -23,7 +23,7 @@ class WP_Job_Manager_Company_Listings_Email_Notification {
 	public function new_company_submitted( $company_id ) {
 		include_once( 'admin/class-wp-job-manager-company-listings-writepanels.php' );
 
-		$custom_fields = array_diff_key( WP_Job_Manager_Company_Listings_Writepanels::company_fields(), array( '_company_file' => '' ) );
+		$custom_fields = array_diff_key( WP_Job_Manager_Company_Listings_Writepanels::company_fields(), array( '_company_file' => '', '_featured' => '' ) );
 		$company        = get_post( $company_id );
 		$recipient     = get_option( 'company_listings_email_notifications' );
 		$recipient     = ! empty( $recipient ) ? $recipient : get_option( 'admin_email' );

@@ -148,8 +148,7 @@
   display: block;
   padding-top: 2px;
 }
-.widefat .column-company_posted,
-.widefat .column-company_expires {
+.widefat .column-company_posted {
   width: 11%;
 }
 .widefat th.column-company_listings {

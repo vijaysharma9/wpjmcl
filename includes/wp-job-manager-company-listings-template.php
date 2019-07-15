@@ -124,7 +124,7 @@ if ( ! function_exists( 'jmcl_default_company_tabs' ) ) {
             'callback' => 'company_listings_company_jobs_tab',
         );
 
-        return $tabs;
+        return apply_filters( 'company_listings_tabs', $tabs );
     }
 }
 
@@ -223,7 +223,7 @@ function jmcl_search_terms( $search_terms = '' ) {
 
 /**
  * Get the search terms
- * 
+ *
  * @return bool|string Search terms on success, false on failure
  */
 function jmcl_get_search_terms( $passed_terms = '' ) {
