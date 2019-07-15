@@ -1,5 +1,6 @@
 /nbproject/private/
 /node_modules/
+/vendor/
 project.xml
 project.properties
 .DS_Store
