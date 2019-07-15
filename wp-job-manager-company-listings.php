@@ -27,12 +27,37 @@ class WP_Job_Manager_Company_Listings {
 	/**
 	 * __construct function.
 	 */
-	public function __construct () {
+	public function __construct() {
 		// Define constants
 		define( 'COMPANY_LISTINGS_VERSION', '1.0.5' );
 		define( 'COMPANY_LISTINGS_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-		define( 'COMPANY_LISTINGS_PLUGIN_FILE',  __FILE__  );
+		define( 'COMPANY_LISTINGS_PLUGIN_FILE', __FILE__ );
 		define( 'COMPANY_LISTINGS_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
+
+		// Load dependecies managed by composer.
+		require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+
+		use Monolog\Logger;
+		use Monolog\Handler\StreamHandler;
+		use Monolog\Handler\FirePHPHandler;
+
+		/**
+		 * [company_listings_log description]
+		 * @return [type] [description]
+		 */
+		function company_listings_log() {
+			// Create the logger
+			$logger = new Logger( 'company-listings' );
+			// Now add some handlers
+			$logger->pushHandler( new StreamHandler( plugin_dir_path( __FILE__ ) . 'company-listings.log', Logger::DEBUG ) );
+			$logger->pushHandler( new FirePHPHandler() );
+
+			/**
+			 * [return description]
+			 * @var [type]
+			 */
+			return $logger;
+		}
 
 		// Includes
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -56,7 +81,7 @@ class WP_Job_Manager_Company_Listings {
 
 		// Activation - works with symlinks
 		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), array( $this->post_types, 'register_post_types' ), 10 );
-		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), create_function( "", "include_once( 'includes/class-wp-job-manager-company-listings-install.php' );" ), 10 );
+		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), create_function( '', "include_once( 'includes/class-wp-job-manager-company-listings-install.php' );" ), 10 );
 		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), 'flush_rewrite_rules', 15 );
 
 		// Actions
@@ -69,19 +94,22 @@ class WP_Job_Manager_Company_Listings {
 		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_scripts' ) );
 
 		// Filters
-		add_filter('rewrite_rules_array', array( $this, 'insert_rewrite_rules' ));
-    	add_filter('query_vars', array( $this, 'insert_query_variable' ));
+		add_filter( 'rewrite_rules_array', array( $this, 'insert_rewrite_rules' ) );
+		add_filter( 'query_vars', array( $this, 'insert_query_variable' ) );
 	}
 
 	/**
 	 * Check JM version
 	 */
 	public function version_check() {
-		$required_jm_version      = '1.22.0';
+		$required_jm_version = '1.22.0';
 		if ( ! defined( 'JOB_MANAGER_VERSION' ) ) {
-			?><div class="error"><p><?php _e( 'Company Manager requires WP Job Manager to be installed!', 'wp-job-manager-company-listings' ); ?></p></div><?php
+			?><div class="error"><p><?php _e( 'Company Manager requires WP Job Manager to be installed!', 'wp-job-manager-company-listings' ); ?></p></div>
+			<?php
 		} elseif ( version_compare( JOB_MANAGER_VERSION, $required_jm_version, '<' ) ) {
-			?><div class="error"><p><?php printf( __( 'Company Manager requires WP Job Manager %s (you are using %s)', 'wp-job-manager-company-listings' ), $required_jm_version, JOB_MANAGER_VERSION ); ?></p></div><?php
+			?>
+			<div class="error"><p><?php printf( __( 'Company Manager requires WP Job Manager %1$s (you are using %2$s)', 'wp-job-manager-company-listings' ), $required_jm_version, JOB_MANAGER_VERSION ); ?></p></div>
+												<?php
 		}
 	}
 
@@ -95,30 +123,57 @@ class WP_Job_Manager_Company_Listings {
 	}
 
 	// Tell WordPress to accept our custom query variable
-    public function insert_query_variable($vars) {
-        array_push($vars, 'cdpage');
-        return $vars;
-    }
+	public function insert_query_variable( $vars ) {
+		array_push( $vars, 'cdpage' );
+		return $vars;
+	}
 
-    // Adding fake pages' rewrite rules for company-directory
-    public function insert_rewrite_rules($rules) {
+	// Adding fake pages' rewrite rules for company-directory
+	public function insert_rewrite_rules( $rules ) {
 
-	    $upper = array('company-numeric','A', 'B', 'C', 'D', 'E', 'F', 'G','H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-	    );
+		$upper = array(
+			'company-numeric',
+			'A',
+			'B',
+			'C',
+			'D',
+			'E',
+			'F',
+			'G',
+			'H',
+			'I',
+			'J',
+			'K',
+			'L',
+			'M',
+			'N',
+			'O',
+			'P',
+			'Q',
+			'R',
+			'S',
+			'T',
+			'U',
+			'V',
+			'W',
+			'X',
+			'Y',
+			'Z',
+		);
 
-	    $company_directory_page_id = get_option( 'company_listings_company_directory_page_id' );
+		$company_directory_page_id = get_option( 'company_listings_company_directory_page_id' );
 
 		$newrules = array();
-		foreach ($upper as $slug ) {
-			$newrules['([^/]+)/' . $slug . '/?$'] =
-			'index.php?page_id='. $company_directory_page_id .'&$matches[1]&cdpage=' . $slug;
+		foreach ( $upper as $slug ) {
+			$newrules[ '([^/]+)/' . $slug . '/?$' ] =
+			'index.php?page_id=' . $company_directory_page_id . '&$matches[1]&cdpage=' . $slug;
 		}
 
 		// Company directory search url
-		$newrules['([^/]+)/search/([^/]+)/?$'] =  'index.php?page_id='. $company_directory_page_id .'&search=$matches[2]';
+		$newrules['([^/]+)/search/([^/]+)/?$'] = 'index.php?page_id=' . $company_directory_page_id . '&search=$matches[2]';
 
-        return $newrules + $rules;
-    }
+		return $newrules + $rules;
+	}
 
 	/**
 	 * Includes once plugins are loaded
@@ -164,7 +219,7 @@ class WP_Job_Manager_Company_Listings {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		/**  STYLES ***/
-		wp_register_style( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2' . $suffix . '.css', array(), '4.0.5');
+		wp_register_style( 'wp-job-manager-company-listings-select2', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/select2' . $suffix . '.css', array(), '4.0.5' );
 		wp_register_style( 'wp-job-manager-company-frontend', COMPANY_LISTINGS_PLUGIN_URL . '/assets/css/frontend' . $suffix . '.css' );
 
 		/** SCRIPTS *******************************************/
@@ -190,17 +245,29 @@ class WP_Job_Manager_Company_Listings {
 
 		/*-- LOCALIZE SCRIPTS ------------------------------------------------*/
 
-		wp_localize_script( 'wp-job-manager-company-listings-company-submission', 'company_listings_company_submission', array(
-			'i18n_navigate'       => __( 'If you wish to edit the posted details use the "edit company" button instead, otherwise changes may be lost.', 'wp-job-manager-company-listings' ),
-			'i18n_confirm_remove' => __( 'Are you sure you want to remove this item?', 'wp-job-manager-company-listings' ),
-			'i18n_remove'         => __( 'remove', 'wp-job-manager-company-listings' )
-		) );
-		wp_localize_script( 'wp-job-manager-company-listings-ajax-filters', 'company_listings_ajax_filters', array(
-			'ajax_url' => $ajax_url
-		) );
-		wp_localize_script( 'wp-job-manager-company-listings-company-dashboard', 'company_listings_company_dashboard', array(
-			'i18n_confirm_delete' => __( 'Are you sure you want to delete this company?', 'wp-job-manager-company-listings' )
-		) );
+		wp_localize_script(
+			'wp-job-manager-company-listings-company-submission',
+			'company_listings_company_submission',
+			array(
+				'i18n_navigate'       => __( 'If you wish to edit the posted details use the "edit company" button instead, otherwise changes may be lost.', 'wp-job-manager-company-listings' ),
+				'i18n_confirm_remove' => __( 'Are you sure you want to remove this item?', 'wp-job-manager-company-listings' ),
+				'i18n_remove'         => __( 'remove', 'wp-job-manager-company-listings' ),
+			)
+		);
+		wp_localize_script(
+			'wp-job-manager-company-listings-ajax-filters',
+			'company_listings_ajax_filters',
+			array(
+				'ajax_url' => $ajax_url,
+			)
+		);
+		wp_localize_script(
+			'wp-job-manager-company-listings-company-dashboard',
+			'company_listings_company_dashboard',
+			array(
+				'i18n_confirm_delete' => __( 'Are you sure you want to delete this company?', 'wp-job-manager-company-listings' ),
+			)
+		);
 
 	}
 }
