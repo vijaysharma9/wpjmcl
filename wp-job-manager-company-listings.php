@@ -3,11 +3,11 @@
 Plugin Name: WP Job Manager - Company Listings
 Plugin URI: http://wpdrift.com/wp-job-manager-company-listings/
 Description: Outputs a list of all companies that have submitted jobs with links to their listings and profile.
-Version: 1.0.5
+Version: 1.0.6
 Author: WPdrift
 Author URI: http://wpdrift.com
 Requires at least: 4.4
-Tested up to: 4.9.8
+Tested up to: 5.2.2
 
 Copyright: 2017 WPdrift
 License: GNU General Public License v3.0
@@ -54,7 +54,7 @@ class WP_Job_Manager_Company_Listings {
 	 */
 	public function __construct() {
 		// Define constants
-		define( 'COMPANY_LISTINGS_VERSION', '1.0.5' );
+		define( 'COMPANY_LISTINGS_VERSION', '1.0.6' );
 		define( 'COMPANY_LISTINGS_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 		define( 'COMPANY_LISTINGS_PLUGIN_FILE', __FILE__ );
 		define( 'COMPANY_LISTINGS_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
