@@ -2,8 +2,8 @@
 Contributors: WPdrift, upnrunn, kishores, shamimmoeen
 Tags: wp-job-manager, wp-job-manager-company, wp-job-manager-company-listings, company-listings
 Requires at least: 4.4
-Tested up to: 4.9.8
-Stable tag: 1.0.5
+Tested up to: 5.2.2
+Stable tag: 1.0.6
 Requires PHP: 5.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -69,6 +69,10 @@ The manual installation method involves downloading the plugin and uploading it 
 
 == Changelog ==
 
+= 1.0.6 - 2019-07-24 =
+* Fix: meta box fields are not displaying value
+* Fix: UI issues on company listing page
+
 = 1.0.5 - 2018-09-25 =
 * Remove fields from submit-job-form and move to submit-company-form
 * Update submit-company-form
@@ -121,8 +125,3 @@ The manual installation method involves downloading the plugin and uploading it 
 
 = 1.0.0 =
 * First release.
-
-== Upgrade Notice ==
-
-= 1.0.5 =
-This is a major update. Make a full site backup before updating this plugin.
