@@ -81,7 +81,13 @@ class WP_Job_Manager_Company_Listings {
 
 		// Activation - works with symlinks
 		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), array( $this->post_types, 'register_post_types' ), 10 );
-		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), create_function( '', "include_once( 'includes/class-wp-job-manager-company-listings-install.php' );" ), 10 );
+		register_activation_hook(
+			basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ),
+			function() {
+				include_once( 'includes/class-wp-job-manager-company-listings-install.php' );
+			},
+			10
+		);
 		register_activation_hook( basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ), 'flush_rewrite_rules', 15 );
 
 		// Actions
