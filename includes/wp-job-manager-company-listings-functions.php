@@ -736,3 +736,14 @@ function jmcl_get_companies_for_dropdown_field() {
 
 	return apply_filters( 'jmcl_get_companies_for_dropdown_field', $companies, $posts );
 }
+
+/**
+ * Checks if the current page is a company listing.
+ *
+ * @since 1.30.0
+ *
+ * @return bool
+ */
+function is_jmcl_company_listing() {
+	return is_singular( array( 'company_listings' ) );
+}
