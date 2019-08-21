@@ -29,7 +29,7 @@ if ( ! class_exists( 'WP_Job_Mananger_Company_Listings_License' ) ) {
 		 */
 		public function define_constants() {
 			if ( ! defined( 'WPDRIFT_STORE_URL' ) ) {
-				define( 'WPDRIFT_STORE_URL', 'https://wpdrift.com' );
+				define( 'WPDRIFT_STORE_URL', 'https://store.techbrise.com' );
 			}
 
 			if ( ! defined( 'WPDRIFT_ITEM_ID' ) ) {
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Job_Mananger_Company_Listings_License' ) ) {
 			}
 
 			if ( ! defined( 'WPDRIFT_ITEM_NAME' ) ) {
-				define( 'WPDRIFT_ITEM_NAME', 'WP Job Manager - Company Listings' );
+				define( 'WPDRIFT_ITEM_NAME', 'Company Listings for WP Job Manager' );
 			}
 
 			if ( ! defined( 'JMCL_LICENSE_PAGE' ) ) {

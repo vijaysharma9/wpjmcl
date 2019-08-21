@@ -1,9 +1,9 @@
 # Company Manager #
-**Contributors:** [WPdrift](https://profiles.wordpress.org/WPdrift), [upnrunn](https://profiles.wordpress.org/upnrunn), [kishores](https://profiles.wordpress.org/kishores), [shamimmoeen](https://profiles.wordpress.org/shamimmoeen)  
+**Contributors:** [TechBrise](https://techbrise.com), [saurabhd](https://profiles.wordpress.org/saurabhd), [ashishk](https://profiles.wordpress.org/ashish112/)
 **Tags:** wp-job-manager, wp-job-manager-company, wp-job-manager-company-listings, company-listings  
 **Requires at least:** 4.4  
 **Tested up to:** 5.2.2  
-**Stable tag:** 1.0.6  
+**Stable tag:** 1.0.6
 **Requires PHP:** 5.4  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
@@ -20,7 +20,7 @@ Company Listing is a lightweight plugin for adding Company Listings functionalit
 * Lists all jobs under the company profile
 * Moreover, it will be a custom post type, so can be easily searched or can make a directory for the company. And much more.
 
-<a href="https://wpdrift.com/company-listings-for-wp-job-manager/" target="_blank">Read more about Company Listings for WP Job Manager</a>.
+<a href="https://store.techbrise.com/company-listings-for-wp-job-manager/" target="_blank">Read more about Company Listings for WP Job Manager</a>.
 
 ### Requirements ###
 
@@ -68,6 +68,9 @@ The manual installation method involves downloading the plugin and uploading it 
 8. List of Companies in the frontend
 
 ## Changelog ##
+
+### 1.0.7 - 2019-08-21 ###
+* Change branding name
 
 ### 1.0.6 - 2019-07-24 ###
 * Fix: meta box fields are not displaying value
