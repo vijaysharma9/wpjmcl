@@ -124,7 +124,7 @@ add_action( 'template_redirect', 'jmlcl_search_results_redirect', 8 );
  * @param  [type] $enqueue [description]
  * @return [type]          [description]
  */
-function jmcl_job_manager_enqueue_frontend_style( $enqueue ) {
+function is_wpjm_frontend_style_required_on_page_tbs( $enqueue ) {
 	if ( is_jmcl_company_listing() ) {
 		return true;
 	}
@@ -132,4 +132,4 @@ function jmcl_job_manager_enqueue_frontend_style( $enqueue ) {
 	return $enqueue;
 }
 
-add_filter( 'job_manager_enqueue_frontend_style', 'jmcl_job_manager_enqueue_frontend_style' );
+add_filter( 'job_manager_enqueue_frontend_style', 'is_wpjm_frontend_style_required_on_page_tbs' );

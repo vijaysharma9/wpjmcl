@@ -740,10 +740,109 @@ function jmcl_get_companies_for_dropdown_field() {
 /**
  * Checks if the current page is a company listing.
  *
- * @since 1.30.0
+ * @since 1.0.7
  *
  * @return bool
  */
 function is_jmcl_company_listing() {
-	return is_singular( array( 'company_listings' ) );
+
+	return apply_filters( 'is_jmcl_company_listing', ( is_wp_jmcl_page() || has_wp_jmcl_shortcode() ) );
+}
+
+/**
+ * Checks if the visitor is currently on a WP Job Manager Company Listing.
+ *
+ * @since 1.0.7
+ *
+ * @return bool
+ */
+function is_wp_jmcl_page() {
+	$is_wp_jmcl_page = is_post_type_archive( 'companies' );
+
+	if ( ! $is_wp_jmcl_page ) {
+		$wp_jmcl_page_ids = array_filter(
+			array(
+				get_option( 'company_listings_submit_company_form_page_id', false ),
+				get_option( 'company_listings_company_dashboard_page_id', false ),
+				get_option( 'company_listings_companies_page_id', false ),
+				get_option( 'company_listings_company_directory_page_id', false ),
+			)
+		);
+
+		/**
+		 * Filters a list of all page IDs related to WP Job Manager Company Listing.
+		 *
+		 * @since 1.17.1
+		 *
+		 * @param int[] $wp_jmcl_page_ids
+		 */
+		$wp_jmcl_page_ids = array_unique( apply_filters( 'jmcl_page_ids', $wp_jmcl_page_ids ) );
+
+		$is_wp_jmcl_page = is_page( $wp_jmcl_page_ids );
+	}
+
+	/**
+	 * Filter the result of is_wp_jmcl_page()
+	 *
+	 * @since 1.0.7
+	 *
+	 * @param bool $is_wp_jmcl_page
+	 */
+	return apply_filters( 'is_wp_jmcl_page', $is_wp_jmcl_page );
+}
+
+
+/**
+ * Checks if the provided content or the current single page or post has a WP Job Manager Company Listing shortcode.
+ *
+ * @param string|null       $content   Content to check. If not provided, it uses the current post content.
+ * @param string|array|null $tag Check specifically for one or more shortcodes. If not provided, checks for any WP Resume Manager shortcode.
+ *
+ * @since 1.0.7
+ * 
+ * @return bool
+ */
+function has_wp_jmcl_shortcode( $content = null, $tag = null ) {
+	global $post;
+
+	$has_wp_jmcl_shortcode = false;
+
+	if ( null === $content && is_singular() && is_a( $post, 'WP_Post' ) ) {
+		$content = $post->post_content;
+	}
+
+	if ( ! empty( $content ) ) {
+		$wp_jmcl_shortcodes = array( 'submit_company_form', 'company_dashboard', 'companies', 'company_directory' );
+		/**
+		 * Filters a list of all shortcodes associated with WP Resume Manager.
+		 *
+		 * @since 1.0.7
+		 *
+		 * @param string[] $wp_jmcl_shortcodes
+		 */
+		$wp_jmcl_shortcodes = array_unique( apply_filters( 'wp_jmcl_shortcodes', $wp_jmcl_shortcodes ) );
+
+		if ( null !== $tag ) {
+			if ( ! is_array( $tag ) ) {
+				$tag = array( $tag );
+			}
+			$wp_jmcl_shortcodes = array_intersect( $wp_jmcl_shortcodes, $tag );
+		}
+
+		foreach ( $wp_jmcl_shortcodes as $shortcode ) {
+			if ( has_shortcode( $content, $shortcode ) ) {
+				$has_wp_jmcl_shortcode = true;
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Filter the result of has_wp_jmcl_shortcode()
+	 *
+	 * @since 1.0.7
+	 *
+	 * @param bool $has_wp_jmcl_shortcode
+	 */
+	return apply_filters( 'has_wp_jmcl_shortcode', $has_wp_jmcl_shortcode );
 }

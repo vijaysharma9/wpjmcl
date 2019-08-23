@@ -1,5 +1,9 @@
 ## Changelog ##
 
+### 1.0.7 - 2019-08-24 ###
+* Add capability to use WP Job Manager frontend.css stylesheet on Company Listing pages
+* Add functions to check if $page is has any company listing shortcode
+
 ### 1.0.6 - 2019-08-21 ###
 * Change branding name
 * Fix: meta box fields are not displaying value

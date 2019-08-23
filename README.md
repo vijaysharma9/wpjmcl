@@ -3,7 +3,7 @@
 **Tags:** wp-job-manager, wp-job-manager-company, wp-job-manager-company-listings, company-listings  
 **Requires at least:** 4.4  
 **Tested up to:** 5.2.2  
-**Stable tag:** 1.0.6
+**Stable tag:** 1.0.7
 **Requires PHP:** 5.4  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
@@ -69,10 +69,12 @@ The manual installation method involves downloading the plugin and uploading it 
 
 ## Changelog ##
 
-### 1.0.7 - 2019-08-21 ###
-* Change branding name
+### 1.0.7 - 2019-08-24 ###
+* Add capability to use WP Job Manager frontend.css stylesheet on Company Listing pages
+* Add functions to check if $page is has any company listing shortcode
 
-### 1.0.6 - 2019-07-24 ###
+### 1.0.6 - 2019-08-21 ###
+* Change branding name
 * Fix: meta box fields are not displaying value
 * Fix: UI issues on company listing page
 

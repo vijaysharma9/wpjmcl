@@ -1,5 +1,5 @@
 === Company Manager ===
-Contributors: TechBrise, saurabhd
+Contributors: techbrise, saurabhd
 Tags: wp-job-manager, wp-job-manager-company, wp-job-manager-company-listings, company-listings
 Requires at least: 4.4
 Tested up to: 5.2.2
@@ -68,6 +68,10 @@ The manual installation method involves downloading the plugin and uploading it 
 8. List of Companies in the frontend
 
 == Changelog ==
+
+= 1.0.7 - 2019-08-24 =
+* Add capability to use WP Job Manager frontend.css stylesheet on Company Listing pages
+* Add functions to check if $page is has any company listing shortcode
 
 = 1.0.6 - 2019-08-21 =
 * Change branding name
