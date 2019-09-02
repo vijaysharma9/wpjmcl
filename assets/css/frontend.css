@@ -160,7 +160,9 @@
 }
 .company-dir-list {
   list-style: none;
-  column-count: 4;
+}
+.company-dir-list .company-dir-list-item {
+  display: inline-block;
 }
 .company-dir-list .company-dir-list-item a {
   text-decoration: none;

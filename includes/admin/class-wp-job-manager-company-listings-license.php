@@ -10,6 +10,9 @@ if ( ! class_exists( 'WP_Job_Mananger_Company_Listings_License' ) ) {
 	 */
 	class WP_Job_Mananger_Company_Listings_License {
 
+		
+		private static $cleared_plugin_cache = false;
+
 		/**
 		 * Constructor.
 		 */
@@ -22,6 +25,8 @@ if ( ! class_exists( 'WP_Job_Mananger_Company_Listings_License' ) ) {
 			add_action( 'admin_init', array( $this, 'updater' ) );
 			add_action( 'admin_init', array( $this, 'activate_license' ) );
 			add_action( 'admin_init', array( $this, 'deactivate_license' ) );
+			add_action( 'admin_notices', array( $this, 'jmcl_admin_notice_license_notice' ) );
+			//add_action( 'plugin_action_links', array( $this, 'jmcl_plugin_links' ), 10, 2 );
 		}
 
 		/**
@@ -173,7 +178,7 @@ if ( ! class_exists( 'WP_Job_Mananger_Company_Listings_License' ) ) {
 
 				// make sure the response came back okay
 				if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-
+					
 					if ( is_wp_error( $response ) ) {
 						$message = $response->get_error_message();
 					} else {
@@ -181,7 +186,7 @@ if ( ! class_exists( 'WP_Job_Mananger_Company_Listings_License' ) ) {
 					}
 
 				} else {
-
+					
 					$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
 					if ( false === $license_data->success ) {
@@ -306,7 +311,105 @@ if ( ! class_exists( 'WP_Job_Mananger_Company_Listings_License' ) ) {
 			}
 		}
 
+		public function jmcl_admin_notice_license_notice() {
+			$status  = get_option( 'jmcl_license_status' );
+			if ( $status == false && $status !== 'valid' ) { ?>
+				<div class="notice notice-success is-dismissible">
+					<div class="notice-updated">
+						<p><?php printf( '<a href="%s">Please enter your license key</a> to get updates for "%s".', esc_url( admin_url( 'edit.php?post_type=company_listings&page=' . JMCL_LICENSE_PAGE ) ), esc_html( WPDRIFT_ITEM_NAME ) ); ?></p>
+					</div>
+				</div>
+				<?php
+			}
+		}
+
+		/**
+		 * Returns list of installed WPJM plugins with managed licenses indexed by product ID.
+		 *
+		 * @param bool $active_only Only return active plugins.
+		 * @return array
+		 */
+		public function get_jmcl_installed_plugins( $active_only = true ) {
+			if ( ! function_exists( 'get_plugins' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			/**
+			 * Clear the plugin cache on first request for installed WPJM add-on plugins.
+			 *
+			 * @since 1.29.1
+			 *
+			 * @param bool $clear_plugin_cache True if we should clear the plugin cache.
+			 */
+			if ( ! self::$cleared_plugin_cache && apply_filters( 'job_manager_clear_plugin_cache', true ) ) {
+				// Reset the plugin cache on the first call. Some plugins prematurely hydrate the cache.
+				wp_clean_plugins_cache( false );
+				self::$cleared_plugin_cache = true;
+			}
+
+			$wpjm_pluginss = array();
+			$plugins      = get_plugins();
+			//print_r($plugins);
+			foreach ( $plugins as $filename ) {
+				
+				print_r($filename);
+				$wpjm_pluginss['_file_name'] = $filename;
+
+				//print_r($wpjm_pluginss);
+			}
+			//print_r($wpjm_pluginss);
+			return $wpjm_plugins;
+		}
+
+		/**
+		 * Returns the plugin data for plugin with a `WPJM-Product` tag by plugin filename.
+		 *
+		 * @param string $plugin_filename
+		 * @return bool|array
+		 */
+		private function get_jmcl_licence_managed_plugin( $plugin_filename ) {
+			foreach ( $this->get_jmcl_installed_plugins() as $plugin ) {
+				if ( $plugin_filename === $plugin['_filename'] ) {
+					return $plugin;
+				}
+			}
+			return false;
+		}
+		
+		/**
+		 * Appends links to manage plugin licence when managed.
+		 *
+		 * @param array  $actions
+		 * @param string $plugin_filename
+		 * @return array
+		 */
+		public function jmcl_plugin_links( $actions, $plugin_filename ) {
+			$plugin = $this->get_jmcl_licence_managed_plugin( COMPANY_LISTINGS_PLUGIN_FILE );
+			echo '<pre>';print_r( $plugin );echo '</pre>';
+			// if ( ! $plugin || ! current_user_can( 'update_plugins' ) ) {
+			// 	return $actions;
+			// }
+			// $product_slug = $plugin['_product_slug'];
+			// $licence      = $this->get_plugin_licence( $product_slug );
+			// $css_class    = '';
+			// if ( $licence && ! empty( $licence['licence_key'] ) ) {
+			// 	if ( ! empty( $licence['errors'] ) ) {
+			// 		$manage_licence_label = __( 'Manage License (Requires Attention)', 'wp-job-manager' );
+			// 		$css_class            = 'wpjm-activate-licence-link';
+			// 	} else {
+			// 		$manage_licence_label = __( 'Manage License', 'wp-job-manager' );
+			// 	}
+			// } else {
+			// 	$manage_licence_label = __( 'Activate License', 'wp-job-manager' );
+			// 	$css_class            = 'wpjm-activate-licence-link';
+			// }
+			// $actions[] = '<a class="' . esc_attr( $css_class ) . '" href="' . esc_url( admin_url( 'edit.php?post_type=company_listings&page=' . JMCL_LICENSE_PAGE  ) ) . '">' . esc_html( WPDRIFT_ITEM_NAME ) . '</a>';
+
+			// return $actions;
+		}
+
 	}
+	
 
 }
 

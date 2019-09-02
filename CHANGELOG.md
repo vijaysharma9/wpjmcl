@@ -1,5 +1,10 @@
 ## Changelog ##
 
+### 1.0.8 - 2019-08-29 ###
+* Fix style issue for job tab under Company page
+* Fix Company Directory listing design issue
+* Remove blank pers before saving into the database
+
 ### 1.0.7 - 2019-08-24 ###
 * Add capability to use WP Job Manager frontend.css stylesheet on Company Listing pages
 * Add functions to check if $page is has any company listing shortcode

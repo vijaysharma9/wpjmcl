@@ -759,6 +759,10 @@ function is_jmcl_company_listing() {
 function is_wp_jmcl_page() {
 	$is_wp_jmcl_page = is_post_type_archive( 'companies' );
 
+	if( is_singular( 'company_listings' ) ) {
+		return apply_filters( 'is_wp_jmcl_page', true );
+	}
+
 	if ( ! $is_wp_jmcl_page ) {
 		$wp_jmcl_page_ids = array_filter(
 			array(
@@ -830,7 +834,7 @@ function has_wp_jmcl_shortcode( $content = null, $tag = null ) {
 		}
 
 		foreach ( $wp_jmcl_shortcodes as $shortcode ) {
-			if ( has_shortcode( $content, $shortcode ) ) {
+			if ( has_shortcode( $content, $shortcode ) ) { die();
 				$has_wp_jmcl_shortcode = true;
 				break;
 			}

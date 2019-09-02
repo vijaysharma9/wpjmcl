@@ -464,7 +464,7 @@ class WP_Job_Manager_Company_Listings_Writepanels extends WP_Job_Manager_Writepa
 		$first_field_name = str_replace( '[]', '', $first_field['name'] );
 
 		if ( ! empty( $_POST[ $first_field_name ] ) && is_array( $_POST[ $first_field_name ] ) ) {
-			$keys = array_keys( $_POST[ $first_field_name ] );
+			$keys = array_keys( array_filter( $_POST[ $first_field_name ] ) );
 			foreach ( $keys as $posted_key ) {
 				$item = array();
 				foreach ( $fields as $key => $field ) {
