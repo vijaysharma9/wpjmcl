@@ -23,12 +23,13 @@ if ( ! jmcl_get_the_company() ) {
 }
 
 $company = get_post( jmcl_get_the_company() );
+$website = get_the_company_website();
 ?>
 <div class="company">
 	<?php the_company_logo( 'thumbnail', '', $company ); ?>
 
 	<p class="name">
-		<?php if ( $website = get_the_company_website() ) : ?>
+		<?php if ( $website ) : ?>
 			<a class="website" href="<?php echo esc_url( $website ); ?>" target="_blank" rel="nofollow"><?php esc_html_e( 'Website', 'wp-job-manager-company-listings' ); ?></a>
 		<?php endif; ?>
 		<?php the_company_twitter(); ?>

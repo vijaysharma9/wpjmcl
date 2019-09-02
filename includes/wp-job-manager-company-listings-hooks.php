@@ -133,3 +133,40 @@ function is_wpjm_frontend_style_required_on_page_tbs( $enqueue ) {
 }
 
 add_filter( 'job_manager_enqueue_frontend_style', 'is_wpjm_frontend_style_required_on_page_tbs' );
+
+add_filter( 'job_manager_enqueue_frontend_style', 'jmcl_job_manager_enqueue_frontend_style' );
+
+/**
+ * Add company name at the end of single job listing meta.
+ * @return [type] [description]
+ */
+function jmcl_single_job_listing_meta_end() {
+	if ( class_exists( 'Jobify' ) ) {
+		remove_action( 'single_job_listing_meta_end', array( jobify()->integrations->get( 'wp-job-manager' )->template, 'job_listing_company_name' ) );
+		add_action( 'single_job_listing_meta_end', 'jmcl_job_listing_company_name' );
+	}
+}
+add_action( 'init', 'jmcl_single_job_listing_meta_end', 11 );
+
+/**
+ * Display compnay name with link.
+ * @return [type] [description]
+ */
+function jmcl_job_listing_company_name() {
+	if ( '' == jobify_get_the_company_name() ) {
+		return;
+	}
+	?>
+	<li class="job-company">
+		<?php
+		if ( class_exists( 'Astoundify_Job_Manager_Companies' ) && '' != jobify_get_the_company_name() ) :
+			$companies   = Astoundify_Job_Manager_Companies::instance();
+			$company_url = esc_url( $companies->company_url( jobify_get_the_company_name() ) );
+			?>
+			<a href="<?php echo $company_url; ?>" target="_blank"><?php jobify_the_company_name(); ?></a>
+		<?php else : ?>
+			<?php the_company_name( '<a href="' . esc_url( get_the_permalink( get_post( jmcl_get_the_company() ) ) ) . '" class="company-name">', '</a>' ); ?>
+		<?php endif; ?>
+	</li>
+	<?php
+}

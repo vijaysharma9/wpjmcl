@@ -33,31 +33,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Load dependecies managed by composer.
-require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
-
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\FirePHPHandler;
-
-/**
- * [company_listings_log description]
- * @return [type] [description]
- */
-function company_listings_log() {
-	// Create the logger
-	$logger = new Logger( 'company-listings' );
-	// Now add some handlers
-	$logger->pushHandler( new StreamHandler( plugin_dir_path( __FILE__ ) . 'company-listings.log', Logger::DEBUG ) );
-	$logger->pushHandler( new FirePHPHandler() );
-
-	/**
-	 * [return description]
-	 * @var [type]
-	 */
-	return $logger;
-}
-
 /**
  * WP_Job_Manager_Company_Listings class.
  */
