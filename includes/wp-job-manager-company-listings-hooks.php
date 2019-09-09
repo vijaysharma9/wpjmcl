@@ -134,8 +134,6 @@ function is_wpjm_frontend_style_required_on_page_tbs( $enqueue ) {
 
 add_filter( 'job_manager_enqueue_frontend_style', 'is_wpjm_frontend_style_required_on_page_tbs' );
 
-add_filter( 'job_manager_enqueue_frontend_style', 'jmcl_job_manager_enqueue_frontend_style' );
-
 /**
  * Add company name at the end of single job listing meta.
  * @return [type] [description]
