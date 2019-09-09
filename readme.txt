@@ -68,6 +68,9 @@ The manual installation method involves downloading the plugin and uploading it 
 8. List of Companies in the frontend
 
 == Changelog ==
+= 1.0.8RC2 - 2019-09-09 =
+* Remove warnigs 
+* Fix company dropdown on job submit page.
 
 = 1.0.7 - 2019-08-24 =
 * Add capability to use WP Job Manager frontend.css stylesheet on Company Listing pages

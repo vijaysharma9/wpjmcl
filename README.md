@@ -69,6 +69,10 @@ The manual installation method involves downloading the plugin and uploading it 
 
 ## Changelog ##
 
+### 1.0.8RC2 - 2019-09-09 ###
+* Remove warnigs 
+* Fix company dropdown on job submit page.
+
 ### 1.0.7 - 2019-08-24 ###
 * Add capability to use WP Job Manager frontend.css stylesheet on Company Listing pages
 * Add functions to check if $page is has any company listing shortcode
