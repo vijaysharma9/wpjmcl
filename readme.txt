@@ -2,7 +2,7 @@
 Contributors: techbrise, saurabhd
 Tags: wp-job-manager, wp-job-manager-company, wp-job-manager-company-listings, company-listings
 Requires at least: 4.4
-Tested up to: 5.2.2
+Tested up to: 5.3
 Stable tag: 1.0.8
 Requires PHP: 5.6+
 License: GPLv3

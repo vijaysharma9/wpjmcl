@@ -1,6 +1,6 @@
 ## Changelog ##
 
-### 1.0.8 - 2019-08-29 ###
+### 1.0.8 - 2019-11-23 ###
 * Add License notice if License is not activated
 * Fix style issue for job tab under Company page
 * Fix Company Directory listing design issue

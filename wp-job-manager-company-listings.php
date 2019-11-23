@@ -7,7 +7,7 @@ Version: 1.0.8
 Author: TechBrise Solutions
 Author URI: https://techbrise.com
 Requires at least: 4.4
-Tested up to: 5.2.4
+Tested up to: 5.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
