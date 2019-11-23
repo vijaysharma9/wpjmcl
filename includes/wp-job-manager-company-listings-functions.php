@@ -834,7 +834,7 @@ function has_wp_jmcl_shortcode( $content = null, $tag = null ) {
 		}
 
 		foreach ( $wp_jmcl_shortcodes as $shortcode ) {
-			if ( has_shortcode( $content, $shortcode ) ) { die();
+			if ( has_shortcode( $content, $shortcode ) ) {
 				$has_wp_jmcl_shortcode = true;
 				break;
 			}

@@ -1,9 +1,11 @@
 ## Changelog ##
 
 ### 1.0.8 - 2019-08-29 ###
+* Add License notice if License is not activated
 * Fix style issue for job tab under Company page
 * Fix Company Directory listing design issue
 * Remove blank pers before saving into the database
+* Fix warning issues.
 
 ### 1.0.7 - 2019-08-24 ###
 * Add capability to use WP Job Manager frontend.css stylesheet on Company Listing pages

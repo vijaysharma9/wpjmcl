@@ -3,11 +3,11 @@
 Plugin Name: WP Job Manager - Company Listings
 Plugin URI: https://store.techbrise.com/downloads/wp-job-manager-company-listings/
 Description: Outputs a list of all companies that have submitted jobs with links to their listings and profile.
-Version: 1.0.7
+Version: 1.0.8
 Author: TechBrise Solutions
 Author URI: https://techbrise.com
 Requires at least: 4.4
-Tested up to: 5.2.2
+Tested up to: 5.2.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -43,7 +43,7 @@ class WP_Job_Manager_Company_Listings {
 	 */
 	public function __construct() {
 		// Define constants
-		define( 'COMPANY_LISTINGS_VERSION', '1.0.7' );
+		define( 'COMPANY_LISTINGS_VERSION', '1.0.8' );
 		define( 'COMPANY_LISTINGS_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 		define( 'COMPANY_LISTINGS_PLUGIN_FILE', __FILE__ );
 		define( 'COMPANY_LISTINGS_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
